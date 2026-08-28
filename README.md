@@ -406,7 +406,7 @@ This portfolio and its code are the intellectual property of Naveen Sharma. Repr
 
 <div align="center">
 
-### 🌟 Built by Naveen Sharma — AI Automation Eng SaaS Implementation Specialist
+### 🌟 Built by Naveen Sharma — Aspiring AI Automation Engineer (No Code Focus) | SaaS Implementation Specialist
 
 **Available for full-time, hybrid, and remote roles. Interested in B2B services?** Visit [Opility](https://opility.com)
 
