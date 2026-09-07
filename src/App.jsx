@@ -4,7 +4,7 @@ import {
   Workflow, Headset, ShieldCheck, FileText, Layers, Database,
   ClipboardCheck, Code2, ExternalLink, Phone, Linkedin, Facebook, ChevronDown, Youtube, Briefcase,
   MessageCircle, Send, GraduationCap, Award, ExternalLink as LinkOut, FileDown,
-  Search, Settings2, FlaskConical, LifeBuoy,
+  Search, Settings2, FlaskConical, LifeBuoy, Quote,
 } from "lucide-react";
 
 /* ─── SCROLL-REVEAL WRAPPER ──────────────────────────────────── */
@@ -149,6 +149,14 @@ const EXPERIENCES = [
     callout: {
       title: "What this experience adds to my automation work",
       text: "Real-world SaaS implementation taught me that reliable automation depends on configuration accuracy, data integrity, user requirements, validation and failure handling — not simply connecting applications.",
+    },
+    endorsement: {
+      quote: "Naveen is an invaluable asset to any team. Throughout our time working together, I have consistently been impressed by his dedication, professionalism, and exceptional work ethic. One of Naveen's standout qualities is his ability to tackle challenges head-on with a positive attitude. In addition to his strong work ethic, Naveen possesses excellent communication skills. He is adept at clearly articulating ideas, collaborating with team members, and effectively managing projects.",
+      author: "Dovi Brackman",
+      role: "Customer Experience Specialist at BOLT Healthcare",
+      relationship: "Managed Naveen directly",
+      date: "March 2024",
+      linkedin: "https://www.linkedin.com/in/dovi-brackman/",
     },
     points: [
       { label: "Workflow Configuration & Automation", text: "Designed and deployed 500+ dynamic intake workflows for 25+ enterprise healthcare agency clients, converting manual paper-based processes into fully automated, compliant digital systems. Built complex conditional logic and data-binding schemas." },
@@ -811,6 +819,36 @@ function Experience() {
                 <div className="rounded-xl bg-blue-50 border border-blue-100 p-5 mt-4">
                   <h4 className="text-sm font-bold text-blue-900 mb-1">{exp.callout.title}</h4>
                   <p className="text-sm text-blue-800 leading-relaxed">{exp.callout.text}</p>
+                </div>
+              )}
+
+              {exp.endorsement && (
+                <div className="mt-5 rounded-2xl border border-blue-200/80 bg-gradient-to-br from-blue-50/70 via-white to-indigo-50/30 p-6 shadow-sm">
+                  <div className="flex items-center justify-between gap-3 mb-3">
+                    <div className="flex items-center gap-2">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white shadow-sm">
+                        <Quote size={16} />
+                      </div>
+                      <span className="text-xs font-bold uppercase tracking-wider text-blue-950">
+                        Direct Manager Endorsement · LinkedIn
+                      </span>
+                    </div>
+                    {exp.endorsement.linkedin && (
+                      <a href={exp.endorsement.linkedin} target="_blank" rel="noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-800 transition">
+                        <Linkedin size={13} className="text-[#0A66C2]" /> LinkedIn <ExternalLink size={11} />
+                      </a>
+                    )}
+                  </div>
+                  <blockquote className="text-sm sm:text-base italic leading-relaxed text-gray-700 mb-4">
+                    "{exp.endorsement.quote}"
+                  </blockquote>
+                  <div className="pt-3 border-t border-blue-100/80 flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-extrabold text-gray-900">{exp.endorsement.author}</p>
+                      <p className="text-xs text-gray-500">{exp.endorsement.role} · <span className="font-semibold text-blue-700">{exp.endorsement.relationship}</span></p>
+                    </div>
+                  </div>
                 </div>
               )}
 
