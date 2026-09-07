@@ -4,7 +4,7 @@ import {
   Workflow, Headset, ShieldCheck, FileText, Layers, Database,
   ClipboardCheck, Code2, ExternalLink, Phone, Linkedin, Facebook, ChevronDown, Youtube, Briefcase,
   MessageCircle, Send, GraduationCap, Award, ExternalLink as LinkOut, FileDown,
-  Search, Settings2, FlaskConical, LifeBuoy, Quote,
+  Search, Settings2, FlaskConical, LifeBuoy, Quote, Star,
 } from "lucide-react";
 
 /* ─── SCROLL-REVEAL WRAPPER ──────────────────────────────────── */
@@ -339,6 +339,25 @@ const CAREER_TIMELINE = [
   { company: "Vishay Intertechnology", role: "Process Quality & Validation", colorClass: "bg-amber-500" },
   { company: "Bolt Healthcare", role: "SaaS Implementation + QA/UAT", colorClass: "bg-cyan-500" },
   { company: "Current", role: "AI & Workflow Automation", colorClass: "bg-blue-600" },
+];
+
+const LINKEDIN_REVIEWS = [
+  {
+    name: "Dovi Brackman",
+    role: "Customer Experience Specialist at BOLT Healthcare",
+    service: "SaaS Development & QA",
+    rating: 5,
+    date: "July 2026",
+    text: "I had the pleasure of working with Naveen on SaaS implementations and QA. They were consistently detail-oriented, reliable, and committed to delivering a great client experience. Their ability to identify issues, collaborate across teams, and ensure smooth implementations made them a valuable teammate. I would gladly work with them again and highly recommend them to any organization.",
+  },
+  {
+    name: "Marc Mutterperl",
+    role: "Novelist | Healthcare Ops + Tech | Transforming Agencies Through Data, Systems & Leadership",
+    service: "Software Testing",
+    rating: 5,
+    date: "July 2026",
+    text: "It was a pleasurable experience working with Naveen.",
+  },
 ];
 
 const FAQS = [
@@ -859,6 +878,84 @@ function Experience() {
               )}
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Reviews() {
+  return (
+    <section className="bg-white border-b border-gray-100">
+      <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-24">
+        <SectionHeading 
+          eyebrow="Testimonials" 
+          center 
+          title="Client & Colleague Endorsements" 
+          color="emerald"
+          description="Verified 5.0 / 5.0 client feedback on LinkedIn Services across project quality, technical knowledge, communication, and timeliness."
+        />
+
+        {/* Rating summary bar */}
+        <Reveal className="mb-12 flex flex-wrap items-center justify-center gap-6 rounded-2xl border border-emerald-100 bg-emerald-50/40 p-6 text-center sm:gap-10 shadow-sm">
+          <div className="flex items-center gap-3">
+            <span className="text-4xl font-extrabold text-gray-900">5.0</span>
+            <div>
+              <div className="flex text-amber-400">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={18} fill="currentColor" />
+                ))}
+              </div>
+              <p className="text-xs font-bold text-gray-500 mt-0.5">LinkedIn Services Rating</p>
+            </div>
+          </div>
+
+          <div className="hidden sm:block h-10 w-px bg-emerald-200/60"></div>
+
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm font-semibold text-gray-700">
+            <span className="flex items-center gap-1.5"><CheckCircle2 size={15} className="text-emerald-600" /> Project Satisfaction: 5.0</span>
+            <span className="flex items-center gap-1.5"><CheckCircle2 size={15} className="text-emerald-600" /> Knowledge: 5.0</span>
+            <span className="flex items-center gap-1.5"><CheckCircle2 size={15} className="text-emerald-600" /> Communication: 5.0</span>
+            <span className="flex items-center gap-1.5"><CheckCircle2 size={15} className="text-emerald-600" /> Timeliness: 5.0</span>
+          </div>
+        </Reveal>
+
+        {/* Reviews Grid */}
+        <div className="grid gap-6 md:grid-cols-2">
+          {LINKEDIN_REVIEWS.map((rev) => (
+            <div key={rev.name} className="tilt-card flex flex-col justify-between rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-4">
+                  <div className="flex text-amber-400">
+                    {[...Array(rev.rating)].map((_, i) => (
+                      <Star key={i} size={16} fill="currentColor" />
+                    ))}
+                  </div>
+                  <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 border border-blue-100 flex items-center gap-1">
+                    <Linkedin size={12} className="text-[#0A66C2]" /> {rev.service}
+                  </span>
+                </div>
+                <blockquote className="text-sm sm:text-base italic leading-relaxed text-gray-700 mb-6">
+                  "{rev.text}"
+                </blockquote>
+              </div>
+
+              <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <div>
+                  <h4 className="text-base font-extrabold text-gray-900">{rev.name}</h4>
+                  <p className="text-xs text-gray-500 mt-0.5">{rev.role}</p>
+                </div>
+                <span className="text-xs text-gray-400 font-medium shrink-0">{rev.date}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-10 text-center">
+          <a href="https://linkedin.com/in/naveensharmatech" target="_blank" rel="noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 transition">
+            <Linkedin size={16} className="text-[#0A66C2]" /> View full recommendations &amp; services on LinkedIn <ExternalLink size={13} />
+          </a>
         </div>
       </div>
     </section>
@@ -1451,6 +1548,7 @@ export default function App() {
         <FeaturedProjects />
         <AutomationApproach />
         <Experience />
+        <Reviews />
         <CareerJourney />
         <CertificationsSection />
         <Skills />
