@@ -8,11 +8,6 @@ import {
 } from "lucide-react";
 
 /* ─── SCROLL-REVEAL WRAPPER ──────────────────────────────────── */
-/* Reveals content on scroll. Defended with three independent triggers so
-   content can never get stuck invisible: (1) an immediate on-mount
-   viewport check, (2) IntersectionObserver for elements scrolled into
-   view later, (3) a scroll-listener fallback, and (4) a hard timeout
-   safety net. Any one of these firing is enough to reveal the content. */
 function Reveal({ as: Tag = "div", stagger = false, className = "", children, ...rest }) {
   const ref = useRef(null);
   const revealedRef = useRef(false);
@@ -32,10 +27,8 @@ function Reveal({ as: Tag = "div", stagger = false, className = "", children, ..
       return r.top < window.innerHeight * 1.05 && r.bottom > -50;
     };
 
-    // 1) Reveal immediately if already on-screen at mount (fixes above-the-fold content).
     if (inViewport()) { reveal(); return; }
 
-    // 2) IntersectionObserver for below-the-fold elements.
     let io;
     if ("IntersectionObserver" in window) {
       io = new IntersectionObserver(
@@ -45,12 +38,10 @@ function Reveal({ as: Tag = "div", stagger = false, className = "", children, ..
       io.observe(el);
     }
 
-    // 3) Scroll-listener fallback in case IO doesn't fire in some environment.
     const onScroll = () => { if (inViewport()) reveal(); };
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
 
-    // 4) Hard timeout safety net — never leave content permanently hidden.
     const failsafe = setTimeout(reveal, 2500);
 
     return () => {
@@ -79,18 +70,13 @@ function XIcon({ size = 16, className = "" }) {
 /* ─── DATA ───────────────────────────────────────────────────── */
 
 const NAV_LINKS = [
-  { label: "About",        href: "#about",       icon: Search,        color: "indigo" },
-  { label: "Expertise",    href: "#expertise",    icon: Layers,        color: "violet" },
-  { label: "Process",      href: "#process",      icon: Workflow,      color: "sky"    },
-  { label: "Experience",   href: "#experience",   icon: Briefcase,     color: "cyan"   },
-  { label: "Case Studies", href: "#casestudies",  icon: ClipboardCheck,color: "emerald"},
-  { label: "Projects",     href: "#projects",     icon: Code2,         color: "amber"  },
-  { label: "Education",    href: "#education",    icon: GraduationCap, color: "rose"   },
-  { label: "Contact",      href: "#contact",      icon: Mail,          color: "pink"   },
+  { label: "Projects",       href: "#projects",       icon: Code2,         color: "amber"   },
+  { label: "Experience",     href: "#experience",     icon: Briefcase,     color: "cyan"    },
+  { label: "Certifications", href: "#certifications", icon: Award,         color: "rose"    },
+  { label: "About",          href: "#about",          icon: Search,        color: "indigo"  },
+  { label: "Contact",        href: "#contact",        icon: Mail,          color: "pink"    },
 ];
 
-// Literal Tailwind class strings per color (Tailwind's build-time scanner needs literal
-// text in the source — it cannot see classes assembled via `bg-${color}-600` at runtime).
 const NAV_COLOR_STYLES = {
   indigo:  { active: "bg-indigo-600 text-white shadow-md shadow-indigo-200",   hover: "hover:bg-indigo-50 hover:text-indigo-700"   },
   violet:  { active: "bg-violet-600 text-white shadow-md shadow-violet-200",   hover: "hover:bg-violet-50 hover:text-violet-700"   },
@@ -107,43 +93,49 @@ const NAV_ICON_TEXT_COLOR = {
   emerald: "text-emerald-600", amber: "text-amber-600", rose: "text-rose-600", pink: "text-pink-600",
 };
 
-const HEADLINES = [
-  "Healthcare SaaS Implementation Specialist",
-  "Systems Configuration Specialist",
-  "Workflow Automation Specialist",
-  "QA/UAT Analyst",
-  "B2B Technical Contractor",
+const EYEBROW_COLOR = {
+  indigo: "text-indigo-600", violet: "text-violet-600", sky: "text-sky-600", cyan: "text-cyan-600",
+  emerald: "text-emerald-600", amber: "text-amber-600", rose: "text-rose-600", pink: "text-pink-600",
+  blue: "text-blue-600", gray: "text-gray-500",
+};
+
+const PILLARS = [
+  {
+    label: "BUILD",
+    title: "AI & Workflow Automation",
+    desc: "Design multi-step business automations using no-code/low-code platforms, workflow logic, conditional routing, CRM actions and integrations.",
+    skills: ["Zapier", "AI Automation", "Workflow Automation", "No-Code Development", "HubSpot"],
+    color: "blue",
+  },
+  {
+    label: "IMPLEMENT",
+    title: "SaaS Implementation",
+    desc: "Configure workflows, forms, documents, data mappings and client-specific SaaS processes.",
+    skills: ["SaaS Implementation", "System Configuration", "Data Mapping", "Workflow Configuration", "UAT"],
+    color: "indigo",
+  },
+  {
+    label: "VALIDATE",
+    title: "QA & Workflow Validation",
+    desc: "Test workflow paths, routing conditions, mappings, edge cases and failure scenarios before deployment.",
+    skills: ["UAT", "Functional Testing", "Regression Testing", "Workflow Validation", "Software Testing"],
+    color: "violet",
+  },
 ];
 
-// Short tags for the circular orbit badges (full titles still shown in the static row below).
-const ORBIT_SHORT_LABELS = ["SaaS", "Sys Config", "Workflow", "QA/UAT", "B2B"];
+const PILLAR_STYLES = {
+  blue: { badge: "bg-blue-50 text-blue-600 border border-blue-100", border: "hover:border-blue-200" },
+  indigo: { badge: "bg-indigo-50 text-indigo-600 border border-indigo-100", border: "hover:border-indigo-200" },
+  violet: { badge: "bg-violet-50 text-violet-600 border border-violet-100", border: "hover:border-violet-200" },
+};
 
-// Literal Tailwind classes per badge (Tailwind's build-time scanner needs full literal
-// class strings in the source, not ones assembled via template-string interpolation).
-const ORBIT_BADGE_STYLES = [
-  "bg-indigo-600 text-white ring-indigo-200",
-  "bg-violet-600 text-white ring-violet-200",
-  "bg-sky-600 text-white ring-sky-200",
-  "bg-emerald-600 text-white ring-emerald-200",
-  "bg-rose-600 text-white ring-rose-200",
-];
-
-const EXPERTISE = [
-  { icon: Layers,         title: "Healthcare SaaS Implementation",  desc: "End-to-end SaaS implementation including enterprise client onboarding, intake process automation, platform configuration, and go-live validation across healthcare service lines." },
-  { icon: Workflow,       title: "Systems & Workflow Configuration", desc: "Dynamic form configuration, conditional logic engineering, business rules configuration, and compliance workflow setup aligned to clinical and operational requirements." },
-  { icon: Headset,        title: "Product & Technical Support",     desc: "Multi-tenant platform administration, user provisioning, access management, and issue triage via Basecamp." },
-  { icon: ClipboardCheck, title: "QA / UAT & Release Validation",   desc: "UAT, functional testing, regression testing, system integration testing, and end-to-end validation from configuration to production go-live." },
-  { icon: Database,       title: "Data Mapping & Field Validation",  desc: "Field-level data mapping, schema design, payload validation, and regulatory compliance (HIPAA, WOTC, Wage Parity) across integrated systems (HHAeXchange)." },
-  { icon: FileText,       title: "Technical Documentation",         desc: "SOPs, process documentation, QA documentation, and knowledge base content that implementation teams can rely on." },
-  { icon: Globe,          title: "Website Design & Development",    desc: "Custom React/Next.js web apps, WordPress business sites, Shopify e-commerce stores, and HTML landing pages." },
-  { icon: Briefcase,      title: "Career & Professional Presence",  desc: "ATS-optimised resume writing, LinkedIn profile optimisation, and career portfolio setup for tech professionals." },
-];
-
-const PROCESS = [
-  { icon: Search,      step: "01", title: "Discover",  desc: "Understand the client's existing paper or manual process, regulatory requirements, and the fields, forms, and edge cases involved before any configuration begins." },
-  { icon: Settings2,   step: "02", title: "Configure",  desc: "Build the dynamic form: field mapping, conditional logic, business rules, e-signature workflows, and data-binding schemas that connect front-end inputs to the backend." },
-  { icon: FlaskConical,step: "03", title: "Validate",   desc: "Run UAT and mapping tests, chase down root causes on defects, and iterate with the team via structured task triage until every field is provably correct." },
-  { icon: LifeBuoy,    step: "04", title: "Support",    desc: "Go live, monitor real submissions, administer platform access for the agency, and stay the point of contact for fixes and future changes." },
+const AUTOMATION_APPROACH = [
+  { step: "01", title: "Understand", desc: "Map the business process, inputs, users and desired outcome.", icon: Search },
+  { step: "02", title: "Design", desc: "Define triggers, actions, logic, routing and exceptions.", icon: Settings2 },
+  { step: "03", title: "Build", desc: "Configure the workflow using suitable no-code/low-code tools.", icon: Workflow },
+  { step: "04", title: "Integrate", desc: "Connect SaaS platforms, CRM systems, APIs and data.", icon: Database },
+  { step: "05", title: "Test", desc: "Validate mappings, branches, inputs, edge cases and failures.", icon: FlaskConical },
+  { step: "06", title: "Monitor", desc: "Document, observe and improve the workflow after deployment.", icon: LifeBuoy },
 ];
 
 const EXPERIENCES = [
@@ -151,16 +143,19 @@ const EXPERIENCES = [
     company: "Bolt Healthcare",
     period: "Aug 2022 – May 2026 · 3 yrs 10 mos",
     context: "Healthcare SaaS · Contract · Remote (NY, United States)",
-    roles: [
-      "Implementation Specialist",
-    ],
+    roles: ["Implementation Specialist"],
+    summary: "SaaS implementation experience involving workflow configuration, dynamic forms and documents, data mapping, UAT, functional validation, troubleshooting and technical coordination.",
+    skills: ["SaaS Implementation", "Workflow Automation", "System Configuration", "Data Mapping & Schema Design", "User Acceptance Testing"],
+    callout: {
+      title: "What this experience adds to my automation work",
+      text: "Real-world SaaS implementation taught me that reliable automation depends on configuration accuracy, data integrity, user requirements, validation and failure handling — not simply connecting applications.",
+    },
     points: [
-      { label: "Workflow Configuration & Automation", text: "Designed and deployed 500+ dynamic intake workflows for 25+ enterprise healthcare agency clients, converting manual paper-based processes into fully automated, HIPAA-compliant digital systems. Built complex conditional logic and data-binding schemas to ensure accurate form submission." },
-      { label: "Data Mapping & Schema Configuration", text: "Built backend data-mapping schemas and configured field-level validation rules across diverse regulatory, referral, eligibility, and compliance form types spanning Home Care, ABA Therapy, HCBS, and Developmental Disability service lines — including federal employment forms, state DOH filings, tax-credit and wage-parity documentation, and agency-specific intake and consent packets — reducing intake errors and ensuring HIPAA compliance." },
-      { label: "E-Signature & Workflow Configuration", text: "Configured dropdown logic, e-signature workflows, and step-based conditional branching for multi-page dynamic files using Bolt's PDF Engine (boltdocs.com) and Bolt Intake App (Bolt Homecare App)." },
-      { label: "QA & System Validation", text: "Executed UAT and regression testing on production forms (\"Run Mapping Test\"); performed root-cause analysis on mapping logic failures to resolve production defects." },
-      { label: "SaaS Platform Administration", text: "Utilized Super-Admin access to configure dynamic workflows, manage dropdown logic, and enable multi-tenant agency clients to operate independently across the platform. Managed HHAeXchange API integration for seamless system interoperability." },
-      { label: "Technical Coordination", text: "Managed technical issue triage via Basecamp, prioritizing by business impact and coordinating cross-functional resolution across 'Pending Jobs,' 'Needs Mapping,' and 'Needs Testing' workflows." },
+      { label: "Workflow Configuration & Automation", text: "Designed and deployed 500+ dynamic intake workflows for 25+ enterprise healthcare agency clients, converting manual paper-based processes into fully automated, compliant digital systems. Built complex conditional logic and data-binding schemas." },
+      { label: "Data Mapping & Schema Configuration", text: "Built backend data-mapping schemas and configured field-level validation rules across diverse regulatory, referral, eligibility, and compliance form types." },
+      { label: "QA & System Validation", text: "Executed UAT and regression testing on production forms; performed root-cause analysis on mapping logic failures to resolve production defects." },
+      { label: "SaaS Platform Administration", text: "Utilized Super-Admin access to configure dynamic workflows, manage dropdown logic, and enable multi-tenant agency clients to operate independently across the platform." },
+      { label: "Technical Coordination", text: "Managed technical issue triage via Basecamp, prioritizing by business impact and coordinating cross-functional resolution." },
     ],
   },
   {
@@ -168,6 +163,8 @@ const EXPERIENCES = [
     period: "Nov 2021 – Dec 2022 · 1 yr 2 mos",
     context: "Electronics Manufacturing · Full-time · On-site (Be'er Sheva, Israel)",
     roles: ["Technical Operator — Quality Control & Validation"],
+    summary: "Experience in operational quality checks, process validation, documentation and troubleshooting strengthened a systematic approach to validation and quality.",
+    skills: ["Quality Control", "Process Validation", "Technical Documentation", "Troubleshooting"],
     points: [
       { label: "Process Validation & Equipment Operation", text: "Operated and maintained specialized precision manufacturing systems in a cleanroom environment, ensuring continuous high-integrity output through rigorous calibration and adherence to complex machine protocols." },
       { label: "Quality Engineering & Inspection", text: "Performed critical functional checks and quality control gates on chip resistor components; utilized automated machinery to identify microscopic discrepancies and maintain strict compliance with global industry standards." },
@@ -179,180 +176,216 @@ const EXPERIENCES = [
     period: "Aug 2012 – Sep 2015 · 3 yrs 2 mos",
     context: "Technical Training Centre · Self-employed · On-site (Dharamshala, India)",
     roles: ["Franchisee Owner — Operations & Technical Management"],
+    summary: "Managed day-to-day operations of a vocational training center, including administration, technical resources, staff coordination, course delivery and student services.",
+    skills: ["Operations Management", "Team Leadership", "Business Operations", "IT Operations"],
+    supportingLine: "This experience built an early understanding of how people, systems and business processes must work together.",
     points: [
-      { label: "Operational Leadership", text: "Managed end-to-end operations for a vocational training center franchise; drove 25% growth in student enrollment through optimized course delivery and technical curriculum development." },
-      { label: "IT Infrastructure Management", text: "Supervised maintenance of IT infrastructure and lab equipment; ensured 99% uptime for student workstations and training software across all operational hours." },
-      { label: "Team Leadership & Training", text: "Led an instructor team to implement standardized training modules; achieved 15% improvement in student certification success rates through structured curriculum delivery." },
-      { label: "Business Growth", text: "Improved organizational profitability by 10% through strategic resource allocation and introduction of high-demand technical courses aligned with market needs." },
+      { label: "Operational Leadership", text: "Managed end-to-end operations for a vocational training center franchise; drove growth in student enrollment through optimized course delivery and technical curriculum development." },
+      { label: "IT Infrastructure Management", text: "Supervised maintenance of IT infrastructure and lab equipment; ensured high uptime for student workstations and training software across all operational hours." },
+      { label: "Team Leadership & Training", text: "Led an instructor team to implement standardized training modules; achieved improvement in student certification success rates through structured curriculum delivery." },
     ],
   },
 ];
 
-const CASE_STUDIES = [
+const FEATURED_PROJECTS = [
   {
-    title: "Healthcare Intake Form Digitization",
-    tag: "Bolt Healthcare · Case Study",
-    challenge: "Multiple healthcare agencies relied on manual paper-based intake processes, creating delays and compliance risk.",
-    role: "Implementation Specialist — configured dynamic form workflows and conditional logic in Bolt's PDF Engine.",
-    solution: "Built 500+ digitized intake and compliance forms (I-9, WOTC, DOH-5201, NHTD, HHA competency forms) with field-level validation and e-signature workflows, mapped to agency-specific data sources.",
-    outcome: "Digitized workflows in active production use across 25+ agencies including Elderwood Health Plan, RCIL, and Rising Stars.",
-  },
-  {
-    title: "Multi-Tenant Platform Administration",
-    tag: "Bolt Healthcare · Case Study",
-    challenge: "Managing user access and workflow configuration across dozens of client agencies on one SaaS platform.",
-    role: "Super-Admin platform administrator.",
-    solution: "Managed user provisioning, HHAeXchange API integration, and Basecamp-coordinated task workflows across Pending Jobs, Needs Mapping, and Needs Testing stages.",
-    outcome: "Ongoing production support and workflow configuration across the full agency base.",
-  },
-];
-
-const EDUCATION = [
-  {
-    icon: GraduationCap,
-    institution: "Amity University Online",
-    degree: "BCA — Bachelor of Computer Applications",
-    focus: "Cloud Computing & Security",
-    period: "Jan 2022 – Jan 2025",
-    type: "Degree",
-  },
-  {
-    icon: Award,
-    institution: "Smart College",
-    degree: "QA Engineering Certification (Web & Mobile)",
-    focus: "Software testing, defect lifecycle, test planning",
-    period: "Sep 2021",
-    type: "Professional Certification",
-  },
-  {
-    icon: Award,
-    institution: "Programming Hub",
-    degree: "Software Engineering",
-    focus: "Software engineering & testing foundations",
-    period: "Sep 2021",
-    type: "Certification",
-  },
-  {
-    icon: Award,
-    institution: "Great Learning",
-    degree: "Automation Testing",
-    focus: "Test automation fundamentals & regression testing",
-    period: "Apr 2025",
-    type: "Certification",
-  },
-  {
-    icon: Award,
-    institution: "Canva",
-    degree: "Canva Essentials Certified",
-    focus: "Visual design, branding & content layout",
-    period: "Jun 2025",
-    type: "Certification",
-  },
-  {
-    icon: Award,
-    institution: "HP LIFE",
-    degree: "Customer Relationship Management",
-    focus: "CRM fundamentals & client engagement",
-    period: "Sep 2021",
-    type: "Certification",
-  },
-  {
-    icon: Award,
-    institution: "Great Learning",
-    degree: "Foundational Tech Courses",
-    focus: "Intro to UI/UX, Cyber Security, HTML, and Google Analytics",
-    period: "Aug 2021",
-    type: "Professional Development",
-  },
-];
-
-const PROJECTS = [
-  {
-    icon: Workflow,
-    title: "Implementation Workbench — Interactive Demo",
-    tag: "Illustrative Recreation",
-    desc: "A 4-part interactive demo I built from scratch to illustrate the range of my healthcare-SaaS implementation work: dynamic form builder (field mapping, conditional logic, UAT 'Run Mapping Test'), multi-signer e-signature workflow, multi-tenant platform administration, and a QA task-triage board. Generic sample data only; no client data or proprietary systems.",
-    skills: ["Form Config", "Conditional Logic", "E-Signature Flows", "Platform Admin", "Data Mapping", "QA / UAT"],
+    title: "AI-Powered Customer Inquiry Router",
+    tag: "Flagship Automation",
+    desc: "Multi-step inquiry processing automation with filtering, JavaScript logic, conditional routing, HubSpot actions, email actions, workflow testing, and documentation.",
+    architecture: ["Gmail", "Filter", "JavaScript Logic", "Zapier Paths", "Email", "HubSpot"],
+    skills: ["Zapier", "HubSpot", "JavaScript", "Workflow Automation", "Conditional Routing"],
     links: [
-      { href: "/intake-builder-demo.html", label: "Open interactive demo", type: "site" },
+      { href: "https://github.com/naveensharmatech", label: "View Case Study", type: "site" },
+      { href: "https://github.com/naveensharmatech", label: "GitHub Repository", type: "code" },
     ],
   },
   {
-    icon: ClipboardCheck,
-    title: "Warehouse Management System — Software Test Plan",
-    tag: "QA Certification Project",
-    desc: "Test planning and strategy demonstrating risk analysis, regression and sanity testing, and the full defect lifecycle.",
-    skills: ["Test Planning", "Risk Analysis", "Regression Testing", "Defect Lifecycle"],
-    file: "/docs/Warehouse-Management-System-Test-Plan.pdf",
-    fileLabel: "View test plan (PDF)",
+    title: "B2B Lead Generator — Automated Lead & Contact Extraction",
+    tag: "Data Automation",
+    desc: "Automated business discovery, crawling, extraction, processing and deduplication pipeline for building high-quality B2B lead datasets.",
+    architecture: ["Business Discovery", "Crawl", "Extract", "Process", "Deduplicate", "Dataset"],
+    skills: ["Apify", "JavaScript", "Crawlee", "Web Data Extraction", "Workflow Automation"],
+    links: [
+      { href: "https://apify.com", label: "View Project", type: "site" },
+      { href: "https://github.com/naveensharmatech", label: "GitHub", type: "code" },
+    ],
   },
   {
-    icon: ClipboardCheck,
-    title: "Netflix Subscription — Software Test Plan",
-    tag: "QA Certification Project",
-    desc: "Structured QA documentation covering methodology, risk assessment, and test execution planning.",
-    skills: ["Test Documentation", "QA Methodology", "Risk Assessment", "Test Execution"],
-    file: "/docs/Netflix-Subscription-Test-Plan.docx",
-    fileLabel: "Download test plan (DOCX)",
+    title: "Shopify Store Lead Extractor — Apify Actor",
+    tag: "Data Automation",
+    desc: "An Apify Actor designed for discovering store endpoints and extracting structured lead data from e-commerce stores.",
+    architecture: ["Store Discovery", "Crawl", "Extract", "Process", "Dataset"],
+    skills: ["Python", "Apify", "Web Data Extraction", "Store Discovery"],
+    links: [
+      { href: "https://apify.com", label: "View Project", type: "site" },
+      { href: "https://github.com/naveensharmatech", label: "GitHub", type: "code" },
+    ],
+  },
+];
+
+const EARLIER_PROJECTS = [
+  {
+    title: "Professional Portfolio Website",
+    tag: "Personal Project",
+    desc: "Designed, built, and deployed this professional portfolio site end-to-end using React, Vite, Tailwind CSS, and Cloudflare Pages.",
+    skills: ["React", "Vite", "Tailwind CSS", "Cloudflare Pages"],
+    links: [
+      { href: "https://naveensharma.net", label: "Visit live site", type: "site" },
+      { href: "https://github.com/naveensharmatech/naveensharma-portfolio", label: "GitHub", type: "code" },
+    ],
   },
   {
-    icon: Code2,
-    title: "Django Blogging CMS",
-    tag: "BCA Graduation Project",
-    desc: "A content management system built to demonstrate technical learning — authentication, CRUD operations, category management, and an admin dashboard.",
-    skills: ["Python", "Django", "MySQL", "MongoDB", "Bootstrap", "AJAX"],
+    title: "Django Blogging CMS — BCA Academic Project",
+    tag: "Academic Project",
+    desc: "A content management system demonstrating authentication, CRUD operations, category management, and an admin dashboard.",
+    skills: ["Python", "Django", "MySQL", "Bootstrap"],
     file: "/docs/Django-Blogging-CMS-Project.pdf",
     fileLabel: "View project doc (PDF)",
   },
   {
-    icon: Globe,
-    title: "naveensharma.net — Personal Portfolio",
-    tag: "Personal Project",
-    desc: "Designed, built, and deployed this professional portfolio site end-to-end — from concept through to domain go-live on Cloudflare Pages. Delivered solo using an AI-assisted development workflow, translating requirements into production code, SEO, and CI/CD.",
-    skills: ["React", "Vite", "Tailwind CSS", "GitHub", "Cloudflare Pages", "AI-Assisted Build"],
-    links: [
-      { href: "https://naveensharma.net", label: "Visit live site", type: "site" },
-      { href: "https://github.com/naveensharmatech/naveensharma-portfolio", label: "View source on GitHub", type: "code" },
+    title: "Streaming Platform — Software Test Plan",
+    tag: "QA Certification Project",
+    desc: "Structured QA documentation covering methodology, risk assessment, and test execution planning.",
+    skills: ["Test Documentation", "QA Methodology", "Risk Assessment"],
+    file: "/docs/Netflix-Subscription-Test-Plan.docx",
+    fileLabel: "Download test plan (DOCX)",
+  },
+  {
+    title: "Warehouse Management System — Software Test Plan",
+    tag: "QA Certification Project",
+    desc: "Test planning and strategy demonstrating risk analysis, regression and sanity testing, and the full defect lifecycle.",
+    skills: ["Test Planning", "Risk Analysis", "Regression Testing"],
+    file: "/docs/Warehouse-Management-System-Test-Plan.pdf",
+    fileLabel: "View test plan (PDF)",
+  },
+];
+
+const CERTIFICATIONS = [
+  {
+    group: "AI & Automation",
+    items: [
+      { institution: "Zapier Academy", degree: "Jumpstart", type: "Certification" },
+      { institution: "Zapier Academy", degree: "Building Basic Zaps", type: "Certification" },
+      { institution: "Zapier Academy", degree: "Building Intermediate Zaps", type: "Certification" },
+      { institution: "Zapier Academy", degree: "Building AI Agents", type: "Certification" },
+      { institution: "Zapier Academy", degree: "What is Zapier MCP?", type: "Certification" },
+      { institution: "Zapier Academy", degree: "Using Zapier MCP", type: "Certification" },
+      { institution: "Zapier Academy", degree: "Governing Zapier MCP", type: "Certification" },
+      { institution: "Zapier Academy", degree: "Account Setup", type: "Certification" },
+      { institution: "Zapier Academy", degree: "Security and Governance", type: "Certification" },
+      { institution: "Zapier Academy", degree: "Monitoring and Operations", type: "Certification" },
     ],
   },
   {
-    icon: MessageCircle,
-    title: "Ella — AI Chat Assistant",
-    tag: "Personal Project",
-    desc: "A full-stack AI chat assistant I built for this site — React frontend, Cloudflare Pages serverless functions, and an LLM (Llama 3 via Groq) grounded on a custom knowledge base. Live 24/7 in the bottom-right corner. Architected and shipped solo using an AI-assisted workflow.",
-    skills: ["React", "Cloudflare Pages Functions", "Serverless", "LLM Integration", "Prompt Engineering", "AI-Assisted Build"],
-    links: [
-      { href: "https://naveensharma.net", label: "Try Ella live (bottom-right)", type: "site" },
-      { href: "https://github.com/naveensharmatech/naveensharma-portfolio", label: "View source on GitHub", type: "code" },
+    group: "QA & Testing",
+    items: [
+      { institution: "Smart College", degree: "QA Engineering Certification (Web & Mobile)", type: "Professional Certification" },
+      { institution: "Great Learning", degree: "Automation Testing", type: "Certification" },
+      { institution: "Programming Hub", degree: "Software Engineering", type: "Certification" },
+    ],
+  },
+  {
+    group: "SaaS / Service Management",
+    items: [
+      { institution: "Atlassian", degree: "Jira Service Management Fundamentals", type: "Certification" },
+      { institution: "HP LIFE", degree: "Customer Relationship Management", type: "Certification" },
+    ],
+  },
+  {
+    group: "Currently Learning",
+    items: [
+      { institution: "Make.com", degree: "Make.com Automation", type: "In Progress" },
+      { institution: "n8n", degree: "n8n Workflow Automation", type: "In Progress" },
+      { institution: "HubSpot Academy", degree: "HubSpot Certification", type: "In Progress" },
     ],
   },
 ];
 
-const TOOL_CATEGORIES = [
+const EDUCATION_DEGREE = {
+  institution: "Amity University Online",
+  degree: "BCA — Bachelor of Computer Applications",
+  focus: "Cloud Computing & Security",
+  period: "Jan 2022 – Jan 2025",
+};
+
+const SKILL_GROUPS = [
   {
-    label: "SaaS & Technical Operations",
-    sublabel: "Core professional tooling used at Bolt Healthcare",
-    tools: ["Basecamp", "HHAeXchange", "Zendesk"],
-    note: "Certification-trained (not production-used): Jira, Google Cloud Architecture",
+    label: "AI & Automation",
+    skills: ["AI Automation", "Workflow Automation", "Zapier", "AI Agents", "No-Code Development", "Low-Code Development", "Model Context Protocol (MCP)"],
   },
   {
-    label: "Website Design & Development",
-    sublabel: "Tools used to build, deploy, and manage websites",
-    tools: ["React", "Vite", "Tailwind CSS", "WordPress", "GitHub", "Visual Studio Code", "Cloudflare Pages", "Hostinger"],
+    label: "SaaS & Integrations",
+    skills: ["SaaS Implementation", "HubSpot", "API Integration", "System Configuration", "Data Mapping & Schema Design"],
   },
   {
-    label: "AI-Assisted Productivity",
-    sublabel: "Used to enhance and accelerate professional work",
-    tools: ["Claude", "Notion AI", "GitHub Copilot", "Scribe", "Gemini", "Google AI Studio"],
+    label: "QA & Validation",
+    skills: ["User Acceptance Testing", "Functional Testing", "Regression Testing", "Software Testing", "Quality Assurance (QA/UAT)"],
   },
   {
-    label: "Design & Content",
-    sublabel: "Supporting documentation and presentation",
-    tools: ["Canva", "Adobe Express"],
+    label: "Platforms & Tools",
+    skills: ["Zapier", "HubSpot", "Make.com", "n8n", "Apify", "GitHub", "Anthropic Claude"],
   },
+];
+
+const CAREER_TIMELINE = [
+  { company: "Shivam Institute", role: "Operations & Technical Management", colorClass: "bg-rose-500" },
+  { company: "Vishay Intertechnology", role: "Process Quality & Validation", colorClass: "bg-amber-500" },
+  { company: "Bolt Healthcare", role: "SaaS Implementation + QA/UAT", colorClass: "bg-cyan-500" },
+  { company: "Current", role: "AI & Workflow Automation", colorClass: "bg-blue-600" },
+];
+
+const FAQS = [
+  {
+    q: "What kind of roles are you looking for?",
+    a: "I'm looking for roles in AI Automation, Workflow Automation, SaaS Implementation and related no-code/low-code opportunities. I'm open to full-time, hybrid, or remote positions in Israel and internationally.",
+  },
+  {
+    q: "What automation tools do you use?",
+    a: "I primarily work with Zapier for workflow automation, and I'm expanding into Make.com and n8n. I also use Apify for web data extraction and HubSpot for CRM workflows. My approach is platform-agnostic — I choose the right tool for each business process.",
+  },
+  {
+    q: "What was your role at Bolt Healthcare?",
+    a: "I was an Implementation Specialist, configuring SaaS form workflows, data mapping schemas, and validation testing for a healthcare intake platform used by 25+ agencies. This gave me deep experience in workflow configuration, system validation, and process automation.",
+  },
+  {
+    q: "Are you available for remote or international work?",
+    a: "Yes — I work fully remote and am available for international roles and contracts. I'm based in Be'er Sheva, Israel, and have worked with US-based teams. I'm also open to hybrid or on-site roles within Israel.",
+  },
+  {
+    q: "Do you offer B2B services or contracting?",
+    a: "Yes — B2B services including automation consulting, SaaS implementation, and QA services are offered through Opility, my registered IT services business. Visit opility.com or email hello@opility.com for enquiries.",
+  },
+  {
+    q: "How do I get in touch?",
+    a: "Email me at contact@naveensharma.net, connect on LinkedIn at linkedin.com/in/naveensharmatech, or call 058-789-6289. I typically respond within one business day.",
+  },
+];
+
+const QUICK_QUESTIONS = [
+  "What automation tools do you use?",
+  "What was your role at Bolt Healthcare?",
+  "Are you open to remote work?",
+  "What certifications do you have?",
+  "Do you offer B2B / contract services?",
+  "How do I get in touch?",
 ];
 
 /* ─── COMPONENTS ─────────────────────────────────────────────── */
+
+function SectionHeading({ eyebrow, title, description, center, color }) {
+  const eyebrowColor = EYEBROW_COLOR[color] || "text-blue-600";
+  return (
+    <Reveal className={`mb-16 ${center ? "text-center mx-auto max-w-2xl" : "max-w-2xl"}`}>
+      {eyebrow && (
+        <p className={`mb-3 text-base font-bold uppercase tracking-widest ${eyebrowColor}`}>{eyebrow}</p>
+      )}
+      <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">{title}</h2>
+      {description && (
+        <p className="mt-5 text-xl leading-relaxed text-gray-600">{description}</p>
+      )}
+    </Reveal>
+  );
+}
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -366,7 +399,7 @@ function Navbar() {
   }, []);
 
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "glass shadow-sm border-b border-gray-100" : "bg-transparent"}`}>
+    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "glass shadow-sm border-b border-gray-100 bg-white/95 backdrop-blur" : "bg-transparent"}`}>
       <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4 sm:px-6">
         <a href="#top" className="flex items-center gap-3 group">
           <img
@@ -400,7 +433,7 @@ function Navbar() {
             Opility <LinkOut size={12} />
           </a>
           <a href="#contact"
-            className="whitespace-nowrap rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700">
+            className="whitespace-nowrap rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 shadow-sm">
             Get in touch
           </a>
         </div>
@@ -444,99 +477,99 @@ function Navbar() {
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden bg-white">
-      <div className="orb h-72 w-72 bg-blue-300/50" style={{ top: "-40px", right: "6%" }} />
-      <div className="orb h-64 w-64 bg-violet-300/40" style={{ top: "180px", left: "2%", animationDelay: "3s" }} />
+      <div className="orb h-72 w-72 bg-blue-300/40" style={{ top: "-40px", right: "6%" }} />
+      <div className="orb h-64 w-64 bg-indigo-200/30" style={{ top: "180px", left: "2%", animationDelay: "3s" }} />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-4 py-24 sm:px-6 sm:py-32 text-center">
-
-        <Reveal className="mb-4 w-full overflow-hidden rounded-2xl shadow-lg">
-          <img
-            src="/linkedin-cover.jpeg"
-            alt="Naveen Sharma — Healthcare SaaS Implementation Specialist"
-            className="w-full h-auto"
-          />
+      <div className="relative z-10 mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-28 text-center">
+        <Reveal className="mb-6 flex justify-center">
+          <span className="rounded-full bg-blue-50 px-4 py-1.5 text-xs sm:text-sm font-bold uppercase tracking-widest text-blue-600 border border-blue-100 shadow-sm">
+            AI AUTOMATION • SAAS IMPLEMENTATION • QA/UAT
+          </span>
         </Reveal>
 
-        <Reveal className="mb-2 mt-4 flex justify-center">
-          <div className="relative scale-[0.72] sm:scale-100" style={{ width: 340, height: 340 }}>
-            {/* dark techy backdrop sphere — labels orbit just past its rim */}
-            <div className="tech-grid absolute overflow-hidden rounded-full bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-900" style={{ inset: 28 }}>
-              <div className="absolute h-32 w-32 rounded-full bg-blue-500/50 blur-3xl" style={{ top: -10, left: -10 }} />
-              <div className="absolute h-28 w-28 rounded-full bg-violet-500/50 blur-3xl" style={{ bottom: -10, right: -10 }} />
-              <div className="absolute h-24 w-24 rounded-full bg-cyan-400/40 blur-2xl" style={{ top: "38%", right: "8%" }} />
+        <Reveal as="h1" className="gradient-text text-5xl font-extrabold tracking-tight sm:text-7xl mb-4 mt-2">
+          AI Automation Engineer
+        </Reveal>
+
+        <Reveal as="p" className="text-xl font-bold text-gray-800 sm:text-3xl mb-6">
+          Building Practical Automations for Real Business Processes
+        </Reveal>
+
+        <Reveal as="p" className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-600 mb-8">
+          I build and validate practical business automations using no-code/low-code platforms, workflow logic, CRM integrations and SaaS systems. My background in SaaS implementation and QA/UAT helps me design workflows that work beyond the happy path.
+        </Reveal>
+
+        <Reveal className="flex flex-wrap items-center justify-center gap-2.5 mb-12">
+          {["Zapier", "No-Code/Low-Code", "HubSpot", "Workflow Automation", "SaaS Implementation", "QA/UAT"].map(skill => (
+            <span key={skill} className="rounded-full bg-gray-50 px-4 py-1.5 text-xs sm:text-sm font-semibold text-gray-700 border border-gray-200 shadow-2xl">
+              {skill}
+            </span>
+          ))}
+        </Reveal>
+
+        {/* Workflow Architecture Diagram */}
+        <Reveal className="mx-auto max-w-4xl mb-12 rounded-2xl border border-gray-200 bg-gray-50/80 p-6 sm:p-8 shadow-sm">
+          <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-6 text-center">
+            Workflow Architecture &amp; Execution Framework
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 sm:gap-2 items-center">
+            {/* Step 1 */}
+            <div className="flex flex-col items-center p-3 rounded-xl bg-white border border-gray-200 shadow-sm w-full">
+              <span className="text-xs font-bold uppercase text-gray-400">Trigger</span>
+              <span className="text-sm font-extrabold text-gray-900 mt-1">INPUT</span>
+              <span className="text-[10px] font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded mt-2">CAPTURE</span>
             </div>
 
-            {/* soft glow behind the photo */}
-            <div className="glow-ring absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-blue-400 to-violet-500 blur-xl" />
-
-            {/* photo, centered */}
-            <img
-              src="/headshot-round.png"
-              alt="Naveen Sharma"
-              className="absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full object-cover ring-4 ring-white shadow-2xl"
-              onError={(e) => { e.target.style.display = "none"; }}
-            />
-
-            {/* orbiting title pills */}
-            <div className="orbit-ring absolute inset-0">
-              {HEADLINES.map((h, i) => {
-                const angle = i * (360 / HEADLINES.length);
-                return (
-                  <div key={h} className="absolute inset-0" style={{ transform: `rotate(${angle}deg)` }}>
-                    <div className="absolute left-1/2 top-0 -translate-x-1/2">
-                      <div style={{ transform: `rotate(${-angle}deg)` }}>
-                        <div className="orbit-item-counter">
-                          <span title={h}
-                            className={`flex h-20 w-20 items-center justify-center rounded-full p-1.5 text-center text-xs font-bold leading-tight shadow-lg ring-4 ${ORBIT_BADGE_STYLES[i]}`}>
-                            {ORBIT_SHORT_LABELS[i]}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+            <div className="hidden sm:flex justify-center text-blue-400">
+              <ArrowRight size={20} />
             </div>
+
+            {/* Step 2 */}
+            <div className="flex flex-col items-center p-3 rounded-xl bg-white border border-blue-200 shadow-sm w-full">
+              <span className="text-xs font-bold uppercase text-gray-400">Processing</span>
+              <span className="text-sm font-extrabold text-blue-700 mt-1">AI / LOGIC</span>
+              <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded mt-2">VALIDATE &amp; ROUTE</span>
+            </div>
+
+            <div className="hidden sm:flex justify-center text-blue-400">
+              <ArrowRight size={20} />
+            </div>
+
+            {/* Step 3 */}
+            <div className="flex flex-col items-center p-3 rounded-xl bg-white border border-gray-200 shadow-sm w-full">
+              <span className="text-xs font-bold uppercase text-gray-400">Execution</span>
+              <span className="text-sm font-extrabold text-gray-900 mt-1">CRM / SaaS</span>
+              <span className="text-[10px] font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded mt-2">ACTION &amp; MONITOR</span>
+            </div>
+          </div>
+
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs font-semibold text-gray-500 pt-4 border-t border-gray-200/60">
+            <span className="inline-flex items-center gap-1.5"><CheckCircle2 size={13} className="text-emerald-500" /> Validation Gates</span>
+            <span>•</span>
+            <span className="inline-flex items-center gap-1.5"><CheckCircle2 size={13} className="text-blue-500" /> Conditional Routing</span>
+            <span>•</span>
+            <span className="inline-flex items-center gap-1.5"><CheckCircle2 size={13} className="text-indigo-500" /> Automated Testing</span>
+            <span>•</span>
+            <span className="inline-flex items-center gap-1.5"><CheckCircle2 size={13} className="text-purple-500" /> Error Monitoring</span>
           </div>
         </Reveal>
 
-        <Reveal as="h1" className="gradient-text text-5xl font-extrabold tracking-tight sm:text-6xl mb-4 mt-2">
-          Naveen Sharma
+        <Reveal className="flex flex-wrap items-center justify-center gap-4">
+          <a href="#projects"
+            className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-8 py-3.5 text-base sm:text-lg font-semibold text-white shadow-lg shadow-blue-600/25 transition hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-xl">
+            View Automation Projects <ArrowRight size={18} />
+          </a>
+          <a href="https://github.com/naveensharmatech" target="_blank" rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl border-2 border-gray-200 bg-white px-8 py-3.5 text-base sm:text-lg font-semibold text-gray-700 transition hover:-translate-y-0.5 hover:border-gray-300 hover:text-gray-900">
+            <Github size={18} /> View GitHub
+          </a>
         </Reveal>
-
-        <Reveal as="p" className="text-xl font-medium text-gray-500 sm:text-2xl mb-9">
-          Healthcare SaaS Implementation Specialist
-        </Reveal>
-
-        <Reveal as="p" className="mx-auto max-w-2xl text-xl leading-relaxed text-gray-600 mb-11">
-          7+ years of professional experience, including nearly 4 years in healthcare SaaS at Bolt Healthcare.
-          Available for full-time, hybrid, and remote employment in SaaS implementation, systems configuration,
-          workflow automation, and QA/UAT.
-        </Reveal>
-
-        <Reveal className="flex flex-wrap items-center justify-center gap-4 mb-16">
+        
+        <Reveal className="mt-6">
           <a href="/Naveen_Sharma_CV.pdf" download
-            className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-9 py-4 text-xl font-semibold text-white shadow-lg shadow-blue-600/25 transition hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-xl">
-            Download CV <ArrowRight size={20} />
+            className="inline-flex items-center gap-2 text-sm sm:text-base font-semibold text-blue-600 hover:underline">
+            <FileDown size={16} /> Download Resume (PDF)
           </a>
-          <a href="#contact"
-            className="inline-flex items-center gap-2 rounded-xl border-2 border-gray-200 px-9 py-4 text-xl font-semibold text-gray-700 transition hover:-translate-y-0.5 hover:border-blue-300 hover:text-blue-600">
-            Get in touch
-          </a>
-        </Reveal>
-
-        <Reveal stagger className="grid grid-cols-2 gap-6 sm:grid-cols-4 border-t border-gray-100 pt-12">
-          {[
-            { num: "7+",     label: "Years Experience" },
-            { num: "~4",     label: "Years Healthcare SaaS" },
-            { num: "Tier 2/3", label: "Technical Support" },
-            { num: "Remote", label: "Available Globally" },
-          ].map((s) => (
-            <div key={s.label} className="text-center">
-              <p className="text-4xl font-extrabold text-blue-600">{s.num}</p>
-              <p className="mt-1.5 text-lg text-gray-500">{s.label}</p>
-            </div>
-          ))}
         </Reveal>
       </div>
     </section>
@@ -544,16 +577,16 @@ function Hero() {
 }
 
 function TrustBar() {
-  const tools = ["Basecamp", "HHAeXchange", "Zendesk", "Cloudflare", "GitHub", "VS Code"];
+  const tools = ["Zapier", "HubSpot", "Apify", "Make.com", "n8n", "GitHub"];
   return (
     <div className="border-y border-gray-100 bg-gray-50 py-6">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
-        <p className="mb-4 text-center text-sm font-semibold uppercase tracking-widest text-gray-400">
-          Core tools & platforms
+        <p className="mb-4 text-center text-xs sm:text-sm font-semibold uppercase tracking-widest text-gray-400">
+          Automation platforms &amp; tools
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-6">
+        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10">
           {tools.map((t) => (
-            <span key={t} className="text-base font-semibold text-gray-400">{t}</span>
+            <span key={t} className="text-base font-semibold text-gray-600">{t}</span>
           ))}
         </div>
       </div>
@@ -561,129 +594,162 @@ function TrustBar() {
   );
 }
 
-const EYEBROW_COLOR = {
-  indigo: "text-indigo-600", violet: "text-violet-600", sky: "text-sky-600", cyan: "text-cyan-600",
-  emerald: "text-emerald-600", amber: "text-amber-600", rose: "text-rose-600", pink: "text-pink-600",
-};
-
-function SectionHeading({ eyebrow, title, description, center, color }) {
-  const eyebrowColor = EYEBROW_COLOR[color] || "text-blue-600";
-  return (
-    <Reveal className={`mb-16 ${center ? "text-center mx-auto max-w-2xl" : "max-w-2xl"}`}>
-      {eyebrow && (
-        <p className={`mb-3 text-base font-bold uppercase tracking-widest ${eyebrowColor}`}>{eyebrow}</p>
-      )}
-      <h2 className="text-5xl font-extrabold tracking-tight text-gray-900">{title}</h2>
-      {description && (
-        <p className="mt-5 text-xl leading-relaxed text-gray-600">{description}</p>
-      )}
-    </Reveal>
-  );
-}
-
-function About() {
+function Pillars() {
   return (
     <section id="about" className="bg-white">
-      <div className="mx-auto max-w-4xl px-4 py-24 sm:px-6 text-center">
-        <SectionHeading eyebrow="About" center color="indigo" title="Healthcare SaaS Implementation Specialist" />
+      <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-24">
+        <SectionHeading eyebrow="About" center color="indigo" title="What I Do" />
         
-        <div className="mx-auto max-w-3xl space-y-5 text-lg leading-relaxed text-gray-600">
-          <p>
-            I'm Naveen Sharma — a Healthcare SaaS Implementation Specialist with 7+ years of technical
-            operations experience, including nearly 4 years of SaaS form-workflow configuration, healthcare
-            operations, and platform administration. I spearheaded the digital transformation of 500+
-            paper-based healthcare forms into automated, data-mapped intake systems for 25+ agencies. My
-            work bridges regulatory requirements and platform configuration.
-          </p>
-          <p>
-            I specialize in end-to-end SaaS workflow automation, system validation, and platform operations
-            for healthcare environments with strict regulatory requirements — dynamic form configuration,
-            conditional logic, data mapping, multi-tenant administration, and full-cycle UAT.
-          </p>
-          <p>
-            I'm available for full-time, hybrid, and remote roles in SaaS implementation, systems
-            configuration, workflow automation, and QA/UAT. I'm also the founder of{" "}
-            <a href="https://opility.com" target="_blank" rel="noreferrer" className="text-blue-600 hover:underline font-medium">Opility</a>
-            {" "}— a registered B2B IT services business.
-          </p>
-        </div>
-
-        <div className="mt-8 flex items-center justify-center gap-3">
-          <a href="#contact"
-            className="inline-flex items-center gap-2 text-base font-semibold text-blue-600 hover:underline">
-            Contact me <ArrowRight size={16} />
-          </a>
-          <span className="text-gray-300">·</span>
-          <a href="https://opility.com" target="_blank" rel="noreferrer"
-            className="inline-flex items-center gap-2 text-base font-semibold text-gray-500 hover:text-blue-600 hover:underline">
-            B2B services at Opility <LinkOut size={14} />
-          </a>
-        </div>
-
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
-          {[
-            { label: "Role focus",   value: "SaaS Implementation · Systems Configuration · Workflow Automation" },
-            { label: "Experience",   value: "7+ years · nearly 4 in healthcare SaaS" },
-            { label: "Location",     value: "Be'er Sheva, Israel · Remote OK" },
-            { label: "Availability", value: "Full-time · Hybrid · Remote" },
-          ].map((item) => (
-            <div key={item.label} className="rounded-2xl border border-gray-100 bg-gray-50 p-6 flex flex-col justify-between">
-              <p className="text-sm font-semibold uppercase tracking-wide text-gray-400">{item.label}</p>
-              <p className="mt-3 text-base font-bold text-gray-900 leading-snug">{item.value}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Expertise() {
-  return (
-    <section id="expertise" className="bg-gray-50">
-      <div className="mx-auto max-w-5xl px-4 py-24 sm:px-6">
-        <SectionHeading eyebrow="Expertise" center color="violet" title="Core competencies"
-          description="The practical skills I bring to healthcare SaaS implementation, systems configuration, quality assurance, and technical support." />
-        <Reveal stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {EXPERTISE.map((item) => {
-            const Icon = item.icon;
+        <Reveal stagger className="grid gap-6 md:grid-cols-3 mb-12">
+          {PILLARS.map((pillar) => {
+            const styles = PILLAR_STYLES[pillar.color] || PILLAR_STYLES.blue;
             return (
-              <div key={item.title}
-                className="tilt-card rounded-2xl border border-gray-100 bg-white p-8">
-                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-violet-50 text-violet-600">
-                  <Icon size={26} />
+              <div key={pillar.title} className={`tilt-card flex flex-col rounded-2xl border border-gray-100 bg-white p-8 shadow-sm ${styles.border}`}>
+                <span className={`inline-block self-start rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest mb-4 ${styles.badge}`}>
+                  {pillar.label}
+                </span>
+                <h3 className="text-xl font-extrabold text-gray-900 mb-3">{pillar.title}</h3>
+                <p className="flex-1 text-base leading-relaxed text-gray-600 mb-6">{pillar.desc}</p>
+                <div className="flex flex-wrap gap-2">
+                  {pillar.skills.map((skill) => (
+                    <span key={skill} className="rounded-md bg-gray-50 border border-gray-100 px-2.5 py-1 text-xs font-semibold text-gray-700">
+                      {skill}
+                    </span>
+                  ))}
                 </div>
-                <h3 className="mt-6 text-xl font-bold text-gray-900">{item.title}</h3>
-                <p className="mt-3 text-lg leading-relaxed text-gray-600">{item.desc}</p>
               </div>
             );
           })}
+        </Reveal>
+        
+        <Reveal className="flex items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm font-bold text-gray-500 uppercase tracking-widest">
+          <span className="text-blue-600 bg-blue-50 px-3 py-1 rounded-md">BUILD</span>
+          <ArrowRight size={14} className="text-gray-400" />
+          <span className="text-indigo-600 bg-indigo-50 px-3 py-1 rounded-md">IMPLEMENT</span>
+          <ArrowRight size={14} className="text-gray-400" />
+          <span className="text-violet-600 bg-violet-50 px-3 py-1 rounded-md">VALIDATE</span>
         </Reveal>
       </div>
     </section>
   );
 }
 
-function Process() {
+function FeaturedProjects() {
   return (
-    <section id="process" className="relative overflow-hidden bg-white">
-      <div className="orb h-56 w-56 bg-sky-200/40" style={{ bottom: "10%", right: "4%" }} />
-      <div className="relative z-10 mx-auto max-w-5xl px-4 py-24 sm:px-6">
-        <SectionHeading eyebrow="How I Work" center color="sky" title="From manual process to production go-live"
-          description="A consistent four-stage approach I apply to every implementation engagement — whether configuring a single form or onboarding a new agency end-to-end." />
-        <div className="relative grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="pointer-events-none absolute left-0 right-0 top-9 hidden h-0.5 bg-gradient-to-r from-sky-100 via-sky-300 to-cyan-200 lg:block" />
-          {PROCESS.map((p, i) => {
+    <section id="projects" className="bg-gray-50">
+      <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-24">
+        <SectionHeading eyebrow="Projects" title="Featured Automation Projects" color="amber" 
+          description="Production and prototype workflows engineered with conditional routing, data extraction, and CRM actions." />
+        
+        <div className="grid gap-8 md:grid-cols-1 mb-16">
+          {FEATURED_PROJECTS.map((project) => (
+            <div key={project.title} className="tilt-card rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+              <div className="flex items-center justify-between gap-3 mb-3">
+                <span className="inline-block rounded-full bg-amber-50 px-3 py-1 text-xs font-bold uppercase tracking-widest text-amber-700 border border-amber-200">
+                  {project.tag}
+                </span>
+              </div>
+              <h3 className="text-2xl font-extrabold text-gray-900 mb-3">{project.title}</h3>
+              <p className="text-base sm:text-lg leading-relaxed text-gray-600 mb-6">{project.desc}</p>
+              
+              {/* Architecture diagram */}
+              <div className="mb-6 rounded-xl bg-gray-50 p-4 border border-gray-200/80 overflow-x-auto">
+                <p className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-3">Pipeline Flow</p>
+                <div className="flex items-center gap-2 min-w-max">
+                  {project.architecture.map((node, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <span className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-semibold text-gray-800 shadow-sm">
+                        {node}
+                      </span>
+                      {i < project.architecture.length - 1 && <ArrowRight size={14} className="text-gray-400 shrink-0" />}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-2 mb-8">
+                {project.skills.map((skill) => (
+                  <span key={skill} className="rounded-lg bg-gray-100 px-3 py-1 text-xs sm:text-sm font-semibold text-gray-700">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-4">
+                {project.links.map((link) => (
+                  <a key={link.label} href={link.href} target="_blank" rel="noreferrer"
+                    className={`inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold transition ${
+                      link.type === 'site' 
+                        ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-sm' 
+                        : 'border-2 border-gray-200 text-gray-700 hover:border-gray-300 hover:text-gray-900 bg-white'
+                    }`}>
+                    {link.type === "code" ? <Github size={16} /> : <ExternalLink size={16} />}
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Earlier Projects */}
+        <div className="pt-8 border-t border-gray-200">
+          <h3 className="text-2xl font-extrabold text-gray-900 mb-6">Earlier Technical Projects</h3>
+          <div className="grid gap-6 md:grid-cols-2">
+            {EARLIER_PROJECTS.map((project) => (
+              <div key={project.title} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm flex flex-col justify-between">
+                <div>
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-2 block">{project.tag}</span>
+                  <h4 className="text-lg font-bold text-gray-900 mb-2">{project.title}</h4>
+                  <p className="text-sm text-gray-600 mb-4">{project.desc}</p>
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    {project.skills.map((skill) => (
+                      <span key={skill} className="rounded-md bg-gray-50 border border-gray-100 px-2 py-0.5 text-xs font-semibold text-gray-600">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-4 pt-4 border-t border-gray-100">
+                  {project.links && project.links.map(link => (
+                    <a key={link.label} href={link.href} target="_blank" rel="noreferrer" className="text-sm font-semibold text-blue-600 hover:underline flex items-center gap-1">
+                      {link.type === "code" ? <Github size={14} /> : <ExternalLink size={14} />} {link.label}
+                    </a>
+                  ))}
+                  {project.file && (
+                    <a href={project.file} target="_blank" rel="noreferrer" className="text-sm font-semibold text-blue-600 hover:underline flex items-center gap-1">
+                      <FileDown size={14} /> {project.fileLabel}
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function AutomationApproach() {
+  return (
+    <section className="relative overflow-hidden bg-white">
+      <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-24">
+        <SectionHeading eyebrow="Approach" center color="sky" title="How I Build Automations"
+          description="A structured engineering framework applied to every workflow to ensure data reliability and prevent breakages." />
+        
+        <div className="relative grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {AUTOMATION_APPROACH.map((p, i) => {
             const Icon = p.icon;
             return (
               <Reveal key={p.step} className="relative" style={{ transitionDelay: `${i * 0.08}s` }}>
-                <div className="tilt-card relative z-10 rounded-2xl border border-gray-100 bg-white p-7 text-center shadow-sm">
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-600 to-cyan-600 text-white shadow-lg shadow-sky-600/25">
-                    <Icon size={28} />
+                <div className="tilt-card relative z-10 rounded-2xl border border-gray-100 bg-white p-6 text-center shadow-sm">
+                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 text-white shadow-lg shadow-sky-600/20">
+                    <Icon size={24} />
                   </div>
-                  <p className="mt-4 text-sm font-bold uppercase tracking-widest text-sky-500">Step {p.step}</p>
-                  <h3 className="mt-1 text-xl font-extrabold text-gray-900">{p.title}</h3>
-                  <p className="mt-3 text-base leading-relaxed text-gray-600">{p.desc}</p>
+                  <p className="mt-4 text-xs font-bold uppercase tracking-widest text-sky-600">Step {p.step}</p>
+                  <h3 className="mt-1 text-lg font-extrabold text-gray-900">{p.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-gray-600">{p.desc}</p>
                 </div>
               </Reveal>
             );
@@ -696,41 +762,143 @@ function Process() {
 
 function Experience() {
   return (
-    <section id="experience" className="bg-white">
-      <div className="mx-auto max-w-5xl px-4 py-24 sm:px-6">
-        <SectionHeading eyebrow="Experience" title="Where I've worked" color="cyan" />
-        <div className="space-y-6">
+    <section id="experience" className="bg-gray-50">
+      <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-24">
+        <SectionHeading eyebrow="Experience" title="Professional Experience" color="cyan" />
+        <div className="space-y-8">
           {EXPERIENCES.map((exp) => (
-            <div key={exp.company}
-              className="tilt-card rounded-2xl border border-gray-100 bg-white p-8">
-              <div className="flex flex-wrap items-start justify-between gap-3">
+            <div key={exp.company} className="tilt-card rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+              <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
                 <div>
-                  <h3 className="text-xl font-extrabold text-gray-900">{exp.company}</h3>
-                  <p className="mt-1 text-base font-semibold text-cyan-600">{exp.context}</p>
+                  <h3 className="text-2xl font-extrabold text-gray-900">{exp.company}</h3>
+                  <p className="mt-1 text-base font-semibold text-cyan-700">{exp.context}</p>
                 </div>
-                <span className="rounded-full bg-cyan-50 px-4 py-1.5 text-sm font-bold text-cyan-600">
+                <span className="rounded-full bg-cyan-50 px-4 py-1.5 text-sm font-bold text-cyan-700 border border-cyan-100">
                   {exp.period}
                 </span>
               </div>
-              <div className="mt-4 flex flex-wrap gap-2">
+              
+              <div className="flex flex-wrap gap-2 mb-4">
                 {exp.roles.map((role) => (
-                  <span key={role}
-                    className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-1 text-sm font-medium text-gray-700">
+                  <span key={role} className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-1 text-sm font-bold text-gray-800">
                     {role}
                   </span>
                 ))}
               </div>
-              <ul className="mt-6 space-y-3">
+              
+              <p className="text-base sm:text-lg text-gray-600 mb-6">{exp.summary}</p>
+              
+              <div className="flex flex-wrap gap-2 mb-6 pb-6 border-b border-gray-100">
+                {exp.skills.map((skill) => (
+                  <span key={skill} className="rounded-md bg-cyan-50 text-cyan-800 px-2.5 py-1 text-xs font-semibold border border-cyan-100">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+
+              <ul className="space-y-4 mb-6">
                 {exp.points.map((point, i) => (
                   <li key={i} className="flex gap-3 text-base leading-relaxed text-gray-600">
-                    <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-cyan-500" />
+                    <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-cyan-600" />
                     <span>
-                      {typeof point === "string" ? point : (
-                        <>
-                          <span className="font-semibold text-gray-900">{point.label}: </span>
-                          {point.text}
-                        </>
-                      )}
+                      <span className="font-semibold text-gray-900">{point.label}: </span>
+                      {point.text}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              
+              {exp.callout && (
+                <div className="rounded-xl bg-blue-50 border border-blue-100 p-5 mt-4">
+                  <h4 className="text-sm font-bold text-blue-900 mb-1">{exp.callout.title}</h4>
+                  <p className="text-sm text-blue-800 leading-relaxed">{exp.callout.text}</p>
+                </div>
+              )}
+
+              {exp.supportingLine && (
+                <div className="mt-4 pt-4 border-t border-gray-100">
+                  <p className="text-sm font-medium text-gray-500 italic">{exp.supportingLine}</p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CareerJourney() {
+  return (
+    <section className="bg-white">
+      <div className="mx-auto max-w-3xl px-4 py-20 sm:px-6 sm:py-24">
+        <SectionHeading eyebrow="Journey" center title="From Operations to Intelligent Automation" color="blue" />
+        
+        <div className="relative pl-6 sm:pl-0">
+          <div className="absolute left-6 sm:left-1/2 top-2 bottom-2 w-0.5 bg-gray-200 -translate-x-1/2"></div>
+          <div className="space-y-10">
+            {CAREER_TIMELINE.map((step, i) => (
+              <div key={i} className={`relative flex sm:justify-between items-center w-full ${i % 2 === 0 ? "sm:flex-row-reverse" : ""}`}>
+                <div className="hidden sm:block w-5/12"></div>
+                <div className={`absolute left-0 sm:left-1/2 h-4 w-4 rounded-full border-4 border-white shadow-sm -translate-x-1/2 ${step.colorClass}`}></div>
+                <div className={`w-full sm:w-5/12 ${i % 2 === 0 ? "sm:text-left ml-6 sm:ml-0" : "sm:text-right ml-6 sm:ml-0"}`}>
+                  <p className="text-xs font-bold uppercase tracking-wider text-gray-400">{step.company}</p>
+                  <p className="text-base sm:text-lg font-extrabold text-gray-900 mt-0.5">{step.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-14 rounded-2xl bg-gray-50 border border-gray-100 p-6 text-center">
+          <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
+            "My career has progressively moved closer to the systems behind business operations — from managing processes, to validating them, to implementing SaaS workflows, and now to automating them."
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CertificationsSection() {
+  return (
+    <section id="certifications" className="bg-gray-50">
+      <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-24">
+        <SectionHeading eyebrow="Learning" title="Certifications &amp; Learning" color="rose" />
+        
+        {/* Degree */}
+        <div className="mb-10 tilt-card rounded-2xl border border-rose-200 bg-white p-8 shadow-sm flex flex-col md:flex-row items-start gap-6">
+          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-rose-50 text-rose-600">
+            <GraduationCap size={28} />
+          </div>
+          <div>
+            <span className="rounded-full bg-rose-50 text-rose-700 text-xs font-bold px-3 py-1 mb-2 inline-block border border-rose-100">
+              Degree
+            </span>
+            <h3 className="text-2xl font-extrabold text-gray-900 mb-1">{EDUCATION_DEGREE.degree}</h3>
+            <p className="text-base font-semibold text-gray-700">{EDUCATION_DEGREE.institution}</p>
+            <p className="text-sm text-gray-500 mt-1">{EDUCATION_DEGREE.focus} · {EDUCATION_DEGREE.period}</p>
+          </div>
+        </div>
+
+        {/* Certification Groups */}
+        <div className="grid gap-6 md:grid-cols-2 mb-10">
+          {CERTIFICATIONS.map((group) => (
+            <div key={group.group} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+              <h3 className="text-lg font-extrabold text-gray-900 mb-4 pb-3 border-b border-gray-100">{group.group}</h3>
+              <ul className="space-y-3">
+                {group.items.map((item, i) => (
+                  <li key={i} className="flex justify-between items-start gap-4">
+                    <div>
+                      <p className="text-sm font-bold text-gray-800">{item.degree}</p>
+                      <p className="text-xs text-gray-500">{item.institution}</p>
+                    </div>
+                    <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${
+                      item.type === 'In Progress' 
+                        ? 'bg-amber-50 text-amber-700 border border-amber-200' 
+                        : 'bg-gray-100 text-gray-600'
+                    }`}>
+                      {item.type}
                     </span>
                   </li>
                 ))}
@@ -738,134 +906,19 @@ function Experience() {
             </div>
           ))}
         </div>
-      </div>
-    </section>
-  );
-}
 
-function CaseStudies() {
-  return (
-    <section id="casestudies" className="bg-gray-50">
-      <div className="mx-auto max-w-5xl px-4 py-24 sm:px-6">
-        <SectionHeading eyebrow="Case Studies · Bolt Healthcare" color="emerald"
-          title="Real-world implementation work"
-          description="A closer look at the challenges I solved across healthcare SaaS implementation, QA, and API validation during my time at Bolt Healthcare. No confidential data is disclosed." />
-        <div className="grid gap-6 md:grid-cols-2">
-          {CASE_STUDIES.map((cs) => (
-            <div key={cs.title}
-              className="tilt-card rounded-2xl border border-gray-100 bg-white p-8">
-              <span className="text-sm font-bold uppercase tracking-widest text-emerald-600">{cs.tag}</span>
-              <h3 className="mt-3 text-xl font-extrabold text-gray-900">{cs.title}</h3>
-              <div className="mt-6 space-y-4">
-                {[
-                  { label: "Challenge", text: cs.challenge, color: "bg-red-50 text-red-700" },
-                  { label: "My Role",   text: cs.role,      color: "bg-emerald-50 text-emerald-700" },
-                  { label: "Solution",  text: cs.solution,  color: "bg-gray-100 text-gray-700" },
-                  { label: "Outcome",   text: cs.outcome,   color: "bg-green-50 text-green-700" },
-                ].map(({ label, text, color }) => (
-                  <div key={label}>
-                    <span className={`inline-block rounded-md px-2 py-0.5 text-sm font-bold ${color}`}>{label}</span>
-                    <p className="mt-1.5 text-base leading-relaxed text-gray-600">{text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function AvailableFor() {
-  const roles = [
-    { title: "SaaS Implementation", items: ["Workflow configuration", "Platform setup & administration", "Go-live & hypercare", "Customer onboarding"] },
-    { title: "QA & Release Validation", items: ["UAT planning & execution", "Functional & regression testing", "Workflow & mapping validation", "Production readiness"] },
-    { title: "Product & Technical Support", items: ["Tier 2/3 support", "Escalation management", "Issue triage & coordination (Basecamp)", "Documentation & SOPs"] },
-  ];
-  return (
-    <section className="bg-blue-600 text-white">
-      <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6">
-        <div className="mb-12 text-center">
-          <p className="mb-3 text-base font-bold uppercase tracking-widest text-blue-200">Open to opportunities</p>
-          <h2 className="text-3xl font-extrabold tracking-tight">Available for full-time, hybrid &amp; remote roles</h2>
-          <p className="mx-auto mt-4 max-w-xl text-blue-100">
-            I'm actively looking for roles in SaaS implementation, systems configuration,
-            workflow automation, and QA/UAT.
-          </p>
-        </div>
-        <div className="grid gap-6 sm:grid-cols-3 mb-10">
-          {roles.map((r) => (
-            <div key={r.title} className="rounded-2xl bg-blue-700/50 border border-blue-500/30 p-6">
-              <h3 className="font-bold text-white mb-4">{r.title}</h3>
-              <ul className="space-y-2">
-                {r.items.map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-base text-blue-100">
-                    <CheckCircle2 size={14} className="shrink-0 text-blue-300" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <div className="text-center">
-          <p className="text-blue-200 text-base mb-4">
-            Looking for B2B services or contracting?{" "}
-            <a href="https://opility.com" target="_blank" rel="noreferrer"
-              className="text-white font-semibold underline underline-offset-2 hover:text-blue-100">
-              Visit Opility →
-            </a>
-          </p>
-          <a href="#contact"
-            className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-base font-bold text-blue-600 transition hover:bg-blue-50">
-            Get in touch <ArrowRight size={16} />
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Education() {
-  return (
-    <section id="education" className="bg-white">
-      <div className="mx-auto max-w-5xl px-4 py-24 sm:px-6">
-        <SectionHeading eyebrow="Education & Certifications" title="Academic background & professional training" color="rose" />
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {EDUCATION.map((item) => {
-            const Icon = item.icon;
-            return (
-              <div key={item.degree}
-                className="tilt-card rounded-2xl border border-gray-100 bg-gray-50 p-8">
-                <div className="flex items-center justify-between mb-5">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-rose-50 text-rose-600">
-                    <Icon size={22} />
-                  </div>
-                  <span className="rounded-full bg-rose-50 text-rose-600 text-sm font-bold px-3 py-1">
-                    {item.type}
-                  </span>
-                </div>
-                <p className="text-sm font-semibold uppercase tracking-widest text-gray-400 mb-1">{item.institution}</p>
-                <h3 className="text-lg font-extrabold text-gray-900 mb-1">{item.degree}</h3>
-                <p className="text-base text-gray-500 mb-3">{item.focus}</p>
-                <p className="text-sm font-semibold text-blue-600">{item.period}</p>
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="mt-10 rounded-2xl border border-gray-100 bg-gray-50 p-8">
-          <h3 className="text-lg font-extrabold text-gray-900 mb-5">Languages</h3>
-          <div className="flex flex-wrap gap-3">
+        {/* Languages */}
+        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h3 className="text-lg font-extrabold text-gray-900 mb-4">Languages</h3>
+          <div className="flex flex-wrap gap-4">
             {[
               { lang: "Hindi", level: "Native / bilingual proficiency" },
               { lang: "English", level: "Professional working proficiency" },
               { lang: "Hebrew", level: "Elementary proficiency" },
             ].map((l) => (
-              <div key={l.lang} className="rounded-xl border border-gray-200 bg-white px-5 py-3">
-                <p className="text-base font-bold text-gray-900">{l.lang}</p>
-                <p className="text-sm text-gray-500">{l.level}</p>
+              <div key={l.lang} className="rounded-xl bg-gray-50 px-4 py-2.5 border border-gray-200">
+                <p className="text-sm font-bold text-gray-900">{l.lang}</p>
+                <p className="text-xs text-gray-500">{l.level}</p>
               </div>
             ))}
           </div>
@@ -875,83 +928,26 @@ function Education() {
   );
 }
 
-function Projects() {
+function Skills() {
   return (
-    <section id="projects" className="bg-gray-50">
-      <div className="mx-auto max-w-5xl px-4 py-24 sm:px-6">
-        <SectionHeading eyebrow="Projects" title="Personal projects & study work" color="amber"
-          description="An interactive implementation demo, QA certification projects, an academic development build, and live web projects — all original work." />
-        <div className="grid gap-6 md:grid-cols-3">
-          {PROJECTS.map((project) => {
-            const Icon = project.icon;
-            return (
-              <div key={project.title}
-                className="tilt-card flex flex-col rounded-2xl border border-gray-100 bg-white p-8">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
-                  <Icon size={22} />
-                </div>
-                <span className="mt-6 text-sm font-bold uppercase tracking-widest text-amber-600">{project.tag}</span>
-                <h3 className="mt-2 text-lg font-extrabold leading-snug text-gray-900">{project.title}</h3>
-                <p className="mt-3 flex-1 text-base leading-relaxed text-gray-600">{project.desc}</p>
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {project.skills.map((skill) => (
-                    <span key={skill}
-                      className="rounded-lg bg-gray-100 px-3 py-1 text-sm font-semibold text-gray-700">
+    <section className="bg-white">
+      <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-24">
+        <SectionHeading eyebrow="Tools" center title="Technical Skills"
+          description="Grouped competencies across automation, SaaS integrations, quality assurance, and platforms." />
+        
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {SKILL_GROUPS.map((group) => (
+            <div key={group.label} className="tilt-card rounded-2xl border border-gray-100 bg-gray-50 p-6 flex flex-col justify-between">
+              <div>
+                <h3 className="text-base font-extrabold text-gray-900 mb-4">{group.label}</h3>
+                <div className="flex flex-wrap gap-2">
+                  {group.skills.map((skill) => (
+                    <span key={skill} className="rounded-md bg-white border border-gray-200 px-2.5 py-1 text-xs font-semibold text-gray-700 shadow-sm">
                       {skill}
                     </span>
                   ))}
                 </div>
-                {project.file && (
-                  <a href={project.file} target="_blank" rel="noreferrer"
-                    className="mt-6 inline-flex items-center gap-2 text-base font-semibold text-blue-600 transition hover:gap-2.5 hover:text-blue-700">
-                    <FileDown size={16} />
-                    {project.fileLabel || "View document"}
-                  </a>
-                )}
-                {project.links && (
-                  <div className="mt-6 flex flex-col gap-2.5">
-                    {project.links.map((l) => (
-                      <a key={l.href} href={l.href} target="_blank" rel="noreferrer"
-                        className="inline-flex items-center gap-2 text-base font-semibold text-blue-600 transition hover:gap-2.5 hover:text-blue-700">
-                        {l.type === "code" ? <Github size={16} /> : <ExternalLink size={16} />}
-                        {l.label}
-                      </a>
-                    ))}
-                  </div>
-                )}
               </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Tools() {
-  return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-5xl px-4 py-24 sm:px-6">
-        <SectionHeading eyebrow="Tools" center title="Tools I work with"
-          description="Core professional tooling across SaaS implementation, systems configuration, and website development." />
-        <div className="space-y-6">
-          {TOOL_CATEGORIES.map((cat) => (
-            <div key={cat.label} className="rounded-2xl border border-gray-100 bg-gray-50 p-8">
-              <div className="mb-5">
-                <h3 className="text-lg font-extrabold text-gray-900">{cat.label}</h3>
-                <p className="mt-0.5 text-sm text-gray-400">{cat.sublabel}</p>
-              </div>
-              <div className="flex flex-wrap gap-2.5">
-                {cat.tools.map((tool) => (
-                  <span key={tool}
-                    className="rounded-lg border border-gray-200 bg-white px-4 py-2 text-base font-medium text-gray-700 transition hover:border-blue-300 hover:text-blue-600">
-                    {tool}
-                  </span>
-                ))}
-              </div>
-              {cat.note && (
-                <p className="mt-3 text-sm text-gray-400 italic">{cat.note}</p>
-              )}
             </div>
           ))}
         </div>
@@ -965,30 +961,35 @@ function Contact() {
     <section id="contact" className="relative overflow-hidden bg-gray-50">
       <div className="orb h-72 w-72 bg-indigo-300/40" style={{ top: "-30px", left: "4%" }} />
       <div className="orb h-64 w-64 bg-rose-300/30" style={{ bottom: "0%", right: "3%", animationDelay: "2s" }} />
-      <div className="relative mx-auto max-w-5xl px-4 py-24 sm:px-6">
+      
+      <div className="relative mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-24">
         <SectionHeading eyebrow="Contact" center color="pink"
-          title="Let's talk"
-          description="Available for full-time, hybrid, and remote employment. Based in Be'er Sheva, Israel." />
+          title="Need Help Automating a Business Process?"
+          description="I'm open to AI Automation, Workflow Automation, SaaS Implementation and related no-code/low-code opportunities." />
 
         <div className="mx-auto max-w-2xl">
-          <div className="mb-8 flex justify-center gap-4">
-            <a href="/Naveen_Sharma_CV.pdf" target="_blank" rel="noreferrer"
-              className="rounded-full border-2 border-gray-200 bg-white px-6 py-3 text-base font-bold text-gray-700 transition hover:border-blue-400 hover:text-blue-600">
-              View CV
+          <div className="mb-8 flex flex-wrap justify-center gap-4">
+            <a href="mailto:contact@naveensharma.net"
+              className="rounded-full bg-blue-600 px-7 py-3 text-base font-bold text-white shadow-md shadow-blue-200 transition hover:bg-blue-700 hover:shadow-lg">
+              Contact Me
             </a>
-            <a href="/Naveen_Sharma_CV.pdf" download
-              className="rounded-full bg-blue-600 px-6 py-3 text-base font-bold text-white shadow-md shadow-blue-200 transition hover:bg-blue-700 hover:shadow-lg">
-              Download CV (PDF)
+            <a href="https://linkedin.com/in/naveensharmatech" target="_blank" rel="noreferrer"
+              className="rounded-full border-2 border-gray-200 bg-white px-7 py-3 text-base font-bold text-gray-700 transition hover:border-blue-400 hover:text-blue-600 shadow-sm">
+              LinkedIn
+            </a>
+            <a href="https://github.com/naveensharmatech" target="_blank" rel="noreferrer"
+              className="rounded-full border-2 border-gray-200 bg-white px-7 py-3 text-base font-bold text-gray-700 transition hover:border-blue-400 hover:text-blue-600 shadow-sm">
+              GitHub
             </a>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
             {[
               { href: "mailto:contact@naveensharma.net",               icon: Mail,     label: "Email",    text: "contact@naveensharma.net",         external: false, link: true,  color: "indigo"  },
               { href: "tel:+972587896289",                              icon: Phone,    label: "Phone",    text: "058-789-6289",                      external: false, link: true,  color: "emerald" },
               { href: null,                                             icon: MapPin,   label: "Location", text: "Be'er Sheva, Israel",              external: false, link: false, color: "rose"    },
             ].map(({ href, icon: Icon, label, text, external, link, color }) => {
-              const classes = "tilt-card flex items-center gap-3 rounded-xl border border-gray-100 bg-white p-4 hover:border-gray-200";
+              const classes = "tilt-card flex flex-col items-center gap-2 rounded-xl border border-gray-100 bg-white p-5 hover:border-gray-200 text-center shadow-sm";
               const iconBg = {
                 indigo: "bg-indigo-50 text-indigo-600",
                 emerald: "bg-emerald-50 text-emerald-600",
@@ -996,12 +997,12 @@ function Contact() {
               }[color];
               const inner = (
                 <>
-                  <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${iconBg}`}>
+                  <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${iconBg}`}>
                     <Icon size={18} />
                   </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="text-sm font-semibold text-gray-400">{label}</p>
-                    <p className="truncate text-base font-bold text-gray-900">{text}</p>
+                  <div className="w-full">
+                    <p className="text-xs font-semibold text-gray-400">{label}</p>
+                    <p className="truncate text-sm font-bold text-gray-900 mt-0.5">{text}</p>
                   </div>
                   {external && <ExternalLink size={13} className="shrink-0 text-gray-300" />}
                 </>
@@ -1017,6 +1018,18 @@ function Contact() {
                 <div key={label} className={classes}>{inner}</div>
               );
             })}
+          </div>
+
+          <div className="flex justify-center gap-4">
+            <a href="/Naveen_Sharma_CV.pdf" target="_blank" rel="noreferrer"
+              className="text-sm font-semibold text-blue-600 hover:underline">
+              View CV
+            </a>
+            <span className="text-gray-300">·</span>
+            <a href="/Naveen_Sharma_CV.pdf" download
+              className="text-sm font-semibold text-blue-600 hover:underline">
+              Download CV (PDF)
+            </a>
           </div>
         </div>
       </div>
@@ -1052,7 +1065,7 @@ const LEGAL_DOCS = {
     title: "Terms of Service",
     content: [
       { heading: "Scope", body: "These terms apply to B2B engagements handled through Opility (Naveen Sharma, Authorised Dealer, Israel). For full terms, please visit opility.com or contact hello@opility.com." },
-      { heading: "Services & rates", body: "Services are provided through Opility at the following standard rates:\n\n• Healthcare SaaS Implementation & Configuration: $50–65 / hour\n• QA Engineering & API Validation: $45–55 / hour\n• Website Design & Development: $55–70 / hour\n• Minimum project engagement: $500\n\nFinal rates are confirmed in a written agreement before work begins." },
+      { heading: "Services & rates", body: "Services are provided through Opility at standard professional rates. Final rates are confirmed in a written agreement before work begins." },
       { heading: "Payment terms", body: "Project work: 50% deposit required before work begins for new clients; balance due upon delivery and acceptance.\n\nOngoing retainer / support contracts: invoiced monthly in arrears; payment due within 14 days of invoice date." },
       { heading: "Engagement process", body: "No work begins without a confirmed written agreement. Typical process:\n1. Initial consultation (free, up to 30 minutes)\n2. Proposal & Statement of Work issued\n3. Agreement signed\n4. Deposit invoice paid\n5. Work commences\n6. Delivery, review, and final payment" },
       { heading: "Confidentiality", body: "All client information — business data, systems access, workflows, and communications — is treated as strictly confidential and will not be disclosed to any third party without written consent." },
@@ -1067,7 +1080,7 @@ const LEGAL_DOCS = {
       { heading: "YouTube embed cookies", body: "This site may include embedded YouTube video players. YouTube (Google LLC) may set cookies on your device when you interact with a video player, subject to Google's Privacy Policy. These are outside our control." },
       { heading: "Cloudflare security cookies", body: "Hosting provider Cloudflare may set strictly necessary cookies (e.g. __cf_bm) for bot detection and security. These do not track you for advertising purposes." },
       { heading: "No analytics or advertising", body: "This website does not use Google Analytics, Facebook Pixel, LinkedIn Insight Tag, Hotjar, or any other analytics or advertising tracking technology." },
-      { heading: "Managing cookies", body: "You can control, block, or delete cookies at any time through your browser settings.\n• Chrome: Settings → Privacy & Security → Cookies\n• Firefox: Settings → Privacy & Security\n• Safari: Preferences → Privacy" },
+      { heading: "Managing cookies", body: "You can control, block, or delete cookies at any time through your browser settings." },
       { heading: "Contact", body: "For cookie or privacy queries: contact@naveensharma.net" },
     ],
   },
@@ -1141,9 +1154,9 @@ function Footer() {
               onError={(e) => { e.target.style.display = "none"; }}
             />
             <p className="font-extrabold text-gray-900">Naveen Sharma</p>
-            <p className="text-base text-gray-500">Healthcare SaaS Implementation · Systems Configuration · Workflow Automation · QA & UAT</p>
+            <p className="text-base text-gray-600 font-medium">AI Automation · Workflow Automation · SaaS Implementation · QA/UAT</p>
             <p className="text-sm text-gray-400">
-              B2B services & contracting →{" "}
+              B2B services &amp; contracting →{" "}
               <a href="https://opility.com" target="_blank" rel="noreferrer" className="text-blue-600 hover:underline font-medium">opility.com</a>
             </p>
             <div className="flex items-center justify-center gap-3 mt-1">
@@ -1160,12 +1173,12 @@ function Footer() {
                   rel={href.startsWith("http") ? "noreferrer" : undefined}
                   aria-label={label}
                   style={{ backgroundColor: bg }}
-                  className="flex h-9 w-9 items-center justify-center rounded-full text-white transition opacity-90 hover:opacity-100 hover:scale-110">
+                  className="flex h-9 w-9 items-center justify-center rounded-full text-white transition opacity-90 hover:opacity-100 hover:scale-110 shadow-sm">
                   <Icon size={16} />
                 </a>
               ))}
             </div>
-            <div className="grid grid-cols-2 gap-x-8 gap-y-1.5 mt-1">
+            <div className="grid grid-cols-2 gap-x-8 gap-y-1.5 mt-2">
               {[
                 { key: "privacy",  label: "Privacy & Data Policy" },
                 { key: "legal",    label: "Legal Notice" },
@@ -1178,7 +1191,7 @@ function Footer() {
                 </button>
               ))}
             </div>
-            <p className="text-sm text-gray-400">© 2026 Naveen Sharma. All rights reserved.</p>
+            <p className="text-xs text-gray-400 mt-1">© 2026 Naveen Sharma. All rights reserved.</p>
           </div>
         </div>
       </footer>
@@ -1186,56 +1199,21 @@ function Footer() {
   );
 }
 
-const FAQS = [
-  {
-    q: "What kind of roles are you looking for?",
-    a: "I'm looking for full-time, hybrid, or remote roles in SaaS implementation, systems configuration, workflow automation, and QA/UAT. I'm open to roles in Israel and internationally.",
-  },
-  {
-    q: "What was your role at Bolt Healthcare?",
-    a: "I was an Implementation Specialist, configuring SaaS form workflows, systems configuration, and validation testing for a healthcare intake platform used by 25+ agencies.",
-  },
-  {
-    q: "Are you available for remote or international work?",
-    a: "Yes — I work fully remote and am available for international roles and contracts. I'm based in Be'er Sheva, Israel, and have worked with US-based teams throughout my time at Bolt Healthcare. I'm also open to hybrid or on-site roles within Israel.",
-  },
-  {
-    q: "What industries have you worked in?",
-    a: "My deepest experience is in healthcare SaaS — specifically regulated intake and caregiver management platforms at Bolt Healthcare. I also have a background in electronics manufacturing QA (Vishay Intertechnology) and technical training operations (Shivam Institute).",
-  },
-  {
-    q: "Do you work with tools like Jira, Postman, or Basecamp?",
-    a: "I coordinated all healthcare SaaS implementation work at Bolt Healthcare through Basecamp. I have certification-level training in Jira but did not use it in production. I've also worked hands-on with HHAeXchange API integration and Zendesk for client support.",
-  },
-  {
-    q: "Can I download your CV?",
-    a: "Yes — you can download my CV directly from this page using the 'Download CV' button at the top. You can also contact me at contact@naveensharma.net and I'll send it directly.",
-  },
-  {
-    q: "Do you offer B2B services or contracting?",
-    a: "Yes — B2B services including SaaS implementation consulting, QA services, website development, and career services are offered through Opility, my registered IT services business. Visit opility.com or email hello@opility.com for enquiries.",
-  },
-  {
-    q: "How do I get in touch?",
-    a: "Email me at contact@naveensharma.net, connect on LinkedIn at linkedin.com/in/naveensharmatech, or call 058-789-6289. I typically respond within one business day.",
-  },
-];
-
 function FAQ() {
   const [open, setOpen] = useState(null);
   return (
     <section id="faq" className="bg-gray-50">
-      <div className="mx-auto max-w-5xl px-4 py-24 sm:px-6">
-        <SectionHeading eyebrow="FAQ" center title="Frequently asked questions"
-          description="Common questions from recruiters and hiring managers." />
+      <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-24">
+        <SectionHeading eyebrow="FAQ" center title="Frequently Asked Questions"
+          description="Common questions regarding my automation expertise, implementation experience, and availability." />
         <div className="mx-auto max-w-3xl space-y-3">
           {FAQS.map((item, i) => (
-            <div key={i} className="rounded-2xl border border-gray-100 bg-white overflow-hidden">
+            <div key={i} className="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm">
               <button
                 onClick={() => setOpen(open === i ? null : i)}
                 className="flex w-full items-center justify-between px-6 py-5 text-left transition hover:bg-gray-50"
               >
-                <span className="text-lg font-bold text-gray-900 pr-4">{item.q}</span>
+                <span className="text-base sm:text-lg font-bold text-gray-900 pr-4">{item.q}</span>
                 <ChevronDown
                   size={20}
                   className={`shrink-0 text-blue-600 transition-transform duration-200 ${open === i ? "rotate-180" : ""}`}
@@ -1254,23 +1232,12 @@ function FAQ() {
   );
 }
 
-/* ─── ELLA CHAT ──────────────────────────────────────────────── */
-
-const QUICK_QUESTIONS = [
-  "What was your role at Bolt Healthcare?",
-  "What tools and tech does Naveen use?",
-  "Are you open to remote work?",
-  "What's your education background?",
-  "Do you offer B2B / contract services?",
-  "How do I get in touch?",
-];
-
 function EllaChat() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      content: "👋 Hi! I'm Ella, Naveen's AI assistant. Ask me anything, or tap a question below to get started!",
+      content: "👋 Hi! I'm Ella, Naveen's AI assistant. Ask me anything about his automation projects, SaaS implementation experience, or skills!",
     },
   ]);
   const [input, setInput] = useState("");
@@ -1319,7 +1286,6 @@ function EllaChat() {
     }
   };
 
-  // Only show quick-question chips before the visitor has asked anything (keeps the UI tidy after).
   const showChips = messages.length === 1 && !loading;
 
   return (
@@ -1334,7 +1300,7 @@ function EllaChat() {
               </div>
               <div>
                 <p className="text-base font-bold text-white">Ella</p>
-                <p className="text-sm text-blue-100">Naveen's AI Assistant</p>
+                <p className="text-xs text-blue-100">Naveen's AI Assistant</p>
               </div>
             </div>
             <button onClick={() => setOpen(false)}
@@ -1346,7 +1312,7 @@ function EllaChat() {
           <div className="flex-1 space-y-3 overflow-y-auto p-4">
             {messages.map((m, i) => (
               <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
-                <div className={`max-w-[82%] rounded-2xl px-4 py-2.5 text-base leading-relaxed ${
+                <div className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm sm:text-base leading-relaxed ${
                   m.role === "user"
                     ? "rounded-br-sm bg-blue-600 text-white"
                     : "rounded-bl-sm bg-gray-100 text-gray-800"
@@ -1371,13 +1337,13 @@ function EllaChat() {
             ))}
             {showChips && (
               <div className="flex flex-col items-start gap-2 pt-1">
-                <p className="px-1 text-sm font-semibold uppercase tracking-wide text-gray-400">Popular questions</p>
+                <p className="px-1 text-xs font-semibold uppercase tracking-wide text-gray-400">Popular questions</p>
                 <div className="flex flex-wrap gap-2">
                   {QUICK_QUESTIONS.map((q) => (
                     <button
                       key={q}
                       onClick={() => send(q)}
-                      className="rounded-full border border-blue-100 bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-700 transition hover:bg-blue-100">
+                      className="rounded-full border border-blue-100 bg-blue-50 px-3 py-1.5 text-xs font-medium text-blue-700 transition hover:bg-blue-100 text-left">
                       {q}
                     </button>
                   ))}
@@ -1407,17 +1373,17 @@ function EllaChat() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && send()}
                 placeholder="Ask me anything…"
-                className="flex-1 rounded-xl border border-gray-200 px-4 py-2.5 text-base outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-50"
+                className="flex-1 rounded-xl border border-gray-200 px-4 py-2 text-sm outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-50"
               />
               <button
                 onClick={() => send()}
                 disabled={!input.trim() || loading}
-                className="flex items-center justify-center rounded-xl bg-blue-600 px-4 py-2.5 text-white transition hover:bg-blue-700 disabled:opacity-40"
+                className="flex items-center justify-center rounded-xl bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700 disabled:opacity-40"
                 aria-label="Send message">
                 <Send size={16} />
               </button>
             </div>
-            <p className="mt-2 text-center text-sm text-gray-400">AI by Groq · Powered by Opility</p>
+            <p className="mt-2 text-center text-xs text-gray-400">AI by Groq · Powered by Opility</p>
           </div>
         </div>
       )}
@@ -1437,8 +1403,6 @@ function EllaChat() {
   );
 }
 
-/* ─── APP ────────────────────────────────────────────────────── */
-
 export default function App() {
   return (
     <div className="min-h-screen bg-white text-gray-900">
@@ -1446,15 +1410,13 @@ export default function App() {
       <main>
         <Hero />
         <TrustBar />
-        <About />
-        <Expertise />
-        <Process />
+        <Pillars />
+        <FeaturedProjects />
+        <AutomationApproach />
         <Experience />
-        <CaseStudies />
-        <AvailableFor />
-        <Education />
-        <Projects />
-        <Tools />
+        <CareerJourney />
+        <CertificationsSection />
+        <Skills />
         <FAQ />
         <Contact />
       </main>

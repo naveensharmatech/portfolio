@@ -24,7 +24,6 @@ body {
   -webkit-backface-visibility: hidden;
 }
 .reveal.is-visible {
-  /* Once settled, drop out of a GPU layer so text renders at full native sharpness (no residual blur). */
   will-change: auto;
 }
 .reveal.is-visible {
@@ -50,7 +49,7 @@ body {
   .reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
 
-/* subtle floating orbs for depth (pure CSS, no 3D lib needed) */
+/* subtle floating orbs for depth */
 @keyframes floaty {
   0%, 100% { transform: translate(0,0) scale(1); }
   50% { transform: translate(14px,-18px) scale(1.04); }
@@ -72,7 +71,7 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-/* Solid, crisp navbar — no backdrop blur (kept content sharp/legible, not hazy). */
+/* Solid, crisp navbar */
 .glass {
   background: #ffffff;
 }
@@ -83,42 +82,24 @@ body {
   -webkit-backface-visibility: hidden;
 }
 .tilt-card:hover {
-  /* translateY only — no scale(). Scaling text/HTML content (unlike images) makes browsers
-     re-rasterize it at a non-1:1 ratio mid-transition, which is what caused the blur-until-settled
-     effect on hover. A pure translate keeps text crisp at every frame. */
   transform: translateY(-6px);
   box-shadow: 0 20px 40px -18px rgba(37,99,235,.28);
 }
 
-/* ── Orbit hero visual: photo centered, title pills revolving around it ── */
-@keyframes orbit-spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+/* Workflow diagram connector line */
+.workflow-connector {
+  position: relative;
 }
-@keyframes orbit-spin-reverse {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(-360deg); }
+.workflow-connector::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #2563eb, #93c5fd);
+  transform: translateY(-50%);
 }
-.orbit-ring {
-  animation: orbit-spin 32s linear infinite;
-}
-.orbit-item-counter {
-  /* Cancels the parent ring's rotation so each label's text stays upright while it revolves. */
-  animation: orbit-spin-reverse 32s linear infinite;
-}
-@keyframes drift-dots {
-  from { background-position: 0 0; }
-  to   { background-position: 60px 60px; }
-}
-.tech-grid {
-  background-image: radial-gradient(rgba(255,255,255,.16) 1.5px, transparent 1.5px);
-  background-size: 28px 28px;
-  animation: drift-dots 18s linear infinite;
-}
-@keyframes pulse-glow {
-  0%, 100% { opacity: .55; }
-  50%      { opacity: .9;  }
-}
-.glow-ring {
-  animation: pulse-glow 4s ease-in-out infinite;
+.workflow-connector:last-child::after {
+  display: none;
 }
