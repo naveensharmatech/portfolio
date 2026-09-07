@@ -203,7 +203,7 @@ const FEATURED_PROJECTS = [
     architecture: ["Gmail / Webhook", "Filter", "JavaScript Logic", "Zapier Paths", "HubSpot CRM", "Email Action"],
     skills: ["Zapier", "HubSpot", "JavaScript", "Workflow Automation", "Conditional Routing"],
     links: [
-      { href: "https://www.linkedin.com/pulse/from-zapier-certification-production-how-i-built-email-naveen-sharma-ziyrf/", label: "Read Case Study (LinkedIn)", type: "site" },
+      { href: "https://www.linkedin.com/pulse/from-zapier-certification-production-how-i-built-email-naveen-sharma-ziyrf/", label: "Read Case Study (LinkedIn)", type: "site", icon: "linkedin" },
       { href: "https://github.com/naveensharmatech/customer-inquiry-router-zapier", label: "GitHub Repository & Setup", type: "code" },
     ],
   },
@@ -215,6 +215,7 @@ const FEATURED_PROJECTS = [
     skills: ["Apify", "Crawlee", "JavaScript/Node.js", "Web Data Extraction", "Workflow Automation"],
     links: [
       { href: "https://apify.com/opility/b2b-leads-scraper-1-5-1k-leads-emails-phones", label: "Live Actor on Apify", type: "site" },
+      { href: "https://www.linkedin.com/posts/naveensharmatech_b2b-lead-generator-for-verified-emails-and-activity-7496760139144929280-pVeb", label: "LinkedIn Overview", type: "linkedin" },
       { href: "https://github.com/naveensharmatech", label: "GitHub Profile", type: "code" },
     ],
   },
@@ -716,7 +717,13 @@ function FeaturedProjects() {
                         ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-sm' 
                         : 'border-2 border-gray-200 text-gray-700 hover:border-gray-300 hover:text-gray-900 bg-white'
                     }`}>
-                    {link.type === "code" ? <Github size={16} /> : <ExternalLink size={16} />}
+                    {link.type === "code" || link.icon === "github" ? (
+                      <Github size={16} />
+                    ) : link.type === "linkedin" || link.icon === "linkedin" ? (
+                      <Linkedin size={16} className={link.type === 'site' ? 'text-white' : 'text-[#0A66C2]'} />
+                    ) : (
+                      <ExternalLink size={16} />
+                    )}
                     {link.label}
                   </a>
                 ))}
