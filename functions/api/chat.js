@@ -159,9 +159,12 @@ export async function onRequestPost(context) {
     return new Response(JSON.stringify({ reply }), {
       headers: { "Content-Type": "application/json" },
     });
-  } catch {
+  } catch (err) {
     return new Response(
-      JSON.stringify({ reply: "Sorry, I'm unable to answer that right now. Please reach Naveen directly at contact@naveensharma.net 📧" }),
+      JSON.stringify({ 
+        reply: "Sorry, I'm unable to answer that right now. Please reach Naveen directly at contact@naveensharma.net 📧",
+        error: err?.message || String(err)
+      }),
       { status: 200, headers: { "Content-Type": "application/json" } }
     );
   }
