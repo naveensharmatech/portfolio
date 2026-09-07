@@ -271,6 +271,12 @@ const EARLIER_PROJECTS = [
 const CERTIFICATIONS = [
   {
     group: "AI & Automation",
+    badge: "10 Credentials",
+    highlight: {
+      label: "Zapier AI Agent Certification Path Breakdown",
+      desc: "Read Naveen's systems architecture breakdown on LinkedIn",
+      href: "https://www.linkedin.com/posts/naveensharmatech_zapier-aiautomation-nocode-activity-7499675350231351296-wy2J",
+    },
     items: [
       { institution: "Zapier Academy", degree: "Jumpstart", type: "Certification" },
       { institution: "Zapier Academy", degree: "Building Basic Zaps", type: "Certification" },
@@ -1019,25 +1025,52 @@ function CertificationsSection() {
         {/* Certification Groups */}
         <div className="grid gap-6 md:grid-cols-2 mb-10">
           {CERTIFICATIONS.map((group) => (
-            <div key={group.group} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-              <h3 className="text-lg font-extrabold text-gray-900 mb-4 pb-3 border-b border-gray-100">{group.group}</h3>
-              <ul className="space-y-3">
-                {group.items.map((item, i) => (
-                  <li key={i} className="flex justify-between items-start gap-4">
-                    <div>
-                      <p className="text-sm font-bold text-gray-800">{item.degree}</p>
-                      <p className="text-xs text-gray-500">{item.institution}</p>
-                    </div>
-                    <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${
-                      item.type === 'In Progress' 
-                        ? 'bg-amber-50 text-amber-700 border border-amber-200' 
-                        : 'bg-gray-100 text-gray-600'
-                    }`}>
-                      {item.type}
+            <div key={group.group} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
+                  <h3 className="text-lg font-extrabold text-gray-900">{group.group}</h3>
+                  {group.badge && (
+                    <span className="rounded-full bg-blue-50 text-blue-700 text-[11px] font-bold px-2.5 py-0.5 border border-blue-100">
+                      {group.badge}
                     </span>
-                  </li>
-                ))}
-              </ul>
+                  )}
+                </div>
+                <ul className="space-y-3">
+                  {group.items.map((item, i) => (
+                    <li key={i} className="flex justify-between items-start gap-4">
+                      <div>
+                        <p className="text-sm font-bold text-gray-800">{item.degree}</p>
+                        <p className="text-xs text-gray-500">{item.institution}</p>
+                      </div>
+                      <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded shrink-0 ${
+                        item.type === 'In Progress' 
+                          ? 'bg-amber-50 text-amber-700 border border-amber-200' 
+                          : 'bg-gray-100 text-gray-600'
+                      }`}>
+                        {item.type}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {group.highlight && (
+                <div className="mt-5 pt-4 border-t border-gray-100">
+                  <a href={group.highlight.href} target="_blank" rel="noreferrer"
+                    className="flex items-center justify-between gap-3 p-3 rounded-xl bg-blue-50/70 hover:bg-blue-100/70 border border-blue-100 text-blue-700 transition group">
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <div className="h-7 w-7 rounded-lg bg-white border border-blue-200 flex items-center justify-center shrink-0 shadow-xs">
+                        <Linkedin size={15} className="text-[#0A66C2]" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xs font-bold text-gray-900 truncate group-hover:text-blue-700 transition">{group.highlight.label}</p>
+                        <p className="text-[11px] text-gray-500 truncate">{group.highlight.desc}</p>
+                      </div>
+                    </div>
+                    <ExternalLink size={13} className="text-blue-500 group-hover:translate-x-0.5 transition shrink-0" />
+                  </a>
+                </div>
+              )}
             </div>
           ))}
         </div>

@@ -45,6 +45,7 @@ Shivam Institute for Vocational Trainings, Dharamshala, India (Aug 2012 – Sep 
 
 === CERTIFICATIONS & LEARNING ===
 • Zapier Academy (10 certifications): Jumpstart, Building Basic Zaps, Building Intermediate Zaps, Building AI Agents, What is Zapier MCP?, Using Zapier MCP, Governing Zapier MCP, Account Setup, Security and Governance, Monitoring and Operations.
+• Zapier AI Agent Certification Path Breakdown: Naveen published an in-depth systems architecture breakdown on LinkedIn detailing the 3 parallel tracks (Multi-step workflows + LLM Integration + Application Integration) converging into Production-Ready AI Agent Systems: https://www.linkedin.com/posts/naveensharmatech_zapier-aiautomation-nocode-activity-7499675350231351296-wy2J
 • QA Engineering Certification (Web & Mobile), Smart College
 • Automation Testing, Great Learning
 • Software Engineering, Programming Hub
