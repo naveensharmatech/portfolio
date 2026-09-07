@@ -208,9 +208,9 @@ const FEATURED_PROJECTS = [
     ],
   },
   {
-    title: "B2B Lead Generator — Automated Lead & Contact Extraction",
-    tag: "Apify Actor · Data Automation",
-    desc: "Automated B2B lead-generation and contact-extraction workflow that discovers businesses by category and location, crawls websites with Crawlee, extracts emails, phones, and social links, and outputs clean datasets.",
+    title: "B2B Leads Scraper — Verified Emails & Phones",
+    tag: "Apify Actor · $1.50 / 1k Leads",
+    desc: "Automated B2B lead-generation workflow that discovers businesses by category and location, crawls websites with Crawlee, extracts verified decision-maker emails, phones, and social coordinates, and outputs structured Apify Datasets.",
     architecture: ["Business Discovery", "Crawl (Crawlee)", "Extract (Emails/Phones)", "Deduplicate", "Apify Dataset"],
     skills: ["Apify", "Crawlee", "JavaScript/Node.js", "Web Data Extraction", "Workflow Automation"],
     links: [
@@ -227,6 +227,7 @@ const FEATURED_PROJECTS = [
     skills: ["Python", "Apify SDK", "Web Data Extraction", "Store Discovery", "HTTPX", "BeautifulSoup"],
     links: [
       { href: "https://apify.com/opility/shopify-store-lead-extractor-emails-catalog-size-apps", label: "Live Actor on Apify", type: "site" },
+      { href: "https://apify.com/opility/shopify-store-lead-extractor-emails-catalog-size-apps/examples/shopify-store-lead-extractor-task", label: "Configured Task Example", type: "example" },
       { href: "https://github.com/naveensharmatech", label: "GitHub Profile", type: "code" },
     ],
   },
@@ -675,6 +676,23 @@ function FeaturedProjects() {
         <SectionHeading eyebrow="Projects" title="Featured Automation Projects" color="amber" 
           description="Production and prototype workflows engineered with conditional routing, data extraction, and CRM actions." />
         
+        <Reveal className="mb-10 -mt-2 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-blue-200/90 bg-gradient-to-r from-blue-50/80 via-indigo-50/40 to-white p-5 shadow-xs">
+          <div className="flex items-center gap-3.5">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white shadow-sm">
+              <Workflow size={20} />
+            </div>
+            <div>
+              <p className="text-sm font-bold text-gray-900">AI Agent &amp; Model Context Protocol (MCP) Ready</p>
+              <p className="text-xs text-gray-600 mt-0.5">Both Apify data extractors are equipped for direct invocation by LLM agents via the Model Context Protocol.</p>
+            </div>
+          </div>
+          <a href="https://mcp.apify.com/?tools=actors,docs,opility/shopify-store-lead-extractor-emails-catalog-size-apps,opility/b2b-leads-scraper-1-5-1k-leads-emails-phones"
+            target="_blank" rel="noreferrer"
+            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white border border-blue-200 px-4 py-2 text-xs font-bold text-blue-700 hover:bg-blue-50 hover:border-blue-300 transition shadow-xs">
+            Connect via Apify MCP <ExternalLink size={13} />
+          </a>
+        </Reveal>
+
         <div className="grid gap-8 md:grid-cols-1 mb-16">
           {FEATURED_PROJECTS.map((project) => (
             <div key={project.title} className="tilt-card rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
