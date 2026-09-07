@@ -203,6 +203,7 @@ const FEATURED_PROJECTS = [
     architecture: ["Gmail / Webhook", "Filter", "JavaScript Logic", "Zapier Paths", "HubSpot CRM", "Email Action"],
     skills: ["Zapier", "HubSpot", "JavaScript", "Workflow Automation", "Conditional Routing"],
     links: [
+      { href: "https://www.linkedin.com/pulse/from-zapier-certification-production-how-i-built-email-naveen-sharma-ziyrf/", label: "Read Case Study (LinkedIn)", type: "site" },
       { href: "https://github.com/naveensharmatech/customer-inquiry-router-zapier", label: "GitHub Repository & Setup", type: "code" },
     ],
   },

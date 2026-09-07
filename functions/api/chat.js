@@ -14,6 +14,7 @@ Available in two ways:
 1. AI-Powered Customer Inquiry Router:
 • Multi-step customer inquiry automation that processes incoming messages, applies filtering and JavaScript logic, routes requests based on priority using Zapier Paths, and triggers HubSpot CRM and automated email actions.
 • Tech Stack: Zapier, HubSpot, JavaScript, Email Automation, Conditional Logic.
+• Case Study: https://www.linkedin.com/pulse/from-zapier-certification-production-how-i-built-email-naveen-sharma-ziyrf/
 • GitHub: https://github.com/naveensharmatech/customer-inquiry-router-zapier
 
 2. B2B Lead Generator — Automated Lead & Contact Extraction:
