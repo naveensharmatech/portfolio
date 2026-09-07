@@ -220,9 +220,9 @@ const FEATURED_PROJECTS = [
     ],
   },
   {
-    title: "Shopify Store Lead Extractor — Apify Actor",
+    title: "Shopify Store Lead Extractor — Emails, Catalog Size & Apps",
     tag: "Apify Actor · Data Automation",
-    desc: "Python-based Apify Actor that discovers Shopify stores by niche, extracts business emails and social profiles, inspects /products.json catalog signals, detects supported ecommerce apps (Klaviyo, Gorgias, Recharge, etc.), and exports structured lead records.",
+    desc: "Python-based Apify Actor that discovers Shopify stores by niche, extracts business emails and Instagram/TikTok profiles, inspects /products.json catalog signals, detects supported ecommerce apps (Klaviyo, Yotpo, Gorgias, Recharge), and exports structured lead records.",
     architecture: ["Store Discovery", "Crawl", "Contact Extraction", "App Fingerprinting", "Catalog Signals", "Apify Dataset"],
     skills: ["Python", "Apify SDK", "Web Data Extraction", "Store Discovery", "HTTPX", "BeautifulSoup"],
     links: [
