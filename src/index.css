@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-html { scroll-behavior: smooth; font-size: 18px; }
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
@@ -12,6 +12,16 @@ body {
     radial-gradient(1000px 500px at 85% -10%, rgba(37,99,235,.05) 0%, rgba(37,99,235,0) 60%),
     radial-gradient(900px 480px at -10% 15%, rgba(124,58,237,.04) 0%, rgba(124,58,237,0) 55%),
     #ffffff;
+  color: #0f172a;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+html.dark body {
+  background:
+    radial-gradient(1000px 500px at 85% -10%, rgba(37,99,235,.15) 0%, rgba(37,99,235,0) 60%),
+    radial-gradient(900px 480px at -10% 15%, rgba(124,58,237,.12) 0%, rgba(124,58,237,0) 55%),
+    #0b0f19;
+  color: #f1f5f9;
 }
 
 /* scroll-reveal */
@@ -25,8 +35,6 @@ body {
 }
 .reveal.is-visible {
   will-change: auto;
-}
-.reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -63,9 +71,22 @@ body {
   animation: floaty 14s ease-in-out infinite;
   z-index: 0;
 }
+html.dark .orb {
+  opacity: .18;
+}
 
 .gradient-text {
-  background: linear-gradient(90deg, #0f172a, #2563eb 55%, #7c3aed);
+  background: linear-gradient(90deg, #0f172a 0%, #2563eb 55%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  padding-bottom: 0.18em;
+  line-height: 1.18;
+}
+
+html.dark .gradient-text {
+  background: linear-gradient(90deg, #ffffff 0%, #60a5fa 50%, #c084fc 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -75,15 +96,21 @@ body {
 .glass {
   background: #ffffff;
 }
+html.dark .glass {
+  background: #0b0f19;
+}
 
 .tilt-card {
-  transition: transform .35s cubic-bezier(.16,.84,.44,1), box-shadow .35s ease;
+  transition: transform .35s cubic-bezier(.16,.84,.44,1), box-shadow .35s ease, background-color .2s ease, border-color .2s ease;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 .tilt-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 20px 40px -18px rgba(37,99,235,.28);
+}
+html.dark .tilt-card:hover {
+  box-shadow: 0 20px 40px -18px rgba(37,99,235,.4);
 }
 
 /* Workflow diagram connector line */

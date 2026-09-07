@@ -4,7 +4,7 @@ import {
   Workflow, Headset, ShieldCheck, FileText, Layers, Database,
   ClipboardCheck, Code2, ExternalLink, Phone, Linkedin, Facebook, ChevronDown, Youtube, Briefcase,
   MessageCircle, Send, GraduationCap, Award, ExternalLink as LinkOut, FileDown,
-  Search, Settings2, FlaskConical, LifeBuoy, Quote, Star,
+  Search, Settings2, FlaskConical, LifeBuoy, Quote, Star, Sun, Moon,
 } from "lucide-react";
 
 /* ─── SCROLL-REVEAL WRAPPER ──────────────────────────────────── */
@@ -78,14 +78,14 @@ const NAV_LINKS = [
 ];
 
 const NAV_COLOR_STYLES = {
-  indigo:  { active: "bg-indigo-600 text-white shadow-md shadow-indigo-200",   hover: "hover:bg-indigo-50 hover:text-indigo-700"   },
-  violet:  { active: "bg-violet-600 text-white shadow-md shadow-violet-200",   hover: "hover:bg-violet-50 hover:text-violet-700"   },
-  sky:     { active: "bg-sky-600 text-white shadow-md shadow-sky-200",         hover: "hover:bg-sky-50 hover:text-sky-700"         },
-  cyan:    { active: "bg-cyan-600 text-white shadow-md shadow-cyan-200",       hover: "hover:bg-cyan-50 hover:text-cyan-700"       },
-  emerald: { active: "bg-emerald-600 text-white shadow-md shadow-emerald-200", hover: "hover:bg-emerald-50 hover:text-emerald-700" },
-  amber:   { active: "bg-amber-500 text-white shadow-md shadow-amber-200",    hover: "hover:bg-amber-50 hover:text-amber-700"     },
-  rose:    { active: "bg-rose-600 text-white shadow-md shadow-rose-200",      hover: "hover:bg-rose-50 hover:text-rose-700"       },
-  pink:    { active: "bg-pink-600 text-white shadow-md shadow-pink-200",      hover: "hover:bg-pink-50 hover:text-pink-700"       },
+  indigo:  { active: "bg-indigo-600 text-white shadow-md shadow-indigo-500/20",   hover: "hover:bg-indigo-50 hover:text-indigo-700 dark:hover:bg-indigo-950/50 dark:hover:text-indigo-300"   },
+  violet:  { active: "bg-violet-600 text-white shadow-md shadow-violet-500/20",   hover: "hover:bg-violet-50 hover:text-violet-700 dark:hover:bg-violet-950/50 dark:hover:text-violet-300"   },
+  sky:     { active: "bg-sky-600 text-white shadow-md shadow-sky-500/20",         hover: "hover:bg-sky-50 hover:text-sky-700 dark:hover:bg-sky-950/50 dark:hover:text-sky-300"         },
+  cyan:    { active: "bg-cyan-600 text-white shadow-md shadow-cyan-500/20",       hover: "hover:bg-cyan-50 hover:text-cyan-700 dark:hover:bg-cyan-950/50 dark:hover:text-cyan-300"       },
+  emerald: { active: "bg-emerald-600 text-white shadow-md shadow-emerald-500/20", hover: "hover:bg-emerald-50 hover:text-emerald-700 dark:hover:bg-emerald-950/50 dark:hover:text-emerald-300" },
+  amber:   { active: "bg-amber-500 text-white shadow-md shadow-amber-500/20",    hover: "hover:bg-amber-50 hover:text-amber-700 dark:hover:bg-amber-950/50 dark:hover:text-amber-300"     },
+  rose:    { active: "bg-rose-600 text-white shadow-md shadow-rose-500/20",      hover: "hover:bg-rose-50 hover:text-rose-700 dark:hover:bg-rose-950/50 dark:hover:text-rose-300"       },
+  pink:    { active: "bg-pink-600 text-white shadow-md shadow-pink-500/20",      hover: "hover:bg-pink-50 hover:text-pink-700 dark:hover:bg-pink-950/50 dark:hover:text-pink-300"       },
 };
 
 const NAV_ICON_TEXT_COLOR = {
@@ -124,9 +124,9 @@ const PILLARS = [
 ];
 
 const PILLAR_STYLES = {
-  blue: { badge: "bg-blue-50 text-blue-600 border border-blue-100", border: "hover:border-blue-200" },
-  indigo: { badge: "bg-indigo-50 text-indigo-600 border border-indigo-100", border: "hover:border-indigo-200" },
-  violet: { badge: "bg-violet-50 text-violet-600 border border-violet-100", border: "hover:border-violet-200" },
+  blue: { badge: "bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-900/60", border: "hover:border-blue-200 dark:hover:border-blue-700" },
+  indigo: { badge: "bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-900/60", border: "hover:border-indigo-200 dark:hover:border-indigo-700" },
+  violet: { badge: "bg-violet-50 dark:bg-violet-950/60 text-violet-600 dark:text-violet-400 border border-violet-100 dark:border-violet-900/60", border: "hover:border-violet-200 dark:hover:border-violet-700" },
 };
 
 const AUTOMATION_APPROACH = [
@@ -408,21 +408,21 @@ const QUICK_QUESTIONS = [
 /* ─── COMPONENTS ─────────────────────────────────────────────── */
 
 function SectionHeading({ eyebrow, title, description, center, color }) {
-  const eyebrowColor = EYEBROW_COLOR[color] || "text-blue-600";
+  const eyebrowColor = EYEBROW_COLOR[color] || "text-blue-600 dark:text-blue-400";
   return (
-    <Reveal className={`mb-16 ${center ? "text-center mx-auto max-w-2xl" : "max-w-2xl"}`}>
+    <Reveal className={`mb-12 sm:mb-14 ${center ? "text-center mx-auto max-w-2xl" : "max-w-2xl"}`}>
       {eyebrow && (
-        <p className={`mb-3 text-base font-bold uppercase tracking-widest ${eyebrowColor}`}>{eyebrow}</p>
+        <p className={`mb-2 text-xs sm:text-sm font-bold uppercase tracking-widest ${eyebrowColor}`}>{eyebrow}</p>
       )}
-      <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">{title}</h2>
+      <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">{title}</h2>
       {description && (
-        <p className="mt-5 text-xl leading-relaxed text-gray-600">{description}</p>
+        <p className="mt-3 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-400">{description}</p>
       )}
     </Reveal>
   );
 }
 
-function Navbar() {
+function Navbar({ darkMode, toggleDarkMode }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeNav, setActiveNav] = useState(null);
@@ -434,17 +434,21 @@ function Navbar() {
   }, []);
 
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "glass shadow-sm border-b border-gray-100 bg-white/95 backdrop-blur" : "bg-transparent"}`}>
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4 sm:px-6">
+    <header className={`sticky top-0 z-50 transition-all duration-300 ${
+      scrolled 
+        ? "glass shadow-sm border-b border-gray-100 dark:border-gray-800/80 bg-white/95 dark:bg-[#0B0F19]/95 backdrop-blur-md" 
+        : "bg-transparent"
+    }`}>
+      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3.5 sm:px-6">
         <a href="#top" className="flex items-center gap-3 group">
           <img
             src="/nav-logo.png"
             alt="Naveen Sharma"
-            className="h-10 w-10 rounded-full object-cover shadow-md transition-transform group-hover:scale-110"
+            className="h-10 w-10 rounded-full object-cover shadow-md transition-transform group-hover:scale-110 ring-1 ring-gray-200 dark:ring-gray-700"
           />
         </a>
 
-        <nav className="hidden items-center gap-1 rounded-full border border-gray-100 bg-gray-50 p-1.5 lg:flex">
+        <nav className="hidden items-center gap-1 rounded-full border border-gray-100 dark:border-gray-800 bg-gray-50/90 dark:bg-gray-900/90 p-1.5 lg:flex shadow-xs">
           {NAV_LINKS.map((link) => {
             const Icon = link.icon;
             const styles = NAV_COLOR_STYLES[link.color];
@@ -452,10 +456,10 @@ function Navbar() {
             return (
               <a key={link.href} href={link.href}
                 onClick={() => setActiveNav(link.href)}
-                className={`flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-2 text-sm font-semibold transition-all duration-200 ${
-                  isActive ? styles.active : `text-gray-600 ${styles.hover}`
+                className={`flex items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 py-1.5 text-xs sm:text-sm font-semibold transition-all duration-200 ${
+                  isActive ? styles.active : `text-gray-600 dark:text-gray-300 ${styles.hover}`
                 }`}>
-                <Icon size={15} />
+                <Icon size={14} />
                 {link.label}
               </a>
             );
@@ -463,43 +467,64 @@ function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
+          {/* Theme switcher button */}
+          <button
+            type="button"
+            onClick={toggleDarkMode}
+            aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+            title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition shadow-xs">
+            {darkMode ? <Sun size={17} className="text-amber-400" /> : <Moon size={17} className="text-gray-600" />}
+          </button>
+
           <a href="https://opility.com" target="_blank" rel="noreferrer"
-            className="text-sm font-semibold text-blue-600 transition hover:text-blue-700 flex items-center gap-1 whitespace-nowrap">
+            className="text-xs sm:text-sm font-semibold text-blue-600 dark:text-blue-400 transition hover:text-blue-700 dark:hover:text-blue-300 flex items-center gap-1 whitespace-nowrap">
             Opility <LinkOut size={12} />
           </a>
           <a href="#contact"
-            className="whitespace-nowrap rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 shadow-sm">
+            className="whitespace-nowrap rounded-full bg-blue-600 px-4 py-2 text-xs sm:text-sm font-semibold text-white transition hover:bg-blue-700 shadow-sm">
             Get in touch
           </a>
         </div>
 
-        <button onClick={() => setOpen((v) => !v)}
-          className="rounded-lg p-2 text-gray-700 transition hover:bg-gray-100 lg:hidden"
-          aria-label="Toggle menu">
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          {/* Mobile Theme Toggle */}
+          <button
+            type="button"
+            onClick={toggleDarkMode}
+            aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-200 transition">
+            {darkMode ? <Sun size={17} className="text-amber-400" /> : <Moon size={17} className="text-gray-600" />}
+          </button>
+
+          <button onClick={() => setOpen((v) => !v)}
+            className="rounded-lg p-2 text-gray-700 dark:text-gray-200 transition hover:bg-gray-100 dark:hover:bg-gray-800"
+            aria-label="Toggle menu">
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </div>
 
       {open && (
-        <nav className="border-t border-gray-100 bg-white lg:hidden">
+        <nav className="border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-[#0B0F19] lg:hidden">
           <div className="mx-auto flex max-w-5xl flex-col px-4 py-2 sm:px-6">
             {NAV_LINKS.map((link) => {
               const Icon = link.icon;
               const iconColor = NAV_ICON_TEXT_COLOR[link.color];
               return (
                 <a key={link.href} href={link.href} onClick={() => { setOpen(false); setActiveNav(link.href); }}
-                  className="flex items-center gap-2.5 border-b border-gray-100 py-3 text-base font-medium text-gray-700 transition hover:text-blue-600">
+                  className="flex items-center gap-2.5 border-b border-gray-100 dark:border-gray-800 py-3 text-base font-medium text-gray-700 dark:text-gray-200 transition hover:text-blue-600 dark:hover:text-blue-400">
                   <Icon size={17} className={iconColor} />
                   {link.label}
                 </a>
               );
             })}
             <a href="https://opility.com" target="_blank" rel="noreferrer" onClick={() => setOpen(false)}
-              className="border-b border-gray-100 py-3 text-base font-medium text-blue-600 flex items-center gap-1">
+              className="border-b border-gray-100 dark:border-gray-800 py-3 text-base font-medium text-blue-600 dark:text-blue-400 flex items-center gap-1">
               Opility <LinkOut size={12} />
             </a>
             <a href="#contact" onClick={() => setOpen(false)}
-              className="mt-3 mb-2 rounded-lg bg-blue-600 px-4 py-3 text-center text-base font-semibold text-white">
+              className="mt-3 mb-2 rounded-lg bg-blue-600 px-4 py-2.5 text-center text-sm font-semibold text-white">
               Get in touch
             </a>
           </div>
@@ -511,74 +536,74 @@ function Navbar() {
 
 function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden bg-white">
+    <section id="top" className="relative overflow-hidden bg-white dark:bg-[#0B0F19]">
       <div className="orb h-72 w-72 bg-blue-300/40" style={{ top: "-40px", right: "6%" }} />
       <div className="orb h-64 w-64 bg-indigo-200/30" style={{ top: "180px", left: "2%", animationDelay: "3s" }} />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-28 text-center">
-        <Reveal className="mb-6 flex justify-center">
-          <span className="rounded-full bg-blue-50 px-4 py-1.5 text-xs sm:text-sm font-bold uppercase tracking-widest text-blue-600 border border-blue-100 shadow-sm">
+      <div className="relative z-10 mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-20 text-center">
+        <Reveal className="mb-4 flex justify-center">
+          <span className="rounded-full bg-blue-50 dark:bg-blue-950/60 px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-900/60 shadow-xs">
             AI AUTOMATION • SAAS IMPLEMENTATION • QA/UAT
           </span>
         </Reveal>
 
-        <Reveal as="h1" className="gradient-text text-5xl font-extrabold tracking-tight sm:text-7xl mb-4 mt-2">
+        <Reveal as="h1" className="gradient-text text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-3 mt-1 leading-[1.18] sm:leading-[1.15] pb-2">
           AI Automation Engineer
         </Reveal>
 
-        <Reveal as="p" className="text-xl font-bold text-gray-800 sm:text-3xl mb-6">
+        <Reveal as="p" className="text-base sm:text-xl lg:text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4 max-w-3xl mx-auto">
           Building Practical Automations for Real Business Processes
         </Reveal>
 
-        <Reveal as="p" className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-600 mb-8">
+        <Reveal as="p" className="mx-auto max-w-2xl text-sm sm:text-base leading-relaxed text-gray-600 dark:text-gray-400 mb-6">
           I build and validate practical business automations using no-code/low-code platforms, workflow logic, CRM integrations and SaaS systems. My background in SaaS implementation and QA/UAT helps me design workflows that work beyond the happy path.
         </Reveal>
 
-        <Reveal className="flex flex-wrap items-center justify-center gap-2.5 mb-12">
+        <Reveal className="flex flex-wrap items-center justify-center gap-2 mb-8">
           {["Zapier", "No-Code/Low-Code", "HubSpot", "Workflow Automation", "SaaS Implementation", "QA/UAT"].map(skill => (
-            <span key={skill} className="rounded-full bg-gray-50 px-4 py-1.5 text-xs sm:text-sm font-semibold text-gray-700 border border-gray-200 shadow-2xl">
+            <span key={skill} className="rounded-full bg-gray-50 dark:bg-gray-800/80 px-3 py-1 text-xs font-semibold text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 shadow-xs">
               {skill}
             </span>
           ))}
         </Reveal>
 
         {/* Workflow Architecture Diagram */}
-        <Reveal className="mx-auto max-w-4xl mb-12 rounded-2xl border border-gray-200 bg-gray-50/80 p-6 sm:p-8 shadow-sm">
-          <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-6 text-center">
+        <Reveal className="mx-auto max-w-3xl mb-8 rounded-2xl border border-gray-200 dark:border-gray-800 bg-gray-50/80 dark:bg-gray-900/60 p-5 sm:p-6 shadow-xs">
+          <p className="text-[11px] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-5 text-center">
             Workflow Architecture &amp; Execution Framework
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 sm:gap-2 items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 sm:gap-2 items-center">
             {/* Step 1 */}
-            <div className="flex flex-col items-center p-3 rounded-xl bg-white border border-gray-200 shadow-sm w-full">
-              <span className="text-xs font-bold uppercase text-gray-400">Trigger</span>
-              <span className="text-sm font-extrabold text-gray-900 mt-1">INPUT</span>
-              <span className="text-[10px] font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded mt-2">CAPTURE</span>
+            <div className="flex flex-col items-center p-3 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-xs w-full">
+              <span className="text-[11px] font-bold uppercase text-gray-400 dark:text-gray-500">Trigger</span>
+              <span className="text-sm font-extrabold text-gray-900 dark:text-white mt-1">INPUT</span>
+              <span className="text-[10px] font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded mt-2">CAPTURE</span>
             </div>
 
             <div className="hidden sm:flex justify-center text-blue-400">
-              <ArrowRight size={20} />
+              <ArrowRight size={18} />
             </div>
 
             {/* Step 2 */}
-            <div className="flex flex-col items-center p-3 rounded-xl bg-white border border-blue-200 shadow-sm w-full">
-              <span className="text-xs font-bold uppercase text-gray-400">Processing</span>
-              <span className="text-sm font-extrabold text-blue-700 mt-1">AI / LOGIC</span>
-              <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded mt-2">VALIDATE &amp; ROUTE</span>
+            <div className="flex flex-col items-center p-3 rounded-xl bg-white dark:bg-gray-800 border border-blue-200 dark:border-blue-900/80 shadow-xs w-full">
+              <span className="text-[11px] font-bold uppercase text-gray-400 dark:text-gray-500">Processing</span>
+              <span className="text-sm font-extrabold text-blue-700 dark:text-blue-400 mt-1">AI / LOGIC</span>
+              <span className="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded mt-2">VALIDATE &amp; ROUTE</span>
             </div>
 
             <div className="hidden sm:flex justify-center text-blue-400">
-              <ArrowRight size={20} />
+              <ArrowRight size={18} />
             </div>
 
             {/* Step 3 */}
-            <div className="flex flex-col items-center p-3 rounded-xl bg-white border border-gray-200 shadow-sm w-full">
-              <span className="text-xs font-bold uppercase text-gray-400">Execution</span>
-              <span className="text-sm font-extrabold text-gray-900 mt-1">CRM / SaaS</span>
-              <span className="text-[10px] font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded mt-2">ACTION &amp; MONITOR</span>
+            <div className="flex flex-col items-center p-3 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-xs w-full">
+              <span className="text-[11px] font-bold uppercase text-gray-400 dark:text-gray-500">Execution</span>
+              <span className="text-sm font-extrabold text-gray-900 dark:text-white mt-1">CRM / SaaS</span>
+              <span className="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-2 py-0.5 rounded mt-2">ACTION &amp; MONITOR</span>
             </div>
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs font-semibold text-gray-500 pt-4 border-t border-gray-200/60">
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-xs font-semibold text-gray-500 dark:text-gray-400 pt-4 border-t border-gray-200/60 dark:border-gray-800">
             <span className="inline-flex items-center gap-1.5"><CheckCircle2 size={13} className="text-emerald-500" /> Validation Gates</span>
             <span>•</span>
             <span className="inline-flex items-center gap-1.5"><CheckCircle2 size={13} className="text-blue-500" /> Conditional Routing</span>
@@ -589,21 +614,21 @@ function Hero() {
           </div>
         </Reveal>
 
-        <Reveal className="flex flex-wrap items-center justify-center gap-4">
+        <Reveal className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
           <a href="#projects"
-            className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-8 py-3.5 text-base sm:text-lg font-semibold text-white shadow-lg shadow-blue-600/25 transition hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-xl">
-            View Automation Projects <ArrowRight size={18} />
+            className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm sm:text-base font-semibold text-white shadow-md shadow-blue-600/25 transition hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg">
+            View Automation Projects <ArrowRight size={16} />
           </a>
           <a href="https://github.com/naveensharmatech" target="_blank" rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl border-2 border-gray-200 bg-white px-8 py-3.5 text-base sm:text-lg font-semibold text-gray-700 transition hover:-translate-y-0.5 hover:border-gray-300 hover:text-gray-900">
-            <Github size={18} /> View GitHub
+            className="inline-flex items-center gap-2 rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-6 py-3 text-sm sm:text-base font-semibold text-gray-700 dark:text-gray-200 transition hover:-translate-y-0.5 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-900 dark:hover:text-white">
+            <Github size={16} /> View GitHub
           </a>
         </Reveal>
         
-        <Reveal className="mt-6">
+        <Reveal className="mt-5">
           <a href="/Naveen_Sharma_CV.pdf" download
-            className="inline-flex items-center gap-2 text-sm sm:text-base font-semibold text-blue-600 hover:underline">
-            <FileDown size={16} /> Download Resume (PDF)
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+            <FileDown size={15} /> Download Resume (PDF)
           </a>
         </Reveal>
       </div>
@@ -614,14 +639,16 @@ function Hero() {
 function TrustBar() {
   const tools = ["Zapier", "HubSpot", "Apify", "Make.com", "n8n", "GitHub"];
   return (
-    <div className="border-y border-gray-100 bg-gray-50 py-6">
+    <div className="border-y border-gray-100 dark:border-gray-800/80 bg-gray-50/70 dark:bg-[#0E131F]/80 py-5">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
-        <p className="mb-4 text-center text-xs sm:text-sm font-semibold uppercase tracking-widest text-gray-400">
+        <p className="mb-3 text-center text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">
           Automation platforms &amp; tools
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10">
+        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8">
           {tools.map((t) => (
-            <span key={t} className="text-base font-semibold text-gray-600">{t}</span>
+            <span key={t} className="rounded-lg bg-white dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700/80 px-3 py-1 text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300 shadow-xs">
+              {t}
+            </span>
           ))}
         </div>
       </div>
@@ -631,23 +658,23 @@ function TrustBar() {
 
 function Pillars() {
   return (
-    <section id="about" className="bg-white">
-      <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-24">
+    <section id="about" className="bg-white dark:bg-[#0B0F19]">
+      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
         <SectionHeading eyebrow="About" center color="indigo" title="What I Do" />
         
-        <Reveal stagger className="grid gap-6 md:grid-cols-3 mb-12">
+        <Reveal stagger className="grid gap-6 md:grid-cols-3 mb-10">
           {PILLARS.map((pillar) => {
             const styles = PILLAR_STYLES[pillar.color] || PILLAR_STYLES.blue;
             return (
-              <div key={pillar.title} className={`tilt-card flex flex-col rounded-2xl border border-gray-100 bg-white p-8 shadow-sm ${styles.border}`}>
+              <div key={pillar.title} className={`tilt-card flex flex-col rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900/70 p-7 shadow-sm ${styles.border}`}>
                 <span className={`inline-block self-start rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest mb-4 ${styles.badge}`}>
                   {pillar.label}
                 </span>
-                <h3 className="text-xl font-extrabold text-gray-900 mb-3">{pillar.title}</h3>
-                <p className="flex-1 text-base leading-relaxed text-gray-600 mb-6">{pillar.desc}</p>
+                <h3 className="text-xl font-extrabold text-gray-900 dark:text-white mb-2.5">{pillar.title}</h3>
+                <p className="flex-1 text-sm sm:text-base leading-relaxed text-gray-600 dark:text-gray-400 mb-6">{pillar.desc}</p>
                 <div className="flex flex-wrap gap-2">
                   {pillar.skills.map((skill) => (
-                    <span key={skill} className="rounded-md bg-gray-50 border border-gray-100 px-2.5 py-1 text-xs font-semibold text-gray-700">
+                    <span key={skill} className="rounded-md bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700/80 px-2.5 py-1 text-xs font-semibold text-gray-700 dark:text-gray-300">
                       {skill}
                     </span>
                   ))}
@@ -657,12 +684,12 @@ function Pillars() {
           })}
         </Reveal>
         
-        <Reveal className="flex items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm font-bold text-gray-500 uppercase tracking-widest">
-          <span className="text-blue-600 bg-blue-50 px-3 py-1 rounded-md">BUILD</span>
+        <Reveal className="flex items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">
+          <span className="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-3 py-1 rounded-md">BUILD</span>
           <ArrowRight size={14} className="text-gray-400" />
-          <span className="text-indigo-600 bg-indigo-50 px-3 py-1 rounded-md">IMPLEMENT</span>
+          <span className="text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-3 py-1 rounded-md">IMPLEMENT</span>
           <ArrowRight size={14} className="text-gray-400" />
-          <span className="text-violet-600 bg-violet-50 px-3 py-1 rounded-md">VALIDATE</span>
+          <span className="text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/60 px-3 py-1 rounded-md">VALIDATE</span>
         </Reveal>
       </div>
     </section>
@@ -671,46 +698,46 @@ function Pillars() {
 
 function FeaturedProjects() {
   return (
-    <section id="projects" className="bg-gray-50">
-      <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-24">
+    <section id="projects" className="bg-gray-50 dark:bg-[#0E131F]">
+      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
         <SectionHeading eyebrow="Projects" title="Featured Automation Projects" color="amber" 
           description="Production and prototype workflows engineered with conditional routing, data extraction, and CRM actions." />
         
-        <Reveal className="mb-10 -mt-2 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-blue-200/90 bg-gradient-to-r from-blue-50/80 via-indigo-50/40 to-white p-5 shadow-xs">
+        <Reveal className="mb-10 -mt-2 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-blue-200/90 dark:border-blue-900/60 bg-gradient-to-r from-blue-50/80 via-indigo-50/40 to-white dark:from-blue-950/40 dark:via-indigo-950/20 dark:to-gray-900 p-5 shadow-xs">
           <div className="flex items-center gap-3.5">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white shadow-sm">
               <Workflow size={20} />
             </div>
             <div>
-              <p className="text-sm font-bold text-gray-900">AI Agent &amp; Model Context Protocol (MCP) Ready</p>
-              <p className="text-xs text-gray-600 mt-0.5">Both Apify data extractors are equipped for direct invocation by LLM agents via the Model Context Protocol.</p>
+              <p className="text-sm font-bold text-gray-900 dark:text-white">AI Agent &amp; Model Context Protocol (MCP) Ready</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">Both Apify data extractors are equipped for direct invocation by LLM agents via the Model Context Protocol.</p>
             </div>
           </div>
           <a href="https://mcp.apify.com/?tools=actors,docs,opility/shopify-store-lead-extractor-emails-catalog-size-apps,opility/b2b-leads-scraper-1-5-1k-leads-emails-phones"
             target="_blank" rel="noreferrer"
-            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white border border-blue-200 px-4 py-2 text-xs font-bold text-blue-700 hover:bg-blue-50 hover:border-blue-300 transition shadow-xs">
+            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white dark:bg-gray-800 border border-blue-200 dark:border-blue-700/80 px-4 py-2 text-xs font-bold text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition shadow-xs">
             Connect via Apify MCP <ExternalLink size={13} />
           </a>
         </Reveal>
 
-        <div className="grid gap-8 md:grid-cols-1 mb-16">
+        <div className="grid gap-8 md:grid-cols-1 mb-14">
           {FEATURED_PROJECTS.map((project) => (
-            <div key={project.title} className="tilt-card rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+            <div key={project.title} className="tilt-card rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-6 sm:p-8 shadow-sm">
               <div className="flex items-center justify-between gap-3 mb-3">
-                <span className="inline-block rounded-full bg-amber-50 px-3 py-1 text-xs font-bold uppercase tracking-widest text-amber-700 border border-amber-200">
+                <span className="inline-block rounded-full bg-amber-50 dark:bg-amber-950/60 px-3 py-1 text-xs font-bold uppercase tracking-widest text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800/80">
                   {project.tag}
                 </span>
               </div>
-              <h3 className="text-2xl font-extrabold text-gray-900 mb-3">{project.title}</h3>
-              <p className="text-base sm:text-lg leading-relaxed text-gray-600 mb-6">{project.desc}</p>
+              <h3 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-3">{project.title}</h3>
+              <p className="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300 mb-6">{project.desc}</p>
               
               {/* Architecture diagram */}
-              <div className="mb-6 rounded-xl bg-gray-50 p-4 border border-gray-200/80 overflow-x-auto">
-                <p className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-3">Pipeline Flow</p>
+              <div className="mb-6 rounded-xl bg-gray-50 dark:bg-gray-800/50 p-4 border border-gray-200/80 dark:border-gray-700/80 overflow-x-auto">
+                <p className="text-[11px] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3">Pipeline Flow</p>
                 <div className="flex items-center gap-2 min-w-max">
                   {project.architecture.map((node, i) => (
                     <div key={i} className="flex items-center gap-2">
-                      <span className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-semibold text-gray-800 shadow-sm">
+                      <span className="px-3 py-1.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-xs sm:text-sm font-semibold text-gray-800 dark:text-gray-200 shadow-sm">
                         {node}
                       </span>
                       {i < project.architecture.length - 1 && <ArrowRight size={14} className="text-gray-400 shrink-0" />}
@@ -721,24 +748,24 @@ function FeaturedProjects() {
 
               <div className="flex flex-wrap gap-2 mb-8">
                 {project.skills.map((skill) => (
-                  <span key={skill} className="rounded-lg bg-gray-100 px-3 py-1 text-xs sm:text-sm font-semibold text-gray-700">
+                  <span key={skill} className="rounded-lg bg-gray-100 dark:bg-gray-800 px-3 py-1 text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">
                     {skill}
                   </span>
                 ))}
               </div>
 
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-3 sm:gap-4">
                 {project.links.map((link) => (
                   <a key={link.label} href={link.href} target="_blank" rel="noreferrer"
                     className={`inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold transition ${
                       link.type === 'site' 
                         ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-sm' 
-                        : 'border-2 border-gray-200 text-gray-700 hover:border-gray-300 hover:text-gray-900 bg-white'
+                        : 'border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-900 dark:hover:text-white bg-white dark:bg-gray-800/80'
                     }`}>
                     {link.type === "code" || link.icon === "github" ? (
                       <Github size={16} />
                     ) : link.type === "linkedin" || link.icon === "linkedin" ? (
-                      <Linkedin size={16} className={link.type === 'site' ? 'text-white' : 'text-[#0A66C2]'} />
+                      <Linkedin size={16} className={link.type === 'site' ? 'text-white' : 'text-[#0A66C2] dark:text-[#388bfd]'} />
                     ) : (
                       <ExternalLink size={16} />
                     )}
@@ -751,31 +778,31 @@ function FeaturedProjects() {
         </div>
 
         {/* Earlier Projects */}
-        <div className="pt-8 border-t border-gray-200">
-          <h3 className="text-2xl font-extrabold text-gray-900 mb-6">Earlier Technical Projects</h3>
+        <div className="pt-8 border-t border-gray-200 dark:border-gray-800">
+          <h3 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-6">Earlier Technical Projects</h3>
           <div className="grid gap-6 md:grid-cols-2">
             {EARLIER_PROJECTS.map((project) => (
-              <div key={project.title} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm flex flex-col justify-between">
+              <div key={project.title} className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-6 shadow-sm flex flex-col justify-between">
                 <div>
-                  <span className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-2 block">{project.tag}</span>
-                  <h4 className="text-lg font-bold text-gray-900 mb-2">{project.title}</h4>
-                  <p className="text-sm text-gray-600 mb-4">{project.desc}</p>
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-2 block">{project.tag}</span>
+                  <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{project.title}</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{project.desc}</p>
                   <div className="flex flex-wrap gap-1.5 mb-6">
                     {project.skills.map((skill) => (
-                      <span key={skill} className="rounded-md bg-gray-50 border border-gray-100 px-2 py-0.5 text-xs font-semibold text-gray-600">
+                      <span key={skill} className="rounded-md bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700/80 px-2 py-0.5 text-xs font-semibold text-gray-600 dark:text-gray-300">
                         {skill}
                       </span>
                     ))}
                   </div>
                 </div>
-                <div className="flex flex-wrap gap-4 pt-4 border-t border-gray-100">
+                <div className="flex flex-wrap gap-4 pt-4 border-t border-gray-100 dark:border-gray-800/80">
                   {project.links && project.links.map(link => (
-                    <a key={link.label} href={link.href} target="_blank" rel="noreferrer" className="text-sm font-semibold text-blue-600 hover:underline flex items-center gap-1">
+                    <a key={link.label} href={link.href} target="_blank" rel="noreferrer" className="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1">
                       {link.type === "code" ? <Github size={14} /> : <ExternalLink size={14} />} {link.label}
                     </a>
                   ))}
                   {project.file && (
-                    <a href={project.file} target="_blank" rel="noreferrer" className="text-sm font-semibold text-blue-600 hover:underline flex items-center gap-1">
+                    <a href={project.file} target="_blank" rel="noreferrer" className="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1">
                       <FileDown size={14} /> {project.fileLabel}
                     </a>
                   )}
@@ -791,7 +818,7 @@ function FeaturedProjects() {
 
 function AutomationApproach() {
   return (
-    <section className="relative overflow-hidden bg-white">
+    <section className="relative overflow-hidden bg-white dark:bg-[#0B0F19]">
       <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-24">
         <SectionHeading eyebrow="Approach" center color="sky" title="How I Build Automations"
           description="A structured engineering framework applied to every workflow to ensure data reliability and prevent breakages." />
@@ -801,13 +828,13 @@ function AutomationApproach() {
             const Icon = p.icon;
             return (
               <Reveal key={p.step} className="relative" style={{ transitionDelay: `${i * 0.08}s` }}>
-                <div className="tilt-card relative z-10 rounded-2xl border border-gray-100 bg-white p-6 text-center shadow-sm">
+                <div className="tilt-card relative z-10 rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900/70 p-6 text-center shadow-sm">
                   <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 text-white shadow-lg shadow-sky-600/20">
                     <Icon size={24} />
                   </div>
-                  <p className="mt-4 text-xs font-bold uppercase tracking-widest text-sky-600">Step {p.step}</p>
-                  <h3 className="mt-1 text-lg font-extrabold text-gray-900">{p.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-gray-600">{p.desc}</p>
+                  <p className="mt-4 text-xs font-bold uppercase tracking-widest text-sky-600 dark:text-sky-400">Step {p.step}</p>
+                  <h3 className="mt-1 text-lg font-extrabold text-gray-900 dark:text-white">{p.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-gray-600 dark:text-gray-400">{p.desc}</p>
                 </div>
               </Reveal>
             );
@@ -820,35 +847,35 @@ function AutomationApproach() {
 
 function Experience() {
   return (
-    <section id="experience" className="bg-gray-50">
+    <section id="experience" className="bg-gray-50 dark:bg-[#0E131F]">
       <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-24">
         <SectionHeading eyebrow="Experience" title="Professional Experience" color="cyan" />
         <div className="space-y-8">
           {EXPERIENCES.map((exp) => (
-            <div key={exp.company} className="tilt-card rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+            <div key={exp.company} className="tilt-card rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-8 shadow-sm">
               <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
                 <div>
-                  <h3 className="text-2xl font-extrabold text-gray-900">{exp.company}</h3>
-                  <p className="mt-1 text-base font-semibold text-cyan-700">{exp.context}</p>
+                  <h3 className="text-2xl font-extrabold text-gray-900 dark:text-white">{exp.company}</h3>
+                  <p className="mt-1 text-base font-semibold text-cyan-700 dark:text-cyan-400">{exp.context}</p>
                 </div>
-                <span className="rounded-full bg-cyan-50 px-4 py-1.5 text-sm font-bold text-cyan-700 border border-cyan-100">
+                <span className="rounded-full bg-cyan-50 dark:bg-cyan-950/50 px-4 py-1.5 text-sm font-bold text-cyan-700 dark:text-cyan-300 border border-cyan-100 dark:border-cyan-800">
                   {exp.period}
                 </span>
               </div>
               
               <div className="flex flex-wrap gap-2 mb-4">
                 {exp.roles.map((role) => (
-                  <span key={role} className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-1 text-sm font-bold text-gray-800">
+                  <span key={role} className="rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 px-3 py-1 text-sm font-bold text-gray-800 dark:text-gray-200">
                     {role}
                   </span>
                 ))}
               </div>
               
-              <p className="text-base sm:text-lg text-gray-600 mb-6">{exp.summary}</p>
+              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 mb-6">{exp.summary}</p>
               
-              <div className="flex flex-wrap gap-2 mb-6 pb-6 border-b border-gray-100">
+              <div className="flex flex-wrap gap-2 mb-6 pb-6 border-b border-gray-100 dark:border-gray-800">
                 {exp.skills.map((skill) => (
-                  <span key={skill} className="rounded-md bg-cyan-50 text-cyan-800 px-2.5 py-1 text-xs font-semibold border border-cyan-100">
+                  <span key={skill} className="rounded-md bg-cyan-50 dark:bg-cyan-950/40 text-cyan-800 dark:text-cyan-300 px-2.5 py-1 text-xs font-semibold border border-cyan-100 dark:border-cyan-800/80">
                     {skill}
                   </span>
                 ))}
@@ -856,10 +883,10 @@ function Experience() {
 
               <ul className="space-y-4 mb-6">
                 {exp.points.map((point, i) => (
-                  <li key={i} className="flex gap-3 text-base leading-relaxed text-gray-600">
-                    <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-cyan-600" />
+                  <li key={i} className="flex gap-3 text-base leading-relaxed text-gray-600 dark:text-gray-400">
+                    <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-cyan-600 dark:text-cyan-400" />
                     <span>
-                      <span className="font-semibold text-gray-900">{point.label}: </span>
+                      <span className="font-semibold text-gray-900 dark:text-white">{point.label}: </span>
                       {point.text}
                     </span>
                   </li>
@@ -867,45 +894,45 @@ function Experience() {
               </ul>
               
               {exp.callout && (
-                <div className="rounded-xl bg-blue-50 border border-blue-100 p-5 mt-4">
-                  <h4 className="text-sm font-bold text-blue-900 mb-1">{exp.callout.title}</h4>
-                  <p className="text-sm text-blue-800 leading-relaxed">{exp.callout.text}</p>
+                <div className="rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/50 p-5 mt-4">
+                  <h4 className="text-sm font-bold text-blue-900 dark:text-blue-200 mb-1">{exp.callout.title}</h4>
+                  <p className="text-sm text-blue-800 dark:text-blue-300 leading-relaxed">{exp.callout.text}</p>
                 </div>
               )}
 
               {exp.endorsement && (
-                <div className="mt-5 rounded-2xl border border-blue-200/80 bg-gradient-to-br from-blue-50/70 via-white to-indigo-50/30 p-6 shadow-sm">
+                <div className="mt-5 rounded-2xl border border-blue-200/80 dark:border-blue-900/60 bg-gradient-to-br from-blue-50/70 via-white to-indigo-50/30 dark:from-blue-950/40 dark:via-gray-900 dark:to-indigo-950/30 p-6 shadow-sm">
                   <div className="flex items-center justify-between gap-3 mb-3">
                     <div className="flex items-center gap-2">
                       <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white shadow-sm">
                         <Quote size={16} />
                       </div>
-                      <span className="text-xs font-bold uppercase tracking-wider text-blue-950">
+                      <span className="text-xs font-bold uppercase tracking-wider text-blue-950 dark:text-blue-200">
                         Direct Manager Endorsement · LinkedIn
                       </span>
                     </div>
                     {exp.endorsement.linkedin && (
                       <a href={exp.endorsement.linkedin} target="_blank" rel="noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-800 transition">
+                        className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">
                         <Linkedin size={13} className="text-[#0A66C2]" /> LinkedIn <ExternalLink size={11} />
                       </a>
                     )}
                   </div>
-                  <blockquote className="text-sm sm:text-base italic leading-relaxed text-gray-700 mb-4">
+                  <blockquote className="text-sm sm:text-base italic leading-relaxed text-gray-700 dark:text-gray-300 mb-4">
                     "{exp.endorsement.quote}"
                   </blockquote>
-                  <div className="pt-3 border-t border-blue-100/80 flex items-center justify-between">
+                  <div className="pt-3 border-t border-blue-100/80 dark:border-gray-800 flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-extrabold text-gray-900">{exp.endorsement.author}</p>
-                      <p className="text-xs text-gray-500">{exp.endorsement.role} · <span className="font-semibold text-blue-700">{exp.endorsement.relationship}</span></p>
+                      <p className="text-sm font-extrabold text-gray-900 dark:text-white">{exp.endorsement.author}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{exp.endorsement.role} · <span className="font-semibold text-blue-700 dark:text-blue-400">{exp.endorsement.relationship}</span></p>
                     </div>
                   </div>
                 </div>
               )}
 
               {exp.supportingLine && (
-                <div className="mt-4 pt-4 border-t border-gray-100">
-                  <p className="text-sm font-medium text-gray-500 italic">{exp.supportingLine}</p>
+                <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-800">
+                  <p className="text-sm font-medium text-gray-500 dark:text-gray-400 italic">{exp.supportingLine}</p>
                 </div>
               )}
             </div>
@@ -918,7 +945,7 @@ function Experience() {
 
 function Reviews() {
   return (
-    <section className="bg-white border-b border-gray-100">
+    <section className="bg-white dark:bg-[#0B0F19] border-b border-gray-100 dark:border-gray-800/80">
       <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-24">
         <SectionHeading 
           eyebrow="Testimonials" 
@@ -929,33 +956,33 @@ function Reviews() {
         />
 
         {/* Rating summary bar */}
-        <Reveal className="mb-12 flex flex-wrap items-center justify-center gap-6 rounded-2xl border border-emerald-100 bg-emerald-50/40 p-6 text-center sm:gap-10 shadow-sm">
+        <Reveal className="mb-12 flex flex-wrap items-center justify-center gap-6 rounded-2xl border border-emerald-100 dark:border-emerald-900/50 bg-emerald-50/40 dark:bg-emerald-950/30 p-6 text-center sm:gap-10 shadow-sm">
           <div className="flex items-center gap-3">
-            <span className="text-4xl font-extrabold text-gray-900">5.0</span>
+            <span className="text-4xl font-extrabold text-gray-900 dark:text-white">5.0</span>
             <div>
               <div className="flex text-amber-400">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} size={18} fill="currentColor" />
                 ))}
               </div>
-              <p className="text-xs font-bold text-gray-500 mt-0.5">LinkedIn Services Rating</p>
+              <p className="text-xs font-bold text-gray-500 dark:text-gray-400 mt-0.5">LinkedIn Services Rating</p>
             </div>
           </div>
 
-          <div className="hidden sm:block h-10 w-px bg-emerald-200/60"></div>
+          <div className="hidden sm:block h-10 w-px bg-emerald-200/60 dark:bg-emerald-800/60"></div>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm font-semibold text-gray-700">
-            <span className="flex items-center gap-1.5"><CheckCircle2 size={15} className="text-emerald-600" /> Project Satisfaction: 5.0</span>
-            <span className="flex items-center gap-1.5"><CheckCircle2 size={15} className="text-emerald-600" /> Knowledge: 5.0</span>
-            <span className="flex items-center gap-1.5"><CheckCircle2 size={15} className="text-emerald-600" /> Communication: 5.0</span>
-            <span className="flex items-center gap-1.5"><CheckCircle2 size={15} className="text-emerald-600" /> Timeliness: 5.0</span>
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">
+            <span className="flex items-center gap-1.5"><CheckCircle2 size={15} className="text-emerald-600 dark:text-emerald-400" /> Project Satisfaction: 5.0</span>
+            <span className="flex items-center gap-1.5"><CheckCircle2 size={15} className="text-emerald-600 dark:text-emerald-400" /> Knowledge: 5.0</span>
+            <span className="flex items-center gap-1.5"><CheckCircle2 size={15} className="text-emerald-600 dark:text-emerald-400" /> Communication: 5.0</span>
+            <span className="flex items-center gap-1.5"><CheckCircle2 size={15} className="text-emerald-600 dark:text-emerald-400" /> Timeliness: 5.0</span>
           </div>
         </Reveal>
 
         {/* Reviews Grid */}
         <div className="grid gap-6 md:grid-cols-2">
           {LINKEDIN_REVIEWS.map((rev) => (
-            <div key={rev.name} className="tilt-card flex flex-col justify-between rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+            <div key={rev.name} className="tilt-card flex flex-col justify-between rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-8 shadow-sm">
               <div>
                 <div className="flex items-center justify-between gap-2 mb-4">
                   <div className="flex text-amber-400">
@@ -963,21 +990,21 @@ function Reviews() {
                       <Star key={i} size={16} fill="currentColor" />
                     ))}
                   </div>
-                  <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 border border-blue-100 flex items-center gap-1">
+                  <span className="rounded-full bg-blue-50 dark:bg-blue-950/50 px-3 py-1 text-xs font-bold text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-800 flex items-center gap-1">
                     <Linkedin size={12} className="text-[#0A66C2]" /> {rev.service}
                   </span>
                 </div>
-                <blockquote className="text-sm sm:text-base italic leading-relaxed text-gray-700 mb-6">
+                <blockquote className="text-sm sm:text-base italic leading-relaxed text-gray-700 dark:text-gray-300 mb-6">
                   "{rev.text}"
                 </blockquote>
               </div>
 
-              <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
+              <div className="pt-4 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
                 <div>
-                  <h4 className="text-base font-extrabold text-gray-900">{rev.name}</h4>
-                  <p className="text-xs text-gray-500 mt-0.5">{rev.role}</p>
+                  <h4 className="text-base font-extrabold text-gray-900 dark:text-white">{rev.name}</h4>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{rev.role}</p>
                 </div>
-                <span className="text-xs text-gray-400 font-medium shrink-0">{rev.date}</span>
+                <span className="text-xs text-gray-400 dark:text-gray-500 font-medium shrink-0">{rev.date}</span>
               </div>
             </div>
           ))}
@@ -985,7 +1012,7 @@ function Reviews() {
 
         <div className="mt-10 text-center">
           <a href="https://linkedin.com/in/naveensharmatech" target="_blank" rel="noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 transition">
+            className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">
             <Linkedin size={16} className="text-[#0A66C2]" /> View full recommendations &amp; services on LinkedIn <ExternalLink size={13} />
           </a>
         </div>
@@ -996,28 +1023,28 @@ function Reviews() {
 
 function CareerJourney() {
   return (
-    <section className="bg-white">
+    <section className="bg-white dark:bg-[#0B0F19]">
       <div className="mx-auto max-w-3xl px-4 py-20 sm:px-6 sm:py-24">
         <SectionHeading eyebrow="Journey" center title="From Operations to Intelligent Automation" color="blue" />
         
         <div className="relative pl-6 sm:pl-0">
-          <div className="absolute left-6 sm:left-1/2 top-2 bottom-2 w-0.5 bg-gray-200 -translate-x-1/2"></div>
+          <div className="absolute left-6 sm:left-1/2 top-2 bottom-2 w-0.5 bg-gray-200 dark:bg-gray-800 -translate-x-1/2"></div>
           <div className="space-y-10">
             {CAREER_TIMELINE.map((step, i) => (
               <div key={i} className={`relative flex sm:justify-between items-center w-full ${i % 2 === 0 ? "sm:flex-row-reverse" : ""}`}>
                 <div className="hidden sm:block w-5/12"></div>
-                <div className={`absolute left-0 sm:left-1/2 h-4 w-4 rounded-full border-4 border-white shadow-sm -translate-x-1/2 ${step.colorClass}`}></div>
+                <div className={`absolute left-0 sm:left-1/2 h-4 w-4 rounded-full border-4 border-white dark:border-gray-900 shadow-sm -translate-x-1/2 ${step.colorClass}`}></div>
                 <div className={`w-full sm:w-5/12 ${i % 2 === 0 ? "sm:text-left ml-6 sm:ml-0" : "sm:text-right ml-6 sm:ml-0"}`}>
-                  <p className="text-xs font-bold uppercase tracking-wider text-gray-400">{step.company}</p>
-                  <p className="text-base sm:text-lg font-extrabold text-gray-900 mt-0.5">{step.role}</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">{step.company}</p>
+                  <p className="text-base sm:text-lg font-extrabold text-gray-900 dark:text-white mt-0.5">{step.role}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="mt-14 rounded-2xl bg-gray-50 border border-gray-100 p-6 text-center">
-          <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
+        <div className="mt-14 rounded-2xl bg-gray-50 dark:bg-gray-900/70 border border-gray-100 dark:border-gray-800 p-6 text-center">
+          <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
             "My career has progressively moved closer to the systems behind business operations — from managing processes, to validating them, to implementing SaaS workflows, and now to automating them."
           </p>
         </div>
@@ -1028,34 +1055,34 @@ function CareerJourney() {
 
 function CertificationsSection() {
   return (
-    <section id="certifications" className="bg-gray-50">
+    <section id="certifications" className="bg-gray-50 dark:bg-[#0E131F]">
       <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-24">
         <SectionHeading eyebrow="Learning" title="Certifications &amp; Learning" color="rose" />
         
         {/* Degree */}
-        <div className="mb-10 tilt-card rounded-2xl border border-rose-200 bg-white p-8 shadow-sm flex flex-col md:flex-row items-start gap-6">
-          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-rose-50 text-rose-600">
+        <div className="mb-10 tilt-card rounded-2xl border border-rose-200 dark:border-rose-900/60 bg-white dark:bg-gray-900/80 p-8 shadow-sm flex flex-col md:flex-row items-start gap-6">
+          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400">
             <GraduationCap size={28} />
           </div>
           <div>
-            <span className="rounded-full bg-rose-50 text-rose-700 text-xs font-bold px-3 py-1 mb-2 inline-block border border-rose-100">
+            <span className="rounded-full bg-rose-50 dark:bg-rose-950/50 text-rose-700 dark:text-rose-300 text-xs font-bold px-3 py-1 mb-2 inline-block border border-rose-100 dark:border-rose-900/50">
               Degree
             </span>
-            <h3 className="text-2xl font-extrabold text-gray-900 mb-1">{EDUCATION_DEGREE.degree}</h3>
-            <p className="text-base font-semibold text-gray-700">{EDUCATION_DEGREE.institution}</p>
-            <p className="text-sm text-gray-500 mt-1">{EDUCATION_DEGREE.focus} · {EDUCATION_DEGREE.period}</p>
+            <h3 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-1">{EDUCATION_DEGREE.degree}</h3>
+            <p className="text-base font-semibold text-gray-700 dark:text-gray-300">{EDUCATION_DEGREE.institution}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{EDUCATION_DEGREE.focus} · {EDUCATION_DEGREE.period}</p>
           </div>
         </div>
 
         {/* Certification Groups */}
         <div className="grid gap-6 md:grid-cols-2 mb-10">
           {CERTIFICATIONS.map((group) => (
-            <div key={group.group} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm flex flex-col justify-between">
+            <div key={group.group} className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-6 shadow-sm flex flex-col justify-between">
               <div>
-                <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
-                  <h3 className="text-lg font-extrabold text-gray-900">{group.group}</h3>
+                <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100 dark:border-gray-800">
+                  <h3 className="text-lg font-extrabold text-gray-900 dark:text-white">{group.group}</h3>
                   {group.badge && (
-                    <span className="rounded-full bg-blue-50 text-blue-700 text-[11px] font-bold px-2.5 py-0.5 border border-blue-100">
+                    <span className="rounded-full bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 text-[11px] font-bold px-2.5 py-0.5 border border-blue-100 dark:border-blue-800">
                       {group.badge}
                     </span>
                   )}
@@ -1064,13 +1091,13 @@ function CertificationsSection() {
                   {group.items.map((item, i) => (
                     <li key={i} className="flex justify-between items-start gap-4">
                       <div>
-                        <p className="text-sm font-bold text-gray-800">{item.degree}</p>
-                        <p className="text-xs text-gray-500">{item.institution}</p>
+                        <p className="text-sm font-bold text-gray-800 dark:text-gray-200">{item.degree}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">{item.institution}</p>
                       </div>
                       <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded shrink-0 ${
                         item.type === 'In Progress' 
-                          ? 'bg-amber-50 text-amber-700 border border-amber-200' 
-                          : 'bg-gray-100 text-gray-600'
+                          ? 'bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800' 
+                          : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300'
                       }`}>
                         {item.type}
                       </span>
@@ -1080,16 +1107,16 @@ function CertificationsSection() {
               </div>
 
               {group.highlight && (
-                <div className="mt-5 pt-4 border-t border-gray-100">
+                <div className="mt-5 pt-4 border-t border-gray-100 dark:border-gray-800">
                   <a href={group.highlight.href} target="_blank" rel="noreferrer"
-                    className="flex items-center justify-between gap-3 p-3 rounded-xl bg-blue-50/70 hover:bg-blue-100/70 border border-blue-100 text-blue-700 transition group">
+                    className="flex items-center justify-between gap-3 p-3 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 hover:bg-blue-100/70 dark:hover:bg-blue-900/50 border border-blue-100 dark:border-blue-900 text-blue-700 dark:text-blue-300 transition group">
                     <div className="flex items-center gap-2.5 min-w-0">
-                      <div className="h-7 w-7 rounded-lg bg-white border border-blue-200 flex items-center justify-center shrink-0 shadow-xs">
+                      <div className="h-7 w-7 rounded-lg bg-white dark:bg-gray-800 border border-blue-200 dark:border-blue-700 flex items-center justify-center shrink-0 shadow-xs">
                         <Linkedin size={15} className="text-[#0A66C2]" />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-xs font-bold text-gray-900 truncate group-hover:text-blue-700 transition">{group.highlight.label}</p>
-                        <p className="text-[11px] text-gray-500 truncate">{group.highlight.desc}</p>
+                        <p className="text-xs font-bold text-gray-900 dark:text-white truncate group-hover:text-blue-700 dark:group-hover:text-blue-300 transition">{group.highlight.label}</p>
+                        <p className="text-[11px] text-gray-500 dark:text-gray-400 truncate">{group.highlight.desc}</p>
                       </div>
                     </div>
                     <ExternalLink size={13} className="text-blue-500 group-hover:translate-x-0.5 transition shrink-0" />
@@ -1101,17 +1128,17 @@ function CertificationsSection() {
         </div>
 
         {/* Languages */}
-        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-          <h3 className="text-lg font-extrabold text-gray-900 mb-4">Languages</h3>
+        <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-6 shadow-sm">
+          <h3 className="text-lg font-extrabold text-gray-900 dark:text-white mb-4">Languages</h3>
           <div className="flex flex-wrap gap-4">
             {[
               { lang: "Hindi", level: "Native / bilingual proficiency" },
               { lang: "English", level: "Professional working proficiency" },
               { lang: "Hebrew", level: "Elementary proficiency" },
             ].map((l) => (
-              <div key={l.lang} className="rounded-xl bg-gray-50 px-4 py-2.5 border border-gray-200">
-                <p className="text-sm font-bold text-gray-900">{l.lang}</p>
-                <p className="text-xs text-gray-500">{l.level}</p>
+              <div key={l.lang} className="rounded-xl bg-gray-50 dark:bg-gray-800/80 px-4 py-2.5 border border-gray-200 dark:border-gray-700">
+                <p className="text-sm font-bold text-gray-900 dark:text-white">{l.lang}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{l.level}</p>
               </div>
             ))}
           </div>
@@ -1123,19 +1150,19 @@ function CertificationsSection() {
 
 function Skills() {
   return (
-    <section className="bg-white">
+    <section className="bg-white dark:bg-[#0B0F19]">
       <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-24">
         <SectionHeading eyebrow="Tools" center title="Technical Skills"
           description="Grouped competencies across automation, SaaS integrations, quality assurance, and platforms." />
         
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {SKILL_GROUPS.map((group) => (
-            <div key={group.label} className="tilt-card rounded-2xl border border-gray-100 bg-gray-50 p-6 flex flex-col justify-between">
+            <div key={group.label} className="tilt-card rounded-2xl border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/70 p-6 flex flex-col justify-between">
               <div>
-                <h3 className="text-base font-extrabold text-gray-900 mb-4">{group.label}</h3>
+                <h3 className="text-base font-extrabold text-gray-900 dark:text-white mb-4">{group.label}</h3>
                 <div className="flex flex-wrap gap-2">
                   {group.skills.map((skill) => (
-                    <span key={skill} className="rounded-md bg-white border border-gray-200 px-2.5 py-1 text-xs font-semibold text-gray-700 shadow-sm">
+                    <span key={skill} className="rounded-md bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-2.5 py-1 text-xs font-semibold text-gray-700 dark:text-gray-300 shadow-sm">
                       {skill}
                     </span>
                   ))}
@@ -1151,9 +1178,9 @@ function Skills() {
 
 function Contact() {
   return (
-    <section id="contact" className="relative overflow-hidden bg-gray-50">
-      <div className="orb h-72 w-72 bg-indigo-300/40" style={{ top: "-30px", left: "4%" }} />
-      <div className="orb h-64 w-64 bg-rose-300/30" style={{ bottom: "0%", right: "3%", animationDelay: "2s" }} />
+    <section id="contact" className="relative overflow-hidden bg-gray-50 dark:bg-[#0E131F]">
+      <div className="orb h-72 w-72 bg-indigo-300/40 dark:bg-indigo-900/20" style={{ top: "-30px", left: "4%" }} />
+      <div className="orb h-64 w-64 bg-rose-300/30 dark:bg-rose-900/20" style={{ bottom: "0%", right: "3%", animationDelay: "2s" }} />
       
       <div className="relative mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-24">
         <SectionHeading eyebrow="Contact" center color="pink"
@@ -1163,15 +1190,15 @@ function Contact() {
         <div className="mx-auto max-w-2xl">
           <div className="mb-8 flex flex-wrap justify-center gap-4">
             <a href="mailto:contact@naveensharma.net"
-              className="rounded-full bg-blue-600 px-7 py-3 text-base font-bold text-white shadow-md shadow-blue-200 transition hover:bg-blue-700 hover:shadow-lg">
+              className="rounded-full bg-blue-600 px-7 py-3 text-base font-bold text-white shadow-md shadow-blue-200 dark:shadow-none transition hover:bg-blue-700 hover:shadow-lg">
               Contact Me
             </a>
             <a href="https://linkedin.com/in/naveensharmatech" target="_blank" rel="noreferrer"
-              className="rounded-full border-2 border-gray-200 bg-white px-7 py-3 text-base font-bold text-gray-700 transition hover:border-blue-400 hover:text-blue-600 shadow-sm">
+              className="rounded-full border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-7 py-3 text-base font-bold text-gray-700 dark:text-gray-200 transition hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400 shadow-sm">
               LinkedIn
             </a>
             <a href="https://github.com/naveensharmatech" target="_blank" rel="noreferrer"
-              className="rounded-full border-2 border-gray-200 bg-white px-7 py-3 text-base font-bold text-gray-700 transition hover:border-blue-400 hover:text-blue-600 shadow-sm">
+              className="rounded-full border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-7 py-3 text-base font-bold text-gray-700 dark:text-gray-200 transition hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400 shadow-sm">
               GitHub
             </a>
           </div>
@@ -1182,11 +1209,11 @@ function Contact() {
               { href: "tel:+972587896289",                              icon: Phone,    label: "Phone",    text: "058-789-6289",                      external: false, link: true,  color: "emerald" },
               { href: null,                                             icon: MapPin,   label: "Location", text: "Be'er Sheva, Israel",              external: false, link: false, color: "rose"    },
             ].map(({ href, icon: Icon, label, text, external, link, color }) => {
-              const classes = "tilt-card flex flex-col items-center gap-2 rounded-xl border border-gray-100 bg-white p-5 hover:border-gray-200 text-center shadow-sm";
+              const classes = "tilt-card flex flex-col items-center gap-2 rounded-xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-5 hover:border-gray-200 dark:hover:border-gray-700 text-center shadow-sm";
               const iconBg = {
-                indigo: "bg-indigo-50 text-indigo-600",
-                emerald: "bg-emerald-50 text-emerald-600",
-                rose: "bg-rose-50 text-rose-600",
+                indigo: "bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400",
+                emerald: "bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400",
+                rose: "bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400",
               }[color];
               const inner = (
                 <>
@@ -1194,10 +1221,10 @@ function Contact() {
                     <Icon size={18} />
                   </div>
                   <div className="w-full">
-                    <p className="text-xs font-semibold text-gray-400">{label}</p>
-                    <p className="truncate text-sm font-bold text-gray-900 mt-0.5">{text}</p>
+                    <p className="text-xs font-semibold text-gray-400 dark:text-gray-500">{label}</p>
+                    <p className="truncate text-sm font-bold text-gray-900 dark:text-white mt-0.5">{text}</p>
                   </div>
-                  {external && <ExternalLink size={13} className="shrink-0 text-gray-300" />}
+                  {external && <ExternalLink size={13} className="shrink-0 text-gray-300 dark:text-gray-600" />}
                 </>
               );
               return link ? (
@@ -1215,12 +1242,12 @@ function Contact() {
 
           <div className="flex justify-center gap-4">
             <a href="/Naveen_Sharma_CV.pdf" target="_blank" rel="noreferrer"
-              className="text-sm font-semibold text-blue-600 hover:underline">
+              className="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline">
               View CV
             </a>
-            <span className="text-gray-300">·</span>
+            <span className="text-gray-300 dark:text-gray-700">·</span>
             <a href="/Naveen_Sharma_CV.pdf" download
-              className="text-sm font-semibold text-blue-600 hover:underline">
+              className="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline">
               Download CV (PDF)
             </a>
           </div>
@@ -1281,16 +1308,16 @@ const LEGAL_DOCS = {
 
 function LegalBodyText({ text }) {
   return (
-    <p className="text-base leading-relaxed text-gray-600 whitespace-pre-line">
+    <p className="text-base leading-relaxed text-gray-600 dark:text-gray-300 whitespace-pre-line">
       {text.split(/(mailto:[^\s]+|https?:\/\/[^\s]+|[\w.+-]+@[\w-]+\.[\w.]+)/g).map((part, i) => {
         if (/^mailto:/.test(part)) {
-          return <a key={i} href={part} className="text-blue-600 hover:underline break-all">{part.replace("mailto:", "")}</a>;
+          return <a key={i} href={part} className="text-blue-600 dark:text-blue-400 hover:underline break-all">{part.replace("mailto:", "")}</a>;
         }
         if (/^https?:\/\//.test(part)) {
-          return <a key={i} href={part} target="_blank" rel="noreferrer" className="text-blue-600 hover:underline break-all">{part}</a>;
+          return <a key={i} href={part} target="_blank" rel="noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline break-all">{part}</a>;
         }
         if (/^[\w.+-]+@[\w-]+\.[\w.]+$/.test(part)) {
-          return <a key={i} href={`mailto:${part}`} className="text-blue-600 hover:underline">{part}</a>;
+          return <a key={i} href={`mailto:${part}`} className="text-blue-600 dark:text-blue-400 hover:underline">{part}</a>;
         }
         return <span key={i}>{part}</span>;
       })}
@@ -1308,24 +1335,24 @@ function LegalModal({ doc, onClose }) {
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
       onClick={onClose}>
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
-      <div className="relative bg-white w-full sm:max-w-2xl sm:rounded-2xl shadow-2xl max-h-[90vh] flex flex-col"
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="relative bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 w-full sm:max-w-2xl sm:rounded-2xl shadow-2xl max-h-[90vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}>
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-          <h2 className="text-xl font-extrabold text-gray-900">{doc.title}</h2>
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800">
+          <h2 className="text-xl font-extrabold text-gray-900 dark:text-white">{doc.title}</h2>
           <button onClick={onClose}
-            className="rounded-lg p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-700 transition">
+            className="rounded-lg p-1.5 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-200 transition">
             <X size={20} />
           </button>
         </div>
         <div className="overflow-y-auto px-6 py-5 space-y-5">
           {doc.content.map(({ heading, body }) => (
             <div key={heading}>
-              <h3 className="text-base font-bold text-gray-900 mb-1">{heading}</h3>
+              <h3 className="text-base font-bold text-gray-900 dark:text-white mb-1">{heading}</h3>
               <LegalBodyText text={body} />
             </div>
           ))}
-          <p className="text-sm text-gray-400 pt-2">Naveen Sharma · naveensharma.net</p>
+          <p className="text-sm text-gray-400 dark:text-gray-500 pt-2">Naveen Sharma · naveensharma.net</p>
         </div>
       </div>
     </div>
@@ -1337,20 +1364,20 @@ function Footer() {
   return (
     <>
       {activeDoc && <LegalModal doc={LEGAL_DOCS[activeDoc]} onClose={() => setActiveDoc(null)} />}
-      <footer className="border-t border-gray-100 bg-white">
+      <footer className="border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-[#070A12]">
         <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
           <div className="flex flex-col items-center gap-4 text-center">
             <img
               src="/headshot-round.png"
               alt="Naveen Sharma"
-              className="h-16 w-16 rounded-full object-cover ring-2 ring-blue-100"
+              className="h-16 w-16 rounded-full object-cover ring-2 ring-blue-100 dark:ring-gray-800"
               onError={(e) => { e.target.style.display = "none"; }}
             />
-            <p className="font-extrabold text-gray-900">Naveen Sharma</p>
-            <p className="text-base text-gray-600 font-medium">AI Automation · Workflow Automation · SaaS Implementation · QA/UAT</p>
-            <p className="text-sm text-gray-400">
+            <p className="font-extrabold text-gray-900 dark:text-white">Naveen Sharma</p>
+            <p className="text-base text-gray-600 dark:text-gray-400 font-medium">AI Automation · Workflow Automation · SaaS Implementation · QA/UAT</p>
+            <p className="text-sm text-gray-400 dark:text-gray-500">
               B2B services &amp; contracting →{" "}
-              <a href="https://opility.com" target="_blank" rel="noreferrer" className="text-blue-600 hover:underline font-medium">opility.com</a>
+              <a href="https://opility.com" target="_blank" rel="noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">opility.com</a>
             </p>
             <div className="flex items-center justify-center gap-3 mt-1">
               {[
@@ -1379,12 +1406,12 @@ function Footer() {
                 { key: "cookies",  label: "Cookie Policy" },
               ].map(({ key, label }) => (
                 <button key={key} onClick={() => setActiveDoc(key)}
-                  className="text-sm text-gray-400 hover:text-blue-600 transition underline-offset-2 hover:underline text-center">
+                  className="text-sm text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition underline-offset-2 hover:underline text-center">
                   {label}
                 </button>
               ))}
             </div>
-            <p className="text-xs text-gray-400 mt-1">© 2026 Naveen Sharma. All rights reserved.</p>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">© 2026 Naveen Sharma. All rights reserved.</p>
           </div>
         </div>
       </footer>
@@ -1395,26 +1422,26 @@ function Footer() {
 function FAQ() {
   const [open, setOpen] = useState(null);
   return (
-    <section id="faq" className="bg-gray-50">
+    <section id="faq" className="bg-gray-50 dark:bg-[#0E131F]">
       <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-24">
         <SectionHeading eyebrow="FAQ" center title="Frequently Asked Questions"
           description="Common questions regarding my automation expertise, implementation experience, and availability." />
         <div className="mx-auto max-w-3xl space-y-3">
           {FAQS.map((item, i) => (
-            <div key={i} className="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm">
+            <div key={i} className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 overflow-hidden shadow-sm">
               <button
                 onClick={() => setOpen(open === i ? null : i)}
-                className="flex w-full items-center justify-between px-6 py-5 text-left transition hover:bg-gray-50"
+                className="flex w-full items-center justify-between px-6 py-5 text-left transition hover:bg-gray-50 dark:hover:bg-gray-800/50"
               >
-                <span className="text-base sm:text-lg font-bold text-gray-900 pr-4">{item.q}</span>
+                <span className="text-base sm:text-lg font-bold text-gray-900 dark:text-white pr-4">{item.q}</span>
                 <ChevronDown
                   size={20}
-                  className={`shrink-0 text-blue-600 transition-transform duration-200 ${open === i ? "rotate-180" : ""}`}
+                  className={`shrink-0 text-blue-600 dark:text-blue-400 transition-transform duration-200 ${open === i ? "rotate-180" : ""}`}
                 />
               </button>
               {open === i && (
                 <div className="px-6 pb-5">
-                  <p className="text-base leading-relaxed text-gray-600">{item.a}</p>
+                  <p className="text-base leading-relaxed text-gray-600 dark:text-gray-400">{item.a}</p>
                 </div>
               )}
             </div>
@@ -1484,7 +1511,7 @@ function EllaChat() {
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
       {open && (
-        <div className="flex w-80 sm:w-96 flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl"
+        <div className="flex w-80 sm:w-96 flex-col overflow-hidden rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-2xl"
           style={{ height: "500px" }}>
           <div className="flex items-center justify-between bg-blue-600 px-4 py-3">
             <div className="flex items-center gap-3">
@@ -1508,7 +1535,7 @@ function EllaChat() {
                 <div className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm sm:text-base leading-relaxed ${
                   m.role === "user"
                     ? "rounded-br-sm bg-blue-600 text-white"
-                    : "rounded-bl-sm bg-gray-100 text-gray-800"
+                    : "rounded-bl-sm bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200"
                 }`}>
                   {m.content.split(/(https?:\/\/[^\s]+)/g).map((part, j) => {
                     if (/^https?:\/\//.test(part)) {
@@ -1517,7 +1544,7 @@ function EllaChat() {
                       if (!safeUrl) return <span key={j}>{url}</span>;
                       return (
                         <a key={j} href={safeUrl} target="_blank" rel="noopener noreferrer"
-                          className="block underline break-all cursor-pointer mt-0.5 text-blue-700"
+                          className="block underline break-all cursor-pointer mt-0.5 text-blue-700 dark:text-blue-400"
                           style={{ touchAction: "manipulation", WebkitTapHighlightColor: "rgba(0,0,0,0.1)" }}>
                           {safeUrl}
                         </a>
@@ -1530,13 +1557,13 @@ function EllaChat() {
             ))}
             {showChips && (
               <div className="flex flex-col items-start gap-2 pt-1">
-                <p className="px-1 text-xs font-semibold uppercase tracking-wide text-gray-400">Popular questions</p>
+                <p className="px-1 text-xs font-semibold uppercase tracking-wide text-gray-400 dark:text-gray-500">Popular questions</p>
                 <div className="flex flex-wrap gap-2">
                   {QUICK_QUESTIONS.map((q) => (
                     <button
                       key={q}
                       onClick={() => send(q)}
-                      className="rounded-full border border-blue-100 bg-blue-50 px-3 py-1.5 text-xs font-medium text-blue-700 transition hover:bg-blue-100 text-left">
+                      className="rounded-full border border-blue-100 dark:border-blue-900 bg-blue-50 dark:bg-blue-950/50 px-3 py-1.5 text-xs font-medium text-blue-700 dark:text-blue-300 transition hover:bg-blue-100 dark:hover:bg-blue-900/60 text-left">
                       {q}
                     </button>
                   ))}
@@ -1545,11 +1572,11 @@ function EllaChat() {
             )}
             {loading && (
               <div className="flex justify-start">
-                <div className="rounded-2xl rounded-bl-sm bg-gray-100 px-4 py-3">
+                <div className="rounded-2xl rounded-bl-sm bg-gray-100 dark:bg-gray-800 px-4 py-3">
                   <div className="flex gap-1">
                     {[0, 150, 300].map((delay) => (
                       <span key={delay}
-                        className="h-2 w-2 rounded-full bg-gray-400 animate-bounce"
+                        className="h-2 w-2 rounded-full bg-gray-400 dark:bg-gray-500 animate-bounce"
                         style={{ animationDelay: `${delay}ms` }} />
                     ))}
                   </div>
@@ -1559,14 +1586,14 @@ function EllaChat() {
             <div ref={bottomRef} />
           </div>
 
-          <div className="border-t border-gray-100 p-3">
+          <div className="border-t border-gray-100 dark:border-gray-800 p-3">
             <div className="flex gap-2">
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && send()}
                 placeholder="Ask me anything…"
-                className="flex-1 rounded-xl border border-gray-200 px-4 py-2 text-sm outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-50"
+                className="flex-1 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-2 text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-50 dark:focus:ring-blue-950"
               />
               <button
                 onClick={() => send()}
@@ -1576,7 +1603,7 @@ function EllaChat() {
                 <Send size={16} />
               </button>
             </div>
-            <p className="mt-2 text-center text-xs text-gray-400">AI by Groq · Powered by Opility</p>
+            <p className="mt-2 text-center text-xs text-gray-400 dark:text-gray-500">AI by Groq · Powered by Opility</p>
           </div>
         </div>
       )}
@@ -1597,9 +1624,31 @@ function EllaChat() {
 }
 
 export default function App() {
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem("theme");
+      if (stored) return stored === "dark";
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (darkMode) {
+      root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      root.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
+
+  const toggleDarkMode = () => setDarkMode((prev) => !prev);
+
   return (
-    <div className="min-h-screen bg-white text-gray-900">
-      <Navbar />
+    <div className="min-h-screen bg-white text-gray-900 dark:bg-[#0B0F19] dark:text-gray-100 transition-colors duration-200">
+      <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       <main>
         <Hero />
         <TrustBar />
