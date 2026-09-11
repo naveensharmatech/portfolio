@@ -8,7 +8,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-Deployed-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://pages.cloudflare.com)
 
-**Healthcare SaaS Implementation Specialist · Systems Configuration · Workflow Automation · QA/UAT**
+**AI Automation Engineer (No Code)•Implementation Specialist•Systems Configuration•QA/UAT**
 
 ---
 
