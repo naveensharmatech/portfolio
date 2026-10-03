@@ -32,6 +32,17 @@ A **modern, professional portfolio website** that positions Naveen Sharma as a H
 
 ---
 
+## 📚 Documentation
+
+| Docs | Guides |
+|------|--------|
+| [Deployment](docs/DEPLOYMENT.md) | [Setup guide](guides/setup-guide.md) |
+| [Customization](docs/CUSTOMIZATION.md) | [Adding projects](guides/adding-projects.md) |
+| [Features](docs/FEATURES.md) | [Updating content](guides/updating-content.md) |
+| [Troubleshooting](docs/TROUBLESHOOTING.md) | |
+
+---
+
 ## 🚀 Features
 
 ### 🎨 Professional Design
