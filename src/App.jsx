@@ -2,15 +2,39 @@
 
 import { useState } from "react";
 import {
-  ArrowDown, ArrowRight, ArrowUpRight, Bot, Check, Code2, FileCheck2,
+  ArrowDown, ArrowRight, ArrowUpRight, Bot, ChevronDown, Code2, FileCheck2,
   Github, Linkedin, Menu, Workflow, X,
 } from "lucide-react";
 
-const navItems = [
-  ["Work", "#work"],
-  ["Experience", "#experience"],
-  ["Capabilities", "#capabilities"],
-  ["About", "#about"],
+const primaryTools = [
+  "Zapier", "Claude", "HubSpot", "GitHub", "Cloudflare", "Apify",
+  "Python", "Node.js", "JavaScript", "GitHub Copilot", "Google AI Studio", "Basecamp",
+];
+
+const secondaryTools = [
+  "Make", "n8n", "Crawlee", "BeautifulSoup", "ChatGPT", "Google Gemini",
+  "ElevenLabs", "Gmail", "Jira", "Google Workspace", "Canva", "Firebase",
+];
+
+const qualifications = [
+  {
+    category: "Education",
+    items: [{ title: "Computer Science & Technology", organization: "Formal education", status: "Completed" }],
+  },
+  {
+    category: "Certifications",
+    items: [
+      { title: "Zapier Expert Certification", organization: "Zapier Academy", status: "Verified" },
+      { title: "SaaS Implementation & Automation", organization: "Professional practice", status: "Ongoing" },
+    ],
+  },
+  {
+    category: "Currently Learning",
+    items: [
+      { title: "AI Agents & Advanced Automation", organization: "Self-directed", status: "In Progress" },
+      { title: "Advanced API Integration & n8n", organization: "Self-directed", status: "In Progress" },
+    ],
+  },
 ];
 
 const projects = [
@@ -45,10 +69,20 @@ const capabilities = [
   { icon: FileCheck2, title: "QA & UAT", text: "Plan and execute functional checks, user acceptance testing, regression passes, and clear defect handoffs." },
   { icon: Bot, title: "Workflow automation", text: "Connect business tools with practical automations using platforms such as Zapier, Make, and n8n." },
   { icon: Code2, title: "Technical operations", text: "Document systems, validate APIs, troubleshoot issues, and make handoffs easier to maintain." },
+  { icon: Code2, title: "API & System Integration", text: "Connect applications and services through APIs, webhooks, and reliable data flows." },
+  { icon: Bot, title: "AI Chatbots & Assistants", text: "Build useful AI-powered assistants that answer questions and support repeatable workflows." },
+  { icon: Code2, title: "AI-Assisted Development", text: "Use AI development tools to prototype, build, and improve practical software solutions." },
 ];
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [expertiseOpen, setExpertiseOpen] = useState(false);
+  const [mobileExpertiseOpen, setMobileExpertiseOpen] = useState(false);
+
+  const closeMobileMenu = () => {
+    setMenuOpen(false);
+    setMobileExpertiseOpen(false);
+  };
 
   return (
     <div className="min-h-screen bg-[#f6f7f4] text-[#172321] selection:bg-[#c5f16b] selection:text-[#172321]">
@@ -59,15 +93,38 @@ export default function App() {
             <span className="text-sm font-semibold tracking-tight">Naveen Sharma<span className="ml-2 text-[#71807b]">/ Portfolio</span></span>
           </a>
           <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation">
-            {navItems.map(([label, href]) => <a key={href} href={href} className="text-sm text-[#52615c] transition hover:text-[#172321]">{label}</a>)}
+            <a href="#projects" className="text-sm text-[#52615c] transition hover:text-[#172321]">Projects</a>
+            <a href="#experience" className="text-sm text-[#52615c] transition hover:text-[#172321]">Experience</a>
+            <div className="relative">
+              <button type="button" className="flex items-center gap-1 text-sm text-[#52615c] transition hover:text-[#172321]" aria-expanded={expertiseOpen} onClick={() => setExpertiseOpen(!expertiseOpen)}>
+                Expertise <ChevronDown size={15} className={`transition-transform ${expertiseOpen ? "rotate-180" : ""}`}/>
+              </button>
+              {expertiseOpen && <div className="absolute left-0 top-full z-20 mt-3 w-48 rounded-xl border border-[#172321]/10 bg-white p-2 shadow-lg">
+                {[["Capabilities", "#capabilities"], ["Tools & Platforms", "#tools"], ["Qualifications", "#qualifications"]].map(([label, href]) => <a key={href} href={href} onClick={() => setExpertiseOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-[#52615c] hover:bg-[#f0f3ef] hover:text-[#172321]">{label}</a>)}
+              </div>}
+            </div>
+            <a href="#about" className="text-sm text-[#52615c] transition hover:text-[#172321]">About</a>
+            <a href="#contact" className="text-sm text-[#52615c] transition hover:text-[#172321]">Contact</a>
           </nav>
           <div className="hidden items-center gap-3 md:flex">
             <a href="https://www.linkedin.com/in/naveensharmatech" target="_blank" rel="noreferrer" className="rounded-full p-2 text-[#52615c] hover:bg-white" aria-label="LinkedIn"><Linkedin size={18}/></a>
             <a href="/Naveen_Sharma_CV.pdf" className="rounded-full bg-[#172321] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#30443e]">View résumé <ArrowUpRight className="ml-1 inline" size={15}/></a>
           </div>
-          <button className="rounded-lg p-2 md:hidden" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X/> : <Menu/>}</button>
+          <button className="rounded-lg p-2 md:hidden" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} onClick={() => { setMenuOpen(!menuOpen); setMobileExpertiseOpen(false); }}>{menuOpen ? <X/> : <Menu/>}</button>
         </div>
-        {menuOpen && <nav className="flex flex-col gap-1 border-t border-[#172321]/10 px-5 py-4 md:hidden" aria-label="Mobile navigation">{navItems.map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)} className="rounded-lg px-3 py-3 text-sm hover:bg-white">{label}</a>)}<a href="/Naveen_Sharma_CV.pdf" className="mt-2 rounded-lg bg-[#172321] px-4 py-3 text-center text-sm font-semibold text-white">View résumé</a></nav>}
+        {menuOpen && <nav className="flex flex-col gap-1 border-t border-[#172321]/10 px-5 py-4 md:hidden" aria-label="Mobile navigation">
+          <a href="#projects" onClick={closeMobileMenu} className="rounded-lg px-3 py-3 text-sm hover:bg-white">Projects</a>
+          <a href="#experience" onClick={closeMobileMenu} className="rounded-lg px-3 py-3 text-sm hover:bg-white">Experience</a>
+          <button type="button" className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-left text-sm hover:bg-white" aria-expanded={mobileExpertiseOpen} onClick={() => setMobileExpertiseOpen(!mobileExpertiseOpen)}>
+            Expertise <ChevronDown size={16} className={`transition-transform ${mobileExpertiseOpen ? "rotate-180" : ""}`}/>
+          </button>
+          {mobileExpertiseOpen && <div className="ml-3 flex flex-col border-l border-[#172321]/10 pl-3">
+            {[["Capabilities", "#capabilities"], ["Tools & Platforms", "#tools"], ["Qualifications", "#qualifications"]].map(([label, href]) => <a key={href} href={href} onClick={closeMobileMenu} className="rounded-lg px-3 py-2 text-sm text-[#52615c] hover:bg-white">{label}</a>)}
+          </div>}
+          <a href="#about" onClick={closeMobileMenu} className="rounded-lg px-3 py-3 text-sm hover:bg-white">About</a>
+          <a href="#contact" onClick={closeMobileMenu} className="rounded-lg px-3 py-3 text-sm hover:bg-white">Contact</a>
+          <a href="/Naveen_Sharma_CV.pdf" onClick={closeMobileMenu} className="mt-2 rounded-lg bg-[#172321] px-4 py-3 text-center text-sm font-semibold text-white">View résumé</a>
+        </nav>}
       </header>
 
       <main id="top">
@@ -77,7 +134,7 @@ export default function App() {
             <h1 className="max-w-4xl text-5xl font-semibold leading-[1.04] tracking-[-.055em] sm:text-6xl lg:text-8xl">I make complex workflows <span className="underline decoration-[#a7d94f] decoration-[8px] underline-offset-[8px]">work better.</span></h1>
             <p className="mt-8 max-w-2xl text-lg leading-8 text-[#52615c]">I’m Naveen, a SaaS implementation specialist focused on configuring business systems, validating workflows, and connecting tools so teams can use them with confidence.</p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <a href="#work" className="rounded-full bg-[#172321] px-6 py-4 text-sm font-semibold text-white hover:bg-[#30443e]">Explore selected work <ArrowDown className="ml-2 inline" size={16}/></a>
+              <a href="#projects" className="rounded-full bg-[#172321] px-6 py-4 text-sm font-semibold text-white hover:bg-[#30443e]">Explore selected work <ArrowDown className="ml-2 inline" size={16}/></a>
               <a href="mailto:contact@naveensharma.net" className="rounded-full border border-[#172321]/20 px-6 py-4 text-sm font-semibold hover:bg-white">Contact me <ArrowUpRight className="ml-2 inline" size={16}/></a>
             </div>
           </div>
@@ -102,13 +159,39 @@ export default function App() {
           </div>
         </section>
 
-        <section id="work" className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
+        <section id="tools" className="mx-auto max-w-7xl px-5 py-24 md:px-10">
+          <div className="mb-10"><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#71807b]">Tools & Platforms</p><h2 className="mt-4 text-4xl font-semibold tracking-[-.04em]">The stack behind the work.</h2></div>
+          <h3 className="mb-4 text-sm font-semibold text-[#52615c]">Primary stack</h3>
+          <div className="flex snap-x gap-3 overflow-x-auto pb-4" aria-label="Primary tools and platforms">
+            {primaryTools.map(tool => <span key={tool} className="shrink-0 snap-start rounded-2xl border border-[#172321]/10 bg-white px-5 py-4 text-sm font-medium">{tool}</span>)}
+          </div>
+          <h3 className="mb-4 mt-8 text-sm font-semibold text-[#52615c]">Also in the toolkit</h3>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+            {secondaryTools.map(tool => <span key={tool} className="rounded-xl bg-white px-4 py-4 text-sm text-[#52615c]">{tool}</span>)}
+          </div>
+        </section>
+
+        <section id="projects" className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
           <div className="mb-12 flex flex-wrap items-end justify-between gap-6"><div><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#71807b]">Selected work</p><h2 className="mt-4 text-4xl font-semibold tracking-[-.04em]">Projects you can inspect.</h2></div><p className="max-w-md text-sm leading-6 text-[#52615c]">Public builds and published products. Client work is described at a high level to respect privacy.</p></div>
           <div className="grid gap-4">{projects.map(project => <article key={project.number} className="grid gap-5 rounded-3xl border border-[#172321]/10 bg-white p-6 transition hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[70px_1fr_auto] md:items-center md:p-8"><span className="text-sm font-semibold text-[#71807b]">{project.number}</span><div><p className="text-xs font-semibold uppercase tracking-[.14em] text-[#71807b]">{project.type}</p><h3 className="mt-2 text-2xl font-semibold">{project.title}</h3><p className="mt-2 max-w-2xl text-sm leading-6 text-[#52615c]">{project.description}</p><div className="mt-4 flex flex-wrap gap-2">{project.stack.map(item => <span key={item} className="rounded-full bg-[#f0f3ef] px-3 py-1 text-xs text-[#52615c]">{item}</span>)}</div></div><a href={project.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold">View project <ArrowUpRight size={16}/></a></article>)}</div>
         </section>
 
         <section id="capabilities" className="bg-[#172321] py-24 text-white md:py-28">
           <div className="mx-auto max-w-7xl px-5 md:px-10"><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#c5f16b]">Capabilities</p><div className="mt-5 grid gap-12 md:grid-cols-[.65fr_1.35fr]"><h2 className="text-4xl font-semibold tracking-[-.04em]">Practical systems.<br/>Clear outcomes.</h2><div className="grid gap-x-10 gap-y-9 sm:grid-cols-2">{capabilities.map(({icon: Icon,title,text}) => <article key={title} className="border-t border-white/20 pt-5"><Icon className="text-[#c5f16b]" size={22}/><h3 className="mt-4 text-lg font-semibold">{title}</h3><p className="mt-2 text-sm leading-6 text-white/65">{text}</p></article>)}</div></div></div>
+        </section>
+
+        <section id="qualifications" className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-28">
+          <div className="mb-12"><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#71807b]">Qualifications</p><h2 className="mt-4 text-4xl font-semibold tracking-[-.04em]">Learning through practice.</h2></div>
+          <div className="grid gap-5 md:grid-cols-3">
+            {qualifications.map(({ category, items }) => <article key={category} className="rounded-3xl border border-[#172321]/10 bg-white p-6 md:p-7">
+              <h3 className="mb-5 text-lg font-semibold">{category}</h3>
+              <div className="space-y-5">{items.map(({ title, organization, status }) => <div key={title} className="border-t border-[#172321]/10 pt-5">
+                <span className="inline-flex rounded-full bg-[#eaf3dc] px-3 py-1 text-xs font-semibold text-[#40572d]">{status}</span>
+                <h4 className="mt-3 font-semibold">{title}</h4>
+                <p className="mt-1 text-sm text-[#71807b]">{organization}</p>
+              </div>)}</div>
+            </article>)}
+          </div>
         </section>
 
         <section id="about" className="mx-auto grid max-w-7xl gap-10 px-5 py-24 md:grid-cols-[.65fr_1.35fr] md:px-10 md:py-28"><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#71807b]">A little about me</p><div><h2 className="max-w-3xl text-3xl font-semibold leading-tight tracking-[-.04em] md:text-5xl">I bridge the gap between how a tool is configured and how a team actually needs to use it.</h2><p className="mt-6 max-w-3xl text-base leading-8 text-[#52615c]">My work sits at the intersection of SaaS implementation, quality assurance, and workflow automation. I value clear requirements, reliable data, thoughtful testing, and documentation that helps the next person succeed.</p><div className="mt-8 flex flex-wrap gap-3"><a href="https://www.linkedin.com/in/naveensharmatech" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white"><Linkedin size={16}/> LinkedIn</a><a href="https://github.com/naveensharmatech" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white"><Github size={16}/> GitHub</a><a href="/Naveen_Sharma_CV.pdf" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white">Résumé <ArrowUpRight size={15}/></a></div></div></section>
