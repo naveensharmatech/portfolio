@@ -5,7 +5,7 @@
 [![Live Site](https://img.shields.io/badge/🌐%20Live%20Site-naveensharma.net-2563eb?style=for-the-badge)](https://naveensharma.net)
 [![React](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-5.3-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.3-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-Deployed-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://pages.cloudflare.com)
 
 **AI Automation Engineer (No Code)•Implementation Specialist•Systems Configuration•QA/UAT**
@@ -94,7 +94,7 @@ A **full-stack AI assistant** built into the bottom-right corner:
 ### Why This Stack?
 
 - **React + Vite** — Fast HMR, minimal config, optimized production builds
-- **Tailwind CSS** — Utility-first styling, responsive design, minimal CSS
+- **Tailwind CSS 4** — Utility-first styling via `@tailwindcss/postcss`; source paths and class-based dark mode are configured in `src/index.css`
 - **Lucide React** — Crisp, customizable icons (60+ used across the site)
 - **Cloudflare Pages** — Edge-hosted, automatic deployments from GitHub, serverless functions included
 - **Groq API** — Fast LLM inference for real-time AI chat responses
@@ -120,7 +120,6 @@ naveensharma-portfolio/
 │   └── Naveen_Sharma_CV.pdf    # Downloadable CV
 ├── index.html                   # HTML entry point
 ├── vite.config.js              # Vite configuration
-├── tailwind.config.js          # Tailwind CSS configuration
 ├── postcss.config.js           # PostCSS configuration
 ├── package.json                # Dependencies & scripts
 └── README.md                   # This file
@@ -357,6 +356,41 @@ All components automatically render from these constants — **no need to touch 
 - ✅ No third-party trackers or ads
 - ✅ HTTPS enforced globally
 - ✅ Secrets stored in Cloudflare environment variables (never in code)
+
+#### Dependency audit (2026-10-03)
+
+Main after PR #24 still reported five high-severity package findings from
+[`braces` GHSA-vfj7-8cjw-p6xm](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm).
+It affects all published versions through 3.0.3 and has no published patch;
+an override to 3.0.3 would not fix it. Tailwind 4.3.3 removes this dependency
+chain. The migration includes the PostCSS plugin, CSS imports/source paths,
+class-based dark mode, v3 border-color compatibility, and renamed utilities.
+Tailwind 4 requires modern browsers (Safari 16.4+, Chrome 111+, Firefox 128+).
+
+The named alerts were checked against official GitHub advisory patched ranges:
+
+| Package | PR #24 lockfile | Patched version / advisory | Updated lockfile |
+|---------|-----------------|----------------------------|------------------|
+| PostCSS | 8.5.28 | 8.5.23 ([GHSA-fxqj-rqcc-2cmp](https://github.com/advisories/GHSA-fxqj-rqcc-2cmp)); also exceeds prior 8.5.10, 8.5.12 and 8.5.18 fixes | 8.5.28 |
+| Vite | 8.3.2 | 8.0.16 ([GHSA-fx2h-pf6j-xcff](https://github.com/advisories/GHSA-fx2h-pf6j-xcff), [GHSA-v6wh-96g9-6wx3](https://github.com/advisories/GHSA-v6wh-96g9-6wx3)) | 8.3.2 |
+| esbuild | Absent | 0.25.0 / 0.28.1 ([GHSA-67mh-4wv8-2f99](https://github.com/advisories/GHSA-67mh-4wv8-2f99), [GHSA-g7r4-m6w7-qqqr](https://github.com/advisories/GHSA-g7r4-m6w7-qqqr)) | Absent |
+| Browserslist | 4.29.3 | 4.28.7 ([GHSA-c83g-rgw3-j3cx](https://github.com/advisories/GHSA-c83g-rgw3-j3cx), [GHSA-73wf-gq98-2v4g](https://github.com/advisories/GHSA-73wf-gq98-2v4g)) | Absent |
+| baseline-browser-mapping | 2.11.27 | 2.11.0 ([GHSA-w5vr-8v7q-w6rv](https://github.com/advisories/GHSA-w5vr-8v7q-w6rv)) | Absent |
+| launch-editor | Absent | 2.9.0 / 2.14.1 ([GHSA-c27g-q93r-2cwf](https://github.com/advisories/GHSA-c27g-q93r-2cwf), [GHSA-v6wh-96g9-6wx3](https://github.com/advisories/GHSA-v6wh-96g9-6wx3)) | Absent |
+| postcss-selector-parser | 6.1.4 | 6.1.3 / 7.1.3 ([GHSA-w9m9-85wc-3x92](https://github.com/advisories/GHSA-w9m9-85wc-3x92)) | Absent |
+
+Validation: `npm ci`, `npm run build`, `npm audit`, and `npm audit --omit=dev`
+pass; both audits report **0 vulnerabilities** in this lockfile. This is a
+point-in-time dependency result, not a guarantee against undisclosed issues.
+There is no configured test suite or linter.
+Local Chrome checks at 1440px and 390px verified responsive navigation,
+heading sizes, no horizontal overflow, light/dark styling, shadows and
+gradients against the prior build. The theme button toggles both ways
+without JavaScript runtime errors.
+
+PR #24 is merged, but these follow-up fixes must also be merged before main
+contains them. A successful local build does **not** verify a Cloudflare
+production deployment; deployment of this follow-up has not been verified.
 
 ---
 

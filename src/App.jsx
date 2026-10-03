@@ -436,7 +436,7 @@ function Navbar({ darkMode, toggleDarkMode }) {
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${
       scrolled 
-        ? "glass shadow-sm border-b border-gray-100 dark:border-gray-800/80 bg-white/95 dark:bg-[#0B0F19]/95 backdrop-blur-md" 
+        ? "glass shadow-xs border-b border-gray-100 dark:border-gray-800/80 bg-white/95 dark:bg-[#0B0F19]/95 backdrop-blur-md"
         : "bg-transparent"
     }`}>
       <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3.5 sm:px-6">
@@ -448,7 +448,7 @@ function Navbar({ darkMode, toggleDarkMode }) {
           />
         </a>
 
-        <nav className="hidden items-center gap-1 rounded-full border border-gray-100 dark:border-gray-800 bg-gray-50/90 dark:bg-gray-900/90 p-1.5 lg:flex shadow-xs">
+        <nav className="hidden items-center gap-1 rounded-full border border-gray-100 dark:border-gray-800 bg-gray-50/90 dark:bg-gray-900/90 p-1.5 lg:flex shadow-2xs">
           {NAV_LINKS.map((link) => {
             const Icon = link.icon;
             const styles = NAV_COLOR_STYLES[link.color];
@@ -473,7 +473,7 @@ function Navbar({ darkMode, toggleDarkMode }) {
             onClick={toggleDarkMode}
             aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
             title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition shadow-xs">
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition shadow-2xs">
             {darkMode ? <Sun size={17} className="text-amber-400" /> : <Moon size={17} className="text-gray-600" />}
           </button>
 
@@ -482,7 +482,7 @@ function Navbar({ darkMode, toggleDarkMode }) {
             Opility <LinkOut size={12} />
           </a>
           <a href="#contact"
-            className="whitespace-nowrap rounded-full bg-blue-600 px-4 py-2 text-xs sm:text-sm font-semibold text-white transition hover:bg-blue-700 shadow-sm">
+            className="whitespace-nowrap rounded-full bg-blue-600 px-4 py-2 text-xs sm:text-sm font-semibold text-white transition hover:bg-blue-700 shadow-xs">
             Get in touch
           </a>
         </div>
@@ -542,7 +542,7 @@ function Hero() {
 
       <div className="relative z-10 mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-20 text-center">
         <Reveal className="mb-4 flex justify-center">
-          <span className="rounded-full bg-blue-50 dark:bg-blue-950/60 px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-900/60 shadow-xs">
+          <span className="rounded-full bg-blue-50 dark:bg-blue-950/60 px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-900/60 shadow-2xs">
             AI AUTOMATION • SAAS IMPLEMENTATION • QA/UAT
           </span>
         </Reveal>
@@ -561,23 +561,23 @@ function Hero() {
 
         <Reveal className="flex flex-wrap items-center justify-center gap-2 mb-8">
           {["Zapier", "No-Code/Low-Code", "HubSpot", "Workflow Automation", "SaaS Implementation", "QA/UAT"].map(skill => (
-            <span key={skill} className="rounded-full bg-gray-50 dark:bg-gray-800/80 px-3 py-1 text-xs font-semibold text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 shadow-xs">
+            <span key={skill} className="rounded-full bg-gray-50 dark:bg-gray-800/80 px-3 py-1 text-xs font-semibold text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 shadow-2xs">
               {skill}
             </span>
           ))}
         </Reveal>
 
         {/* Workflow Architecture Diagram */}
-        <Reveal className="mx-auto max-w-3xl mb-8 rounded-2xl border border-gray-200 dark:border-gray-800 bg-gray-50/80 dark:bg-gray-900/60 p-5 sm:p-6 shadow-xs">
+        <Reveal className="mx-auto max-w-3xl mb-8 rounded-2xl border border-gray-200 dark:border-gray-800 bg-gray-50/80 dark:bg-gray-900/60 p-5 sm:p-6 shadow-2xs">
           <p className="text-[11px] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-5 text-center">
             Workflow Architecture &amp; Execution Framework
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 sm:gap-2 items-center">
             {/* Step 1 */}
-            <div className="flex flex-col items-center p-3 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-xs w-full">
+            <div className="flex flex-col items-center p-3 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-2xs w-full">
               <span className="text-[11px] font-bold uppercase text-gray-400 dark:text-gray-500">Trigger</span>
               <span className="text-sm font-extrabold text-gray-900 dark:text-white mt-1">INPUT</span>
-              <span className="text-[10px] font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded mt-2">CAPTURE</span>
+              <span className="text-[10px] font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded-sm mt-2">CAPTURE</span>
             </div>
 
             <div className="hidden sm:flex justify-center text-blue-400">
@@ -585,10 +585,10 @@ function Hero() {
             </div>
 
             {/* Step 2 */}
-            <div className="flex flex-col items-center p-3 rounded-xl bg-white dark:bg-gray-800 border border-blue-200 dark:border-blue-900/80 shadow-xs w-full">
+            <div className="flex flex-col items-center p-3 rounded-xl bg-white dark:bg-gray-800 border border-blue-200 dark:border-blue-900/80 shadow-2xs w-full">
               <span className="text-[11px] font-bold uppercase text-gray-400 dark:text-gray-500">Processing</span>
               <span className="text-sm font-extrabold text-blue-700 dark:text-blue-400 mt-1">AI / LOGIC</span>
-              <span className="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded mt-2">VALIDATE &amp; ROUTE</span>
+              <span className="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-sm mt-2">VALIDATE &amp; ROUTE</span>
             </div>
 
             <div className="hidden sm:flex justify-center text-blue-400">
@@ -596,10 +596,10 @@ function Hero() {
             </div>
 
             {/* Step 3 */}
-            <div className="flex flex-col items-center p-3 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-xs w-full">
+            <div className="flex flex-col items-center p-3 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-2xs w-full">
               <span className="text-[11px] font-bold uppercase text-gray-400 dark:text-gray-500">Execution</span>
               <span className="text-sm font-extrabold text-gray-900 dark:text-white mt-1">CRM / SaaS</span>
-              <span className="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-2 py-0.5 rounded mt-2">ACTION &amp; MONITOR</span>
+              <span className="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-2 py-0.5 rounded-sm mt-2">ACTION &amp; MONITOR</span>
             </div>
           </div>
 
@@ -646,7 +646,7 @@ function TrustBar() {
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8">
           {tools.map((t) => (
-            <span key={t} className="rounded-lg bg-white dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700/80 px-3 py-1 text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300 shadow-xs">
+            <span key={t} className="rounded-lg bg-white dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700/80 px-3 py-1 text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300 shadow-2xs">
               {t}
             </span>
           ))}
@@ -666,7 +666,7 @@ function Pillars() {
           {PILLARS.map((pillar) => {
             const styles = PILLAR_STYLES[pillar.color] || PILLAR_STYLES.blue;
             return (
-              <div key={pillar.title} className={`tilt-card flex flex-col rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900/70 p-7 shadow-sm ${styles.border}`}>
+              <div key={pillar.title} className={`tilt-card flex flex-col rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900/70 p-7 shadow-xs ${styles.border}`}>
                 <span className={`inline-block self-start rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest mb-4 ${styles.badge}`}>
                   {pillar.label}
                 </span>
@@ -703,9 +703,9 @@ function FeaturedProjects() {
         <SectionHeading eyebrow="Projects" title="Featured Automation Projects" color="amber" 
           description="Production and prototype workflows engineered with conditional routing, data extraction, and CRM actions." />
         
-        <Reveal className="mb-10 -mt-2 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-blue-200/90 dark:border-blue-900/60 bg-gradient-to-r from-blue-50/80 via-indigo-50/40 to-white dark:from-blue-950/40 dark:via-indigo-950/20 dark:to-gray-900 p-5 shadow-xs">
+        <Reveal className="mb-10 -mt-2 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-blue-200/90 dark:border-blue-900/60 bg-linear-to-r from-blue-50/80 via-indigo-50/40 to-white dark:from-blue-950/40 dark:via-indigo-950/20 dark:to-gray-900 p-5 shadow-2xs">
           <div className="flex items-center gap-3.5">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white shadow-sm">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white shadow-xs">
               <Workflow size={20} />
             </div>
             <div>
@@ -715,14 +715,14 @@ function FeaturedProjects() {
           </div>
           <a href="https://mcp.apify.com/?tools=actors,docs,opility/shopify-store-lead-extractor-emails-catalog-size-apps,opility/b2b-leads-scraper-1-5-1k-leads-emails-phones"
             target="_blank" rel="noreferrer"
-            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white dark:bg-gray-800 border border-blue-200 dark:border-blue-700/80 px-4 py-2 text-xs font-bold text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition shadow-xs">
+            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white dark:bg-gray-800 border border-blue-200 dark:border-blue-700/80 px-4 py-2 text-xs font-bold text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition shadow-2xs">
             Connect via Apify MCP <ExternalLink size={13} />
           </a>
         </Reveal>
 
         <div className="grid gap-8 md:grid-cols-1 mb-14">
           {FEATURED_PROJECTS.map((project) => (
-            <div key={project.title} className="tilt-card rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-6 sm:p-8 shadow-sm">
+            <div key={project.title} className="tilt-card rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-6 sm:p-8 shadow-xs">
               <div className="flex items-center justify-between gap-3 mb-3">
                 <span className="inline-block rounded-full bg-amber-50 dark:bg-amber-950/60 px-3 py-1 text-xs font-bold uppercase tracking-widest text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800/80">
                   {project.tag}
@@ -737,7 +737,7 @@ function FeaturedProjects() {
                 <div className="flex items-center gap-2 min-w-max">
                   {project.architecture.map((node, i) => (
                     <div key={i} className="flex items-center gap-2">
-                      <span className="px-3 py-1.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-xs sm:text-sm font-semibold text-gray-800 dark:text-gray-200 shadow-sm">
+                      <span className="px-3 py-1.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-xs sm:text-sm font-semibold text-gray-800 dark:text-gray-200 shadow-xs">
                         {node}
                       </span>
                       {i < project.architecture.length - 1 && <ArrowRight size={14} className="text-gray-400 shrink-0" />}
@@ -759,7 +759,7 @@ function FeaturedProjects() {
                   <a key={link.label} href={link.href} target="_blank" rel="noreferrer"
                     className={`inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold transition ${
                       link.type === 'site' 
-                        ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-sm' 
+                        ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-xs'
                         : 'border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-900 dark:hover:text-white bg-white dark:bg-gray-800/80'
                     }`}>
                     {link.type === "code" || link.icon === "github" ? (
@@ -782,7 +782,7 @@ function FeaturedProjects() {
           <h3 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-6">Earlier Technical Projects</h3>
           <div className="grid gap-6 md:grid-cols-2">
             {EARLIER_PROJECTS.map((project) => (
-              <div key={project.title} className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-6 shadow-sm flex flex-col justify-between">
+              <div key={project.title} className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-6 shadow-xs flex flex-col justify-between">
                 <div>
                   <span className="text-[11px] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-2 block">{project.tag}</span>
                   <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{project.title}</h4>
@@ -828,8 +828,8 @@ function AutomationApproach() {
             const Icon = p.icon;
             return (
               <Reveal key={p.step} className="relative" style={{ transitionDelay: `${i * 0.08}s` }}>
-                <div className="tilt-card relative z-10 rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900/70 p-6 text-center shadow-sm">
-                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 text-white shadow-lg shadow-sky-600/20">
+                <div className="tilt-card relative z-10 rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900/70 p-6 text-center shadow-xs">
+                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br from-sky-500 to-blue-600 text-white shadow-lg shadow-sky-600/20">
                     <Icon size={24} />
                   </div>
                   <p className="mt-4 text-xs font-bold uppercase tracking-widest text-sky-600 dark:text-sky-400">Step {p.step}</p>
@@ -852,7 +852,7 @@ function Experience() {
         <SectionHeading eyebrow="Experience" title="Professional Experience" color="cyan" />
         <div className="space-y-8">
           {EXPERIENCES.map((exp) => (
-            <div key={exp.company} className="tilt-card rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-8 shadow-sm">
+            <div key={exp.company} className="tilt-card rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-8 shadow-xs">
               <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
                 <div>
                   <h3 className="text-2xl font-extrabold text-gray-900 dark:text-white">{exp.company}</h3>
@@ -901,10 +901,10 @@ function Experience() {
               )}
 
               {exp.endorsement && (
-                <div className="mt-5 rounded-2xl border border-blue-200/80 dark:border-blue-900/60 bg-gradient-to-br from-blue-50/70 via-white to-indigo-50/30 dark:from-blue-950/40 dark:via-gray-900 dark:to-indigo-950/30 p-6 shadow-sm">
+                <div className="mt-5 rounded-2xl border border-blue-200/80 dark:border-blue-900/60 bg-linear-to-br from-blue-50/70 via-white to-indigo-50/30 dark:from-blue-950/40 dark:via-gray-900 dark:to-indigo-950/30 p-6 shadow-xs">
                   <div className="flex items-center justify-between gap-3 mb-3">
                     <div className="flex items-center gap-2">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white shadow-sm">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white shadow-xs">
                         <Quote size={16} />
                       </div>
                       <span className="text-xs font-bold uppercase tracking-wider text-blue-950 dark:text-blue-200">
@@ -956,7 +956,7 @@ function Reviews() {
         />
 
         {/* Rating summary bar */}
-        <Reveal className="mb-12 flex flex-wrap items-center justify-center gap-6 rounded-2xl border border-emerald-100 dark:border-emerald-900/50 bg-emerald-50/40 dark:bg-emerald-950/30 p-6 text-center sm:gap-10 shadow-sm">
+        <Reveal className="mb-12 flex flex-wrap items-center justify-center gap-6 rounded-2xl border border-emerald-100 dark:border-emerald-900/50 bg-emerald-50/40 dark:bg-emerald-950/30 p-6 text-center sm:gap-10 shadow-xs">
           <div className="flex items-center gap-3">
             <span className="text-4xl font-extrabold text-gray-900 dark:text-white">5.0</span>
             <div>
@@ -982,7 +982,7 @@ function Reviews() {
         {/* Reviews Grid */}
         <div className="grid gap-6 md:grid-cols-2">
           {LINKEDIN_REVIEWS.map((rev) => (
-            <div key={rev.name} className="tilt-card flex flex-col justify-between rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-8 shadow-sm">
+            <div key={rev.name} className="tilt-card flex flex-col justify-between rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-8 shadow-xs">
               <div>
                 <div className="flex items-center justify-between gap-2 mb-4">
                   <div className="flex text-amber-400">
@@ -1033,7 +1033,7 @@ function CareerJourney() {
             {CAREER_TIMELINE.map((step, i) => (
               <div key={i} className={`relative flex sm:justify-between items-center w-full ${i % 2 === 0 ? "sm:flex-row-reverse" : ""}`}>
                 <div className="hidden sm:block w-5/12"></div>
-                <div className={`absolute left-0 sm:left-1/2 h-4 w-4 rounded-full border-4 border-white dark:border-gray-900 shadow-sm -translate-x-1/2 ${step.colorClass}`}></div>
+                <div className={`absolute left-0 sm:left-1/2 h-4 w-4 rounded-full border-4 border-white dark:border-gray-900 shadow-xs -translate-x-1/2 ${step.colorClass}`}></div>
                 <div className={`w-full sm:w-5/12 ${i % 2 === 0 ? "sm:text-left ml-6 sm:ml-0" : "sm:text-right ml-6 sm:ml-0"}`}>
                   <p className="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">{step.company}</p>
                   <p className="text-base sm:text-lg font-extrabold text-gray-900 dark:text-white mt-0.5">{step.role}</p>
@@ -1060,7 +1060,7 @@ function CertificationsSection() {
         <SectionHeading eyebrow="Learning" title="Certifications &amp; Learning" color="rose" />
         
         {/* Degree */}
-        <div className="mb-10 tilt-card rounded-2xl border border-rose-200 dark:border-rose-900/60 bg-white dark:bg-gray-900/80 p-8 shadow-sm flex flex-col md:flex-row items-start gap-6">
+        <div className="mb-10 tilt-card rounded-2xl border border-rose-200 dark:border-rose-900/60 bg-white dark:bg-gray-900/80 p-8 shadow-xs flex flex-col md:flex-row items-start gap-6">
           <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400">
             <GraduationCap size={28} />
           </div>
@@ -1077,7 +1077,7 @@ function CertificationsSection() {
         {/* Certification Groups */}
         <div className="grid gap-6 md:grid-cols-2 mb-10">
           {CERTIFICATIONS.map((group) => (
-            <div key={group.group} className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-6 shadow-sm flex flex-col justify-between">
+            <div key={group.group} className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-6 shadow-xs flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100 dark:border-gray-800">
                   <h3 className="text-lg font-extrabold text-gray-900 dark:text-white">{group.group}</h3>
@@ -1111,7 +1111,7 @@ function CertificationsSection() {
                   <a href={group.highlight.href} target="_blank" rel="noreferrer"
                     className="flex items-center justify-between gap-3 p-3 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 hover:bg-blue-100/70 dark:hover:bg-blue-900/50 border border-blue-100 dark:border-blue-900 text-blue-700 dark:text-blue-300 transition group">
                     <div className="flex items-center gap-2.5 min-w-0">
-                      <div className="h-7 w-7 rounded-lg bg-white dark:bg-gray-800 border border-blue-200 dark:border-blue-700 flex items-center justify-center shrink-0 shadow-xs">
+                      <div className="h-7 w-7 rounded-lg bg-white dark:bg-gray-800 border border-blue-200 dark:border-blue-700 flex items-center justify-center shrink-0 shadow-2xs">
                         <Linkedin size={15} className="text-[#0A66C2]" />
                       </div>
                       <div className="min-w-0">
@@ -1128,7 +1128,7 @@ function CertificationsSection() {
         </div>
 
         {/* Languages */}
-        <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-6 shadow-sm">
+        <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-6 shadow-xs">
           <h3 className="text-lg font-extrabold text-gray-900 dark:text-white mb-4">Languages</h3>
           <div className="flex flex-wrap gap-4">
             {[
@@ -1162,7 +1162,7 @@ function Skills() {
                 <h3 className="text-base font-extrabold text-gray-900 dark:text-white mb-4">{group.label}</h3>
                 <div className="flex flex-wrap gap-2">
                   {group.skills.map((skill) => (
-                    <span key={skill} className="rounded-md bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-2.5 py-1 text-xs font-semibold text-gray-700 dark:text-gray-300 shadow-sm">
+                    <span key={skill} className="rounded-md bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-2.5 py-1 text-xs font-semibold text-gray-700 dark:text-gray-300 shadow-xs">
                       {skill}
                     </span>
                   ))}
@@ -1194,11 +1194,11 @@ function Contact() {
               Contact Me
             </a>
             <a href="https://linkedin.com/in/naveensharmatech" target="_blank" rel="noreferrer"
-              className="rounded-full border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-7 py-3 text-base font-bold text-gray-700 dark:text-gray-200 transition hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400 shadow-sm">
+              className="rounded-full border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-7 py-3 text-base font-bold text-gray-700 dark:text-gray-200 transition hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400 shadow-xs">
               LinkedIn
             </a>
             <a href="https://github.com/naveensharmatech" target="_blank" rel="noreferrer"
-              className="rounded-full border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-7 py-3 text-base font-bold text-gray-700 dark:text-gray-200 transition hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400 shadow-sm">
+              className="rounded-full border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-7 py-3 text-base font-bold text-gray-700 dark:text-gray-200 transition hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400 shadow-xs">
               GitHub
             </a>
           </div>
@@ -1209,7 +1209,7 @@ function Contact() {
               { href: "tel:+972587896289",                              icon: Phone,    label: "Phone",    text: "058-789-6289",                      external: false, link: true,  color: "emerald" },
               { href: null,                                             icon: MapPin,   label: "Location", text: "Be'er Sheva, Israel",              external: false, link: false, color: "rose"    },
             ].map(({ href, icon: Icon, label, text, external, link, color }) => {
-              const classes = "tilt-card flex flex-col items-center gap-2 rounded-xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-5 hover:border-gray-200 dark:hover:border-gray-700 text-center shadow-sm";
+              const classes = "tilt-card flex flex-col items-center gap-2 rounded-xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-5 hover:border-gray-200 dark:hover:border-gray-700 text-center shadow-xs";
               const iconBg = {
                 indigo: "bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400",
                 emerald: "bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400",
@@ -1335,7 +1335,7 @@ function LegalModal({ doc, onClose }) {
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
       onClick={onClose}>
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-xs" />
       <div className="relative bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 w-full sm:max-w-2xl sm:rounded-2xl shadow-2xl max-h-[90vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800">
@@ -1393,7 +1393,7 @@ function Footer() {
                   rel={href.startsWith("http") ? "noreferrer" : undefined}
                   aria-label={label}
                   style={{ backgroundColor: bg }}
-                  className="flex h-9 w-9 items-center justify-center rounded-full text-white transition opacity-90 hover:opacity-100 hover:scale-110 shadow-sm">
+                  className="flex h-9 w-9 items-center justify-center rounded-full text-white transition opacity-90 hover:opacity-100 hover:scale-110 shadow-xs">
                   <Icon size={16} />
                 </a>
               ))}
@@ -1428,7 +1428,7 @@ function FAQ() {
           description="Common questions regarding my automation expertise, implementation experience, and availability." />
         <div className="mx-auto max-w-3xl space-y-3">
           {FAQS.map((item, i) => (
-            <div key={i} className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 overflow-hidden shadow-sm">
+            <div key={i} className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 overflow-hidden shadow-xs">
               <button
                 onClick={() => setOpen(open === i ? null : i)}
                 className="flex w-full items-center justify-between px-6 py-5 text-left transition hover:bg-gray-50 dark:hover:bg-gray-800/50"
@@ -1593,7 +1593,7 @@ function EllaChat() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && send()}
                 placeholder="Ask me anything…"
-                className="flex-1 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-2 text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-50 dark:focus:ring-blue-950"
+                className="flex-1 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-2 text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 outline-hidden focus:border-blue-400 focus:ring-2 focus:ring-blue-50 dark:focus:ring-blue-950"
               />
               <button
                 onClick={() => send()}

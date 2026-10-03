@@ -28,7 +28,7 @@ Navigation is anchor-based (`#about`, `#expertise`, etc.) — no client-side rou
 
 ## Styling
 
-Pure Tailwind CSS utility classes throughout. No custom component classes or CSS modules. The only custom CSS is in `src/index.css`: smooth scroll and system font stack.
+Tailwind CSS 4 runs through `@tailwindcss/postcss`. Sources and class-based dark mode are configured in `src/index.css`, alongside custom styles. There is no `tailwind.config.js`; Autoprefixer is not needed.
 
 Icons come exclusively from `lucide-react`.
 
