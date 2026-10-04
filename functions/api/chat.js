@@ -81,7 +81,24 @@ export async function onRequestPost({ request, env }) {
       if (response.ok) {
         const data = await response.json();
         const reply = data.choices?.[0]?.message?.content;
-        if (typeof reply === 'string' && reply.trim()) return json({ reply, mode: 'ai', model: 'openai/gpt-oss-20b' });
+        if (typeof reply === 'string' && reply.trim()) {
+          let answer = reply;
+          // Built-in search sometimes emits opaque citation IDs instead of URLs.
+          // Add a known official entry point, clearly labeled, rather than inventing a source.
+          if (needsSearch && !/https?:\/\//.test(answer)) {
+            const official = [
+              [/make/i, 'https://academy.make.com/'],
+              [/zapier/i, 'https://learn.zapier.com/'],
+              [/n8n/i, 'https://docs.n8n.io/learning-paths'],
+              [/openai/i, 'https://academy.openai.com/'],
+              [/hubspot/i, 'https://academy.hubspot.com/'],
+              [/microsoft/i, 'https://learn.microsoft.com/training/'],
+              [/salesforce|trailhead/i, 'https://trailhead.salesforce.com/']
+            ].filter(([pattern]) => pattern.test(question)).map(([,url]) => url);
+            if (official.length) answer += '\n\nOfficial resource: ' + official.join(' · ');
+          }
+          return json({ reply: answer, mode: 'ai', model: 'openai/gpt-oss-20b' });
+        }
         failure = 'empty_ai_response';
       } else {
         failure = response.status === 401 ? 'invalid_api_key' : response.status === 403 ? 'provider_access_denied' : response.status === 429 ? 'provider_rate_limit' : 'provider_http_' + response.status;
