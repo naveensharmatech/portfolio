@@ -201,13 +201,11 @@ const projects = [
 ];
 
 const capabilities = [
-  { icon: Workflow, title: "SaaS implementation", text: "Configure forms, workflows, integrations, and data mappings around real operating requirements." },
-  { icon: FileCheck2, title: "QA & UAT", text: "Check workflow behavior, validate outputs, document acceptance scenarios, and communicate issues clearly." },
-  { icon: Bot, title: "Workflow automation", text: "Connect business tools with practical automations using platforms such as Zapier, Make, and n8n." },
-  { icon: Code2, title: "Technical operations", text: "Document systems, validate APIs, troubleshoot issues, and make handoffs easier to maintain." },
-  { icon: Code2, title: "API & System Integration", text: "Connect applications and services through APIs, webhooks, and reliable data flows." },
-  { icon: Bot, title: "AI Chatbots & Assistants", text: "Build useful AI-powered assistants that answer questions and support repeatable workflows." },
-  { icon: Code2, title: "AI-Assisted Development", text: "Use AI development tools to prototype, build, and improve practical software solutions." },
+  { icon: Bot, title: "AI & workflow automation", text: "Build practical automations and assistants that connect business processes.", source: "Projects & practical builds", skills: ["AI Automation","Workflow Automation","AI Agents","No-Code Development"] },
+  { icon: Workflow, title: "SaaS implementation & integration", text: "Configure intake workflows, map fields, and connect systems around agency requirements.", source: "Bolt Healthcare", skills: ["SaaS Implementation","System Configuration","Data Mapping & Schema Design","REST APIs"] },
+  { icon: FileCheck2, title: "Workflow QA & validation", text: "Test forms, dropdowns, mappings, and document outputs; track defects before handoff.", source: "Bolt Healthcare & QA learning", skills: ["Quality Assurance (QA/UAT)","Functional Testing","Regression Testing","Defect Management"] },
+  { icon: Code2, title: "Technical operations & quality", text: "Manage institute operations and lab systems, and follow production quality procedures.", source: "Shivam Institute & Vishay", skills: ["IT Operations","Operations Management","Quality Control","Standard Operating Procedure (SOP)"] },
+  { icon: FileCheck2, title: "Administration & governance", text: "Apply concepts studied across Zapier Academy’s administration, security, and MCP courses.", source: "Completed Zapier Academy learning", skills: ["Zapier Administration","Monitoring and Alerting","AI Governance","Model Context Protocol (MCP)"] },
 ];
 
 export default function App() {
@@ -317,7 +315,7 @@ export default function App() {
         </section>
 
         <section id="capabilities" className="bg-[#172321] py-24 text-white md:py-28">
-          <div className="mx-auto max-w-7xl px-5 md:px-10"><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#c5f16b]">Capabilities</p><div className="mt-5 grid gap-12 md:grid-cols-[.65fr_1.35fr]"><h2 className="text-4xl font-semibold tracking-[-.04em]">Practical systems.<br/>Clear outcomes.</h2><div className="grid gap-x-10 gap-y-9 sm:grid-cols-2">{capabilities.map(({icon: Icon,title,text}) => <article key={title} className="border-t border-white/20 pt-5"><Icon className="text-[#c5f16b]" size={22}/><h3 className="mt-4 text-lg font-semibold">{title}</h3><p className="mt-2 text-sm leading-6 text-white/65">{text}</p></article>)}</div></div></div>
+          <div className="mx-auto max-w-7xl px-5 md:px-10"><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#c5f16b]">Capabilities</p><div className="mt-5 grid gap-12 md:grid-cols-[.65fr_1.35fr]"><h2 className="text-4xl font-semibold tracking-[-.04em]">Practical systems.<br/>Clear outcomes.</h2><div className="grid gap-x-10 gap-y-9 sm:grid-cols-2">{capabilities.map(({icon: Icon,title,text,source,skills}) => <article key={title} className="border-t border-white/20 pt-5"><Icon className="text-[#c5f16b]" size={22}/><h3 className="mt-4 text-lg font-semibold">{title}</h3><p className="mt-2 text-sm leading-6 text-white/65">{text}</p><ul className="mt-4 flex flex-wrap gap-2" aria-label={`${title} skills`}>{skills.map(skill => <li key={skill} className="rounded-full border border-white/20 px-3 py-1.5 text-xs leading-5 text-white/90">{skill}</li>)}</ul><p className="mt-4 text-xs leading-5 text-[#c5f16b]">{source}</p></article>)}</div></div></div>
           <div className="mx-auto max-w-7xl px-5 md:px-10"><Approach /></div>
         </section>
 
