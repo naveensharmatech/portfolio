@@ -181,7 +181,7 @@ export default function App() {
           <aside className="relative overflow-hidden rounded-[2rem] bg-[#dfe8dd] p-8 md:p-10">
             <div className="absolute -right-10 -top-10 h-48 w-48 rounded-full border border-[#172321]/10"/><div className="absolute -right-2 -top-2 h-32 w-32 rounded-full border border-[#172321]/10"/>
             <div className="relative">
-              <div className="mb-10 flex items-center gap-4"><img src="/headshot-round.png" alt="Naveen Sharma" className="h-16 w-16 rounded-full object-cover"/><div><p className="font-semibold">Naveen Sharma</p><p className="mt-1 text-sm text-[#52615c]">Implementation Specialist</p></div></div>
+              <div className="mb-10 flex items-center gap-4"><img src="/headshot-round.png?v=ed0db4cb" alt="Naveen Sharma" className="h-16 w-16 rounded-full object-cover"/><div><p className="font-semibold">Naveen Sharma</p><p className="mt-1 text-sm text-[#52615c]">Implementation Specialist</p></div></div>
               <p className="text-xs font-semibold uppercase tracking-[.2em] text-[#52615c]">How I approach the work</p>
               <ol className="mt-5 space-y-4">{["Understand the process", "Configure the system", "Test with real users", "Document the handoff"].map((item, i) => <li key={item} className="flex items-center gap-3 border-b border-[#172321]/10 pb-4 text-sm"><span className="grid h-7 w-7 place-items-center rounded-full bg-[#c5f16b] text-xs font-bold">0{i+1}</span>{item}</li>)}</ol>
               <a href="https://opility.com" target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold">Business services at Opility <ArrowUpRight size={15}/></a>
