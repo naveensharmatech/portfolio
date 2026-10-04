@@ -281,7 +281,7 @@
           <div style="padding:0 24px 8px"><button class="btn btn-green" id="submitBtn" disabled style="opacity:.5">Save demo result ↦</button></div>
           <div class="success" id="successBox">
             <h4>✓ Demo result saved</h4>
-            <p style="font-size:14px;color:var(--gray-700)">Local sample result — reference <code id="subId">—</code>. Your entered values and saved signature are included in the preview below. No external submission is made.</p>
+            <p style="font-size:14px;color:var(--gray-700)">Local sample result — reference <code id="subId">—</code>. Your entered values and saved signature are included in the document preview. No external submission is made.</p>
           </div>
         </div>
       </div>
@@ -543,10 +543,10 @@
       var html='<section id="mappedDocument" style="margin:24px;padding:28px;background:white;border:1px solid var(--gray-200);border-radius:14px"><h3 style="margin-bottom:20px">Completed sample intake document</h3>';
       FIELDS.filter(function(f){return f.id!=="f_sign";}).forEach(function(f){html+='<div style="padding:12px 0;border-bottom:1px solid var(--gray-100)"><b>'+escapeText(f.label)+'</b><div style="margin-top:7px;padding:8px;background:#e0f7ff;border-radius:6px">'+escapeText(v(f.id)||"—")+'</div><small class="muted">'+escapeText(f.map)+'</small></div>';});
       if(v("f_dx")==="Two Chronic Conditions")html+='<div style="padding:12px 0"><b>Chronic condition details</b><p>'+escapeText(v("f_chronic")||"—")+'</p><small class="muted">patient.chronic_condition_details</small></div>';
-      html+='<div style="padding:16px 0"><b>Applicant signature</b>'+(signed?'<div><img src="'+signatureData+'" alt="Saved sample signature" style="max-width:100%;height:100px;object-fit:contain"></div><small>'+escapeText(signatureTime)+'</small>':'<p>Not saved yet</p>')+'</div><p class="muted">Local portfolio demonstration · no agency submission</p></section><div class="actions" style="padding:0 24px 20px"><button class="btn btn-primary" id="printResult">Print / Save PDF</button><button class="btn btn-ghost" id="downloadResult">Download mapped data</button></div>';
+      html+='<div style="padding:16px 0"><b>Applicant signature</b>'+(signed?'<div><img src="'+signatureData+'" alt="Saved sample signature" style="max-width:100%;height:100px;object-fit:contain"></div><small>'+escapeText(signatureTime)+'</small>':'<p>Not saved yet</p>')+'</div><p class="muted">Local portfolio demonstration · no agency submission</p></section><div class="actions" style="padding:0 24px 20px"><button class="btn btn-primary" id="printResult">Print / Save PDF</button><button class="btn btn-ghost" id="downloadResult">View mapped data</button></div>';
       resList.insertAdjacentHTML("beforeend",html);
       document.getElementById("printResult").onclick=function(){window.print();};
-      document.getElementById("downloadResult").onclick=function(){var url=URL.createObjectURL(new Blob([JSON.stringify(mappedPacket(),null,2)],{type:"application/json"}));var a=document.createElement("a");a.href=url;a.download="mapped-intake-result.json";a.click();setTimeout(function(){URL.revokeObjectURL(url);},1000);};
+      document.getElementById("downloadResult").onclick=function(){var existing=document.getElementById("mappedDataView");if(existing)existing.remove();var box=document.createElement("div");box.id="mappedDataView";box.style.cssText="padding:20px 24px;overflow:auto;background:#f8fafc";var pre=document.createElement("pre");pre.style.cssText="white-space:pre-wrap;word-break:break-word;font-size:12px";var data=mappedPacket();if(data.signature.applicant)data.signature.applicant={captured:true,capturedAt:data.signature.applicant.capturedAt};pre.textContent=JSON.stringify(data,null,2);box.appendChild(pre);resList.appendChild(box);box.scrollIntoView({behavior:"smooth",block:"nearest"});};
       bar.style.width="0";bar.parentElement.style.display="none";
     }
 
@@ -565,7 +565,7 @@
       successBox.scrollIntoView({behavior:"smooth",block:"nearest"});
     });
 
-    document.getElementById("runTest").addEventListener("click",validate);
+    document.getElementById("runTest").addEventListener("click",function(){validate();results.scrollIntoView({behavior:"smooth",block:"start"});});
     document.getElementById("fillValid").addEventListener("click",function(){
       document.getElementById("f_first").value="Jordan";
       document.getElementById("f_last").value="Rivera";
