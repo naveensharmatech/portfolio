@@ -154,6 +154,7 @@
 
     footer{border-top:1px solid var(--gray-100);background:#fff;padding:30px 0;text-align:center;color:var(--gray-400);font-size:14px}
     .muted{color:var(--gray-400);font-size:13px}
+  @media print{body *{visibility:hidden}#mappedDocument,#mappedDocument *{visibility:visible}#mappedDocument{position:absolute;left:0;top:0;width:100%;margin:0!important;border:0!important}#mappedDocument div{break-inside:avoid}}
   </style>
 </head>
 <body>
@@ -246,7 +247,7 @@
 
             <div class="prev-field">
               <label>Applicant e-signature <span class="req">*</span> <span class="muted">— draw with your mouse or finger</span></label>
-              <div id="sigContainer">
+              <label for="typedSignature" class="muted">Or type a sample signature name</label><input id="typedSignature" class="prev-input" type="text" placeholder="Your sample signature name"><div id="sigContainer">
                 <div class="sigwrap">
                   <canvas class="sigpad" id="sigPad"></canvas>
                   <div class="sigbar">
@@ -274,13 +275,13 @@
         </div>
 
         <div id="results" style="display:none">
-          <div class="res-head"><h3>Mapping &amp; UAT test results</h3><span class="pill" id="resSummary">—</span></div>
+          <div class="res-head"><h3>Mapped document preview</h3><span class="pill" id="resSummary">—</span></div>
           <div id="resList"></div>
           <div class="progress"><span id="bar"></span></div>
-          <div style="padding:0 24px 8px"><button class="btn btn-green" id="submitBtn" disabled style="opacity:.5">Submit intake ↦</button></div>
+          <div style="padding:0 24px 8px"><button class="btn btn-green" id="submitBtn" disabled style="opacity:.5">Save demo result ↦</button></div>
           <div class="success" id="successBox">
-            <h4>✓ Intake submitted successfully</h4>
-            <p style="font-size:14px;color:var(--gray-700)">Record created — reference <code id="subId">—</code>. All fields mapped, validated, and the signed packet was routed for processing.</p>
+            <h4>✓ Demo result saved</h4>
+            <p style="font-size:14px;color:var(--gray-700)">Local sample result — reference <code id="subId">—</code>. Your entered values and saved signature are included in the preview below. No external submission is made.</p>
           </div>
         </div>
       </div>
@@ -373,7 +374,7 @@
       {id:"f_dob",t:"📅",label:"Date of birth",type:"Date",req:true,map:"patient.dob",rules:["Required","Format MM/DD/YYYY","Must be a real calendar date","Not in the future"]},
       {id:"f_email",t:"✉",label:"Email",type:"Email",req:true,map:"patient.email",rules:["Required","Valid email format"]},
       {id:"f_dx",t:"▾",label:"Diagnosis type",type:"Dropdown",req:true,map:"patient.diagnosis_type",rules:["Required · must select an option","Triggers conditional sub-field when “Two Chronic Conditions”"]},
-      {id:"f_transport",t:"▾",label:"Reliable transportation?",type:"Dropdown",req:false,map:"— (unmapped)",rules:["Optional field"]},
+      {id:"f_transport",t:"▾",label:"Reliable transportation?",type:"Dropdown",req:false,map:"patient.transportation",rules:["Optional field"]},
       {id:"f_sign",t:"✍",label:"Applicant e-signature",type:"E-signature",req:true,map:"signature.applicant",rules:["Required · must draw &amp; save","Timestamped on capture"]}
     ];
     var list=document.getElementById("fieldList");
@@ -438,26 +439,22 @@
     var sigHint=document.getElementById("sigHint"),sigContainer=document.getElementById("sigContainer");
     document.getElementById("sigClear").addEventListener("click",function(){
       ctx.clearRect(0,0,canvas.width,canvas.height);hasInk=false;signed=false;signatureData=null;
-      sigHint.textContent="Draw your signature above";
+      sigHint.textContent="Draw your signature above";document.getElementById("typedSignature").value="";
       if(tested) validate();
     });
-    document.getElementById("sigSave").addEventListener("click",function(){
-      if(!hasInk){sigHint.textContent="Please draw a signature first";return;}
-      signatureData=canvas.toDataURL();signed=true;
-      var when=new Date().toLocaleString();
-      sigContainer.innerHTML='<div class="sigsaved"><img src="'+signatureData+'" alt="signature"/>'+
-        '<div class="st">✓ Signature captured<small>Signed '+when+'</small></div>'+
-        '<button class="btn btn-ghost" id="sigRedo" type="button" style="margin-left:auto;padding:7px 12px">Re-sign</button></div>';
-      document.getElementById("sigRedo").addEventListener("click",function(){
-        signed=false;signatureData=null;hasInk=false;
-        sigContainer.innerHTML='<div class="sigwrap"><canvas class="sigpad" id="sigPad2"></canvas>'+
-          '<div class="sigbar"><span class="hint">Draw your signature above</span>'+
-          '<span style="display:flex;gap:8px"><button class="btn btn-ghost" type="button" onclick="location.reload()" style="padding:7px 12px">Reset page</button></span></div></div>';
-        location.reload();
-      });
-      var box=document.getElementById("e_f_sign");box.classList.remove("show");
+    var signatureTime=null;
+    function saveSignature(){
+      var typed=document.getElementById("typedSignature").value.trim();
+      if(!hasInk&&!typed){sigHint.textContent="Draw a signature or enter a sample name first.";return;}
+      if(typed&&!hasInk){ctx.font="italic 28px Georgia";ctx.fillText(typed,20,90);hasInk=true;}
+      signatureData=canvas.toDataURL();signed=true;signatureTime=new Date().toISOString();
+      sigHint.textContent="Signature saved. Draw again or clear to change it.";
+      document.getElementById("e_f_sign").classList.remove("show");
       if(tested) validate();
-    });
+    }
+    document.getElementById("sigSave").addEventListener("click",saveSignature);
+    canvas.addEventListener("mousedown",function(){signed=false;signatureData=null;});
+    canvas.addEventListener("touchstart",function(){signed=false;signatureData=null;},{passive:true});
 
     // ── validation engine ──
     var tested=false, errorsById={};
@@ -512,7 +509,7 @@
       var el=document.getElementById(id);
       if(el) el.addEventListener("blur",function(){ if(tested||v(id)) { checkField(id); refreshAfterField(); } });
     });
-    function refreshAfterField(){ renderList(); renderCfg(); if(tested) updateSubmit(); }
+    function refreshAfterField(){ renderList(); renderCfg(); if(tested){showResults();updateSubmit();} }
 
     var submitBtn=document.getElementById("submitBtn");
     function updateSubmit(){
@@ -531,38 +528,36 @@
     var results=document.getElementById("results"),resList=document.getElementById("resList"),
         resSummary=document.getElementById("resSummary"),bar=document.getElementById("bar"),
         successBox=document.getElementById("successBox");
-    function showResults(){
-      results.style.display="block"; successBox.classList.remove("show");
-      var keys=Object.keys(errorsById), n=keys.length;
-      resList.innerHTML="";
-      var reqTotal=(v("f_dx")==="Two Chronic Conditions")?7:6;
-      var valid=reqTotal-n;
-      if(n===0){
-        resSummary.className="pill ok"; resSummary.textContent=valid+" / "+reqTotal+" fields valid · 0 errors";
-        [["Field mapping","every field resolves to a backend target (e.g. patient.dob, patient.email)."],
-         ["Required-field validation","all required fields are present."],
-         ["Data-type validation","date is a real MM/DD/YYYY value; email format is valid."],
-         ["Conditional logic","the diagnosis rule fired correctly and its sub-field passed."],
-         ["E-signature","signature drawn, saved, and timestamped."]
-        ].forEach(function(r){addRow("ok","✓",r[0],r[1]);});
-        bar.className="pass"; bar.style.width="100%";
-      }else{
-        resSummary.className="pill bad"; resSummary.textContent=n+" error"+(n>1?"s":"")+" · "+valid+" / "+reqTotal+" fields valid";
-        var lbl={f_first:"First name",f_last:"Last name",f_dob:"Date of birth",f_email:"Email",f_dx:"Diagnosis type",f_chronic:"Chronic condition details",f_sign:"E-signature"};
-        keys.forEach(function(k){addRow("bad","✕",lbl[k]||k,errorsById[k]);});
-        addRow("warn","!","Submission blocked","Fix the errors above, then run the test again to submit.");
-        bar.className="fail"; bar.style.width=Math.round(valid/reqTotal*100)+"%";
-      }
-      results.scrollIntoView({behavior:"smooth",block:"nearest"});
+    function escapeText(value){return String(value==null?"":value).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+    function mappedPacket(){
+      var packet={patient:{},signature:{}};
+      FIELDS.forEach(function(f){var value=f.id==="f_sign"?(signed?{image:signatureData,capturedAt:signatureTime}:null):v(f.id);var keys=f.map.split(".");if(keys.length===2&&packet[keys[0]])packet[keys[0]][keys[1]]=value;});
+      packet.patient.chronic_condition_details=v("f_dx")==="Two Chronic Conditions"?v("f_chronic"):"";
+      return packet;
     }
+    function showResults(){
+      results.style.display="block";successBox.classList.remove("show");resList.innerHTML="";
+      var keys=Object.keys(errorsById);
+      resSummary.className="pill "+(keys.length?"wait":"map");resSummary.textContent=keys.length?"Draft · review missing or invalid fields":"Populated preview · ready to review";
+      keys.forEach(function(k){addRow("warn","!",(FIELDS.find(function(f){return f.id===k;})||{label:"Chronic condition details"}).label,errorsById[k]);});
+      var html='<section id="mappedDocument" style="margin:24px;padding:28px;background:white;border:1px solid var(--gray-200);border-radius:14px"><h3 style="margin-bottom:20px">Completed sample intake document</h3>';
+      FIELDS.filter(function(f){return f.id!=="f_sign";}).forEach(function(f){html+='<div style="padding:12px 0;border-bottom:1px solid var(--gray-100)"><b>'+escapeText(f.label)+'</b><div style="margin-top:7px;padding:8px;background:#e0f7ff;border-radius:6px">'+escapeText(v(f.id)||"—")+'</div><small class="muted">'+escapeText(f.map)+'</small></div>';});
+      if(v("f_dx")==="Two Chronic Conditions")html+='<div style="padding:12px 0"><b>Chronic condition details</b><p>'+escapeText(v("f_chronic")||"—")+'</p><small class="muted">patient.chronic_condition_details</small></div>';
+      html+='<div style="padding:16px 0"><b>Applicant signature</b>'+(signed?'<div><img src="'+signatureData+'" alt="Saved sample signature" style="max-width:100%;height:100px;object-fit:contain"></div><small>'+escapeText(signatureTime)+'</small>':'<p>Not saved yet</p>')+'</div><p class="muted">Local portfolio demonstration · no agency submission</p></section><div class="actions" style="padding:0 24px 20px"><button class="btn btn-primary" id="printResult">Print / Save PDF</button><button class="btn btn-ghost" id="downloadResult">Download mapped data</button></div>';
+      resList.insertAdjacentHTML("beforeend",html);
+      document.getElementById("printResult").onclick=function(){window.print();};
+      document.getElementById("downloadResult").onclick=function(){var url=URL.createObjectURL(new Blob([JSON.stringify(mappedPacket(),null,2)],{type:"application/json"}));var a=document.createElement("a");a.href=url;a.download="mapped-intake-result.json";a.click();setTimeout(function(){URL.revokeObjectURL(url);},1000);};
+      bar.style.width="0";bar.parentElement.style.display="none";
+    }
+
     function addRow(cls,ic,title,text){
       var d=document.createElement("div");d.className="res-row "+cls;
-      d.innerHTML='<span class="ic">'+ic+'</span><span class="rt"><b>'+title+'</b> — '+text+'</span>';
+      d.innerHTML='<span class="ic">'+ic+'</span><span class="rt"><b>'+escapeText(title)+'</b> — '+escapeText(text)+'</span>';
       resList.appendChild(d);
     }
 
     submitBtn.addEventListener("click",function(){
-      if(Object.keys(errorsById).length!==0) return;
+      validate();if(Object.keys(errorsById).length!==0) return;
       var id="INT-"+Date.now().toString(36).toUpperCase().slice(-6);
       document.getElementById("subId").textContent=id;
       successBox.classList.add("show");
@@ -586,6 +581,11 @@
     });
     document.getElementById("resetForm").addEventListener("click",function(){location.reload();});
 
+    ["f_first","f_last","f_dob","f_email","f_dx","f_chronic","f_transport"].forEach(function(id){
+      var input=document.getElementById(id);input.addEventListener("input",function(){if(tested)validate();});
+      var label=input.parentElement.querySelector("label");if(label)label.setAttribute("for",id);
+    });
+    document.getElementById("typedSignature").addEventListener("input",function(){signed=false;signatureData=null;hasInk=false;ctx.clearRect(0,0,canvas.width,canvas.height);if(tested)validate();});
     // init
     renderList(); renderCfg(); setTimeout(sizeCanvas,40);
     window.addEventListener("resize",function(){ if(document.getElementById("view-builder").classList.contains("active")) sizeCanvas(); });
