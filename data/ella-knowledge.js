@@ -1,6 +1,39 @@
 // Public site knowledge snapshot, 4 October 2026. Refresh when site facts change.
 export const ELLA_IDENTITY = "Naveen Sharma’s Personal Assistant";
 export const ELLA_KNOWLEDGE = [
+{
+  "keywords": [
+    "story",
+    "background",
+    "passion",
+    "engineer",
+    "engineering",
+    "dream",
+    "about",
+    "why",
+    "curiosity"
+  ],
+  "text": "Naveen has long wanted to become an engineer: to understand technology, solve problems and build useful things. His passion predates AI; in 2012 he opened a S.I.V.T. computer-training franchise centre and managed its operations and technical needs. Traditional programming was not the route that suited him; no-code tools and AI assistance now give him a practical way to pursue his engineering ambition. He contributes ideas, requirements, design choices, configuration, troubleshooting and persistence; AI assists with code. Do not imply an engineering degree or independent expert programming. People around him call him mini Google because he enjoys researching and finding answers. Opility represents a new chapter in creating his own venture. Public story: https://naveensharma.net/#about"
+},
+{
+  "keywords": [
+    "building",
+    "builder",
+    "whatsapp",
+    "agent",
+    "agents",
+    "apps",
+    "website",
+    "ai",
+    "learning",
+    "make",
+    "n8n",
+    "salesforce",
+    "airtable",
+    "postman"
+  ],
+  "text": "Naveen builds with no-code tools and AI assistance. His portfolio and Opility websites were created with help from Claude, ChatGPT/Codex and Gemini, with Antigravity used later. He is learning WhatsApp chatbot building and expanding agent/app development through experiments. He has developed Zapier skills and is growing capabilities with Make, n8n, HubSpot, Salesforce, Airtable and Postman. Ongoing learning includes Microsoft Learn, Google Skills, OpenAI Academy, Anthropic Academy and other listed platforms. Some experiments are unfinished; do not invent working deployments or label every listed platform expert-level. Courses remain in Qualifications; the About story focuses on practical skills, engineering ambition and projects."
+},
   {
     "keywords": [
       "who",

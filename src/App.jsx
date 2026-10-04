@@ -263,25 +263,23 @@ export default function App() {
       </header>
 
       <main id="top">
-        <section className="mx-auto grid max-w-7xl gap-14 px-5 pb-24 pt-20 md:grid-cols-[1.2fr_.8fr] md:items-end md:px-10 md:pb-32 md:pt-28">
-          <div>
-            <p className="mb-7 flex items-center gap-3 text-xs font-semibold uppercase tracking-[.22em] text-[#52615c]"><span className="h-px w-8 bg-[#52615c]"/> SaaS implementation · QA · automation</p>
-            <h1 className="max-w-4xl text-5xl font-semibold leading-[1.04] tracking-[-.055em] sm:text-6xl lg:text-8xl">I make complex workflows <span className="underline decoration-[#a7d94f] decoration-[8px] underline-offset-[8px]">work better.</span></h1>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-[#52615c]">I’m Naveen, a SaaS implementation specialist focused on configuring business systems, validating workflows, and connecting tools so teams can use them with confidence.</p>
+        <section aria-labelledby="hero-title" className="mx-auto grid max-w-7xl gap-10 px-5 pb-20 pt-14 md:px-10 md:py-24 lg:grid-cols-[1.15fr_.85fr] lg:items-center lg:gap-14">
+          <div className="min-w-0">
+            <p className="mb-7 max-w-2xl text-sm font-semibold leading-6 text-[#52615c]">AI Automation &amp; Integration Engineer <span aria-hidden="true">|</span> SaaS Implementation Specialist <span aria-hidden="true">|</span> Workflow Automation</p>
+            <h1 id="hero-title" className="max-w-3xl text-5xl font-semibold leading-[1.06] tracking-[-.055em] sm:text-6xl lg:text-7xl">Turning curiosity into <span className="underline decoration-[#a7d94f] decoration-[6px] underline-offset-[8px]">practical AI solutions.</span></h1>
+            <p className="mt-8 max-w-2xl text-lg leading-8 text-[#52615c]">I’m Naveen—a lifelong technology enthusiast building with no-code tools and AI assistance. I combine SaaS implementation and technical problem-solving experience with hands-on projects in automation, assistants and websites, while expanding into AI agents and apps.</p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <a href="#projects" className="rounded-full bg-[#172321] px-6 py-4 text-sm font-semibold text-white hover:bg-[#30443e]">Explore selected work <ArrowDown className="ml-2 inline" size={16}/></a>
-              <a href="mailto:contact@naveensharma.net" className="rounded-full border border-[#172321]/20 px-6 py-4 text-sm font-semibold hover:bg-white">Contact me <ArrowUpRight className="ml-2 inline" size={16}/></a>
+              <a href="#projects" className="rounded-full bg-[#172321] px-6 py-4 text-sm font-semibold text-white hover:bg-[#30443e]">Explore my work <ArrowDown className="ml-2 inline" size={16}/></a>
+              <a href="mailto:contact@naveensharma.net" className="rounded-full border border-[#172321]/20 px-6 py-4 text-sm font-semibold hover:bg-white">Let’s connect <ArrowUpRight className="ml-2 inline" size={16}/></a>
             </div>
           </div>
-          <aside className="relative overflow-hidden rounded-[2rem] bg-[#dfe8dd] p-8 md:p-10">
-            <div className="absolute -right-10 -top-10 h-48 w-48 rounded-full border border-[#172321]/10"/><div className="absolute -right-2 -top-2 h-32 w-32 rounded-full border border-[#172321]/10"/>
-            <div className="relative">
-              <div className="mb-10 flex items-center gap-4"><img src="/profile-canva.png" alt="Naveen Sharma" className="h-16 w-16 shrink-0 rounded-full object-cover"/><div><p className="font-semibold">Naveen Sharma</p><p className="mt-2 text-sm leading-6 text-[#52615c]">AI Automation &amp; Integration Engineer | SaaS Implementation Specialist | Workflow Automation</p></div></div>
-              <p className="text-xs font-semibold uppercase tracking-[.2em] text-[#52615c]">How I approach the work</p>
-              <ol className="mt-5 space-y-4">{["Understand the process", "Configure the system", "Test with real users", "Document the handoff"].map((item, i) => <li key={item} className="flex items-center gap-3 border-b border-[#172321]/10 pb-4 text-sm"><span className="grid h-7 w-7 place-items-center rounded-full bg-[#c5f16b] text-xs font-bold">0{i+1}</span>{item}</li>)}</ol>
-              <a href="https://opility.com" target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold">Business services at Opility <ArrowUpRight size={15}/></a>
-            </div>
-          </aside>
+          <figure className="mx-auto w-full max-w-xl overflow-hidden rounded-[2rem] border border-[#172321]/10 bg-white">
+            <img src="/images/naveen-ai-builder.jpeg" alt="AI illustration of Naveen connecting an inquiry, AI processing, routing and a CRM, surrounded by workflow and SaaS tools." width="1254" height="1254" fetchPriority="high" className="aspect-square w-full object-contain"/>
+            <figcaption className="flex flex-wrap items-center justify-between gap-3 px-5 py-4">
+              <div className="flex items-center gap-3"><img src="/profile-canva.png" alt="Naveen Sharma" width="40" height="40" className="h-10 w-10 rounded-full object-cover"/><div><p className="text-sm font-semibold">Ideas. Systems. Possibilities.</p><p className="mt-1 text-xs text-[#52615c]">AI-generated illustration</p></div></div>
+              <a href="https://opility.com" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-sm font-semibold">Opility <ArrowUpRight size={15}/></a>
+            </figcaption>
+          </figure>
         </section>
 
         <section id="experience" className="border-y border-[#172321]/10 bg-white py-20">
@@ -334,7 +332,31 @@ export default function App() {
           <details className="mt-6 rounded-2xl border border-[#172321]/10 bg-white p-6"><summary className="cursor-pointer font-semibold">Zapier Academy — completed courses</summary><ul className="mt-5 grid gap-3 text-sm text-[#52615c] sm:grid-cols-2">{["Jumpstart", "Building Basic Zaps", "Building Intermediate Zaps", "Building AI Agents", "What is Zapier MCP?", "Using Zapier MCP", "Governing Zapier MCP", "Account Setup", "Monitoring and Operations", "Security and Governance"].map(course => <li key={course}>✓ {course}</li>)}</ul></details>
         </section>
 
-        <section id="about" className="mx-auto grid max-w-7xl gap-10 px-5 py-24 md:grid-cols-[.65fr_1.35fr] md:px-10 md:py-28"><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#71807b]">A little about me</p><div><h2 className="max-w-3xl text-3xl font-semibold leading-tight tracking-[-.04em] md:text-5xl">I bridge the gap between how a tool is configured and how a team actually needs to use it.</h2><p className="mt-6 max-w-3xl text-base leading-8 text-[#52615c]">My work connects SaaS implementation, AI integration, and workflow automation. I build with no-code platforms and AI assistance, bringing a practical approach to configuration and validation. I value clear requirements, reliable data, thoughtful testing, and documentation that helps the next person succeed.</p><p className="mt-4 max-w-3xl text-base leading-8 text-[#52615c]">I use Zapier, Make, n8n, and HubSpot to connect business workflows, working with REST APIs and webhooks where needed. My practical work also includes AI agents and assistants, workflow testing, and QA / UAT to check that systems behave as intended.</p><div className="mt-8 flex flex-wrap gap-3"><a href="https://www.linkedin.com/in/naveensharmatech" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white"><Linkedin size={16}/> LinkedIn</a><a href="https://github.com/naveensharmatech" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white"><Github size={16}/> GitHub</a><a href="/Naveen_Sharma_CV.pdf" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white">Résumé <ArrowUpRight size={15}/></a></div><AboutDetails /></div></section>
+        <section id="about" aria-labelledby="about-title" className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-28">
+          <p className="text-xs font-semibold uppercase tracking-[.22em] text-[#71807b]">The story behind the work</p>
+          <div className="mt-8 grid items-start gap-10 lg:grid-cols-[.75fr_1.25fr] lg:gap-16">
+            <figure className="mx-auto w-full max-w-xl overflow-hidden rounded-[2rem] border border-[#172321]/10 bg-white lg:sticky lg:top-28">
+              <img src="/images/naveen-people-and-systems.jpeg" alt="AI illustration of Naveen planning a workflow that connects a form, data mapping, integration and a usable screen." width="1254" height="1254" loading="lazy" className="aspect-square w-full object-contain"/>
+              <figcaption className="px-5 py-4"><p className="font-semibold">Make it work for people.</p><p className="mt-1 text-xs text-[#52615c]">AI-generated illustration</p></figcaption>
+            </figure>
+            <div className="min-w-0">
+              <h2 id="about-title" className="max-w-3xl text-3xl font-semibold leading-tight tracking-[-.04em] md:text-5xl">Technology has always made me curious. AI has given that curiosity a new way to build.</h2>
+              <p className="mt-6 max-w-3xl text-base leading-8 text-[#52615c]">Growing up through the transition from everyday paperwork to computers and connected tools, I saw how technology could make difficult tasks simpler. I wanted to understand it, solve problems with it and eventually create something of my own.</p>
+              <p className="mt-5 max-w-3xl text-base leading-8 text-[#52615c]">In 2012, that ambition led me to open a S.I.V.T. computer-training franchise centre. Managing the centre, its operations and technical needs gave me experience working with people, systems and the practical problems behind them. Later, my SaaS implementation work strengthened my skills in configuration, data mapping, workflow validation and troubleshooting.</p>
+              <p className="mt-5 max-w-3xl text-base leading-8 text-[#52615c]">My route into building has been through no-code platforms and AI assistance. I bring the ideas, requirements, design choices and persistence; AI tools help me turn those ideas into working projects. That approach helped me create my portfolio, develop Opility, build assistants and explore automation and data-extraction tools.</p>
+              <p className="mt-5 max-w-3xl text-base leading-8 text-[#52615c]">I’ve always wanted to become an engineer—to understand how technology works, solve problems and build something useful. Traditional programming wasn’t the path that suited me, but my interest in technology never faded. AI and no-code tools have opened a practical route for me to pursue that ambition.</p>
+              <p className="mt-5 max-w-3xl text-base leading-8 text-[#52615c]">Today, my focus is AI automation and integration engineering: understanding a process, connecting systems, configuring workflows and checking how they behave. I bring SaaS implementation and technical problem-solving experience, skills developed in Zapier, and growing capabilities with Make, n8n, HubSpot, Salesforce, Airtable and Postman. I’m expanding into WhatsApp chatbots, AI agents and apps through practical projects and continuous learning.</p>
+              <p className="mt-5 max-w-3xl text-base leading-8 text-[#52615c]">People around me call me “mini Google” because I enjoy researching, finding answers and figuring out why something isn’t working. That same curiosity drives my work: understand the problem, explore the options, build a solution and keep improving it.</p>
+              <p className="mt-5 max-w-3xl text-base leading-8 text-[#52615c]">Opility is my next chapter in creating something of my own—a venture I’m developing around practical AI, automation and digital tools. I’m looking for opportunities to bring that curiosity and problem-solving approach to a team while continuing to grow.</p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a href="https://www.linkedin.com/in/naveensharmatech" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white"><Linkedin size={16}/> LinkedIn</a>
+                <a href="https://github.com/naveensharmatech" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white"><Github size={16}/> GitHub</a>
+                <a href="/Naveen_Sharma_CV.pdf" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white">Résumé <ArrowUpRight size={15}/></a>
+              </div>
+              <AboutDetails />
+            </div>
+          </div>
+        </section>
 
         <section id="contact" className="bg-[#c5f16b] px-5 py-20 md:px-10"><div className="mx-auto flex max-w-7xl flex-col justify-between gap-8 md:flex-row md:items-end"><div><p className="text-xs font-semibold uppercase tracking-[.22em]">Next step</p><h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-[-.04em] md:text-6xl">Have a role or workflow to discuss?</h2></div><a href="mailto:contact@naveensharma.net" className="inline-flex w-fit items-center gap-3 rounded-full bg-[#172321] px-6 py-4 text-sm font-semibold text-white hover:bg-[#30443e]">Get in touch <ArrowRight size={17}/></a></div></section>
       </main>
