@@ -274,9 +274,9 @@ export default function App() {
             </div>
           </div>
           <figure className="mx-auto w-full max-w-xl overflow-hidden rounded-[2rem] border border-[#172321]/10 bg-white">
-            <img src="/images/naveen-ai-builder.jpeg" alt="AI illustration of Naveen connecting an inquiry, AI processing, routing and a CRM, surrounded by workflow and SaaS tools." width="1254" height="1254" fetchPriority="high" className="aspect-square w-full object-contain"/>
+            <img src="/images/naveen-ai-builder.jpeg" alt="Illustration of Naveen connecting an inquiry, AI processing, routing and a CRM, surrounded by workflow and SaaS tools." width="1254" height="1254" fetchPriority="high" className="aspect-square w-full object-contain"/>
             <figcaption className="flex flex-wrap items-center justify-between gap-3 px-5 py-4">
-              <div className="flex items-center gap-3"><img src="/profile-canva.png" alt="Naveen Sharma" width="40" height="40" className="h-10 w-10 rounded-full object-cover"/><div><p className="text-sm font-semibold">Ideas. Systems. Possibilities.</p><p className="mt-1 text-xs text-[#52615c]">AI-generated illustration</p></div></div>
+              <div className="flex items-center gap-3"><img src="/profile-canva.png" alt="Naveen Sharma" width="40" height="40" className="h-10 w-10 rounded-full object-cover"/><div><p className="text-sm font-semibold">Ideas. Systems. Possibilities.</p></div></div>
               <a href="https://opility.com" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-sm font-semibold">Opility <ArrowUpRight size={15}/></a>
             </figcaption>
           </figure>
@@ -336,8 +336,8 @@ export default function App() {
           <p className="text-xs font-semibold uppercase tracking-[.22em] text-[#71807b]">The story behind the work</p>
           <div className="mt-8 grid items-start gap-10 lg:grid-cols-[.75fr_1.25fr] lg:gap-16">
             <figure className="mx-auto w-full max-w-xl overflow-hidden rounded-[2rem] border border-[#172321]/10 bg-white lg:sticky lg:top-28">
-              <img src="/images/naveen-people-and-systems.jpeg" alt="AI illustration of Naveen planning a workflow that connects a form, data mapping, integration and a usable screen." width="1254" height="1254" loading="lazy" className="aspect-square w-full object-contain"/>
-              <figcaption className="px-5 py-4"><p className="font-semibold">Make it work for people.</p><p className="mt-1 text-xs text-[#52615c]">AI-generated illustration</p></figcaption>
+              <img src="/images/naveen-people-and-systems.jpeg" alt="Illustration of Naveen planning a workflow that connects a form, data mapping, integration and a usable screen." width="1254" height="1254" loading="lazy" className="aspect-square w-full object-contain"/>
+              <figcaption className="px-5 py-4"><p className="font-semibold">Make it work for people.</p></figcaption>
             </figure>
             <div className="min-w-0">
               <h2 id="about-title" className="max-w-3xl text-3xl font-semibold leading-tight tracking-[-.04em] md:text-5xl">Technology has always made me curious. AI has given that curiosity a new way to build.</h2>
