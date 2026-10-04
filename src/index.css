@@ -130,3 +130,11 @@ html.dark .tilt-card:hover {
 .workflow-connector:last-child::after {
   display: none;
 }
+
+/* Portfolio content and restored assistant accessibility. */
+[id] { scroll-margin-top: 100px; }
+:focus-visible { outline: 3px solid #526f23; outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

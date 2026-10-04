@@ -1,5 +1,7 @@
 "use client";
 
+import { RestoredContent, EllaChat, Approach, AboutDetails } from "./RestoredContent";
+
 import { useState } from "react";
 import {
   ArrowDown, ArrowRight, ArrowUpRight, Bot, ChevronDown, Code2, FileCheck2,
@@ -8,33 +10,70 @@ import {
 
 const primaryTools = [
   "Zapier", "Claude", "HubSpot", "GitHub", "Cloudflare", "Apify",
-  "Python", "Node.js", "JavaScript", "GitHub Copilot", "Google AI Studio", "Basecamp",
+  "API integration", "Webhooks", "JSON", "GitHub Copilot", "Google AI Studio", "Basecamp",
 ];
 
 const secondaryTools = [
   "Make", "n8n", "Crawlee", "BeautifulSoup", "ChatGPT", "Google Gemini",
-  "ElevenLabs", "Gmail", "Jira", "Google Workspace", "Canva", "Firebase",
+  "ElevenLabs", "Gmail", "Jira", "Google Workspace", "Canva", "Postman", "Firebase", "Python (AI-assisted)", "JavaScript (AI-assisted)", "Node.js (AI-assisted)",
 ];
 
 const qualifications = [
   {
-    category: "Education",
-    items: [{ title: "Computer Science & Technology", organization: "Formal education", status: "Completed" }],
+    "category": "Education",
+    "items": [
+      {
+        "title": "Bachelor of Computer Applications (BCA)",
+        "organization": "Amity University Online",
+        "status": "Completed"
+      }
+    ]
   },
   {
-    category: "Certifications",
-    items: [
-      { title: "Zapier Expert Certification", organization: "Zapier Academy", status: "Verified" },
-      { title: "SaaS Implementation & Automation", organization: "Professional practice", status: "Ongoing" },
-    ],
+    "category": "Certifications",
+    "items": [
+      {
+        "title": "Zapier Academy — all courses completed",
+        "organization": "AI Builder · MCP · Account Admin Essentials",
+        "status": "Completed"
+      },
+      {
+        "title": "QA qualification",
+        "organization": "Smart College",
+        "status": "Completed"
+      },
+      {
+        "title": "JSM Fundamentals with AI",
+        "organization": "Atlassian",
+        "status": "Completed"
+      }
+    ]
   },
   {
-    category: "Currently Learning",
-    items: [
-      { title: "AI Agents & Advanced Automation", organization: "Self-directed", status: "In Progress" },
-      { title: "Advanced API Integration & n8n", organization: "Self-directed", status: "In Progress" },
-    ],
-  },
+    "category": "Currently Learning",
+    "items": [
+      {
+        "title": "Make Academy · n8n Academy · HubSpot",
+        "organization": "Automation and CRM",
+        "status": "In progress"
+      },
+      {
+        "title": "OpenAI · Anthropic · Postman",
+        "organization": "AI tools and API testing",
+        "status": "In progress"
+      },
+      {
+        "title": "Airtable · Salesforce · Asana",
+        "organization": "Business platforms",
+        "status": "In progress"
+      },
+      {
+        "title": "Microsoft Learn · GitHub Learn · Google Skills · Coursera",
+        "organization": "Continuing professional development",
+        "status": "In progress"
+      }
+    ]
+  }
 ];
 
 const projects = [
@@ -66,7 +105,7 @@ const projects = [
 
 const capabilities = [
   { icon: Workflow, title: "SaaS implementation", text: "Configure forms, workflows, integrations, and data mappings around real operating requirements." },
-  { icon: FileCheck2, title: "QA & UAT", text: "Plan and execute functional checks, user acceptance testing, regression passes, and clear defect handoffs." },
+  { icon: FileCheck2, title: "QA & UAT", text: "Check workflow behavior, validate outputs, document acceptance scenarios, and communicate issues clearly." },
   { icon: Bot, title: "Workflow automation", text: "Connect business tools with practical automations using platforms such as Zapier, Make, and n8n." },
   { icon: Code2, title: "Technical operations", text: "Document systems, validate APIs, troubleshoot issues, and make handoffs easier to maintain." },
   { icon: Code2, title: "API & System Integration", text: "Connect applications and services through APIs, webhooks, and reliable data flows." },
@@ -86,6 +125,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#f6f7f4] text-[#172321] selection:bg-[#c5f16b] selection:text-[#172321]">
+      <a href="#top" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:p-4">Skip to content</a>
       <header className="sticky top-0 z-50 border-b border-[#172321]/10 bg-[#f6f7f4]/95 backdrop-blur">
         <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-5 md:px-10">
           <a href="#top" className="flex items-center gap-3" aria-label="Naveen Sharma home">
@@ -150,11 +190,15 @@ export default function App() {
         </section>
 
         <section id="experience" className="border-y border-[#172321]/10 bg-white py-20">
-          <div className="mx-auto grid max-w-7xl gap-8 px-5 md:grid-cols-[.55fr_1fr] md:px-10">
-            <div><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#71807b]">Experience</p><h2 className="mt-4 text-3xl font-semibold tracking-tight">Grounded in delivery.</h2></div>
-            <div className="grid gap-8 md:grid-cols-2">
-              <article><p className="text-sm font-semibold text-[#71807b]">Healthcare SaaS</p><h3 className="mt-2 text-xl font-semibold">Implementation Specialist</h3><p className="mt-3 leading-7 text-[#52615c]">Hands-on implementation work across system configuration, dynamic forms, workflow setup, data mapping, user acceptance testing, and technical support.</p></article>
-              <article><p className="text-sm font-semibold text-[#71807b]">Quality & operations</p><h3 className="mt-2 text-xl font-semibold">Testing, training, process support</h3><p className="mt-3 leading-7 text-[#52615c]">Earlier experience in manufacturing QA and training/operations support informs a practical, detail-oriented approach to system changes and handoffs.</p></article>
+          <div className="mx-auto max-w-7xl px-5 md:px-10">
+            <p className="text-xs font-semibold uppercase tracking-[.22em] text-[#71807b]">Experience</p>
+            <h2 className="mt-4 text-4xl font-semibold tracking-tight">Grounded in delivery.</h2>
+            <div className="mt-10 grid gap-5 lg:grid-cols-3">
+              {[
+                { company: "BOLT Healthcare", role: "SaaS implementation & workflow configuration", context: "B2B contractor · Customer Success · August 2022–May 2026", points: ["Configured dynamic intake and document workflows, field mappings, labels and conditional inputs.", "Validated generated outputs, tested workflow behavior and troubleshot configuration issues.", "Coordinated tasks and technical handoffs through Basecamp; supported colleagues with configuration work.", "Worked with API/JSON mapping and HHAeXchange-related configuration."] },
+                { company: "Vishay Intertechnology", role: "Manufacturing / technical operator", context: "Chip-resistor production · Be’er Sheva, Israel", points: ["Operated equipment in chip-resistor manufacturing.", "Built a practical foundation in following production procedures and working carefully with technical systems."] },
+                { company: "Shivam Institute of Vocational Training", role: "Franchise owner & instructor", context: "Vocational education · Dharamshala, India", points: ["Taught computer-course theory for diploma and degree modules.", "Managed classes, student coordination, fees, lab resources and day-to-day franchise operations.", "Earlier experience also includes school guest teaching, private tuition and hotel front-desk/OTA administration."] },
+              ].map(({ company, role, context, points }) => <article key={company} className="rounded-3xl border border-[#172321]/10 bg-[#f6f7f4] p-6"><p className="text-sm font-semibold text-[#71807b]">{company}</p><h3 className="mt-2 text-xl font-semibold">{role}</h3><p className="mt-3 text-xs leading-6 text-[#52615c]">{context}</p><ul className="mt-5 space-y-3">{points.map(point => <li key={point} className="border-t border-[#172321]/10 pt-3 text-sm leading-6 text-[#52615c]">{point}</li>)}</ul></article>)}
             </div>
           </div>
         </section>
@@ -174,10 +218,12 @@ export default function App() {
         <section id="projects" className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
           <div className="mb-12 flex flex-wrap items-end justify-between gap-6"><div><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#71807b]">Selected work</p><h2 className="mt-4 text-4xl font-semibold tracking-[-.04em]">Projects you can inspect.</h2></div><p className="max-w-md text-sm leading-6 text-[#52615c]">Public builds and published products. Client work is described at a high level to respect privacy.</p></div>
           <div className="grid gap-4">{projects.map(project => <article key={project.number} className="grid gap-5 rounded-3xl border border-[#172321]/10 bg-white p-6 transition hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[70px_1fr_auto] md:items-center md:p-8"><span className="text-sm font-semibold text-[#71807b]">{project.number}</span><div><p className="text-xs font-semibold uppercase tracking-[.14em] text-[#71807b]">{project.type}</p><h3 className="mt-2 text-2xl font-semibold">{project.title}</h3><p className="mt-2 max-w-2xl text-sm leading-6 text-[#52615c]">{project.description}</p><div className="mt-4 flex flex-wrap gap-2">{project.stack.map(item => <span key={item} className="rounded-full bg-[#f0f3ef] px-3 py-1 text-xs text-[#52615c]">{item}</span>)}</div></div><a href={project.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold">View project <ArrowUpRight size={16}/></a></article>)}</div>
+          <RestoredContent />
         </section>
 
         <section id="capabilities" className="bg-[#172321] py-24 text-white md:py-28">
           <div className="mx-auto max-w-7xl px-5 md:px-10"><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#c5f16b]">Capabilities</p><div className="mt-5 grid gap-12 md:grid-cols-[.65fr_1.35fr]"><h2 className="text-4xl font-semibold tracking-[-.04em]">Practical systems.<br/>Clear outcomes.</h2><div className="grid gap-x-10 gap-y-9 sm:grid-cols-2">{capabilities.map(({icon: Icon,title,text}) => <article key={title} className="border-t border-white/20 pt-5"><Icon className="text-[#c5f16b]" size={22}/><h3 className="mt-4 text-lg font-semibold">{title}</h3><p className="mt-2 text-sm leading-6 text-white/65">{text}</p></article>)}</div></div></div>
+          <div className="mx-auto max-w-7xl px-5 md:px-10"><Approach /></div>
         </section>
 
         <section id="qualifications" className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-28">
@@ -192,12 +238,14 @@ export default function App() {
               </div>)}</div>
             </article>)}
           </div>
+          <details className="mt-6 rounded-2xl border border-[#172321]/10 bg-white p-6"><summary className="cursor-pointer font-semibold">Zapier Academy — completed courses</summary><ul className="mt-5 grid gap-3 text-sm text-[#52615c] sm:grid-cols-2">{["Jumpstart", "Building Basic Zaps", "Building Intermediate Zaps", "Building AI Agents", "What is Zapier MCP?", "Using Zapier MCP", "Governing Zapier MCP", "Account Setup", "Monitoring and Operations", "Security and Governance"].map(course => <li key={course}>✓ {course}</li>)}</ul></details>
         </section>
 
-        <section id="about" className="mx-auto grid max-w-7xl gap-10 px-5 py-24 md:grid-cols-[.65fr_1.35fr] md:px-10 md:py-28"><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#71807b]">A little about me</p><div><h2 className="max-w-3xl text-3xl font-semibold leading-tight tracking-[-.04em] md:text-5xl">I bridge the gap between how a tool is configured and how a team actually needs to use it.</h2><p className="mt-6 max-w-3xl text-base leading-8 text-[#52615c]">My work sits at the intersection of SaaS implementation, quality assurance, and workflow automation. I value clear requirements, reliable data, thoughtful testing, and documentation that helps the next person succeed.</p><div className="mt-8 flex flex-wrap gap-3"><a href="https://www.linkedin.com/in/naveensharmatech" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white"><Linkedin size={16}/> LinkedIn</a><a href="https://github.com/naveensharmatech" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white"><Github size={16}/> GitHub</a><a href="/Naveen_Sharma_CV.pdf" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white">Résumé <ArrowUpRight size={15}/></a></div></div></section>
+        <section id="about" className="mx-auto grid max-w-7xl gap-10 px-5 py-24 md:grid-cols-[.65fr_1.35fr] md:px-10 md:py-28"><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#71807b]">A little about me</p><div><h2 className="max-w-3xl text-3xl font-semibold leading-tight tracking-[-.04em] md:text-5xl">I bridge the gap between how a tool is configured and how a team actually needs to use it.</h2><p className="mt-6 max-w-3xl text-base leading-8 text-[#52615c]">My work connects SaaS implementation, AI integration, and workflow automation. I build with no-code platforms and AI assistance, bringing a practical approach to configuration and validation. I value clear requirements, reliable data, thoughtful testing, and documentation that helps the next person succeed.</p><div className="mt-8 flex flex-wrap gap-3"><a href="https://www.linkedin.com/in/naveensharmatech" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white"><Linkedin size={16}/> LinkedIn</a><a href="https://github.com/naveensharmatech" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white"><Github size={16}/> GitHub</a><a href="/Naveen_Sharma_CV.pdf" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white">Résumé <ArrowUpRight size={15}/></a></div><AboutDetails /></div></section>
 
         <section id="contact" className="bg-[#c5f16b] px-5 py-20 md:px-10"><div className="mx-auto flex max-w-7xl flex-col justify-between gap-8 md:flex-row md:items-end"><div><p className="text-xs font-semibold uppercase tracking-[.22em]">Next step</p><h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-[-.04em] md:text-6xl">Have a role or workflow to discuss?</h2></div><a href="mailto:contact@naveensharma.net" className="inline-flex w-fit items-center gap-3 rounded-full bg-[#172321] px-6 py-4 text-sm font-semibold text-white hover:bg-[#30443e]">Get in touch <ArrowRight size={17}/></a></div></section>
       </main>
+      <EllaChat />
       <footer className="bg-[#172321] px-5 py-7 text-sm text-white/60 md:px-10"><div className="mx-auto flex max-w-7xl flex-wrap justify-between gap-3"><span>© {new Date().getFullYear()} Naveen Sharma</span><a href="https://opility.com" target="_blank" rel="noreferrer" className="hover:text-white">Opility — business services <ArrowUpRight className="ml-1 inline" size={13}/></a></div></footer>
     </div>
   );
