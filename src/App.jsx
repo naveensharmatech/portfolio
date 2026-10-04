@@ -8,14 +8,111 @@ import {
   Github, Linkedin, Menu, Workflow, X,
 } from "lucide-react";
 
-const primaryTools = [
-  "Zapier", "Claude", "HubSpot", "GitHub", "Cloudflare", "Apify",
-  "API integration", "Webhooks", "JSON", "GitHub Copilot", "Google AI Studio", "Basecamp",
-];
-
-const secondaryTools = [
-  "Make", "n8n", "Crawlee", "BeautifulSoup", "ChatGPT", "Google Gemini",
-  "ElevenLabs", "Gmail", "Jira", "Google Workspace", "Canva", "Postman", "Firebase", "Python (AI-assisted)", "JavaScript (AI-assisted)", "Node.js (AI-assisted)",
+const tools = [
+  {
+    "name": "Zapier",
+    "logo": "/tool-logos/zapier.svg"
+  },
+  {
+    "name": "Claude",
+    "logo": "/tool-logos/claude.svg"
+  },
+  {
+    "name": "HubSpot",
+    "logo": "/tool-logos/hubspot.svg"
+  },
+  {
+    "name": "GitHub",
+    "logo": "/tool-logos/github.svg"
+  },
+  {
+    "name": "Cloudflare",
+    "logo": "/tool-logos/cloudflare.svg"
+  },
+  {
+    "name": "Apify",
+    "logo": "/tool-logos/apify_logo.svg"
+  },
+  {
+    "name": "GitHub Copilot",
+    "logo": "/tool-logos/github-copilot.svg"
+  },
+  {
+    "name": "Google AI Studio",
+    "logo": "/tool-logos/google-aistudio.svg"
+  },
+  {
+    "name": "Basecamp",
+    "logo": "/tool-logos/basecamp.svg"
+  },
+  {
+    "name": "Make",
+    "logo": "/tool-logos/make-color.svg"
+  },
+  {
+    "name": "n8n",
+    "logo": "/tool-logos/n8n.svg"
+  },
+  {
+    "name": "Crawlee",
+    "logo": "/tool-logos/crawlee-logo.svg"
+  },
+  {
+    "name": "BeautifulSoup",
+    "logo": "/tool-logos/beautifulsoup.jpg"
+  },
+  {
+    "name": "ChatGPT",
+    "logo": "/tool-logos/openai.svg"
+  },
+  {
+    "name": "Google Gemini",
+    "logo": "/tool-logos/google-gemini.svg"
+  },
+  {
+    "name": "ElevenLabs",
+    "logo": "/tool-logos/elevenlabs.svg"
+  },
+  {
+    "name": "Gmail",
+    "logo": "/tool-logos/google-gmail.svg"
+  },
+  {
+    "name": "Jira",
+    "logo": "/tool-logos/jira.svg"
+  },
+  {
+    "name": "Google Workspace",
+    "logo": "/tool-logos/google-workspace.svg"
+  },
+  {
+    "name": "Canva",
+    "logo": "/tool-logos/canva.svg"
+  },
+  {
+    "name": "Postman",
+    "logo": "/tool-logos/postman.svg"
+  },
+  {
+    "name": "Firebase",
+    "logo": "/tool-logos/firebase.svg"
+  },
+  {
+    "name": "Python (AI-assisted)",
+    "logo": "/tool-logos/python.svg"
+  },
+  {
+    "name": "JavaScript (AI-assisted)",
+    "logo": "/tool-logos/javascript.svg"
+  },
+  {
+    "name": "Node.js (AI-assisted)",
+    "logo": "/tool-logos/nodejs.svg"
+  },
+  {
+    "name": "JSON",
+    "logo": "/tool-logos/json.svg"
+  }
 ];
 
 const qualifications = [
@@ -205,14 +302,12 @@ export default function App() {
 
         <section id="tools" className="mx-auto max-w-7xl px-5 py-24 md:px-10">
           <div className="mb-10"><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#71807b]">Tools & Platforms</p><h2 className="mt-4 text-4xl font-semibold tracking-[-.04em]">The stack behind the work.</h2></div>
-          <h3 className="mb-4 text-sm font-semibold text-[#52615c]">Primary stack</h3>
-          <div className="flex snap-x gap-3 overflow-x-auto pb-4" aria-label="Primary tools and platforms">
-            {primaryTools.map(tool => <span key={tool} className="shrink-0 snap-start rounded-2xl border border-[#172321]/10 bg-white px-5 py-4 text-sm font-medium">{tool}</span>)}
-          </div>
-          <h3 className="mb-4 mt-8 text-sm font-semibold text-[#52615c]">Also in the toolkit</h3>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
-            {secondaryTools.map(tool => <span key={tool} className="rounded-xl bg-white px-4 py-4 text-sm text-[#52615c]">{tool}</span>)}
-          </div>
+          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5" aria-label="Tools and platforms I use">
+            {tools.map(tool => <li key={tool.name} className="flex min-h-[136px] flex-col items-center justify-center gap-4 rounded-2xl border border-[#172321]/10 bg-white px-3 py-5 text-center">
+              <div className="flex h-12 w-24 items-center justify-center"><img src={tool.logo} alt="" aria-hidden="true" width="80" height="48" loading="lazy" className="max-h-12 max-w-full object-contain" /></div>
+              <span className="text-sm font-medium leading-5 text-[#172321]">{tool.name}</span>
+            </li>)}
+          </ul>
         </section>
 
         <section id="projects" className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
