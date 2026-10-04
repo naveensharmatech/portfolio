@@ -1,4 +1,4 @@
-import {expectedMappings,sampleSources,workflowInputs,mappingChecks} from './bolt-workbench-engine.js';
+import {expectedMappings,sampleSources,workflowInputs,mappingChecks} from './bolt-workbench-engine.js?v=2';
 const $=id=>document.getElementById(id);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const labels={name:{name:'Patient name',group:'Personal info',value:'Jordan Rivera',editable:true},signed:{name:'Signing date employee',group:'Signatures',value:'2026-04-08',editable:true},transport:{name:'Transportation',group:'Anticipated Need',value:'Yes',editable:true},diagnosis:{name:'Diagnosis 1',group:'Child workflow',value:'Sample condition A',editable:true}};
@@ -77,3 +77,9 @@ for(const [i,role] of signerRoles.entries()){
  const input=document.createElement('input');const url=new URL(location.href);url.hash='demo-signer-'+(i+1);input.value=url.href;input.readOnly=true;input.setAttribute('aria-label',role+' demo link');row.append(input);
  const copy=document.createElement('button');copy.className='btn';copy.textContent='Copy '+role+' link';copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(input.value);$('linkStatus').textContent='Copied the local sample link for '+role+'.';}catch{input.focus();input.select();$('linkStatus').textContent='Select and copy the highlighted sample link.';}});row.append(copy);$('signLinks').append(row);
 }
+
+function selectLinkedSigner(){
+ const match=/^#demo-signer-([1-3])$/.exec(location.hash);if(!match)return;
+ $('tab-signers').click();$('linkStatus').textContent='Selected sample signer: '+signerRoles[Number(match[1])-1]+'. Submit a passing case in this browser session to begin the sample signing flow.';
+}
+window.addEventListener('hashchange',selectLinkedSigner);selectLinkedSigner();
