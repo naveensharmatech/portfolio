@@ -138,3 +138,8 @@ html.dark .tilt-card:hover {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* Readable controls and persistent keyboard focus. */
+summary { min-height: 44px; align-content: center; }
+:focus-visible { box-shadow: 0 0 0 2px #fff; }
+@media (max-width: 767px) { input, select, textarea { font-size: 16px !important; } }

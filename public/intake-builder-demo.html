@@ -181,7 +181,7 @@
       .prev-input{min-width:0}
     }
   </style>
-<style>.linkedin-experience{margin:32px 0;padding:26px;background:#fff;border:1px solid #dfe5e3;border-radius:20px}.linkedin-experience h2{font-size:clamp(22px,3vw,32px);line-height:1.25;margin-bottom:12px}.linkedin-experience>p{color:#52615c;margin-bottom:24px}.linkedin-duties{display:grid;grid-template-columns:1fr 1fr;gap:24px}.linkedin-duties h3{font-size:17px;margin-bottom:8px}.linkedin-duties p{font-size:14px;line-height:1.7;color:#52615c}@media(max-width:700px){.linkedin-duties{grid-template-columns:1fr}.linkedin-experience{padding:18px}}</style></head>
+<style>.linkedin-experience{margin:32px 0;padding:26px;background:#fff;border:1px solid #dfe5e3;border-radius:20px}.linkedin-experience h2{font-size:clamp(22px,3vw,32px);line-height:1.25;margin-bottom:12px}.linkedin-experience>p{color:#52615c;margin-bottom:24px}.linkedin-duties{display:grid;grid-template-columns:1fr 1fr;gap:24px}.linkedin-duties h3{font-size:17px;margin-bottom:8px}.linkedin-duties p{font-size:14px;line-height:1.7;color:#52615c}@media(max-width:700px){.linkedin-duties{grid-template-columns:1fr}.linkedin-experience{padding:18px}}</style><style>:focus-visible{outline:3px solid #1d4ed8;outline-offset:4px}button:disabled{cursor:default;opacity:.6}@media(max-width:600px){input,select,textarea{font-size:16px!important}}</style></head>
 <body>
   <div class="topbar">
     <div class="wrap">
@@ -191,7 +191,7 @@
   </div>
 
   <div class="wrap">
-<section class="linkedin-experience" aria-label="Bolt Healthcare experience"><h2>SaaS Implementation Specialist &amp; Workflow QA</h2><p>Bolt Healthcare · Aug 2022 – Present</p><div class="linkedin-duties"><article><h3>Enterprise SaaS Implementation</h3><p>Architected and deployed digital onboarding pipelines for 25+ healthcare agencies, translating legacy paper intake into HIPAA-compliant SaaS workflows that cut client onboarding turnaround time by 40%.</p></article><article><h3>Form Logic &amp; Data Mapping</h3><p>Engineered complex dynamic forms, conditional visibility rules, and field-level validation throughout intake and referral workflows, enforcing strict data integrity gates to eliminate clinical submission errors.</p></article><article><h3>Document Automation &amp; eSignatures</h3><p>Configured dynamic document pipelines, mapping form tokens to regulatory PDFs and structuring multi-party sequential eSignature routing (patient, clinician, administrator), eliminating 15+ hours of weekly paperwork per agency.</p></article><article><h3>QA, UAT &amp; Defect Triage</h3><p>Executed end-to-end User Acceptance Testing (UAT), functional validation, and regression suites on workflow forms and document outputs; triaged mapping defects alongside engineering to maintain 99.5%+ workflow uptime.</p></article><article><h3>SOPs &amp; Governance</h3><p>Authored platform configuration guides, clinical intake playbooks, and validation checklists for agency stakeholders, standardizing operations within multi-tenant agency accounts.</p></article></div></section>    <h1>Implementation Workbench</h1>
+    <h1>Implementation Workbench</h1>
     <p class="sub">Enter sample details, save a signature and run the mapping test to see your populated document.</p>
 
     <div class="disclaimer">
@@ -199,10 +199,10 @@
     </div>
 
     <div class="tabs">
-      <button class="tab active" data-view="builder">🧩 Form Builder <span class="n">config + live validation</span></button>
-      <button class="tab" data-view="esign">✍ E-Signature <span class="n">multi-signer</span></button>
-      <button class="tab" data-view="admin">🛠 Platform Admin <span class="n">multi-tenant</span></button>
-      <button class="tab" data-view="qa">✅ QA &amp; Testing <span class="n">triage board</span></button>
+      <button class="tab active" data-view="builder" aria-pressed="true" aria-controls="view-builder">🧩 Form Builder <span class="n">config + live validation</span></button>
+      <button class="tab" data-view="esign" aria-pressed="false" aria-controls="view-esign">✍ E-Signature <span class="n">multi-signer</span></button>
+      <button class="tab" data-view="admin" aria-pressed="false" aria-controls="view-admin">🛠 Platform Admin <span class="n">sample administration view</span></button>
+      <button class="tab" data-view="qa" aria-pressed="false" aria-controls="view-qa">✅ QA &amp; Testing <span class="n">example triage board</span></button>
     </div>
 
     <div class="app">
@@ -299,12 +299,12 @@
           </div>
         </div>
 
-        <div id="results" style="display:none">
+        <div id="results" aria-live="polite" style="display:none">
           <div class="res-head"><h3>Mapped document preview</h3><span class="pill" id="resSummary">—</span></div>
           <div id="resList"></div>
           <div class="progress"><span id="bar"></span></div>
           <div style="padding:0 24px 8px"><button class="btn btn-green" id="submitBtn" disabled style="opacity:.5">Save demo result ↦</button></div>
-          <div class="success" id="successBox">
+          <div class="success" id="successBox" role="status">
             <h4>✓ Demo result saved</h4>
             <p style="font-size:14px;color:var(--gray-700)">Local sample result — reference <code id="subId">—</code>. Your entered values and saved signature are included in the document preview. No external submission is made.</p>
           </div>
@@ -375,6 +375,7 @@
       </div>
     </div>
 
+<section class="linkedin-experience" aria-label="Bolt Healthcare experience"><h2>SaaS Implementation Specialist &amp; Workflow QA</h2><p>Bolt Healthcare · Aug 2022 – May 2026</p><div class="linkedin-duties"><article><h3>Enterprise SaaS Implementation</h3><p>Architected and deployed digital onboarding pipelines for 25+ healthcare agencies, translating legacy paper intake into HIPAA-compliant SaaS workflows that cut client onboarding turnaround time by 40%.</p></article><article><h3>Form Logic &amp; Data Mapping</h3><p>Engineered complex dynamic forms, conditional visibility rules, and field-level validation throughout intake and referral workflows, enforcing strict data integrity gates to eliminate clinical submission errors.</p></article><article><h3>Document Automation &amp; eSignatures</h3><p>Configured dynamic document pipelines, mapping form tokens to regulatory PDFs and structuring multi-party sequential eSignature routing (patient, clinician, administrator), eliminating 15+ hours of weekly paperwork per agency.</p></article><article><h3>QA, UAT &amp; Defect Triage</h3><p>Executed end-to-end User Acceptance Testing (UAT), functional validation, and regression suites on workflow forms and document outputs; triaged mapping defects alongside engineering to maintain 99.5%+ workflow uptime.</p></article><article><h3>SOPs &amp; Governance</h3><p>Authored platform configuration guides, clinical intake playbooks, and validation checklists for agency stakeholders, standardizing operations within multi-tenant agency accounts.</p></article></div></section>
     <p class="sub" style="margin-bottom:38px">This workbench mirrors the <b>breadth</b> of my Bolt Healthcare work — configuring 500+ dynamic forms, building conditional logic and e-signature flows, administering a multi-tenant platform with API integration, and coordinating QA/UAT — recreated here as my own original build. <a href="/#projects">← Back to projects</a></p>
   </div>
 
@@ -384,9 +385,9 @@
     // ── tabs ──
     document.querySelectorAll(".tab").forEach(function(t){
       t.addEventListener("click",function(){
-        document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active");});
+        document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active");x.setAttribute("aria-pressed","false");});
         document.querySelectorAll(".view").forEach(function(v){v.classList.remove("active");});
-        t.classList.add("active");
+        t.classList.add("active");t.setAttribute("aria-pressed","true");
         document.getElementById("view-"+t.dataset.view).classList.add("active");
         if(t.dataset.view==="builder") setTimeout(sizeCanvas,30);
       });
@@ -486,11 +487,12 @@
     function v(id){var el=document.getElementById(id);return el?el.value.trim():"";}
     function setErr(id,msg){
       errorsById[id]=msg;
+      var invalidInput=document.getElementById(id);if(invalidInput){invalidInput.setAttribute("aria-invalid","true");invalidInput.setAttribute("aria-describedby","e_"+id);}
       var box=document.getElementById("e_"+id),inp=document.getElementById(id);
       if(box){box.textContent=msg;box.classList.add("show");}
       if(inp){inp.classList.add("invalid");inp.classList.remove("valid");}
     }
-    function setOk(id){
+    function setOk(id){ var validInput=document.getElementById(id);if(validInput)validInput.setAttribute("aria-invalid","false");
       var inp=document.getElementById(id),box=document.getElementById("e_"+id);
       if(inp && inp.value && inp.value.trim()!==""){inp.classList.add("valid");inp.classList.remove("invalid");}
       else if(inp){inp.classList.remove("valid","invalid");}
@@ -626,7 +628,7 @@
       esCount++;
       if(esCount<rows.length){rows[esCount].querySelector(".st").innerHTML='<span class="pill wait">● Awaiting</span>';}
       signState.textContent=esCount+" of "+rows.length+" signed";
-      if(esCount===rows.length){signState.className="pill ok";signState.textContent="Complete · packet submitted";}
+      if(esCount===rows.length){signState.className="pill ok";signState.textContent="Complete · packet submitted";var advance=document.getElementById("advanceSign");advance.disabled=true;advance.textContent="All sample signers complete";}
     });
   </script>
 </body>
