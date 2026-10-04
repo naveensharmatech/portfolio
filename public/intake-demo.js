@@ -150,7 +150,7 @@ $('runTest').addEventListener('click',()=>renderValidation(true));
 $('intakeForm').addEventListener('submit',event=>{
   event.preventDefault();invalidatePacket();const result=renderValidation(true);
   if(!result.pass)return;
-  packet={demo:true,reference:'DEMO-'+(crypto.randomUUID?.()||Date.now().toString(36)),createdAt:new Date().toISOString(),validation:'PASS',mappings:{...mappings},...result.record,signatures:[{role:'Applicant',...signature}]};
+  packet={demo:true,reference:'DEMO-'+(crypto.randomUUID?.()||Date.now().toString(36)),createdAt:new Date().toISOString(),validation:'PASS',mappings:{...mappings},...result.record,signatures:[{role:'Consumer / Patient',...signature}]};
   $('successBox').hidden=false;$('submissionRef').textContent=`Reference: ${packet.reference}`;renderSigners();
 });
 $('downloadJson').addEventListener('click',()=>{
@@ -173,7 +173,7 @@ function loadSample(failing=false){
 $('fillValid').addEventListener('click',()=>loadSample());$('fillInvalid').addEventListener('click',()=>loadSample(true));
 function renderSigners(){
   $('signRows').replaceChildren();
-  const roles=['Applicant','Caregiver','Program Coordinator'];
+  const roles=['Consumer / Patient','Designated Representative / Caregiver','Health Plan Representative / Insurance / Homecare'];
   for(const [index,role] of roles.entries()){
     const row=document.createElement('div');row.className='signer';const label=document.createElement('strong');label.textContent=`${index+1}. ${role}`;row.append(label);
     const signed=packet?.signatures[index];
@@ -187,8 +187,8 @@ function renderSigners(){
   if(packet){$('submissionStatus').textContent=count===3?'PASS — demo packet complete':'PASS — demo packet created';packet.status=count===3?'complete':'awaiting-signatures';$('jsonPreview').textContent=JSON.stringify(packet,null,2);}
 }
 $('resetSigners').addEventListener('click',()=>{if(packet){packet.signatures=packet.signatures.slice(0,1);renderSigners();}});
-const taskSeeds=[{title:'Configure intake labels',context:'Input labels and required rules',stage:0},{title:'Map intake fields',context:'Check configured output targets',stage:0},{title:'Check conditional inputs',context:'Validate the extra required field',stage:1}];
-let tasks=taskSeeds.map(t=>({...t}));const stages=['Pending','Mapping','Testing','Complete'];
+const taskSeeds=[{title:'PDF engine · update input labels',context:'Configure labels, groups and preview behavior',stage:0},{title:'Dynamic file · map signing date',context:'Check Signing Date Employee instead of Current Date',stage:0},{title:'Workflow · verify diagnosis sub-input',context:'Check dependent workflow/status/sub-input and output',stage:1}];
+let tasks=taskSeeds.map(t=>({...t}));const stages=['In progress','Needs mapping','Needs testing','Complete'];
 function renderTasks(){
   $('taskBoard').replaceChildren();
   for(const [stage,label] of stages.entries()){
@@ -197,7 +197,7 @@ function renderTasks(){
       const card=document.createElement('div');card.className='card';const title=document.createElement('strong');title.textContent=t.title;card.append(title);
       const description=document.createElement('p');description.className='hint';description.textContent=t.context;card.append(description);
       if(stage<3){const button=document.createElement('button');button.className='btn';button.textContent=stage===2?'Validate current form':'Move to '+stages[stage+1];button.addEventListener('click',()=>{
-        if(stage===2){const result=validateIntake(values(),mappings,signature);if(!result.pass){description.textContent=`FAIL — ${result.failed} checks need fixing. Open Form & mapping.`;return;}}
+        if(stage===2){const result=validateIntake(values(),mappings,signature);if(!result.pass){description.textContent=`FAIL — ${result.failed} checks need fixing. Open Case & validation.`;return;}}
         t.stage++;renderTasks();});card.append(button);}
       lane.append(card);
     }
