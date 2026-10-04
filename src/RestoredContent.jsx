@@ -22,6 +22,18 @@ export function AboutDetails() {
   return <div className="mt-10"><p className="text-sm leading-7 text-[#52615c]">Based in Be’er Sheva, Israel. Hindi is my native language; I use English professionally and speak conversational Hebrew. I’m open to remote roles that can hire in Israel, suitable local hybrid roles, B2B contracts and freelance projects.</p><div className="mt-6 space-y-3">{[['What kind of work are you looking for?','AI and workflow automation, SaaS implementation, technical onboarding and integration support. I focus on practical no-code solutions and AI-assisted builds.'],['Do you build websites and assistants?','Yes. My work includes AI-assisted websites, chatbots, business assistants and bounded agents, alongside workflows and data integrations.'],['What is Opility?','Opility is my commercial venture: Build • Automate • Grow. Its scope covers Dev, AI, QA and Studio. Visit opility.com to discuss a business project.']].map(([q,a])=><details key={q} className="rounded-2xl border border-[#172321]/10 bg-white p-5"><summary className="cursor-pointer text-sm font-semibold">{q}</summary><p className="mt-3 text-sm leading-7 text-[#52615c]">{a}</p></details>)}</div></div>;
 }
 
+function ChatText({ text }) {
+  return text.split(/(\[[^\]]+\]\(https?:\/\/[^\s)]+\)|https?:\/\/[^\s<>]+)/g).map((part, index) => {
+    const markdown = part.match(/^\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)$/);
+    if (markdown) return <a key={index} href={markdown[2]} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{markdown[1]}</a>;
+    if (/^https?:\/\//.test(part)) {
+      const url = part.replace(/[.,;]+$/, '');
+      return <span key={index}><a href={url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{url}</a>{part.slice(url.length)}</span>;
+    }
+    return part;
+  });
+}
+
 export function EllaChat() {
   const [open,setOpen]=useState(false);
   const [messages,setMessages]=useState([{role:'assistant',content:'Hi, I’m Ella, Naveen Sharma’s Personal Assistant. Ask me about him—or explore AI, automation, careers and learning.'}]);
@@ -34,7 +46,7 @@ export function EllaChat() {
   async function send(event){
     event.preventDefault(); const question=input.trim(); if(!question||busy)return;
     const next=[...messages,{role:'user',content:question}];setMessages(next);setInput('');setBusy(true);
-    const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),20000);
+    const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),55000);
     try {
       const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:next.slice(-10)}),signal:controller.signal});
       if(!response.ok)throw new Error('Chat unavailable');
@@ -46,7 +58,7 @@ export function EllaChat() {
   return <div className="fixed bottom-5 right-5 z-[60]">
     {open&&<section id="ella-panel" role="dialog" aria-labelledby="ella-title" onKeyDown={e=>{if(e.key==='Escape')close();}} className="mb-3 flex h-[min(520px,70dvh)] w-[min(370px,calc(100vw-40px))] flex-col overflow-hidden rounded-3xl border border-[#172321]/15 bg-white text-[#172321] shadow-2xl">
       <header className="flex items-center justify-between bg-[#172321] p-4 text-white"><div className="flex items-center gap-3"><img src="/ella-avatar.png" alt="Ella" width="48" height="48" className="h-12 w-12 shrink-0 rounded-full object-cover"/><div><h2 id="ella-title" className="font-semibold">Ella</h2><p className="text-xs text-white/75">Naveen Sharma’s Personal Assistant</p></div></div><button type="button" onClick={close} aria-label="Close Ella chat" className="grid h-11 w-11 place-items-center rounded-full hover:bg-white/10"><X size={20}/></button></header>
-      <div className="flex-1 overflow-y-auto p-4" aria-live="polite" aria-relevant="additions" aria-busy={busy}>{messages.map((m,i)=><p key={i} className={`mb-3 whitespace-pre-wrap break-words rounded-2xl p-3 text-sm leading-6 ${m.role==='user'?'ml-7 bg-[#eaf3dc]':'mr-7 bg-[#f0f3ef]'}`}><span className="sr-only">{m.role==='user'?'You':'Ella'}: </span>{m.content}</p>)}{busy&&<p className="text-sm text-[#52615c]">Ella is replying…</p>}<div ref={endRef}/></div>
+      <div className="flex-1 overflow-y-auto p-4" aria-live="polite" aria-relevant="additions" aria-busy={busy}>{messages.map((m,i)=><p key={i} className={`mb-3 whitespace-pre-wrap break-words rounded-2xl p-3 text-sm leading-6 ${m.role==='user'?'ml-7 bg-[#eaf3dc]':'mr-7 bg-[#f0f3ef]'}`}><span className="sr-only">{m.role==='user'?'You':'Ella'}: </span><ChatText text={m.content}/></p>)}{busy&&<p className="text-sm text-[#52615c]">Ella is replying…</p>}<div ref={endRef}/></div>
       <form onSubmit={send} className="flex gap-2 border-t border-[#172321]/10 p-3"><label htmlFor="ella-input" className="sr-only">Ask Ella a question</label><input ref={inputRef} id="ella-input" maxLength={1500} value={input} onChange={e=>setInput(e.target.value)} placeholder="Ask me about Naveen…" className="min-w-0 flex-1 rounded-xl border border-[#172321]/20 px-3 py-3 text-sm"/><button type="submit" disabled={busy||!input.trim()} aria-label="Send message" className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[#172321] text-white disabled:opacity-40"><Send size={18}/></button></form>
     </section>}
     <button ref={toggleRef} type="button" aria-expanded={open} aria-controls="ella-panel" onClick={()=>open?close():setOpen(true)} className="ml-auto flex min-h-12 items-center gap-2 rounded-full bg-[#172321] px-5 py-3 font-semibold text-[#c5f16b] shadow-lg"><img src="/ella-avatar.png" alt="" aria-hidden="true" width="36" height="36" className="h-9 w-9 rounded-full object-cover"/>Ask Ella</button>
