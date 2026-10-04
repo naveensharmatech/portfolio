@@ -1,6 +1,6 @@
 "use client";
 
-import { RestoredContent, EllaChat, Approach, AboutDetails } from "./RestoredContent";
+import { RestoredContent, EllaChat, Approach, AboutDetails, WorkflowGallery } from "./RestoredContent";
 
 import { useState } from "react";
 import {
@@ -304,6 +304,13 @@ export default function App() {
               <span className="text-sm font-medium leading-5 text-[#172321]">{tool.name}</span>
             </li>)}
           </ul>
+          <details className="mt-8 overflow-hidden rounded-3xl border border-[#172321]/10 bg-white p-5 md:p-7">
+            <summary className="cursor-pointer text-lg font-semibold">Zapier, n8n &amp; Make — visual concepts</summary>
+            <figure className="mt-6">
+              <a href="/images/automation-platform-concepts.png" target="_blank" rel="noreferrer" aria-label="Open automation platform comparison at full size"><img src="/images/automation-platform-concepts.png" alt="Visual comparison of a Zapier Zap with triggers, paths and steps; an n8n workflow with nodes; and a Make scenario with modules and a router." width="2000" height="938" loading="lazy" className="h-auto w-full rounded-xl"/></a>
+              <figcaption className="mt-4 flex flex-wrap items-center justify-between gap-3"><p className="text-sm text-[#52615c]">A visual reference for the platforms I’m building with and learning.</p><a href="/images/automation-platform-concepts.png" target="_blank" rel="noreferrer" className="text-sm font-semibold underline underline-offset-4">View full-size comparison <ArrowUpRight size={14} className="inline"/></a></figcaption>
+            </figure>
+          </details>
         </section>
 
         <section id="projects" className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
@@ -313,7 +320,7 @@ export default function App() {
         </section>
 
         <section id="capabilities" className="bg-[#172321] py-24 text-white md:py-28">
-          <div className="mx-auto max-w-7xl px-5 md:px-10"><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#c5f16b]">Capabilities</p><div className="mt-5 grid gap-12 md:grid-cols-[.65fr_1.35fr]"><h2 className="text-4xl font-semibold tracking-[-.04em]">Practical systems.<br/>Clear outcomes.</h2><div className="grid gap-x-10 gap-y-9 sm:grid-cols-2">{capabilities.map(({icon: Icon,title,text,source,skills}) => <article key={title} className="border-t border-white/20 pt-5"><Icon className="text-[#c5f16b]" size={22}/><h3 className="mt-4 text-lg font-semibold">{title}</h3><p className="mt-2 text-sm leading-6 text-white/65">{text}</p><ul className="mt-4 flex flex-wrap gap-2" aria-label={`${title} skills`}>{skills.map(skill => <li key={skill} className="rounded-full border border-white/20 px-3 py-1.5 text-xs leading-5 text-white/90">{skill}</li>)}</ul><p className="mt-4 text-xs leading-5 text-[#c5f16b]">{source}</p></article>)}</div></div></div>
+          <div className="mx-auto max-w-7xl px-5 md:px-10"><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#c5f16b]">Capabilities</p><div className="mt-5 grid gap-12 md:grid-cols-[.65fr_1.35fr]"><div><h2 className="text-4xl font-semibold tracking-[-.04em]">Practical systems.<br/>Clear outcomes.</h2><img src="/images/connected-systems.jpeg" alt="" aria-hidden="true" width="1536" height="596" loading="lazy" className="mt-8 h-auto w-full rounded-2xl border border-white/10"/></div><div className="grid gap-x-10 gap-y-9 sm:grid-cols-2">{capabilities.map(({icon: Icon,title,text,source,skills}) => <article key={title} className="border-t border-white/20 pt-5"><Icon className="text-[#c5f16b]" size={22}/><h3 className="mt-4 text-lg font-semibold">{title}</h3><p className="mt-2 text-sm leading-6 text-white/65">{text}</p><ul className="mt-4 flex flex-wrap gap-2" aria-label={`${title} skills`}>{skills.map(skill => <li key={skill} className="rounded-full border border-white/20 px-3 py-1.5 text-xs leading-5 text-white/90">{skill}</li>)}</ul><p className="mt-4 text-xs leading-5 text-[#c5f16b]">{source}</p></article>)}</div></div></div>
           <div className="mx-auto max-w-7xl px-5 md:px-10"><Approach /></div>
         </section>
 
@@ -330,6 +337,7 @@ export default function App() {
             </article>)}
           </div>
           <details className="mt-6 rounded-2xl border border-[#172321]/10 bg-white p-6"><summary className="cursor-pointer font-semibold">Zapier Academy — completed courses</summary><ul className="mt-5 grid gap-3 text-sm text-[#52615c] sm:grid-cols-2">{["Jumpstart", "Building Basic Zaps", "Building Intermediate Zaps", "Building AI Agents", "What is Zapier MCP?", "Using Zapier MCP", "Governing Zapier MCP", "Account Setup", "Monitoring and Operations", "Security and Governance"].map(course => <li key={course}>✓ {course}</li>)}</ul></details>
+          <WorkflowGallery />
         </section>
 
         <section id="about" aria-labelledby="about-title" className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-28">

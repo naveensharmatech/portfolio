@@ -3,6 +3,18 @@ export const ELLA_IDENTITY = "Naveen Sharma’s Personal Assistant";
 export const ELLA_KNOWLEDGE = [
 {
   "keywords": [
+    "workflow",
+    "gallery",
+    "reference",
+    "visual",
+    "n8n",
+    "make",
+    "zapier"
+  ],
+  "text": "The site includes a visual comparison of Zapier, n8n and Make and a Workflow ideas & visual references gallery at https://naveensharma.net/#workflow-references . Gallery subjects: appointment routing/reminders, AI lead routing (graphic credited to Hisham Sarwar), agent onboarding, social analytics reporting, Make order notifications, and Make Airtable routing. These are reference images for learning and exploration; do not present them as Naveen's deployed projects or successful runs. The separate Customer Inquiry Router is Naveen's published personal Zapier/Claude/HubSpot project; the site diagram summarizes its documented process."
+},
+{
+  "keywords": [
     "story",
     "background",
     "passion",
