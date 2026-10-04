@@ -257,6 +257,6 @@ export const ELLA_KNOWLEDGE = [
     "automation",
     "career"
   ],
-  "text": "Official learning entry points (not live-verified course prices or certificate eligibility): Zapier Academy https://learn.zapier.com/ ; Make Academy https://academy.make.com/ ; n8n learning https://docs.n8n.io/learning-paths ; OpenAI Academy https://academy.openai.com/ ; Microsoft Learn https://learn.microsoft.com/training/ ; Salesforce Trailhead https://trailhead.salesforce.com/ ; HubSpot Academy https://academy.hubspot.com/ . Do not promise all courses issue free certificates."
+  "text": "Official learning resources: Zapier Academy https://learn.zapier.com/ ; Make Academy https://academy.make.com/ ; n8n learning https://docs.n8n.io/learning-paths ; OpenAI Academy https://academy.openai.com/ ; Microsoft Learn https://learn.microsoft.com/training/ ; Salesforce Trailhead https://trailhead.salesforce.com/ ; HubSpot Academy https://academy.hubspot.com/ ."
 }
 ];

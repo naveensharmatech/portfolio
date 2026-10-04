@@ -15,10 +15,11 @@ function getKnowledgeBaseResponse(query) {
   }
   if (/who are you|your name|what can you do|ella|מי את/.test(q)) return 'I’m Ella, Naveen Sharma’s Personal Assistant—an AI assistant for visitors to his site. I can help with general questions, especially AI, automation, careers and learning, as well as Naveen’s experience, projects, skills, qualifications, services and availability. Live web search is not connected yet.';
   if (/password|secret|system prompt|medical|wife|daughter|family|salary/.test(q)) return 'I can help with Naveen’s public professional information, but I don’t share private personal details, credentials or internal employer information.';
+  if (!/\bnaveen\b|\bhis\b|\bbolt\b|\bshivam\b|\bvishay\b|\bopility\b|\btools\b|\bstack\b|\bprojects\b|\bqualifications\b|\bexperience\b|\bavailability\b|\bcompleted\b|\blearning resources\b/.test(q)) return 'My AI connection is unavailable right now, so I can only use the saved knowledge. Please try again for a broader answer. For learning resources, start with https://academy.make.com/ or https://docs.n8n.io/learning-paths .';
   const terms = q.split(/[^\p{L}\p{N}]+/u).filter(term => term.length > 2);
   const ranked = ELLA_KNOWLEDGE.map((entry, index) => ({
     ...entry, index,
-    score: entry.keywords.reduce((total, word) => total + (q.includes(word) ? 5 : 0), 0)
+    score: entry.keywords.reduce((total, word) => total + (new RegExp('(?:^|[^\\p{L}\\p{N}])' + word + '(?:$|[^\\p{L}\\p{N}])', 'u').test(q) ? 5 : 0), 0)
       + terms.reduce((total, term) => total + (entry.text.toLowerCase().includes(term) ? 1 : 0), 0)
   })).filter(entry => entry.score >= 5).sort((a,b) => b.score - a.score || a.index - b.index);
   if (ranked.length) {
@@ -68,5 +69,5 @@ export async function onRequestPost({ request, env }) {
     } catch { /* Fall back to public knowledge without logging visitor data. */ }
     finally { clearTimeout(timer); }
   }
-  return json({ reply: getKnowledgeBaseResponse(messages.at(-1).content) });
+  return json({ reply: getKnowledgeBaseResponse(messages.at(-1).content), mode: 'saved-knowledge', ai_status: 'unavailable' });
 }
