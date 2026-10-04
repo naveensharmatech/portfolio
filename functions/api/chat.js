@@ -60,6 +60,9 @@ export async function onRequestPost({ request, env }) {
     if (!messages.length || messages.at(-1).role !== 'user' || !messages.at(-1).content.trim()) return json({ error: 'A question is required.' }, 400);
   } catch { return json({ error: 'Invalid request.' }, 400); }
 
+  const question = messages.at(-1).content;
+  const personalQuestion = /naveen|shivam|bolt|vishay|opility|\bhis\b/i.test(question);
+  const needsSearch = /search|browse|latest|current|today|recent/i.test(question) || (!personalQuestion && /sources?|resources?|courses?|certificates?|free|links?/i.test(question));
   let failure = 'missing_api_key';
   if (env?.GROQ_API_KEY) {
     const controller = new AbortController();
@@ -72,8 +75,7 @@ export async function onRequestPost({ request, env }) {
           model: 'openai/gpt-oss-20b',
           messages: [{ role: 'system', content: SYSTEM_PROMPT + '\nPUBLIC SITE KNOWLEDGE:\n' + relevantKnowledge(messages) }, ...messages],
           max_completion_tokens: 1800, temperature: 0.2, reasoning_effort: 'low',
-          tools: [{ type: 'browser_search' }],
-          tool_choice: /search|browse|latest|current|today|recent|sources?|resources?|courses?|certificates?|free|links?/i.test(messages.at(-1).content) ? 'required' : 'auto'
+          ...(needsSearch ? { tools: [{ type: 'browser_search' }], tool_choice: 'required' } : {})
         })
       });
       if (response.ok) {
