@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import { Bot, X, Send } from 'lucide-react';
 
 const earlierProjects = [
+  { title: 'Intake & Mapping Workbench', type: 'Interactive SaaS implementation demo', text: 'Enter sample data, complete conditional fields and save a signature to see a populated document and its mapped values.', href: '/intake-builder-demo', link: 'Try working demo' },
   { title: 'Iterative Array Data Transformer', type: 'Make · Personal project in development', text: 'A workflow design for normalizing records, validating inputs, checking duplicates and routing results into separate Google Sheets outputs.', href: 'https://github.com/naveensharmatech/Iterative-Array-Data-Transformer', link: 'View project repository' },
   { title: 'Professional Portfolio Website', type: 'AI-assisted website build', text: 'This React and Cloudflare portfolio brings together career experience, project documentation and an assistant that answers questions about my work.', href: 'https://github.com/naveensharmatech/portfolio', link: 'View website source' },
   { title: 'Django Blogging CMS', type: 'BCA academic project', text: 'Academic documentation covering a blogging application with authentication, content management and an admin interface.', href: '/docs/Django-Blogging-CMS-Project.pdf', link: 'View project document' },
   { title: 'Streaming Platform Test Plan', type: 'QA learning project', text: 'Test-planning documentation covering methodology, risks and planned validation scenarios.', href: '/docs/Netflix-Subscription-Test-Plan.docx', link: 'Download test plan' },
   { title: 'Warehouse Management System Test Plan', type: 'QA learning project', text: 'A structured test plan covering validation strategy, risks and regression scenarios.', href: '/docs/Warehouse-Management-System-Test-Plan.pdf', link: 'View test plan' },
-  { title: 'Intake & Mapping Workbench', type: 'Synthetic implementation demonstration', text: 'An interactive recreation of configuration and mapping patterns using demonstration data.', href: '/intake-builder-demo.html', link: 'Explore demonstration' },
 ];
 
 export function RestoredContent() {
