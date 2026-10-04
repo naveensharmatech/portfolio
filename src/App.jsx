@@ -181,6 +181,8 @@ const projects = [
     description: "A published project that classifies incoming inquiries and routes them to the right follow-up workflow.",
     stack: ["Zapier", "Claude API", "HubSpot", "JavaScript"],
     href: "https://github.com/naveensharmatech/customer-inquiry-router-zapier",
+    linkLabel: "View source & setup",
+    workflowHref: "#inquiry-workflow",
   },
   {
     number: "02",
@@ -188,6 +190,7 @@ const projects = [
     title: "B2B Lead Generator",
     description: "A published Apify actor for discovering businesses and structuring publicly available company contact data.",
     stack: ["Apify", "Crawlee", "Node.js"],
+    linkLabel: "Open Apify actor",
     href: "https://apify.com/opility/b2b-leads-scraper-1-5-1k-leads-emails-phones",
   },
   {
@@ -196,6 +199,7 @@ const projects = [
     title: "Shopify Store Lead Extractor",
     description: "A published actor that gathers public store details and organizes them for research workflows.",
     stack: ["Python", "Apify", "BeautifulSoup"],
+    linkLabel: "Open Apify actor",
     href: "https://apify.com/opility/shopify-store-lead-extractor-emails-catalog-size-apps",
   },
 ];
@@ -235,7 +239,7 @@ export default function App() {
                 Expertise <ChevronDown size={15} className={`transition-transform ${expertiseOpen ? "rotate-180" : ""}`}/>
               </button>
               {expertiseOpen && <div className="absolute left-0 top-full z-20 mt-3 w-48 rounded-xl border border-[#172321]/10 bg-white p-2 shadow-lg">
-                {[["Capabilities", "#capabilities"], ["Tools & Platforms", "#tools"], ["Qualifications", "#qualifications"]].map(([label, href]) => <a key={href} href={href} onClick={() => setExpertiseOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-[#52615c] hover:bg-[#f0f3ef] hover:text-[#172321]">{label}</a>)}
+                {[["Workflows", "#workflow-references"], ["Work demos", "#demos"], ["Capabilities", "#capabilities"], ["Tools & Platforms", "#tools"], ["Qualifications", "#qualifications"]].map(([label, href]) => <a key={href} href={href} onClick={() => setExpertiseOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-[#52615c] hover:bg-[#f0f3ef] hover:text-[#172321]">{label}</a>)}
               </div>}
             </div>
             <a href="#about" className="text-sm text-[#52615c] transition hover:text-[#172321]">About</a>
@@ -254,7 +258,7 @@ export default function App() {
             Expertise <ChevronDown size={16} className={`transition-transform ${mobileExpertiseOpen ? "rotate-180" : ""}`}/>
           </button>
           {mobileExpertiseOpen && <div className="ml-3 flex flex-col border-l border-[#172321]/10 pl-3">
-            {[["Capabilities", "#capabilities"], ["Tools & Platforms", "#tools"], ["Qualifications", "#qualifications"]].map(([label, href]) => <a key={href} href={href} onClick={closeMobileMenu} className="rounded-lg px-3 py-2 text-sm text-[#52615c] hover:bg-white">{label}</a>)}
+            {[["Workflows", "#workflow-references"], ["Work demos", "#demos"], ["Capabilities", "#capabilities"], ["Tools & Platforms", "#tools"], ["Qualifications", "#qualifications"]].map(([label, href]) => <a key={href} href={href} onClick={closeMobileMenu} className="rounded-lg px-3 py-2 text-sm text-[#52615c] hover:bg-white">{label}</a>)}
           </div>}
           <a href="#about" onClick={closeMobileMenu} className="rounded-lg px-3 py-3 text-sm hover:bg-white">About</a>
           <a href="#contact" onClick={closeMobileMenu} className="rounded-lg px-3 py-3 text-sm hover:bg-white">Contact</a>
@@ -304,18 +308,20 @@ export default function App() {
               <span className="text-sm font-medium leading-5 text-[#172321]">{tool.name}</span>
             </li>)}
           </ul>
-          <details className="mt-8 overflow-hidden rounded-3xl border border-[#172321]/10 bg-white p-5 md:p-7">
-            <summary className="cursor-pointer text-lg font-semibold">Zapier, n8n &amp; Make — visual concepts</summary>
+          <section aria-labelledby="platform-concepts-title" className="mt-8 overflow-hidden rounded-3xl border border-[#172321]/10 bg-white p-5 md:p-7">
+            <h3 id="platform-concepts-title" className="text-xl font-semibold">Zapier, n8n &amp; Make — visual concepts</h3>
             <figure className="mt-6">
               <a href="/images/automation-platform-concepts.png" target="_blank" rel="noreferrer" aria-label="Open automation platform comparison at full size"><img src="/images/automation-platform-concepts.png" alt="Visual comparison of a Zapier Zap with triggers, paths and steps; an n8n workflow with nodes; and a Make scenario with modules and a router." width="2000" height="938" loading="lazy" className="h-auto w-full rounded-xl"/></a>
               <figcaption className="mt-4 flex flex-wrap items-center justify-between gap-3"><p className="text-sm text-[#52615c]">A visual reference for the platforms I’m building with and learning.</p><a href="/images/automation-platform-concepts.png" target="_blank" rel="noreferrer" className="text-sm font-semibold underline underline-offset-4">View full-size comparison <ArrowUpRight size={14} className="inline"/></a></figcaption>
             </figure>
-          </details>
+          </section>
         </section>
 
         <section id="projects" className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
-          <div className="mb-12 flex flex-wrap items-end justify-between gap-6"><div><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#71807b]">Selected work</p><h2 className="mt-4 text-4xl font-semibold tracking-[-.04em]">Projects you can inspect.</h2></div><p className="max-w-md text-sm leading-6 text-[#52615c]">Public builds and published products. Client work is described at a high level to respect privacy.</p></div>
-          <div className="grid gap-4">{projects.map(project => <article key={project.number} className="grid gap-5 rounded-3xl border border-[#172321]/10 bg-white p-6 transition hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[70px_1fr_auto] md:items-center md:p-8"><span className="text-sm font-semibold text-[#71807b]">{project.number}</span><div><p className="text-xs font-semibold uppercase tracking-[.14em] text-[#71807b]">{project.type}</p><h3 className="mt-2 text-2xl font-semibold">{project.title}</h3><p className="mt-2 max-w-2xl text-sm leading-6 text-[#52615c]">{project.description}</p><div className="mt-4 flex flex-wrap gap-2">{project.stack.map(item => <span key={item} className="rounded-full bg-[#f0f3ef] px-3 py-1 text-xs text-[#52615c]">{item}</span>)}</div></div><a href={project.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold">View project <ArrowUpRight size={16}/></a></article>)}</div>
+          <div className="mb-12 flex flex-wrap items-end justify-between gap-6"><div><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#71807b]">Selected work</p><h2 className="mt-4 text-4xl font-semibold tracking-[-.04em]">Projects you can inspect.</h2></div><p className="max-w-md text-sm leading-6 text-[#52615c]">Public builds and published products. Client work is described at a high level to respect privacy.</p><a href="#workflow-references" className="inline-flex items-center gap-2 rounded-full bg-[#172321] px-5 py-3 text-sm font-semibold text-[#c5f16b]">Explore workflow gallery <ArrowDown size={16}/></a></div>
+          <div className="grid gap-4">{projects.map(project => <article key={project.number} className="grid gap-5 rounded-3xl border border-[#172321]/10 bg-white p-6 transition hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[70px_1fr_auto] md:items-center md:p-8"><span className="text-sm font-semibold text-[#71807b]">{project.number}</span><div><p className="text-xs font-semibold uppercase tracking-[.14em] text-[#71807b]">{project.type}</p><h3 className="mt-2 text-2xl font-semibold">{project.title}</h3><p className="mt-2 max-w-2xl text-sm leading-6 text-[#52615c]">{project.description}</p><div className="mt-4 flex flex-wrap gap-2">{project.stack.map(item => <span key={item} className="rounded-full bg-[#f0f3ef] px-3 py-1 text-xs text-[#52615c]">{item}</span>)}</div></div><div className="flex flex-wrap gap-4 md:flex-col">{project.workflowHref && <a href={project.workflowHref} className="inline-flex items-center gap-2 text-sm font-semibold">Inspect workflow <ArrowDown size={16}/></a>}<a href={project.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold">{project.linkLabel} <ArrowUpRight size={16}/></a></div></article>)}</div>
+          <section id="demos" aria-labelledby="demos-title" className="mt-14 scroll-mt-24"><h3 id="demos-title" className="text-2xl font-semibold tracking-tight">Explore the work firsthand.</h3><p className="mt-3 text-sm leading-6 text-[#52615c]">Try sample-data demonstrations or explore the academy experience. Project source, documents and Apify products have separate links.</p><div className="mt-6 grid gap-4 lg:grid-cols-3">{[{title:"Intake & Mapping Workbench",text:"Fill sample fields, test mappings and inspect a populated document.",href:"/intake-builder-demo",label:"Launch interactive demo"},{title:"Manufacturing Shift Handoff",text:"Load a sample shift and generate a validated handoff summary.",href:"/manufacturing-demo",label:"Launch interactive demo"},{title:"Academy Operations",text:"Explore my institute responsibilities and academy photo gallery.",href:"/institute-demo",label:"Explore experience gallery"}].map(item => <article key={item.href} className="flex flex-col rounded-3xl border border-[#172321]/10 bg-white p-6"><h4 className="text-xl font-semibold">{item.title}</h4><p className="mt-3 flex-1 text-sm leading-6 text-[#52615c]">{item.text}</p><a href={item.href} className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-[#172321] px-5 py-3 text-sm font-semibold text-[#c5f16b]">{item.label} <ArrowUpRight size={16}/></a></article>)}</div></section>
+          <WorkflowGallery />
           <RestoredContent />
         </section>
 
@@ -337,7 +343,6 @@ export default function App() {
             </article>)}
           </div>
           <details className="mt-6 rounded-2xl border border-[#172321]/10 bg-white p-6"><summary className="cursor-pointer font-semibold">Zapier Academy — completed courses</summary><ul className="mt-5 grid gap-3 text-sm text-[#52615c] sm:grid-cols-2">{["Jumpstart", "Building Basic Zaps", "Building Intermediate Zaps", "Building AI Agents", "What is Zapier MCP?", "Using Zapier MCP", "Governing Zapier MCP", "Account Setup", "Monitoring and Operations", "Security and Governance"].map(course => <li key={course}>✓ {course}</li>)}</ul></details>
-          <WorkflowGallery />
         </section>
 
         <section id="about" aria-labelledby="about-title" className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-28">
