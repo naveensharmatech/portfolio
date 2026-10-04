@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Bot, X, Send } from 'lucide-react';
+import { X, Send } from 'lucide-react';
 
 const earlierProjects = [
   { title: 'Intake & Mapping Workbench', type: 'Interactive SaaS implementation demo', text: 'Enter sample data, complete conditional fields and save a signature to see a populated document and its mapped values.', href: '/intake-builder-demo', link: 'Try working demo' },
@@ -24,7 +24,7 @@ export function AboutDetails() {
 
 export function EllaChat() {
   const [open,setOpen]=useState(false);
-  const [messages,setMessages]=useState([{role:'assistant',content:'Hi, I’m Ella. Ask me about Naveen’s projects, experience or learning.'}]);
+  const [messages,setMessages]=useState([{role:'assistant',content:'Hi, I’m Ella, Naveen Sharma’s Personal Assistant. Ask me about him—or explore AI, automation, careers and learning.'}]);
   const [input,setInput]=useState('');
   const [busy,setBusy]=useState(false);
   const inputRef=useRef(null), endRef=useRef(null), toggleRef=useRef(null);
@@ -45,10 +45,10 @@ export function EllaChat() {
   }
   return <div className="fixed bottom-5 right-5 z-[60]">
     {open&&<section id="ella-panel" role="dialog" aria-labelledby="ella-title" onKeyDown={e=>{if(e.key==='Escape')close();}} className="mb-3 flex h-[min(520px,70dvh)] w-[min(370px,calc(100vw-40px))] flex-col overflow-hidden rounded-3xl border border-[#172321]/15 bg-white text-[#172321] shadow-2xl">
-      <header className="flex items-center justify-between bg-[#172321] p-4 text-white"><div className="flex items-center gap-3"><Bot size={24}/><div><h2 id="ella-title" className="font-semibold">Ella</h2><p className="text-xs text-white/75">Naveen’s portfolio assistant</p></div></div><button type="button" onClick={close} aria-label="Close Ella chat" className="grid h-11 w-11 place-items-center rounded-full hover:bg-white/10"><X size={20}/></button></header>
+      <header className="flex items-center justify-between bg-[#172321] p-4 text-white"><div className="flex items-center gap-3"><img src="/ella-avatar.png" alt="Ella" width="48" height="48" className="h-12 w-12 shrink-0 rounded-full object-cover"/><div><h2 id="ella-title" className="font-semibold">Ella</h2><p className="text-xs text-white/75">Naveen Sharma’s Personal Assistant</p></div></div><button type="button" onClick={close} aria-label="Close Ella chat" className="grid h-11 w-11 place-items-center rounded-full hover:bg-white/10"><X size={20}/></button></header>
       <div className="flex-1 overflow-y-auto p-4" aria-live="polite" aria-relevant="additions" aria-busy={busy}>{messages.map((m,i)=><p key={i} className={`mb-3 whitespace-pre-wrap break-words rounded-2xl p-3 text-sm leading-6 ${m.role==='user'?'ml-7 bg-[#eaf3dc]':'mr-7 bg-[#f0f3ef]'}`}><span className="sr-only">{m.role==='user'?'You':'Ella'}: </span>{m.content}</p>)}{busy&&<p className="text-sm text-[#52615c]">Ella is replying…</p>}<div ref={endRef}/></div>
-      <form onSubmit={send} className="flex gap-2 border-t border-[#172321]/10 p-3"><label htmlFor="ella-input" className="sr-only">Ask Ella a question</label><input ref={inputRef} id="ella-input" maxLength={1500} value={input} onChange={e=>setInput(e.target.value)} placeholder="Ask about Naveen’s work…" className="min-w-0 flex-1 rounded-xl border border-[#172321]/20 px-3 py-3 text-sm"/><button type="submit" disabled={busy||!input.trim()} aria-label="Send message" className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[#172321] text-white disabled:opacity-40"><Send size={18}/></button></form>
+      <form onSubmit={send} className="flex gap-2 border-t border-[#172321]/10 p-3"><label htmlFor="ella-input" className="sr-only">Ask Ella a question</label><input ref={inputRef} id="ella-input" maxLength={1500} value={input} onChange={e=>setInput(e.target.value)} placeholder="Ask me about Naveen…" className="min-w-0 flex-1 rounded-xl border border-[#172321]/20 px-3 py-3 text-sm"/><button type="submit" disabled={busy||!input.trim()} aria-label="Send message" className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[#172321] text-white disabled:opacity-40"><Send size={18}/></button></form>
     </section>}
-    <button ref={toggleRef} type="button" aria-expanded={open} aria-controls="ella-panel" onClick={()=>open?close():setOpen(true)} className="ml-auto flex min-h-12 items-center gap-2 rounded-full bg-[#172321] px-5 py-3 font-semibold text-[#c5f16b] shadow-lg"><Bot size={20}/>Ask Ella</button>
+    <button ref={toggleRef} type="button" aria-expanded={open} aria-controls="ella-panel" onClick={()=>open?close():setOpen(true)} className="ml-auto flex min-h-12 items-center gap-2 rounded-full bg-[#172321] px-5 py-3 font-semibold text-[#c5f16b] shadow-lg"><img src="/ella-avatar.png" alt="" aria-hidden="true" width="36" height="36" className="h-9 w-9 rounded-full object-cover"/>Ask Ella</button>
   </div>;
 }
