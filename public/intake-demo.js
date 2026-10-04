@@ -156,7 +156,7 @@ $('intakeForm').addEventListener('submit',event=>{
 $('downloadJson').addEventListener('click',()=>{
   if(!packet)return;
   const blob=new Blob([JSON.stringify(packet,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob);
-  const anchor=document.createElement('a');anchor.href=url;anchor.download='naveen-intake-demo.json';anchor.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  const anchor=document.createElement('a');anchor.href=url;anchor.download='naveen-intake-demo.json';anchor.hidden=true;document.body.append(anchor);anchor.click();anchor.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
 });
 function resetForm(){
   tested=false;$('intakeForm').reset();mappings=Object.fromEntries(fields.map(f=>[f.id,f.target]));
@@ -184,7 +184,7 @@ function renderSigners(){
   }
   const count=packet?.signatures.length||0;
   $('signState').className='pill '+(count===3?'pass':'');$('signState').textContent=!packet?'Submit a passing intake to begin.':count===3?'PASS — all 3 sample signer steps complete':`${count}/3 signed — next signer unlocked`;
-  if(packet){$('submissionStatus').textContent=count===3?'PASS — demo packet complete':'PASS — demo packet created';packet.status=count===3?'complete':'awaiting-signatures';}
+  if(packet){$('submissionStatus').textContent=count===3?'PASS — demo packet complete':'PASS — demo packet created';packet.status=count===3?'complete':'awaiting-signatures';$('jsonPreview').textContent=JSON.stringify(packet,null,2);}
 }
 $('resetSigners').addEventListener('click',()=>{if(packet){packet.signatures=packet.signatures.slice(0,1);renderSigners();}});
 const taskSeeds=[{title:'Configure intake labels',context:'Input labels and required rules',stage:0},{title:'Map intake fields',context:'Check configured output targets',stage:0},{title:'Check conditional inputs',context:'Validate the extra required field',stage:1}];
