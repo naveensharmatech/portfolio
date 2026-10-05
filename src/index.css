@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Keep restored sections on the same theme tokens as the responsive layout. */
+@layer utilities {
+  .bg-white { @apply bg-surface; }
+  .bg-\[\#f6f7f4\] { @apply bg-canvas; }
+  .bg-\[\#f0f3ef\] { @apply bg-soft; }
+  .bg-\[\#eaf3dc\] { @apply bg-panel; }
+  .text-\[\#172321\] { @apply text-ink; }
+  .text-\[\#52615c\], .text-\[\#40572d\] { @apply text-muted; }
+  .text-\[\#5c6d65\] { @apply text-subtle; }
+  .border-\[\#172321\]\/10 { @apply border-ink/10; }
+  .border-\[\#172321\]\/15 { @apply border-ink/15; }
+  .border-\[\#172321\]\/20 { @apply border-ink/20; }
+  .hover\:bg-white:hover { @apply bg-surface; }
+  .hover\:bg-\[\#f0f3ef\]:hover { @apply bg-soft; }
+  .hover\:text-\[\#172321\]:hover { @apply text-ink; }
+}
+
 :root {
   color-scheme: light;
   --color-canvas: 246 247 244;
@@ -188,3 +205,14 @@ html.dark .tilt-card:hover {
 .workflow-connector:last-child::after {
   display: none;
 }
+
+/* Portfolio content and restored assistant accessibility. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* Readable controls and persistent keyboard focus. */
+summary { min-height: 44px; align-content: center; }
+:focus-visible { box-shadow: 0 0 0 2px #fff; }
+@media (max-width: 767px) { input, select, textarea { font-size: 16px !important; } }

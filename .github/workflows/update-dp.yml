@@ -1,0 +1,30 @@
+name: Update Portfolio DP from work-and-projects
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update-dp:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout portfolio repo
+        uses: actions/checkout@v3
+        with:
+          repository: naveensharmatech/portfolio
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Download DP from work-and-projects
+        run: |
+          curl -L https://github.com/naveensharmatech/work-and-projects/raw/main/NaveenProfile%20DP.png \
+            -o public/headshot-round.png
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add public/headshot-round.png
+          git commit -m "chore: update portfolio DP from work-and-projects"
+          git push
