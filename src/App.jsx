@@ -238,7 +238,7 @@ export default function App() {
       <header onKeyDown={event => { if (event.key === "Escape") { if (menuOpen) { closeMobileMenu(); mobileMenuButtonRef.current?.focus(); } else if (expertiseOpen) { setExpertiseOpen(false); expertiseButtonRef.current?.focus(); } } }} className="sticky top-0 z-50 border-b border-[#172321]/10 bg-[#f6f7f4]/95 backdrop-blur">
         <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-5 md:px-10">
           <a href="#top" className="flex items-center gap-3" aria-label="Naveen Sharma home">
-            <span className="grid h-10 w-10 place-items-center rounded-full bg-[#172321] text-sm font-bold text-[#c5f16b]">NS</span>
+            <img src="/favicon.png" alt="Naveen Sharma" width="40" height="40" className="h-10 w-10 rounded-full object-cover" />
             <span className="text-sm font-semibold tracking-tight">Naveen Sharma<span className="ml-2 text-[#5c6d65]">/ Portfolio</span></span>
           </a>
           <nav className="hidden items-center gap-8 lg:flex" aria-label="Main navigation">
