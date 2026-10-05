@@ -349,10 +349,14 @@ export default function App() {
                 <span className="inline-flex rounded-full bg-[#eaf3dc] px-3 py-1 text-xs font-semibold text-[#40572d]">{status}</span>
                 <h4 className="mt-3 font-semibold">{title}</h4>
                 <p className="mt-1 text-sm text-[#5c6d65]">{organization}</p>
+                {title.startsWith("Zapier Academy") && <div className="mt-3 flex flex-col gap-2 text-sm font-semibold">
+                  <a href="/docs/Zapier%20AI%20Agent%20Learning%20Path.pdf" target="_blank" rel="noreferrer" className="underline underline-offset-4">AI Agent Learning Path — certificates (PDF) ↗</a>
+                  <a href="/docs/MCP%20Path-%20Zapier.pdf" target="_blank" rel="noreferrer" className="underline underline-offset-4">MCP Path — certificates (PDF) ↗</a>
+                  <a href="/docs/Account%20Admin%20Essentials%20Path.pdf" target="_blank" rel="noreferrer" className="underline underline-offset-4">Account Admin Essentials Path — certificates (PDF) ↗</a>
+                </div>}
               </div>)}</div>
             </article>)}
           </div>
-          <details className="mt-6 rounded-2xl border border-[#172321]/10 bg-white p-6"><summary className="cursor-pointer font-semibold">Zapier Academy — completed courses</summary><ul className="mt-5 grid gap-3 text-sm text-[#52615c] sm:grid-cols-2">{["Jumpstart", "Building Basic Zaps", "Building Intermediate Zaps", "Building AI Agents", "What is Zapier MCP?", "Using Zapier MCP", "Governing Zapier MCP", "Account Setup", "Monitoring and Operations", "Security and Governance"].map(course => <li key={course}>✓ {course}</li>)}</ul></details>
         </section>
 
         <section id="about" aria-labelledby="about-title" className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-28">
