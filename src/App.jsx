@@ -130,7 +130,7 @@ const qualifications = [
     "category": "Certifications",
     "items": [
       {
-        "title": "Zapier Academy — all courses completed",
+        "title": "Zapier Academy",
         "organization": "AI Builder · MCP · Account Admin Essentials",
         "status": "Completed"
       },
@@ -349,11 +349,7 @@ export default function App() {
                 <span className="inline-flex rounded-full bg-[#eaf3dc] px-3 py-1 text-xs font-semibold text-[#40572d]">{status}</span>
                 <h4 className="mt-3 font-semibold">{title}</h4>
                 <p className="mt-1 text-sm text-[#5c6d65]">{organization}</p>
-                {title.startsWith("Zapier Academy") && <div className="mt-3 flex flex-col gap-2 text-sm font-semibold">
-                  <a href="/docs/Zapier%20AI%20Agent%20Learning%20Path.pdf" target="_blank" rel="noreferrer" className="underline underline-offset-4">AI Agent Learning Path — certificates (PDF) ↗</a>
-                  <a href="/docs/MCP%20Path-%20Zapier.pdf" target="_blank" rel="noreferrer" className="underline underline-offset-4">MCP Path — certificates (PDF) ↗</a>
-                  <a href="/docs/Account%20Admin%20Essentials%20Path.pdf" target="_blank" rel="noreferrer" className="underline underline-offset-4">Account Admin Essentials Path — certificates (PDF) ↗</a>
-                </div>}
+                {title.startsWith("Zapier Academy") && <a href="/zapier-expertise.html" target="_blank" rel="noreferrer" className="mt-3 inline-block text-sm font-semibold underline underline-offset-4">Zapier Expertise ↗</a>}
               </div>)}</div>
             </article>)}
           </div>
