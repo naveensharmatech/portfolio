@@ -31,10 +31,12 @@ export function ZapierExperiments() {
     },
     {
       title: 'Social Media AI Chatbot',
+      href: 'https://social-media-ai-chatbot-c5b290.zapier.app',
+      label: 'Open chatbot demo',
       status: 'Experimental · Configuration evidence',
       description: 'Configured a Zapier Chatbots assistant with a greeting and instructions for drafting, editing, summarizing, and adapting social content to a requested audience and tone.',
       skills: 'AI instruction design · Requirements gathering · Conversational experience',
-      evidence: 'The editor screenshot establishes a configured greeting and directive. Response quality, model setup, and successful conversations have not yet been verified.',
+      evidence: 'The editor screenshot establishes a configured greeting and directive, and a shared chatbot URL is available. Response quality, model setup, and successful conversations have not yet been verified.',
       next: 'Test realistic briefs, revision requests, and incomplete inputs; record sample conversations before presenting a runnable demo.',
     },
     {
