@@ -135,11 +135,11 @@ const qualifications = [
         "status": "Completed"
       },
       {
-        "title": "Quality Assurance & Testing",
+        "title": "QA Manual & Automation",
         "organization": "Smart College · Great Learning Academy",
         "status": "Completed",
         "certificateGroup": "qa",
-        "certificateLabel": "QA & Testing Certificates"
+        "certificateLabel": "QA Manual & Automation Certificates"
       },
       {
         "title": "JSM Fundamentals with AI",
