@@ -20,6 +20,26 @@ export function Approach() {
 export function ZapierExperiments() {
   const experiments = [
     {
+      title: 'Gmail Acknowledgment Draft Automation',
+      status: 'Published demo · Successful run and draft shown',
+      description: 'Built a two-step Gmail workflow that receives a new email and creates a fixed acknowledgment draft addressed to its sender. The reply stays in Drafts for human review.',
+      skills: 'Gmail integration · Field mapping · Workflow testing · Human review',
+      evidence: 'Shared screenshots show the Zap published as v1, a successful run on one new email, and the matching acknowledgment draft. Scheduled execution without pressing Run has not yet been confirmed.',
+      next: 'Confirm an unattended run and check duplicate processing and sender mapping with additional test messages.',
+      href: '/docs/gmail-acknowledgment-demo.html',
+      label: 'Explore the demo and routing design',
+    },
+    {
+      title: 'Email Priority Routing — Advanced Prototype',
+      status: 'Design prototype · Paid Zapier features',
+      description: 'Designed Urgent, Follow-up and Standard branches using Zapier Paths, with text-formatting steps. A webhook trigger was later replaced with Gmail while exploring a free-plan version.',
+      skills: 'Conditional branching · Trigger migration · Plan-aware workflow design',
+      evidence: 'Editor screenshots show three branches and tested path conditions. Later mapping warnings and missing final actions remained; this advanced design was not established as a published working workflow.',
+      next: 'Repair mappings, make branch conditions exclusive, add final actions, and validate every route on a suitable plan.',
+      href: '/docs/gmail-acknowledgment-demo.html#routing',
+      label: 'View the advanced routing design',
+    },
+    {
       title: 'AI Email Assistant — Inbox Organization',
       status: 'Experimental · Inactive · Requires repair',
       description: 'Designed an email workflow connecting Gmail, AI categorization and summarization, Zapier Tables, and four category-specific views: newsletters, app notifications, action required, and sales.',
@@ -51,7 +71,7 @@ export function ZapierExperiments() {
   return <section id="zapier-experiments" aria-labelledby="zapier-experiments-title" className="mt-14 scroll-mt-24">
     <p className="text-xs font-semibold uppercase tracking-[.2em] text-[#5c6d65]">Hands-on learning · Zapier</p>
     <h3 id="zapier-experiments-title" className="mt-3 text-3xl font-semibold tracking-tight">Zapier experiments &amp; workflow design</h3>
-    <p className="mt-4 max-w-3xl text-sm leading-7 text-[#52615c]">Personal prototypes exploring how AI steps, connected apps, structured data, and interfaces fit into a business process. These examples complement my completed Zapier Academy learning; they are not production deployments or evidence of completed Make or n8n implementations.</p>
+    <p className="mt-4 max-w-3xl text-sm leading-7 text-[#52615c]">A published Gmail acknowledgment demo alongside personal prototypes exploring routing, AI steps, connected apps, structured data, and interfaces. Each example states what was built and what its evidence establishes.</p>
     <div className="mt-6 grid gap-5 lg:grid-cols-3">{experiments.map(item => <article key={item.title} className="rounded-3xl border border-[#172321]/10 bg-white p-6">
       <p className="text-xs font-semibold leading-5 text-[#5c6d65]">{item.status}</p>
       <h4 className="mt-3 text-xl font-semibold">{item.title}</h4>
