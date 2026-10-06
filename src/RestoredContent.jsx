@@ -17,6 +17,51 @@ export function Approach() {
   return <div className="mt-14 border-t border-white/20 pt-8"><h3 className="text-2xl font-semibold">How I build a workflow</h3><ol className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{[['Understand','Map the process, inputs, users and desired outcome.'],['Design','Define triggers, actions, routing and exceptions.'],['Build','Configure suitable no-code tools and AI-assisted components.'],['Integrate','Connect applications, APIs, webhooks and data.'],['Validate','Check mappings, branches, invalid inputs and failure behavior.'],['Document','Explain the setup, handoff and ongoing checks.']].map(([title,text],i)=><li key={title}><p className="font-semibold text-[#c5f16b]">0{i+1} · {title}</p><p className="mt-2 text-sm leading-6 text-white/75">{text}</p></li>)}</ol></div>;
 }
 
+export function ZapierExperiments() {
+  const experiments = [
+    {
+      title: 'AI Email Assistant — Inbox Organization',
+      status: 'Experimental · Inactive · Requires repair',
+      description: 'Designed an email workflow connecting Gmail, AI categorization and summarization, Zapier Tables, and four category-specific views: newsletters, app notifications, action required, and sales.',
+      skills: 'Process mapping · Structured records · Categorization · User-facing views',
+      evidence: 'The shared canvas documents the intended architecture. Editor screenshots show missing AI app steps, an unselected Gmail account, and mapping/test warnings. End-to-end execution and view filtering are not verified.',
+      next: 'Reconnect Gmail, replace unavailable AI steps, map category and summary fields, and check sample messages against each view before activation.',
+      href: 'https://zapier.com/app/canvas/public/326ca302-e95e-4827-8f7f-0ddca47a3c12',
+      label: 'View workflow design',
+    },
+    {
+      title: 'Social Media AI Chatbot',
+      status: 'Experimental · Configuration evidence',
+      description: 'Configured a Zapier Chatbots assistant with a greeting and instructions for drafting, editing, summarizing, and adapting social content to a requested audience and tone.',
+      skills: 'AI instruction design · Requirements gathering · Conversational experience',
+      evidence: 'The editor screenshot establishes a configured greeting and directive. Response quality, model setup, and successful conversations have not yet been verified.',
+      next: 'Test realistic briefs, revision requests, and incomplete inputs; record sample conversations before presenting a runnable demo.',
+    },
+    {
+      title: 'AI-Powered Gmail Assistant — Team Handoff',
+      status: 'Experimental · Draft',
+      description: 'Explored a Gmail-triggered workflow that generates a reply using Zapier Chatbots and passes information to Slack for team follow-up.',
+      skills: 'App orchestration · AI-assisted reply drafting · Team notifications',
+      evidence: 'The draft shows a Gmail trigger, chatbot reply generation, and two Slack actions. Their field mappings, destinations, and execution results have not been verified.',
+      next: 'Confirm the purpose of both Slack messages, verify field mappings, and test one complete run without duplicate notifications.',
+    },
+  ];
+  return <section id="zapier-experiments" aria-labelledby="zapier-experiments-title" className="mt-14 scroll-mt-24">
+    <p className="text-xs font-semibold uppercase tracking-[.2em] text-[#5c6d65]">Hands-on learning · Zapier</p>
+    <h3 id="zapier-experiments-title" className="mt-3 text-3xl font-semibold tracking-tight">Zapier experiments &amp; workflow design</h3>
+    <p className="mt-4 max-w-3xl text-sm leading-7 text-[#52615c]">Personal prototypes exploring how AI steps, connected apps, structured data, and interfaces fit into a business process. These examples complement my completed Zapier Academy learning; they are not production deployments or evidence of completed Make or n8n implementations.</p>
+    <div className="mt-6 grid gap-5 lg:grid-cols-3">{experiments.map(item => <article key={item.title} className="rounded-3xl border border-[#172321]/10 bg-white p-6">
+      <p className="text-xs font-semibold leading-5 text-[#5c6d65]">{item.status}</p>
+      <h4 className="mt-3 text-xl font-semibold">{item.title}</h4>
+      <p className="mt-3 text-sm leading-7 text-[#52615c]">{item.description}</p>
+      <p className="mt-4 text-xs font-semibold leading-6 text-[#40572d]">{item.skills}</p>
+      <details className="mt-5 border-t border-[#172321]/10 pt-4"><summary className="cursor-pointer text-sm font-semibold">Evidence &amp; next validation</summary><p className="mt-3 text-sm leading-7 text-[#52615c]">{item.evidence}</p><p className="mt-3 text-sm leading-7 text-[#52615c]"><strong>Next validation:</strong> {item.next}</p></details>
+      {item.href && <a href={item.href} target="_blank" rel="noreferrer" className="mt-5 inline-block text-sm font-semibold underline underline-offset-4">{item.label} ↗</a>}
+    </article>)}</div>
+    <p className="mt-5 text-sm leading-7 text-[#52615c]">The <a href="#inquiry-workflow" className="font-semibold underline underline-offset-4">Customer Inquiry Router</a> is documented separately: Gmail filtering and JavaScript processing feed three routing paths with email and HubSpot actions. It is currently inactive after the Zapier trial expired. Screenshots document its structure; current run results and classification behavior require verification.</p>
+  </section>;
+}
+
 
 export function WorkflowGallery() {
   return <section id="workflow-references" aria-labelledby="workflow-gallery-title" className="mt-14 scroll-mt-24 rounded-3xl border border-[#172321]/10 bg-white p-5 md:p-8">

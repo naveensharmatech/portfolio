@@ -1,6 +1,6 @@
 "use client";
 
-import { RestoredContent, EllaChat, Approach, AboutDetails, WorkflowGallery } from "./RestoredContent";
+import { RestoredContent, EllaChat, Approach, AboutDetails, WorkflowGallery, ZapierExperiments } from "./RestoredContent";
 
 import { useState, useEffect, useRef } from "react";
 import {
@@ -194,9 +194,9 @@ const qualifications = [
 const projects = [
   {
     number: "01",
-    type: "Workflow automation · Public project",
+    type: "Workflow automation · Inactive prototype",
     title: "Customer Inquiry Router",
-    description: "A published project that classifies incoming inquiries and routes them to the right follow-up workflow.",
+    description: "A documented Zapier prototype for classifying inquiries and routing CRM and email actions. Currently inactive following trial expiry; source and setup are available.",
     stack: ["Zapier", "Claude API", "HubSpot", "JavaScript"],
     href: "https://github.com/naveensharmatech/customer-inquiry-router-zapier",
     linkLabel: "View source & setup",
@@ -319,6 +319,7 @@ export default function App() {
           <div className="grid gap-4">{projects.map(project => <article key={project.number} className="grid gap-5 rounded-3xl border border-[#172321]/10 bg-white p-6 transition hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[70px_1fr_auto] md:items-center md:p-8"><span className="text-sm font-semibold text-[#5c6d65]">{project.number}</span><div><p className="text-xs font-semibold uppercase tracking-[.14em] text-[#5c6d65]">{project.type}</p><h3 className="mt-2 text-2xl font-semibold">{project.title}</h3><p className="mt-2 max-w-2xl text-sm leading-6 text-[#52615c]">{project.description}</p><div className="mt-4 flex flex-wrap gap-2">{project.stack.map(item => <span key={item} className="rounded-full bg-[#f0f3ef] px-3 py-1 text-xs text-[#52615c]">{item}</span>)}</div></div><div className="flex flex-wrap gap-4 md:flex-col">{project.workflowHref && <a href={project.workflowHref} className="inline-flex items-center gap-2 text-sm font-semibold">Inspect workflow <ArrowDown size={16}/></a>}<a href={project.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold">{project.linkLabel} <ArrowUpRight size={16}/></a></div></article>)}</div>
           <section id="demos" aria-labelledby="demos-title" className="mt-14 scroll-mt-24"><h3 id="demos-title" className="text-2xl font-semibold tracking-tight">Explore the work firsthand.</h3><p className="mt-3 text-sm leading-6 text-[#52615c]">Try sample-data demonstrations or explore the academy experience. Project source, documents and Apify products have separate links.</p><div className="mt-6 grid gap-4 lg:grid-cols-3">{[{title:"Intake & Mapping Workbench",text:"Fill sample fields, test mappings and inspect a populated document.",href:"/intake-builder-demo",label:"Launch interactive demo"},{title:"Manufacturing Shift Handoff",text:"Load a sample shift and generate a validated handoff summary.",href:"/manufacturing-demo",label:"Launch interactive demo"},{title:"Academy Operations",text:"Explore my institute responsibilities and academy photo gallery.",href:"/institute-demo",label:"Explore experience gallery"}].map(item => <article key={item.href} className="flex flex-col rounded-3xl border border-[#172321]/10 bg-white p-6"><h4 className="text-xl font-semibold">{item.title}</h4><p className="mt-3 flex-1 text-sm leading-6 text-[#52615c]">{item.text}</p><a href={item.href} aria-label={`${item.label}: ${item.title}`} className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-[#172321] px-5 py-3 text-sm font-semibold text-[#c5f16b]">{item.label} <ArrowUpRight size={16}/></a></article>)}</div></section>
           <RestoredContent />
+          <ZapierExperiments />
           <WorkflowGallery />
         </section>
 
