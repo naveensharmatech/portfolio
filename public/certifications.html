@@ -32,7 +32,7 @@
     const section=document.createElement('section');section.id=id;
     const heading=document.createElement('h2');heading.textContent=title;
     const link=document.createElement('a');link.href=url;link.target='_blank';link.rel='noreferrer';link.textContent='Open PDF ↗';
-    const frame=document.createElement('iframe');frame.src=url;frame.title=title;frame.loading='lazy';
+    const frame=document.createElement('img');frame.src='/certificate-previews/'+encodeURIComponent(file.replace(/\.pdf$/,'.jpg'));frame.alt=title+' — Naveen Sharma';frame.loading='lazy';frame.style.cssText='display:block;width:100%;height:auto;margin-top:18px;border-radius:12px';
     section.append(heading,link,frame);document.getElementById('documents').append(section);
     const navLink=document.createElement('a');navLink.href='#'+id;navLink.textContent=title;document.getElementById('navigation').append(navLink);
   }
