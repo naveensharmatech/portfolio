@@ -135,11 +135,11 @@ const qualifications = [
         "status": "Completed"
       },
       {
-        "title": "QA qualification",
-        "organization": "Smart College",
+        "title": "Quality Assurance & Testing",
+        "organization": "Smart College · Great Learning Academy",
         "status": "Completed",
         "certificateGroup": "qa",
-        "certificateLabel": "QA Qualification"
+        "certificateLabel": "QA & Testing Certificates"
       },
       {
         "title": "JSM Fundamentals with AI",
@@ -147,13 +147,6 @@ const qualifications = [
         "status": "Completed",
         "certificateGroup": "jira",
         "certificateLabel": "Jira Expertise"
-      },
-      {
-        "title": "Introduction to Automation Testing",
-        "organization": "Great Learning Academy",
-        "status": "Completed",
-        "certificateGroup": "testing",
-        "certificateLabel": "Automation Testing Certificate"
       },
       {
         "title": "AI Tools Workshop",
