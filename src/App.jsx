@@ -137,12 +137,37 @@ const qualifications = [
       {
         "title": "QA qualification",
         "organization": "Smart College",
-        "status": "Completed"
+        "status": "Completed",
+        "certificateGroup": "qa",
+        "certificateLabel": "QA Qualification"
       },
       {
         "title": "JSM Fundamentals with AI",
         "organization": "Atlassian",
-        "status": "Completed"
+        "status": "Completed",
+        "certificateGroup": "jira",
+        "certificateLabel": "Jira Expertise"
+      },
+      {
+        "title": "Introduction to Automation Testing",
+        "organization": "Great Learning Academy",
+        "status": "Completed",
+        "certificateGroup": "testing",
+        "certificateLabel": "Automation Testing Certificate"
+      },
+      {
+        "title": "AI Tools Workshop",
+        "organization": "be10x",
+        "status": "Completed",
+        "certificateGroup": "ai",
+        "certificateLabel": "AI Tools Workshop Certificate"
+      },
+      {
+        "title": "Customer Relationship Management",
+        "organization": "HP LIFE · HP Foundation",
+        "status": "Completed",
+        "certificateGroup": "crm",
+        "certificateLabel": "CRM Certificate"
       }
     ]
   },
@@ -345,11 +370,12 @@ export default function App() {
           <div className="grid gap-5 md:grid-cols-3">
             {qualifications.map(({ category, items }) => <article key={category} className="rounded-3xl border border-[#172321]/10 bg-white p-6 md:p-7">
               <h3 className="mb-5 text-lg font-semibold">{category}</h3>
-              <div className="space-y-5">{items.map(({ title, organization, status }) => <div key={title} className="border-t border-[#172321]/10 pt-5">
+              <div className="space-y-5">{items.map(({ title, organization, status, certificateGroup, certificateLabel }) => <div key={title} className="border-t border-[#172321]/10 pt-5">
                 <span className="inline-flex rounded-full bg-[#eaf3dc] px-3 py-1 text-xs font-semibold text-[#40572d]">{status}</span>
                 <h4 className="mt-3 font-semibold">{title}</h4>
                 <p className="mt-1 text-sm text-[#5c6d65]">{organization}</p>
                 {title.startsWith("Zapier Academy") && <a href="/zapier-expertise.html" target="_blank" rel="noreferrer" className="mt-3 inline-block text-sm font-semibold underline underline-offset-4">Zapier Expertise ↗</a>}
+                {certificateGroup && <a href={`/certifications.html?group=${certificateGroup}`} target="_blank" rel="noreferrer" className="mt-3 inline-block text-sm font-semibold underline underline-offset-4">{certificateLabel} ↗</a>}
               </div>)}</div>
             </article>)}
           </div>
