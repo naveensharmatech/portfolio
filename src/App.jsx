@@ -257,7 +257,7 @@ export default function App() {
         <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-5 md:px-10">
           <a href="#top" className="flex items-center gap-3" aria-label="Naveen Sharma home">
             <img src="/favicon.png" alt="Naveen Sharma" width="40" height="40" className="h-10 w-10 rounded-full object-cover" />
-            <span className="text-sm font-semibold tracking-tight">Naveen Sharma<span className="ml-2 text-[#5c6d65]">/ Portfolio</span></span>
+            <span className="text-sm font-semibold tracking-tight">Naveen Sharma</span>
           </a>
           <nav className="hidden items-center gap-8 lg:flex" aria-label="Main navigation">
             <a href="#projects" className="text-sm text-[#52615c] transition hover:text-[#172321]">Projects</a>
