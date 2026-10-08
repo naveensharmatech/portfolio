@@ -16,7 +16,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: npm audit --omit=dev
+      - run: npm audit
       - run: npm run build
       - run: npm run test:chat
       - run: npx playwright install --with-deps chromium

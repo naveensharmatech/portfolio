@@ -1,8 +1,8 @@
 # Mobile Responsiveness & Accessibility
 
 The mobile improvements from `fix/mobile-responsive-accessibility` have been
-adapted to the current employer-focused portfolio. The newer content and locked
-dependencies are preserved. The feature branch's undeclared Terser configuration
+adapted to the current employer-focused portfolio. The newer portfolio content is preserved. Tailwind is migrated to version 4
+with its PostCSS plugin to remove the vulnerable development-tool dependency chain. The feature branch's undeclared Terser configuration
 is not needed; the existing Vite production build remains in use.
 
 ## Implemented
@@ -85,10 +85,9 @@ certificate links, Zapier experiment evidence, and corrected project status.
   enlargement at a 390px viewport passed. Actual browser zoom gestures were not tested.
 - Local linked assets responded successfully. No runtime errors occurred during
   layout checks. The UI fallback label, reply display, and input focus were tested.
-- `npm audit --omit=dev` reports zero vulnerabilities. The full audit reports five
-  high-severity development-tool findings through Tailwind 3's braces dependency.
-  Compatible source-map-js and selector-parser fixes were applied; braces currently
-  has no newer published version. A Tailwind major-version migration is separate work.
+- Both `npm audit` and `npm audit --omit=dev` report zero vulnerabilities after
+  migrating Tailwind to version 4 and refreshing the lockfile. Source detection is
+  limited to the React source directory; the existing theme configuration is retained.
 
 These are automated browser checks, not physical-device or screen-reader tests.
 Real iOS/Android safe-area behavior, touch gestures, VoiceOver/TalkBack output,

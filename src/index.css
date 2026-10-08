@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss" source(none);
+@source "./";
+@config "../tailwind.config.js";
 
 /* Keep restored sections on the same theme tokens as the responsive layout. */
 @layer utilities {
