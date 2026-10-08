@@ -1,18 +1,87 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss" source(none);
+@source "./";
+@config "../tailwind.config.js";
 
-html { scroll-behavior: smooth; }
+/* Keep restored sections on the same theme tokens as the responsive layout. */
+@layer utilities {
+  .bg-white { @apply bg-surface; }
+  .bg-\[\#f6f7f4\] { @apply bg-canvas; }
+  .bg-\[\#f0f3ef\] { @apply bg-soft; }
+  .bg-\[\#eaf3dc\] { @apply bg-panel; }
+  .text-\[\#172321\] { @apply text-ink; }
+  .text-\[\#52615c\], .text-\[\#40572d\] { @apply text-muted; }
+  .text-\[\#5c6d65\] { @apply text-subtle; }
+  .border-\[\#172321\]\/10 { @apply border-ink/10; }
+  .border-\[\#172321\]\/15 { @apply border-ink/15; }
+  .border-\[\#172321\]\/20 { @apply border-ink/20; }
+  .hover\:bg-white:hover { @apply bg-surface; }
+  .hover\:bg-\[\#f0f3ef\]:hover { @apply bg-soft; }
+  .hover\:text-\[\#172321\]:hover { @apply text-ink; }
+}
+
+:root {
+  color-scheme: light;
+  --color-canvas: 246 247 244;
+  --color-surface: 255 255 255;
+  --color-ink: 23 35 33;
+  --color-muted: 82 97 92;
+  --color-subtle: 86 101 95;
+  --color-panel: 223 232 221;
+  --color-soft: 240 243 239;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --color-canvas: 15 25 21;
+    --color-surface: 27 43 37;
+    --color-ink: 241 245 241;
+    --color-muted: 184 202 193;
+    --color-subtle: 174 192 184;
+    --color-panel: 37 59 50;
+    --color-soft: 43 62 53;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(76px + env(safe-area-inset-top) + 1rem);
+}
+
+@layer base {
+  a, button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  a svg, button svg { flex-shrink: 0; }
+
+  :focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 3px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :focus-visible { outline-color: #93c5fd; }
+    #contact :focus-visible { outline-color: #2563eb; }
+  }
+}
 
 body {
   margin: 0;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
   -webkit-font-smoothing: antialiased;
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background:
-    radial-gradient(1000px 500px at 85% -10%, rgba(37,99,235,.05) 0%, rgba(37,99,235,0) 60%),
-    radial-gradient(900px 480px at -10% 15%, rgba(124,58,237,.04) 0%, rgba(124,58,237,0) 55%),
-    #ffffff;
-  color: #0f172a;
+  background: rgb(var(--color-canvas));
+  color: rgb(var(--color-ink));
+  overflow-wrap: anywhere;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
@@ -54,6 +123,12 @@ html.dark body {
 .reveal-stagger.is-visible > *:nth-child(8){ transition-delay: .44s }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
   .reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
 
@@ -132,8 +207,6 @@ html.dark .tilt-card:hover {
 }
 
 /* Portfolio content and restored assistant accessibility. */
-[id] { scroll-margin-top: 100px; }
-:focus-visible { outline: 3px solid #526f23; outline-offset: 4px; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }

@@ -63,3 +63,10 @@ npm run dev
 ```
 
 Build with `npm run build`.
+
+## Mobile accessibility and deployment
+
+See the [mobile optimization checklist](MOBILE_OPTIMIZATION.md) for responsive
+layouts, system dark mode, touch targets, keyboard navigation, and validation.
+Follow the [Cloudflare deployment guide](docs/DEPLOYMENT.md) to preview and release
+the reviewed changes from `main`.
