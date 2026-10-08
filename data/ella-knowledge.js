@@ -94,7 +94,7 @@ export const ELLA_KNOWLEDGE = [
       "inquiry",
       "router"
     ],
-    "text": "Customer Inquiry Router — Workflow automation · Public project. A published project that classifies incoming inquiries and routes them to the right follow-up workflow. Stack: Zapier, Claude API, HubSpot, JavaScript. https://github.com/naveensharmatech/customer-inquiry-router-zapier"
+    "text": "Customer Inquiry Router — documented personal Zapier prototype, currently inactive after trial expiry. Screenshots show Gmail, filtering, JavaScript, three routing paths, email actions and HubSpot contact creation. Documentation describes Claude integration, but current classification behavior and successful runs were not independently verified. Source: https://github.com/naveensharmatech/customer-inquiry-router-zapier . Additional personal experiments at https://naveensharma.net/#zapier-experiments cover an Email Assistant design (missing AI steps and mapping/account warnings), Social Media AI Chatbot configuration (responses unverified), and a draft Gmail-to-Slack assistant. These demonstrate learning and configuration scope, not production deployments or additional credentials."
   },
   {
     "keywords": [

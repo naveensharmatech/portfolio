@@ -28,13 +28,20 @@ is not needed; the existing Vite production build remains in use.
 
 ## Validation checklist
 
-There is no automated test suite or linter configured. Use the existing commands:
+Run the build and repeatable acceptance checks:
 
 ```bash
 npm ci
 npm run build
-npm run preview
+npm run test:chat
+npx playwright install chromium
+npm run test:acceptance
 ```
+
+GitHub Actions runs the same checks and uploads browser traces/reports on failures.
+The Vite preview does not execute Pages Functions; chat fallback is separately
+checked against the actual Function handler and the UI is checked with a mocked
+fallback response.
 
 In the production preview:
 
@@ -61,21 +68,32 @@ These changes target WCAG AA; this checklist is not an independent accessibility
 certification or a claim of a perfect audit score. Screen-reader and real-device
 checks remain part of deployment acceptance.
 
-### Verification performed
+### Verification performed — October 8, 2026
 
-- `npm ci` and `npm run build` succeeded with the existing lockfile.
-- Chrome production-preview checks passed at all 11 widths listed above in both
-  light and dark modes: no horizontal overflow and no visible target below 44px.
-- Measured text contrast after theme transitions settled was at least 5.19:1 in
-  light mode and 6.65:1 in dark mode.
-- Keyboard skip navigation, Enter/Escape menu behavior, section focus, desktop
-  resize reset, touch activation, a scrollable 667×320 landscape menu, reduced
-  motion, 200% mobile page scaling, and local image/PDF responses passed.
-- No runtime errors were observed during viewport checks.
+The branch incorporates current main `3544783`, including the name-only header,
+certificate links, Zapier experiment evidence, and corrected project status.
 
-These are browser-emulation results, not physical-device or screen-reader tests.
-The existing development dependency audit reports five high-severity findings;
-the runtime-only audit reports none. Dependencies were not changed by this work.
+- `npm ci`, production build, and the chat Function validation/fallback test passed.
+- All 30 Chromium browser acceptance tests passed on the combined version.
+- All 11 widths above passed in light and dark mode without horizontal overflow
+  or visible link/button/summary targets below 44 CSS pixels.
+- Automated WCAG A/AA scans passed on the home page in light/dark mode, with Ella
+  closed and open, and on the QA certificate, Zapier expertise, and Gmail demo pages.
+- Keyboard skip navigation, Enter/Escape menu controls, section focus, desktop
+  resize reset, scrollable landscape menu, and reduced-motion scrolling passed.
+- Reflow at 320 CSS pixels (1280px desktop at 400% equivalent) and 200% text
+  enlargement at a 390px viewport passed. Actual browser zoom gestures were not tested.
+- Local linked assets responded successfully. No runtime errors occurred during
+  layout checks. The UI fallback label, reply display, and input focus were tested.
+- `npm audit --omit=dev` reports zero vulnerabilities. The full audit reports five
+  high-severity development-tool findings through Tailwind 3's braces dependency.
+  Compatible source-map-js and selector-parser fixes were applied; braces currently
+  has no newer published version. A Tailwind major-version migration is separate work.
+
+These are automated browser checks, not physical-device or screen-reader tests.
+Real iOS/Android safe-area behavior, touch gestures, VoiceOver/TalkBack output,
+external destinations, live AI/search accuracy, and actual browser zoom still
+require manual verification. No independent WCAG certification is claimed.
 
 ## Deployment
 

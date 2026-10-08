@@ -1,6 +1,6 @@
 "use client";
 
-import { RestoredContent, EllaChat, Approach, AboutDetails, WorkflowGallery } from "./RestoredContent";
+import { RestoredContent, EllaChat, Approach, AboutDetails, WorkflowGallery, ZapierExperiments } from "./RestoredContent";
 
 import { useState, useEffect, useRef } from "react";
 import {
@@ -130,19 +130,37 @@ const qualifications = [
     "category": "Certifications",
     "items": [
       {
-        "title": "Zapier Academy — all courses completed",
+        "title": "Zapier Academy",
         "organization": "AI Builder · MCP · Account Admin Essentials",
         "status": "Completed"
       },
       {
-        "title": "QA qualification",
-        "organization": "Smart College",
-        "status": "Completed"
+        "title": "QA Manual & Automation",
+        "organization": "Smart College · Great Learning Academy",
+        "status": "Completed",
+        "certificateGroup": "qa",
+        "certificateLabel": "QA Manual & Automation Certificates"
       },
       {
         "title": "JSM Fundamentals with AI",
         "organization": "Atlassian",
-        "status": "Completed"
+        "status": "Completed",
+        "certificateGroup": "jira",
+        "certificateLabel": "Jira Expertise"
+      },
+      {
+        "title": "AI Tools Workshop",
+        "organization": "be10x",
+        "status": "Completed",
+        "certificateGroup": "ai",
+        "certificateLabel": "AI Tools Workshop Certificate"
+      },
+      {
+        "title": "Customer Relationship Management",
+        "organization": "HP LIFE · HP Foundation",
+        "status": "Completed",
+        "certificateGroup": "crm",
+        "certificateLabel": "CRM Certificate"
       }
     ]
   },
@@ -176,9 +194,9 @@ const qualifications = [
 const projects = [
   {
     number: "01",
-    type: "Workflow automation · Public project",
+    type: "Workflow automation · Inactive prototype",
     title: "Customer Inquiry Router",
-    description: "A published project that classifies incoming inquiries and routes them to the right follow-up workflow.",
+    description: "A documented Zapier prototype for classifying inquiries and routing CRM and email actions. Currently inactive following trial expiry; source and setup are available.",
     stack: ["Zapier", "Claude API", "HubSpot", "JavaScript"],
     href: "https://github.com/naveensharmatech/customer-inquiry-router-zapier",
     linkLabel: "View source & setup",
@@ -270,7 +288,7 @@ export default function App() {
         <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-5 md:px-10">
           <a href="#top" className="flex items-center gap-3" aria-label="Naveen Sharma home">
             <img src="/favicon.png" alt="Naveen Sharma" width="40" height="40" className="h-10 w-10 rounded-full object-cover" />
-            <span className="text-sm font-semibold tracking-tight">Naveen Sharma<span className="ml-2 hidden text-subtle sm:inline">/ Portfolio</span></span>
+            <span className="text-sm font-semibold tracking-tight">Naveen Sharma</span>
           </a>
           <nav className="hidden items-center gap-8 lg:flex" aria-label="Main navigation">
             <a href="#projects" className="text-sm text-[#52615c] transition hover:text-[#172321]">Projects</a>
@@ -332,6 +350,7 @@ export default function App() {
           <div className="grid gap-4">{projects.map(project => <article key={project.number} className="grid gap-5 rounded-3xl border border-ink/10 bg-surface p-6 transition motion-safe:hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[70px_minmax(0,1fr)_auto] md:items-center md:p-8"><span className="text-sm font-semibold text-subtle">{project.number}</span><div><p className="text-xs font-semibold uppercase tracking-[.14em] text-subtle">{project.type}</p><h3 className="mt-2 text-2xl font-semibold">{project.title}</h3><p className="mt-2 max-w-2xl text-sm leading-6 text-muted">{project.description}</p><div className="mt-4 flex flex-wrap gap-2">{project.stack.map(item => <span key={item} className="rounded-full bg-soft px-3 py-1 text-xs text-muted">{item}</span>)}</div></div><div className="flex flex-wrap gap-4 md:flex-col">{project.workflowHref && <a href={project.workflowHref} aria-label={`Inspect workflow: ${project.title}`} className="inline-flex items-center gap-2 text-sm font-semibold">Inspect workflow <ArrowDown size={16}/></a>}<a href={project.href} target="_blank" rel="noreferrer" aria-label={`${project.linkLabel}: ${project.title}`} className="inline-flex items-center gap-2 text-sm font-semibold">{project.linkLabel} <ArrowUpRight size={16}/></a></div></article>)}</div>
           <section id="demos" aria-labelledby="demos-title" className="mt-14 scroll-mt-24"><h3 id="demos-title" className="text-2xl font-semibold tracking-tight">Explore the work firsthand.</h3><p className="mt-3 text-sm leading-6 text-[#52615c]">Try sample-data demonstrations or explore the academy experience. Project source, documents and Apify products have separate links.</p><div className="mt-6 grid gap-4 lg:grid-cols-3">{[{title:"Intake & Mapping Workbench",text:"Fill sample fields, test mappings and inspect a populated document.",href:"/intake-builder-demo",label:"Launch interactive demo"},{title:"Manufacturing Shift Handoff",text:"Load a sample shift and generate a validated handoff summary.",href:"/manufacturing-demo",label:"Launch interactive demo"},{title:"Academy Operations",text:"Explore my institute responsibilities and academy photo gallery.",href:"/institute-demo",label:"Explore experience gallery"}].map(item => <article key={item.href} className="flex flex-col rounded-3xl border border-[#172321]/10 bg-white p-6"><h4 className="text-xl font-semibold">{item.title}</h4><p className="mt-3 flex-1 text-sm leading-6 text-[#52615c]">{item.text}</p><a href={item.href} aria-label={`${item.label}: ${item.title}`} className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-[#172321] px-5 py-3 text-sm font-semibold text-[#c5f16b]">{item.label} <ArrowUpRight size={16}/></a></article>)}</div></section>
           <RestoredContent />
+          <ZapierExperiments />
           <WorkflowGallery />
         </section>
 
@@ -376,14 +395,15 @@ export default function App() {
           <div className="grid gap-5 md:grid-cols-3">
             {qualifications.map(({ category, items }) => <article key={category} className="rounded-3xl border border-[#172321]/10 bg-white p-6 md:p-7">
               <h3 className="mb-5 text-lg font-semibold">{category}</h3>
-              <div className="space-y-5">{items.map(({ title, organization, status }) => <div key={title} className="border-t border-[#172321]/10 pt-5">
+              <div className="space-y-5">{items.map(({ title, organization, status, certificateGroup, certificateLabel }) => <div key={title} className="border-t border-[#172321]/10 pt-5">
                 <span className="inline-flex rounded-full bg-[#eaf3dc] px-3 py-1 text-xs font-semibold text-[#40572d]">{status}</span>
                 <h4 className="mt-3 font-semibold">{title}</h4>
                 <p className="mt-1 text-sm text-[#5c6d65]">{organization}</p>
+                {title.startsWith("Zapier Academy") && <a href="/zapier-expertise.html" target="_blank" rel="noreferrer" className="mt-3 inline-block text-sm font-semibold underline underline-offset-4">Zapier Expertise ↗</a>}
+                {certificateGroup && <a href={`/certifications.html?group=${certificateGroup}`} target="_blank" rel="noreferrer" className="mt-3 inline-block text-sm font-semibold underline underline-offset-4">{certificateLabel} ↗</a>}
               </div>)}</div>
             </article>)}
           </div>
-          <details className="mt-6 rounded-2xl border border-[#172321]/10 bg-white p-6"><summary className="cursor-pointer font-semibold">Zapier Academy — completed courses</summary><ul className="mt-5 grid gap-3 text-sm text-[#52615c] sm:grid-cols-2">{["Jumpstart", "Building Basic Zaps", "Building Intermediate Zaps", "Building AI Agents", "What is Zapier MCP?", "Using Zapier MCP", "Governing Zapier MCP", "Account Setup", "Monitoring and Operations", "Security and Governance"].map(course => <li key={course}>✓ {course}</li>)}</ul></details>
         </section>
 
         <section id="about" tabIndex={-1} aria-labelledby="about-title" className="mx-auto max-w-7xl px-5 py-16 md:px-10 md:py-28">

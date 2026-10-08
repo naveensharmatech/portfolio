@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:acceptance": "playwright test",
+    "test:chat": "node --test tests/chat.test.js"
   },
   "dependencies": {
     "lucide-react": "^0.383.0",
@@ -14,10 +16,15 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.64.0",
     "@vitejs/plugin-react": "^6.1.1",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.48",
     "tailwindcss": "^3.4.4",
     "vite": "^8.3.2"
+  },
+  "overrides": {
+    "postcss-selector-parser": "^7.1.6"
   }
 }

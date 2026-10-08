@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gmail Acknowledgment Automation — Naveen Sharma</title>
+<style>
+body{margin:0;background:#f6f7f4;color:#172321;font:16px/1.7 system-ui,sans-serif}main{max-width:960px;margin:auto;padding:36px 24px}a{color:#245d40}h1{font-size:clamp(28px,5vw,44px);line-height:1.2}h2{line-height:1.3}.tag{display:inline-block;border-radius:20px;background:#e7f3d9;padding:4px 14px;font-size:13px;font-weight:600}.card{background:white;border:1px solid #dde3da;border-radius:24px;padding:24px;margin:24px 0}.flow{display:flex;gap:16px;flex-wrap:wrap;list-style:none;padding:0}.flow li{flex:1 1 160px;padding:18px;border-radius:16px;background:#edf4ff;border:1px solid #bed3f8}.flow li:last-child{background:#edf7e7;border-color:#c3dfad}.branches{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}.branches div{padding:18px;background:#fff1e6;border-radius:16px}dt{font-weight:700}dd{margin:0 0 16px}blockquote{margin:16px 0;padding:16px;border-left:4px solid #7da252;background:#f6f7f4}small{color:#52615c}
+</style>
+</head>
+<body><main>
+<a href="/#zapier-experiments">← Back to Naveen Sharma’s website</a>
+<h1>Gmail Acknowledgment Draft Automation</h1>
+<span class="tag">Published demo · Successful run and matching draft shown</span>
+<p>A small workflow that prepares an acknowledgment for review when a new email arrives. Built with Gmail and Zapier using the author’s free-plan setup.</p>
+<section class="card"><h2>The working workflow</h2>
+<ol class="flow" aria-label="Workflow steps"><li><strong>01 · Gmail</strong><br>Receive a new email</li><li><strong>02 · Gmail</strong><br>Create an acknowledgment draft</li><li><strong>03 · Human review</strong><br>Review the draft before sending</li></ol>
+<p>The human review stage happens in Gmail, outside the two-step Zap. The workflow uses a fixed template; it does not generate an AI reply or send a message automatically.</p>
+<blockquote>Thank you for your email. I have received your message and will review it before responding.</blockquote>
+</section>
+<section class="card"><h2>Workflow configuration</h2>
+<figure style="margin:0"><a href="/images/zapier/gmail-draft-configuration-redacted.png" target="_blank" rel="noreferrer"><img src="/images/zapier/gmail-draft-configuration-redacted.png" alt="Redacted Zapier configuration showing Gmail New Email connected to Create Draft, sender and subject mappings, and a fixed acknowledgment body." width="1669" height="942" style="width:100%;height:auto;border-radius:12px" loading="lazy"></a><figcaption><small>Author-supplied configuration screenshot, edited with AI to blur the recipient address and unrelated subject sample. Open the image to inspect the mappings. The editor title mentions AI; the visible workflow uses a fixed template.</small></figcaption></figure>
+</section>
+<section class="card"><h2>What the demonstration established</h2>
+<dl><dt>Publication</dt><dd>A shared screenshot shows version v1 published and switched on.</dd><dt>Execution</dt><dd>Zapier reports a successful run on one new email.</dd><dt>Output</dt><dd>The matching Gmail draft has the test sender as recipient, a reply subject, and the acknowledgment text.</dd></dl>
+<p>This demonstrates Gmail field mapping and a complete draft-creation run. The screenshots do not establish whether the run was manually started or triggered by unattended polling. The editor displays a 15-minute polling interval.</p>
+<h3>Skills demonstrated</h3><p>Application integration · Trigger/action configuration · Recipient and subject mapping · Testing against a real message · Human review · Adapting a design to plan limits.</p>
+</section>
+<section id="routing" class="card"><span class="tag">Advanced design prototype · Paid features</span><h2>Email priority routing</h2>
+<p>The earlier design used a webhook trigger followed by Zapier Paths and Formatter steps. A later version substituted Gmail for the webhook.</p>
+<div class="branches"><div><strong>Urgent</strong><br>Contains “urgent”<br>→ Text formatting</div><div><strong>Follow-up</strong><br>Contains “follow”<br>→ Text formatting</div><div><strong>Standard</strong><br>Intended for all other messages<br>→ Text formatting</div></div>
+<p>These labels summarize the visible design, not verified exclusive routing. Screenshots show tested conditions, followed by unavailable-field warnings and requests for final actions. The working demo above was simplified to fit the available plan.</p>
+<h3>Next validation</h3><ul><li>Remap fields after changing the trigger.</li><li>Prevent overlapping keyword matches and configure a fallback.</li><li>Add and test final actions for every branch.</li><li>Validate duplicate handling, empty subjects, automated senders, and failed actions.</li></ul>
+</section>
+<p><small>Evidence summary based on screenshots supplied by Naveen Sharma. The configuration image has been edited with AI for privacy redaction. Diagrams summarize the workflows; they are not execution logs.</small></p>
+</main></body></html>

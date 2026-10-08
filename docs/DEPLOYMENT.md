@@ -39,6 +39,18 @@ changes before merging. No Wrangler install or Vite minifier changes are needed.
 5. If verification fails, use Cloudflare Pages' rollback to the last successful
    production deployment.
 
-The current portfolio UI is static and needs no API key. The retained
-`functions/api/chat.js` endpoint requires a server-side `GROQ_API_KEY` only if that
-endpoint is used; never expose it to the client.
+## Ella chat
+
+The React UI calls the Cloudflare Pages Function at `/api/chat`. Vite's local
+preview serves static files only and does not run this endpoint. Deploy the
+repository with Pages Functions, including `functions/` and `data/`, to test it.
+
+Set `GROQ_API_KEY` as a server-side secret separately for preview and production
+for live AI replies. Without a working key or when the provider fails, the
+endpoint returns saved public profile knowledge; the UI labels that fallback.
+Never expose the key through `VITE_*` variables or browser source.
+
+Verify GET `/api/chat` returns JSON, then send a public profile question from
+Ella's UI. Check that a reply arrives, the send button recovers, and keyboard
+focus returns to the input. Test fallback locally with the Function handler and
+no key; do not remove production secrets to simulate failure.

@@ -17,6 +17,73 @@ export function Approach() {
   return <div className="mt-14 border-t border-white/20 pt-8"><h3 className="text-2xl font-semibold">How I build a workflow</h3><ol className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{[['Understand','Map the process, inputs, users and desired outcome.'],['Design','Define triggers, actions, routing and exceptions.'],['Build','Configure suitable no-code tools and AI-assisted components.'],['Integrate','Connect applications, APIs, webhooks and data.'],['Validate','Check mappings, branches, invalid inputs and failure behavior.'],['Document','Explain the setup, handoff and ongoing checks.']].map(([title,text],i)=><li key={title}><p className="font-semibold text-[#c5f16b]">0{i+1} · {title}</p><p className="mt-2 text-sm leading-6 text-white/75">{text}</p></li>)}</ol></div>;
 }
 
+export function ZapierExperiments() {
+  const experiments = [
+    {
+      title: 'Gmail Acknowledgment Draft Automation',
+      status: 'Published demo · Successful run and draft shown',
+      description: 'Built a two-step Gmail workflow that receives a new email and creates a fixed acknowledgment draft addressed to its sender. The reply stays in Drafts for human review.',
+      skills: 'Gmail integration · Field mapping · Workflow testing · Human review',
+      evidence: 'Shared screenshots show the Zap published as v1, a successful run on one new email, and the matching acknowledgment draft. Scheduled execution without pressing Run has not yet been confirmed.',
+      next: 'Confirm an unattended run and check duplicate processing and sender mapping with additional test messages.',
+      href: '/docs/gmail-acknowledgment-demo.html',
+      label: 'Explore the demo and routing design',
+    },
+    {
+      title: 'Email Priority Routing — Advanced Prototype',
+      status: 'Design prototype · Paid Zapier features',
+      description: 'Designed Urgent, Follow-up and Standard branches using Zapier Paths, with text-formatting steps. A webhook trigger was later replaced with Gmail while exploring a free-plan version.',
+      skills: 'Conditional branching · Trigger migration · Plan-aware workflow design',
+      evidence: 'Editor screenshots show three branches and tested path conditions. Later mapping warnings and missing final actions remained; this advanced design was not established as a published working workflow.',
+      next: 'Repair mappings, make branch conditions exclusive, add final actions, and validate every route on a suitable plan.',
+      href: '/docs/gmail-acknowledgment-demo.html#routing',
+      label: 'View the advanced routing design',
+    },
+    {
+      title: 'AI Email Assistant — Inbox Organization',
+      status: 'Experimental · Inactive · Requires repair',
+      description: 'Designed an email workflow connecting Gmail, AI categorization and summarization, Zapier Tables, and four category-specific views: newsletters, app notifications, action required, and sales.',
+      skills: 'Process mapping · Structured records · Categorization · User-facing views',
+      evidence: 'The shared canvas documents the intended architecture. Editor screenshots show missing AI app steps, an unselected Gmail account, and mapping/test warnings. End-to-end execution and view filtering are not verified.',
+      next: 'Reconnect Gmail, replace unavailable AI steps, map category and summary fields, and check sample messages against each view before activation.',
+      href: 'https://zapier.com/app/canvas/public/326ca302-e95e-4827-8f7f-0ddca47a3c12',
+      label: 'View workflow design',
+    },
+    {
+      title: 'Social Media AI Chatbot',
+      href: 'https://social-media-ai-chatbot-c5b290.zapier.app',
+      label: 'Open chatbot demo',
+      status: 'Experimental · Configuration evidence',
+      description: 'Configured a Zapier Chatbots assistant with a greeting and instructions for drafting, editing, summarizing, and adapting social content to a requested audience and tone.',
+      skills: 'AI instruction design · Requirements gathering · Conversational experience',
+      evidence: 'The editor screenshot establishes a configured greeting and directive, and a shared chatbot URL is available. Response quality, model setup, and successful conversations have not yet been verified.',
+      next: 'Test realistic briefs, revision requests, and incomplete inputs; record sample conversations before presenting a runnable demo.',
+    },
+    {
+      title: 'AI-Powered Gmail Assistant — Team Handoff',
+      status: 'Experimental · Draft',
+      description: 'Explored a Gmail-triggered workflow that generates a reply using Zapier Chatbots and passes information to Slack for team follow-up.',
+      skills: 'App orchestration · AI-assisted reply drafting · Team notifications',
+      evidence: 'The draft shows a Gmail trigger, chatbot reply generation, and two Slack actions. Their field mappings, destinations, and execution results have not been verified.',
+      next: 'Confirm the purpose of both Slack messages, verify field mappings, and test one complete run without duplicate notifications.',
+    },
+  ];
+  return <section id="zapier-experiments" aria-labelledby="zapier-experiments-title" className="mt-14 scroll-mt-24">
+    <p className="text-xs font-semibold uppercase tracking-[.2em] text-[#5c6d65]">Hands-on learning · Zapier</p>
+    <h3 id="zapier-experiments-title" className="mt-3 text-3xl font-semibold tracking-tight">Zapier experiments &amp; workflow design</h3>
+    <p className="mt-4 max-w-3xl text-sm leading-7 text-[#52615c]">A published Gmail acknowledgment demo alongside personal prototypes exploring routing, AI steps, connected apps, structured data, and interfaces. Each example states what was built and what its evidence establishes.</p>
+    <div className="mt-6 grid gap-5 lg:grid-cols-3">{experiments.map(item => <article key={item.title} className="rounded-3xl border border-[#172321]/10 bg-white p-6">
+      <p className="text-xs font-semibold leading-5 text-[#5c6d65]">{item.status}</p>
+      <h4 className="mt-3 text-xl font-semibold">{item.title}</h4>
+      <p className="mt-3 text-sm leading-7 text-[#52615c]">{item.description}</p>
+      <p className="mt-4 text-xs font-semibold leading-6 text-[#40572d]">{item.skills}</p>
+      <details className="mt-5 border-t border-[#172321]/10 pt-4"><summary className="cursor-pointer text-sm font-semibold">Evidence &amp; next validation</summary><p className="mt-3 text-sm leading-7 text-[#52615c]">{item.evidence}</p><p className="mt-3 text-sm leading-7 text-[#52615c]"><strong>Next validation:</strong> {item.next}</p></details>
+      {item.href && <a href={item.href} target="_blank" rel="noreferrer" className="mt-5 inline-block text-sm font-semibold underline underline-offset-4">{item.label} ↗</a>}
+    </article>)}</div>
+    <p className="mt-5 text-sm leading-7 text-[#52615c]">The <a href="#inquiry-workflow" className="font-semibold underline underline-offset-4">Customer Inquiry Router</a> is documented separately: Gmail filtering and JavaScript processing feed three routing paths with email and HubSpot actions. It is currently inactive after the Zapier trial expired. Screenshots document its structure; current run results and classification behavior require verification.</p>
+  </section>;
+}
+
 
 export function WorkflowGallery() {
   return <section id="workflow-references" aria-labelledby="workflow-gallery-title" className="mt-14 scroll-mt-24 rounded-3xl border border-[#172321]/10 bg-white p-5 md:p-8">
@@ -28,8 +95,8 @@ export function WorkflowGallery() {
         <figcaption className="p-5"><h4 className="font-semibold">Appointment routing &amp; reminders</h4><p className="mt-2 text-sm leading-6 text-[#52615c]">Practice workflow reference connecting routing, calendars, notifications and follow-up actions.</p><a href="/images/appointment-workflow-reference.jpeg" target="_blank" rel="noreferrer" aria-label="View full-size Appointment routing and reminders workflow" className="mt-3 inline-block text-sm font-semibold underline underline-offset-4">View full-size workflow ↗</a></figcaption>
       </figure>
       <figure className="overflow-hidden rounded-2xl border border-[#172321]/10">
-        <a href="/images/ai-lead-routing-reference.jpeg" target="_blank" rel="noreferrer" aria-label="Open AI lead-routing reference at full size"><img src="/images/ai-lead-routing-reference.jpeg" alt="n8n AI lead-routing guide credited to Hisham Sarwar, showing webhook input, preparation, AI analysis, conditional routing, Slack, CRM, Gmail and Google Sheets." width="1920" height="1080" loading="lazy" className="aspect-[16/10] w-full bg-[#202020] object-contain"/></a>
-        <figcaption className="p-5"><h4 className="font-semibold">AI lead routing — workflow reference</h4><p className="mt-2 text-sm leading-6 text-[#52615c]">A reference for exploring AI analysis, decision logic and connected business tools. Graphic credit: Hisham Sarwar.</p><a href="/images/ai-lead-routing-reference.jpeg" target="_blank" rel="noreferrer" aria-label="View full-size AI lead routing workflow" className="mt-3 inline-block text-sm font-semibold underline underline-offset-4">View full-size reference ↗</a></figcaption>
+        <a href="/images/ai-lead-routing-reference.jpeg?v=cropped-0b26a44" target="_blank" rel="noreferrer" aria-label="Open AI lead-routing reference at full size"><img src="/images/ai-lead-routing-reference.jpeg?v=cropped-0b26a44" alt="n8n AI lead-routing guide credited to Hisham Sarwar, showing webhook input, preparation, AI analysis, conditional routing, Slack, CRM, Gmail and Google Sheets." width="1920" height="953" loading="lazy" className="h-auto w-full bg-[#202020]"/></a>
+        <figcaption className="p-5"><h4 className="font-semibold">AI lead routing — workflow reference</h4><p className="mt-2 text-sm leading-6 text-[#52615c]">A reference for exploring AI analysis, decision logic and connected business tools. Graphic credit: Hisham Sarwar.</p><a href="/images/ai-lead-routing-reference.jpeg?v=cropped-0b26a44" target="_blank" rel="noreferrer" aria-label="View full-size AI lead routing workflow" className="mt-3 inline-block text-sm font-semibold underline underline-offset-4">View full-size reference ↗</a></figcaption>
       </figure>
 
       <figure className="overflow-hidden rounded-2xl border border-[#172321]/10">
@@ -94,8 +161,8 @@ export function EllaChat() {
     }catch{setMessages([...next,{role:'assistant',content:'I couldn’t connect just now. Please try again, or use the Contact section to reach Naveen.'}]);}
     finally{clearTimeout(timer);setBusy(false);inputRef.current?.focus();}
   }
-  return <div className="fixed bottom-5 right-5 z-[60]">
-    {open&&<section id="ella-panel" role="dialog" aria-labelledby="ella-title" onKeyDown={e=>{if(e.key==='Escape')close();}} className="mb-3 flex h-[min(520px,70dvh)] w-[min(370px,calc(100vw-40px))] flex-col overflow-hidden rounded-3xl border border-[#172321]/15 bg-white text-[#172321] shadow-2xl">
+  return <div className="fixed bottom-[calc(1.25rem+env(safe-area-inset-bottom))] right-[calc(1.25rem+env(safe-area-inset-right))] z-[60]">
+    {open&&<section id="ella-panel" role="dialog" aria-labelledby="ella-title" onKeyDown={e=>{if(e.key==='Escape')close();}} className="mb-3 flex h-[min(520px,70dvh)] w-[min(370px,calc(100vw-40px-env(safe-area-inset-left)-env(safe-area-inset-right)))] flex-col overflow-hidden rounded-3xl border border-[#172321]/15 bg-white text-[#172321] shadow-2xl">
       <header className="flex items-center justify-between bg-[#172321] p-4 text-white"><div className="flex items-center gap-3"><img src="/ella-avatar.png" alt="Ella" width="48" height="48" className="h-12 w-12 shrink-0 rounded-full object-cover"/><div><h2 id="ella-title" className="font-semibold">Ella</h2><p className="text-xs text-white/75">Naveen Sharma’s Personal Assistant</p></div></div><button type="button" onClick={close} aria-label="Close Ella chat" className="grid h-11 w-11 place-items-center rounded-full hover:bg-white/10"><X size={20}/></button></header>
       <div className="flex-1 overflow-y-auto p-4" aria-live="polite" aria-relevant="additions" aria-busy={busy}>{messages.map((m,i)=><p key={i} className={`mb-3 whitespace-pre-wrap break-words rounded-2xl p-3 text-sm leading-6 ${m.role==='user'?'ml-7 bg-[#eaf3dc]':'mr-7 bg-[#f0f3ef]'}`}><span className="sr-only">{m.role==='user'?'You':'Ella'}: </span><ChatText text={m.content}/></p>)}{busy&&<p className="text-sm text-[#52615c]">Ella is replying…</p>}<div ref={endRef}/></div>
       {connectionMode && <p role="status" className="border-t border-[#172321]/10 px-4 py-2 text-xs leading-5 text-[#52615c]">{connectionMode}</p>}
