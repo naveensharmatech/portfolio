@@ -56,11 +56,12 @@ test('200% text enlargement and chat fallback interaction',async({page})=>{
   await page.setViewportSize({width:390,height:844});await page.goto('/');
   await page.addStyleTag({content:'html { font-size: 200%; }'});
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-  await page.route('**/api/chat',route=>route.fulfill({json:{reply:'Saved public profile reply',mode:'saved-knowledge'}}));
+  await page.route('**/api/chat',route=>route.fulfill({json:{reply:'**Saved public profile reply**\n[Portfolio](https://naveensharma.net/)',mode:'saved-knowledge'}}));
   await page.getByRole('button',{name:'Ask Ella'}).click();
   const input=page.getByRole('textbox',{name:'Ask Ella a question'});await input.fill('Who is Naveen?');
   await page.getByRole('button',{name:'Send message'}).click();
-  await expect(page.getByText('Saved public profile reply')).toBeVisible();
+  await expect(page.locator('#ella-panel strong')).toHaveText('Saved public profile reply');
+  await expect(page.locator('#ella-panel').getByRole('link',{name:'Portfolio',exact:true})).toHaveAttribute('href','https://naveensharma.net/');
   await expect(page.getByRole('status')).toHaveText('Saved profile knowledge · live AI temporarily unavailable');
   await expect(input).toBeFocused();
 });

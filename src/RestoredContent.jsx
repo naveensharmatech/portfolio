@@ -127,13 +127,14 @@ export function AboutDetails() {
 }
 
 function ChatText({ text }) {
-  return text.split(/(\[[^\]]+\]\(https?:\/\/[^\s)]+\)|https?:\/\/[^\s<>]+)/g).map((part, index) => {
+  return text.split(/(\[[^\]]+\]\(https?:\/\/[^\s)]+\)|https?:\/\/[^\s<>]+|\*\*[^*]+\*\*)/g).map((part, index) => {
     const markdown = part.match(/^\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)$/);
     if (markdown) return <a key={index} href={markdown[2]} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{markdown[1]}</a>;
     if (/^https?:\/\//.test(part)) {
       const url = part.replace(/[.,;]+$/, '');
       return <span key={index}><a href={url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{url}</a>{part.slice(url.length)}</span>;
     }
+    if (/^\*\*[^*]+\*\*$/.test(part)) return <strong key={index}>{part.slice(2, -2)}</strong>;
     return part;
   });
 }
