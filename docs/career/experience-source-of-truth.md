@@ -1,30 +1,30 @@
 # Experience reference — Naveen Sharma
 
-Updated 4 October 2026 from the LinkedIn entries supplied directly by Naveen in this conversation, including his latest correction removing “Lead” from the Bolt title. Use these entries when updating the portfolio experience sections. Do not replace them with earlier remembered titles or dates. The descriptions and numerical claims below are user-supplied; they are not independently audited.
+Updated 9 October 2026 to align the website, demonstrations and Ella with the corrected employment dates and supported responsibilities. Historical LinkedIn wording is not independent proof of numerical outcomes. Keep unsubstantiated performance metrics and compliance guarantees out of public copy.
 
 ## Bolt Healthcare
 
 **SaaS Implementation Specialist & Workflow QA**
 
-Aug 2022 – Present
+Aug 2022 – May 2026
 
-- Enterprise SaaS Implementation: Architected and deployed digital onboarding pipelines for 25+ healthcare agencies, translating legacy paper intake into HIPAA-compliant SaaS workflows that cut client onboarding turnaround time by 40%.
-- Form Logic & Data Mapping: Engineered complex dynamic forms, conditional visibility rules, and field-level validation throughout intake and referral workflows, enforcing strict data integrity gates to eliminate clinical submission errors.
-- Document Automation & eSignatures: Configured dynamic document pipelines, mapping form tokens to regulatory PDFs and structuring multi-party sequential eSignature routing (patient, clinician, administrator), eliminating 15+ hours of weekly paperwork per agency.
-- QA, UAT & Defect Triage: Executed end-to-end User Acceptance Testing (UAT), functional validation, and regression suites on workflow forms and document outputs; triaged mapping defects alongside engineering to maintain 99.5%+ workflow uptime.
-- SOPs & Governance: Authored platform configuration guides, clinical intake playbooks, and validation checklists for agency stakeholders, standardizing operations within multi-tenant agency accounts.
+- SaaS Implementation: Supported healthcare SaaS configuration and digital intake workflows for agency clients, translating requirements into configurable onboarding processes.
+- Form Logic & Data Mapping: Configured dynamic forms, conditional visibility, dropdown constraints and field validation across intake and referral workflows.
+- Document Automation & eSignatures: Configured document generation, mapped form tokens to regulatory PDFs and set up multi-party eSignature routing.
+- QA, UAT & Defect Triage: Performed functional validation, QA/UAT and regression checks on forms and mapped outputs; investigated defects and coordinated fixes through Basecamp.
+- SOPs & Governance: Created configuration guidance and validation documentation; supported platform settings and helped colleagues troubleshoot workflow issues.
 
 ## Vishay Intertechnology, Inc.
 
 **Technical Operator (Process Operations & Quality Control)**
 
-Nov 2021 – Dec 2022 · 1 yr 2 mos · Be'er Sheva, South District, Israel
+Nov 2021 – May 2022 · 7 mos · Be'er Sheva, South District, Israel
 
-- Precision Machine Operations: Operated high-precision component manufacturing equipment within a controlled cleanroom environment, verifying machine parameters and calibration standards prior to active production runs.
-- Quality Control & Component Inspection: Conducted multi-stage physical, optical, and functional quality control checks on electronic components, catching manufacturing discrepancies to prevent defect leakage.
-- Traceability & Compliance Logging: Maintained detailed operational logs, equipment calibration metrics, and batch traveler records, ensuring complete component traceability under ISO manufacturing standards.
-- Process Adherence & Defect Escalation: Enforced strict Standard Operating Procedures (SOPs) throughout high-volume production cycles, escalating material anomalies to line engineers to protect throughput yield.
-- Cleanroom Governance: Followed electrostatic discharge (ESD) prevention protocols and cleanroom operating guidelines, sustaining zero-contamination standards and equipment uptime across shift handovers.
+- Precision Machine Operations: Operated chip-resistor manufacturing equipment in a cleanroom environment and checked machine settings according to production procedures.
+- Quality Control & Component Inspection: Checked component quality at production stages and reported discrepancies for follow-up.
+- Traceability & Compliance Logging: Maintained operational and quality records to support production traceability.
+- Process Adherence & Defect Escalation: Followed standard operating procedures and escalated equipment or material issues to the relevant team.
+- Cleanroom Governance: Followed cleanroom and equipment-handling procedures and recorded relevant issues for shift handover.
 
 ## Shivam Institute for Vocational Trainings
 
@@ -32,11 +32,11 @@ Nov 2021 – Dec 2022 · 1 yr 2 mos · Be'er Sheva, South District, Israel
 
 Aug 2012 – Sep 2015 · 3 yrs 2 mos · India
 
-- Center Operations & Business Governance: Directed operational management for an authorized vocational IT institute franchise, coordinating administrative workflows, staff scheduling, and facility standards to support 300+ students annually.
-- IT Infrastructure & Lab Systems: Administered computer lab network infrastructure across 20+ workstations, overseeing hardware maintenance, OS deployment, and software provisioning to sustain 99%+ lab uptime.
-- Technical Curriculum & Training Delivery: Led instructor teams in delivering vocational coursework spanning software applications, networking fundamentals, and computer hardware, driving an 88% program completion rate.
-- Quality Standards & Regulatory Compliance: Enforced ISO 9001:2008 quality management guidelines and technical certification protocols, ensuring total audit readiness and regulatory alignment for state-recognized programs.
-- Student Lifecycle & Service Delivery: Supervised end-to-end student onboarding, enrollment pipelines, and academic support, establishing standardized communication touchpoints that increased student referral volume by 25%.
+- Center Operations & Business Governance: Managed a vocational computer-training franchise branch, including enrollment, fees, schedules and day-to-day operations.
+- IT Infrastructure & Lab Systems: Maintained computer-lab resources, organized software and equipment setup, and resolved technical problems.
+- Technical Curriculum & Training Delivery: Taught computer-course modules and coordinated classes and training activities.
+- Quality Standards & Regulatory Compliance: Organized administrative records and course-related documentation for the branch.
+- Student Lifecycle & Service Delivery: Handled student inquiries, enrollment and advising, parent meetings and local marketing.
 
 ## Shivam photo and role decisions
 
