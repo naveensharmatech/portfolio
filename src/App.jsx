@@ -306,9 +306,9 @@ export default function App() {
           </nav>
           <div className="hidden items-center gap-3 lg:flex">
             <a href="https://www.linkedin.com/in/naveensharmatech" target="_blank" rel="noreferrer" className="justify-center rounded-full p-2 text-muted hover:bg-surface" aria-label="LinkedIn"><Linkedin size={18}/></a>
-            <div className="flex w-40 flex-col gap-1">
-              <a href="/Naveen_Sharma_CV.pdf" className="flex min-h-8 items-center justify-center gap-2 rounded-full bg-[#172321] px-3 py-1 text-sm font-semibold text-white hover:bg-[#30443e]">English CV <ArrowUpRight size={15}/></a>
-              <a href="/Naveen_Sharma_CV_HE.pdf" lang="he" dir="rtl" className="flex min-h-8 items-center justify-center gap-2 rounded-full bg-[#172321] px-3 py-1 text-sm font-semibold text-white hover:bg-[#30443e]">קורות חיים <ArrowUpRight size={15}/></a>
+            <div className="grid w-56 grid-cols-2 gap-2">
+              <a href="/Naveen_Sharma_CV.pdf" className="flex min-h-11 min-w-0 items-center justify-center gap-1 rounded-full bg-[#172321] px-2 py-2 text-sm font-semibold text-white hover:bg-[#30443e]">English CV <ArrowUpRight size={15}/></a>
+              <a href="/Naveen_Sharma_CV_HE.pdf" lang="he" dir="rtl" className="flex min-h-11 min-w-0 items-center justify-center gap-1 rounded-full bg-[#172321] px-2 py-2 text-sm font-semibold text-white hover:bg-[#30443e]">קורות חיים <ArrowUpRight size={15}/></a>
             </div>
           </div>
           <button ref={mobileMenuButtonRef} type="button" aria-controls="mobile-navigation" className="shrink-0 rounded-lg p-3 lg:hidden" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} onClick={() => { setMenuOpen(!menuOpen); setMobileExpertiseOpen(false); }}>{menuOpen ? <X/> : <Menu/>}</button>
@@ -324,8 +324,10 @@ export default function App() {
           </div>}
           <a href="#about" onClick={closeMobileMenu} className="rounded-lg px-3 py-3 text-sm hover:bg-white">About</a>
           <a href="#contact" onClick={closeMobileMenu} className="rounded-lg px-3 py-3 text-sm hover:bg-white">Contact</a>
-          <a href="/Naveen_Sharma_CV.pdf" onClick={closeMobileMenu} className="mt-2 rounded-lg bg-[#172321] px-4 py-3 text-center text-sm font-semibold text-white">English CV</a>
-          <a lang="he" dir="rtl" href="/Naveen_Sharma_CV_HE.pdf" onClick={closeMobileMenu} className="mt-2 rounded-lg bg-[#172321] px-4 py-3 text-center text-sm font-semibold text-white">קורות חיים</a>
+          <div className="mt-2 grid grid-cols-2 gap-3" aria-label="Résumé links">
+            <a href="/Naveen_Sharma_CV.pdf" onClick={closeMobileMenu} className="flex min-h-12 min-w-0 items-center justify-center rounded-lg bg-[#172321] px-2 py-3 text-center text-sm font-semibold text-white">English CV</a>
+            <a lang="he" dir="rtl" href="/Naveen_Sharma_CV_HE.pdf" onClick={closeMobileMenu} className="flex min-h-12 min-w-0 items-center justify-center rounded-lg bg-[#172321] px-2 py-3 text-center text-sm font-semibold text-white">קורות חיים</a>
+          </div>
         </nav>
       </header>
 
@@ -337,9 +339,9 @@ export default function App() {
             <p className="mt-8 max-w-2xl text-lg leading-8 text-[#52615c]">I’m Naveen—a lifelong technology enthusiast building with no-code tools and AI assistance. I combine SaaS implementation and technical problem-solving experience with hands-on projects in automation, assistants and websites, while expanding into AI agents and apps.</p>
             <section aria-labelledby="resume-title" className="mt-7 rounded-2xl border border-ink/10 bg-surface p-5">
               <h2 id="resume-title" className="text-sm font-semibold">View résumé</h2>
-              <div className="mt-3 flex w-full max-w-xs flex-col gap-3">
-                <a href="/Naveen_Sharma_CV.pdf" hrefLang="en" className="flex w-full min-h-11 items-center justify-center gap-2 rounded-full border border-ink/20 px-5 py-3 text-sm font-semibold hover:bg-soft">English CV <ArrowUpRight size={15}/></a>
-                <a href="/Naveen_Sharma_CV_HE.pdf" hrefLang="he" lang="he" dir="rtl" className="flex w-full min-h-11 items-center justify-center gap-2 rounded-full border border-ink/20 px-5 py-3 text-sm font-semibold hover:bg-soft">קורות חיים <ArrowUpRight size={15}/></a>
+              <div className="mt-3 grid w-full grid-cols-2 gap-3">
+                <a href="/Naveen_Sharma_CV.pdf" hrefLang="en" className="flex w-full min-h-12 min-w-0 items-center justify-center gap-1 rounded-full border border-ink/20 px-2 py-3 text-sm font-semibold hover:bg-soft">English CV <ArrowUpRight size={15}/></a>
+                <a href="/Naveen_Sharma_CV_HE.pdf" hrefLang="he" lang="he" dir="rtl" className="flex w-full min-h-12 min-w-0 items-center justify-center gap-1 rounded-full border border-ink/20 px-2 py-3 text-sm font-semibold hover:bg-soft">קורות חיים <ArrowUpRight size={15}/></a>
               </div>
             </section>
             <div className="mt-9 flex flex-wrap gap-3">
@@ -433,14 +435,19 @@ export default function App() {
               <p className="mt-5 max-w-3xl text-base leading-8 text-[#52615c]">Today, my focus is AI automation and integration engineering: understanding a process, connecting systems, configuring workflows and checking how they behave. I bring SaaS implementation and technical problem-solving experience, skills developed in Zapier, and growing capabilities with Make, n8n, HubSpot, Salesforce, Airtable and Postman. I’m expanding into WhatsApp chatbots, AI agents and apps through practical projects and continuous learning.</p>
               <p className="mt-5 max-w-3xl text-base leading-8 text-[#52615c]">People around me call me “mini Google” because I enjoy researching, finding answers and figuring out why something isn’t working. That same curiosity drives my work: understand the problem, explore the options, build a solution and keep improving it.</p>
               <p className="mt-5 max-w-3xl text-base leading-8 text-[#52615c]">Opility is my next chapter in creating something of my own—a venture I’m developing around practical AI, automation and digital tools. I’m looking for opportunities to bring that curiosity and problem-solving approach to a team while continuing to grow.</p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a href="https://www.linkedin.com/in/naveensharmatech" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white"><Linkedin size={16}/> LinkedIn</a>
-                <a href="https://github.com/naveensharmatech" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white"><Github size={16}/> GitHub</a>
-
-              </div>
-              <div className="mt-3 flex w-full max-w-xs flex-col gap-3" aria-label="Résumé links">
-                <a href="/Naveen_Sharma_CV.pdf" className="flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white">English CV <ArrowUpRight size={15}/></a>
-                <a href="/Naveen_Sharma_CV_HE.pdf" lang="he" dir="rtl" className="flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white">קורות חיים <ArrowUpRight size={15}/></a>
+              <div className="mt-8 grid w-full max-w-md gap-3">
+                <div className="rounded-2xl border border-ink/10 bg-surface p-4" role="group" aria-label="Social links">
+                  <div className="grid grid-cols-2 gap-3">
+                    <a href="https://www.linkedin.com/in/naveensharmatech" target="_blank" rel="noreferrer" className="flex min-h-12 min-w-0 items-center justify-center gap-2 rounded-full border border-ink/20 px-2 py-3 text-sm font-semibold hover:bg-soft"><Linkedin size={16} className="shrink-0"/> LinkedIn</a>
+                    <a href="https://github.com/naveensharmatech" target="_blank" rel="noreferrer" className="flex min-h-12 min-w-0 items-center justify-center gap-2 rounded-full border border-ink/20 px-2 py-3 text-sm font-semibold hover:bg-soft"><Github size={16} className="shrink-0"/> GitHub</a>
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-ink/10 bg-surface p-4" role="group" aria-label="Résumé links">
+                  <div className="grid grid-cols-2 gap-3">
+                    <a href="/Naveen_Sharma_CV.pdf" className="flex min-h-12 min-w-0 items-center justify-center gap-1 rounded-full border border-ink/20 px-2 py-3 text-sm font-semibold hover:bg-soft">English CV <ArrowUpRight size={15} className="shrink-0"/></a>
+                    <a href="/Naveen_Sharma_CV_HE.pdf" lang="he" dir="rtl" className="flex min-h-12 min-w-0 items-center justify-center gap-1 rounded-full border border-ink/20 px-2 py-3 text-sm font-semibold hover:bg-soft">קורות חיים <ArrowUpRight size={15} className="shrink-0"/></a>
+                  </div>
+                </div>
               </div>
               <AboutDetails />
             </div>
