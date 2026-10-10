@@ -335,7 +335,7 @@ export default function App() {
         <section aria-labelledby="hero-title" className="mx-auto grid max-w-7xl gap-10 px-5 pb-20 pt-14 md:px-10 md:py-24 lg:grid-cols-[1.15fr_.85fr] lg:items-center lg:gap-14">
           <div className="min-w-0">
             <p className="mb-7 max-w-2xl text-sm font-semibold leading-6 text-[#52615c]">AI Automation &amp; Integration Engineer <span aria-hidden="true">|</span> SaaS Implementation Specialist <span aria-hidden="true">|</span> Workflow Automation</p>
-            <h1 id="hero-title" className="max-w-3xl text-clamp-h1 font-semibold tracking-[-.055em] lg:text-7xl">Turning curiosity into <span className="underline decoration-[#a7d94f] decoration-[6px] underline-offset-[8px]">practical AI solutions.</span></h1>
+            <h1 id="hero-title" className="max-w-3xl text-clamp-h1 font-semibold tracking-normal lg:text-7xl">Turning curiosity into <span className="underline decoration-[#a7d94f] decoration-[6px] underline-offset-[8px]">practical AI solutions.</span></h1>
             <p className="mt-8 max-w-2xl text-lg leading-8 text-[#52615c]">I’m Naveen—a lifelong technology enthusiast building with no-code tools and AI assistance. I combine SaaS implementation and technical problem-solving experience with hands-on projects in automation, assistants and websites, while expanding into AI agents and apps.</p>
             <section aria-labelledby="resume-title" className="mt-7 rounded-2xl border border-ink/10 bg-surface p-5">
               <h2 id="resume-title" className="text-sm font-semibold">View résumé</h2>

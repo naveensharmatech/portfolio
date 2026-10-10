@@ -65,3 +65,18 @@ test('200% text enlargement and chat fallback interaction',async({page})=>{
   await expect(page.getByRole('status')).toHaveText('Saved profile knowledge · live AI temporarily unavailable');
   await expect(input).toBeFocused();
 });
+// Keep “rn” in Turning distinct instead of visually merging into “m”.
+for (const width of [320, 375, 390, 430, 768, 1024, 1440]) {
+  test(`hero heading stays legible at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/');
+    const heading = page.locator('#hero-title');
+    await expect(heading).toHaveText('Turning curiosity into practical AI solutions.');
+    const layout = await heading.evaluate(element => ({
+      spacing: getComputedStyle(element).letterSpacing,
+      fits: element.scrollWidth <= element.clientWidth,
+    }));
+    expect(['normal', '0px']).toContain(layout.spacing);
+    expect(layout.fits).toBe(true);
+  });
+}
