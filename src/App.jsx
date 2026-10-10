@@ -306,7 +306,8 @@ export default function App() {
           </nav>
           <div className="hidden items-center gap-3 lg:flex">
             <a href="https://www.linkedin.com/in/naveensharmatech" target="_blank" rel="noreferrer" className="justify-center rounded-full p-2 text-muted hover:bg-surface" aria-label="LinkedIn"><Linkedin size={18}/></a>
-            <a href="/Naveen_Sharma_CV.pdf" className="rounded-full bg-[#172321] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#30443e]">View résumé <ArrowUpRight className="ml-1 inline" size={15}/></a>
+            <a href="/Naveen_Sharma_CV.pdf" className="rounded-full bg-[#172321] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#30443e]">CV · English <ArrowUpRight className="ml-1 inline" size={15}/></a>
+            <a lang="he" dir="rtl" href="/Naveen_Sharma_CV_HE.pdf" className="rounded-full bg-[#172321] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#30443e]">קורות חיים · עברית <ArrowUpRight className="ml-1 inline" size={15}/></a>
           </div>
           <button ref={mobileMenuButtonRef} type="button" aria-controls="mobile-navigation" className="shrink-0 rounded-lg p-3 lg:hidden" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} onClick={() => { setMenuOpen(!menuOpen); setMobileExpertiseOpen(false); }}>{menuOpen ? <X/> : <Menu/>}</button>
         </div>
@@ -321,7 +322,8 @@ export default function App() {
           </div>}
           <a href="#about" onClick={closeMobileMenu} className="rounded-lg px-3 py-3 text-sm hover:bg-white">About</a>
           <a href="#contact" onClick={closeMobileMenu} className="rounded-lg px-3 py-3 text-sm hover:bg-white">Contact</a>
-          <a href="/Naveen_Sharma_CV.pdf" onClick={closeMobileMenu} className="mt-2 rounded-lg bg-[#172321] px-4 py-3 text-center text-sm font-semibold text-white">View résumé</a>
+          <a href="/Naveen_Sharma_CV.pdf" onClick={closeMobileMenu} className="mt-2 rounded-lg bg-[#172321] px-4 py-3 text-center text-sm font-semibold text-white">CV · English</a>
+          <a lang="he" dir="rtl" href="/Naveen_Sharma_CV_HE.pdf" onClick={closeMobileMenu} className="mt-2 rounded-lg bg-[#172321] px-4 py-3 text-center text-sm font-semibold text-white">קורות חיים · עברית</a>
         </nav>
       </header>
 
@@ -331,6 +333,13 @@ export default function App() {
             <p className="mb-7 max-w-2xl text-sm font-semibold leading-6 text-[#52615c]">AI Automation &amp; Integration Engineer <span aria-hidden="true">|</span> SaaS Implementation Specialist <span aria-hidden="true">|</span> Workflow Automation</p>
             <h1 id="hero-title" className="max-w-3xl text-clamp-h1 font-semibold tracking-[-.055em] lg:text-7xl">Turning curiosity into <span className="underline decoration-[#a7d94f] decoration-[6px] underline-offset-[8px]">practical AI solutions.</span></h1>
             <p className="mt-8 max-w-2xl text-lg leading-8 text-[#52615c]">I’m Naveen—a lifelong technology enthusiast building with no-code tools and AI assistance. I combine SaaS implementation and technical problem-solving experience with hands-on projects in automation, assistants and websites, while expanding into AI agents and apps.</p>
+            <section aria-labelledby="resume-title" className="mt-7 rounded-2xl border border-ink/10 bg-surface p-5">
+              <h2 id="resume-title" className="text-sm font-semibold">View résumé</h2>
+              <div className="mt-3 flex flex-wrap gap-3">
+                <a href="/Naveen_Sharma_CV.pdf" hrefLang="en" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/20 px-5 py-3 text-sm font-semibold hover:bg-soft">English CV <ArrowUpRight size={15}/></a>
+                <a href="/Naveen_Sharma_CV_HE.pdf" hrefLang="he" lang="he" dir="rtl" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/20 px-5 py-3 text-sm font-semibold hover:bg-soft">קורות חיים בעברית <ArrowUpRight size={15}/></a>
+              </div>
+            </section>
             <div className="mt-9 flex flex-wrap gap-3">
               <a href="#projects" className="w-full justify-center rounded-full bg-[#172321] px-6 py-4 text-sm font-semibold text-white hover:bg-[#30443e] sm:w-auto">Explore my work <ArrowDown className="ml-2 inline" size={16}/></a>
               <a href="mailto:contact@naveensharma.net" className="w-full justify-center rounded-full border border-ink/20 px-6 py-4 text-sm font-semibold hover:bg-surface sm:w-auto">Let’s connect <ArrowUpRight className="ml-2 inline" size={16}/></a>
@@ -426,6 +435,7 @@ export default function App() {
                 <a href="https://www.linkedin.com/in/naveensharmatech" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white"><Linkedin size={16}/> LinkedIn</a>
                 <a href="https://github.com/naveensharmatech" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white"><Github size={16}/> GitHub</a>
                 <a href="/Naveen_Sharma_CV.pdf" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white">Résumé <ArrowUpRight size={15}/></a>
+                <a lang="he" dir="rtl" href="/Naveen_Sharma_CV_HE.pdf" className="inline-flex items-center gap-2 rounded-full border border-[#172321]/20 px-5 py-3 text-sm font-semibold hover:bg-white">קורות חיים · עברית <ArrowUpRight size={15}/></a>
               </div>
               <AboutDetails />
             </div>
