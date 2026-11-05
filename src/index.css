@@ -85,127 +85,6 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-html.dark body {
-  background:
-    radial-gradient(1000px 500px at 85% -10%, rgba(37,99,235,.15) 0%, rgba(37,99,235,0) 60%),
-    radial-gradient(900px 480px at -10% 15%, rgba(124,58,237,.12) 0%, rgba(124,58,237,0) 55%),
-    #0b0f19;
-  color: #f1f5f9;
-}
-
-/* scroll-reveal */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity .7s cubic-bezier(.16,.84,.44,1), transform .7s cubic-bezier(.16,.84,.44,1);
-  will-change: opacity, transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-.reveal.is-visible {
-  will-change: auto;
-  opacity: 1;
-  transform: translateY(0);
-}
-.reveal-stagger > * {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity .6s ease, transform .6s ease;
-}
-.reveal-stagger.is-visible > * { opacity: 1; transform: translateY(0); }
-.reveal-stagger.is-visible > *:nth-child(1){ transition-delay: .02s }
-.reveal-stagger.is-visible > *:nth-child(2){ transition-delay: .08s }
-.reveal-stagger.is-visible > *:nth-child(3){ transition-delay: .14s }
-.reveal-stagger.is-visible > *:nth-child(4){ transition-delay: .20s }
-.reveal-stagger.is-visible > *:nth-child(5){ transition-delay: .26s }
-.reveal-stagger.is-visible > *:nth-child(6){ transition-delay: .32s }
-.reveal-stagger.is-visible > *:nth-child(7){ transition-delay: .38s }
-.reveal-stagger.is-visible > *:nth-child(8){ transition-delay: .44s }
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  .reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; transition: none !important; }
-}
-
-/* subtle floating orbs for depth */
-@keyframes floaty {
-  0%, 100% { transform: translate(0,0) scale(1); }
-  50% { transform: translate(14px,-18px) scale(1.04); }
-}
-.orb {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(70px);
-  opacity: .3;
-  pointer-events: none;
-  animation: floaty 14s ease-in-out infinite;
-  z-index: 0;
-}
-html.dark .orb {
-  opacity: .18;
-}
-
-.gradient-text {
-  background: linear-gradient(90deg, #0f172a 0%, #2563eb 55%, #7c3aed 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-  padding-bottom: 0.18em;
-  line-height: 1.18;
-}
-
-html.dark .gradient-text {
-  background: linear-gradient(90deg, #ffffff 0%, #60a5fa 50%, #c084fc 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Solid, crisp navbar */
-.glass {
-  background: #ffffff;
-}
-html.dark .glass {
-  background: #0b0f19;
-}
-
-.tilt-card {
-  transition: transform .35s cubic-bezier(.16,.84,.44,1), box-shadow .35s ease, background-color .2s ease, border-color .2s ease;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-.tilt-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px -18px rgba(37,99,235,.28);
-}
-html.dark .tilt-card:hover {
-  box-shadow: 0 20px 40px -18px rgba(37,99,235,.4);
-}
-
-/* Workflow diagram connector line */
-.workflow-connector {
-  position: relative;
-}
-.workflow-connector::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, #2563eb, #93c5fd);
-  transform: translateY(-50%);
-}
-.workflow-connector:last-child::after {
-  display: none;
-}
-
 /* Portfolio content and restored assistant accessibility. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -253,3 +132,11 @@ body { font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 17px;
 }
 
 .header-frame a[href$=".pdf"] { white-space: nowrap; }
+
+/* Depth follows interaction; content remains readable without motion. */
+.nav-link{display:inline-flex;align-items:center;gap:7px}
+@media(hover:hover) and (pointer:fine){
+ #projects article,#qualifications article{transition:transform .25s ease,box-shadow .25s ease}
+ #projects article:hover,#qualifications article:hover{transform:perspective(1100px) rotateX(1deg) translateY(-4px);box-shadow:0 12px 24px rgb(var(--color-ink)/.08)}
+}
+@media(prefers-reduced-motion:reduce){#projects article:hover,#qualifications article:hover{transform:none!important}}

@@ -1,3 +1,5 @@
+[![Naveen Sharma — practical AI solutions](docs/assets/portfolio-banner.svg)](https://naveensharma.net/)
+
 <div align="center">
 
 <img src="https://raw.githubusercontent.com/naveensharmatech/portfolio/main/public/profile-canva.png" alt="Naveen Sharma" width="110" />
@@ -18,7 +20,7 @@
 
 This repository contains the source for **[naveensharma.net](https://naveensharma.net/)**—my personal portfolio, practical demonstrations and Ella assistant. Its presentation follows the current website’s AI automation and integration direction.
 
-## What I build
+## 👋 What I build
 
 I build practical no-code workflows, AI assistants, chatbots, AI-assisted websites and small applications. My focus is understanding a process, connecting the right systems, mapping data and checking that the result works.
 
@@ -26,7 +28,11 @@ Technology has always made me curious. I managed a computer-training franchise a
 
 I contribute requirements, workflow logic, configuration, design decisions, troubleshooting and validation. AI tools help me write and refine code.
 
-## Explore the work
+![Animated workflow from input through AI logic, routing and human review](docs/assets/workflow-motion.gif)
+
+<sub>Conceptual workflow illustration. The live site provides hover depth, animated controls and reduced-motion support.</sub>
+
+## 🧩 Projects you can inspect
 
 | Explore | What you’ll find | Status |
 | --- | --- | --- |
@@ -39,13 +45,13 @@ I contribute requirements, workflow logic, configuration, design decisions, trou
 
 The site also documents B2B and Shopify extraction projects, academic work and QA learning materials. Workflow-reference graphics are learning references, not claims that I built or deployed those workflows.
 
-## Ella — my personal site assistant
+## 🤖 Ella — my personal site assistant
 
 Ella helps visitors explore my experience, projects and learning, and discuss AI, automation and related questions. The React interface calls a Cloudflare Pages Function. The server uses relevant public site knowledge and a configured AI provider; if that connection is unavailable, it returns a clearly labelled saved-knowledge answer.
 
 Ella is part of this codebase, not a separate repository. The assistant on Opility uses its own business context.
 
-## Tools behind the work
+## 🛠️ Tools behind the work
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/naveensharmatech/portfolio/main/public/tool-logos/zapier.svg" alt="Zapier" title="Zapier" width="38" height="38" />
@@ -71,16 +77,18 @@ Ella is part of this codebase, not a separate repository. The assistant on Opili
 
 These tools reflect a mix of project use and ongoing learning. Code-based builds are AI-assisted; tool logos do not imply expert-level proficiency.
 
-## What the website includes
+## ✨ Inside the current website
 
 - Responsive layouts, system light/dark preferences and keyboard navigation.
+- Green dimensional navigation, icons, card hover motion and reduced-motion alternatives.
+- Standalone demonstrations and certificate pages using the shared portfolio theme.
 - Project descriptions with links to source code, demonstrations and supporting documents.
 - Interactive sample-data workbenches for forms, field mapping and document workflows.
 - Experience, qualifications, certificate evidence, résumé links and my personal story.
 - An automation learning gallery and experiments with their individual development status.
 - Ella’s chat interface, server-side handler and public knowledge source.
 
-## Where the current website code lives
+## 🗂️ Where the current code lives
 
 | Path | Purpose |
 | --- | --- |
@@ -89,12 +97,15 @@ These tools reflect a mix of project use and ongoing learning. Code-based builds
 | [src/index.css](src/index.css) | Website styling and theme rules |
 | [functions/api/chat.js](functions/api/chat.js) | Ella’s server-side request handler and fallback |
 | [data/ella-knowledge.js](data/ella-knowledge.js) | Public knowledge used by Ella |
-| [public/](public/) | Images, tool logos, demonstrations and public documents |
+| [public/](public/) | Active images, tool logos, demonstrations and public documents |
+| [public/portfolio-theme.css](public/portfolio-theme.css) | Green styling, readable type and reduced-motion support for standalone pages |
+| [archive/](archive/) | Retired implementations and media; excluded from the live build |
+| [docs/CUSTOMIZATION.md](docs/CUSTOMIZATION.md) | How to update content, Ella, CV files and visuals together |
 | [tests/](tests/) | Chat-handler tests and browser acceptance scenarios |
 
 The README describes the application; it does not generate the website. An older README or release note does not mean the site’s current code is missing.
 
-## Run locally
+## 🚀 Run locally
 
 Use **Node.js 22.12+** and npm.
 
@@ -108,6 +119,7 @@ Build and check:
 ```bash
 npm run build
 npm run test:chat
+npm run check:content
 npx playwright install chromium
 npm run test:acceptance
 ```
@@ -116,14 +128,20 @@ npm run test:acceptance
 
 Test files and past passing runs are not a guarantee that every current integration or device has been verified. See [validation coverage](MOBILE_OPTIMIZATION.md). The [October release record](DEPLOYMENT_COMPLETED.md) is historical evidence for its named commit, not the current deployment status.
 
-## Background and learning
+## 🎓 Background and learning
 
 My paid SaaS work involved healthcare intake configuration, conditional forms, JSON/data mapping, document generation, eSignature routing and workflow validation. That experience supports my current automation direction.
 
 Completed Zapier Academy paths: **AI Builder · MCP · Account Admin Essentials**. I’m continuing practical learning across Make, n8n, CRM tools, AI platforms and API testing. [Explore qualifications](https://naveensharma.net/#qualifications).
 
-## Let’s connect
+## 📬 Let’s connect
 
 Open to AI/workflow automation, implementation and integration opportunities, remote work that can hire in Israel, and freelance projects.
 
 [Contact Naveen](https://naveensharma.net/#contact) · [LinkedIn](https://www.linkedin.com/in/naveensharmatech/) · [Business enquiries](https://opility.com/contact)
+
+## Visuals and maintenance
+
+The banner and animated workflow are repository-hosted assets. GitHub displays image animation; website CSS/JavaScript and interactive 3D run on the actual site. All essential information remains available as text.
+
+Use the [customization guide](docs/CUSTOMIZATION.md) for the exact source files. Update public biography in the site, Ella and both résumé formats together. Original academic documents and certificates remain original evidence. Historical release notes apply only to their named commits.

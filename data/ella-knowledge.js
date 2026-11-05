@@ -1,4 +1,4 @@
-// Public site knowledge snapshot, 4 October 2026. Refresh when site facts change.
+// Public site knowledge snapshot, 5 November 2026. Refresh when site facts change.
 export const ELLA_IDENTITY = "Naveen Sharma’s Personal Assistant";
 export const ELLA_KNOWLEDGE = [
 {
@@ -60,7 +60,7 @@ export const ELLA_KNOWLEDGE = [
     "keywords": [
       "bolt"
     ],
-    "text": "Bolt Healthcare: SaaS Implementation Specialist & Workflow QA. Site dates: Aug 2022 – May 2026. SaaS Implementation: Supported healthcare SaaS configuration and digital intake workflows for agency clients, translating requirements into configurable onboarding processes. Form Logic & Data Mapping: Configured dynamic forms, conditional visibility, dropdown constraints and field validation across intake and referral workflows. Document Automation & eSignatures: Configured document generation, mapped form tokens to regulatory PDFs and set up multi-party eSignature routing. QA, UAT & Defect Triage: Performed functional validation, QA/UAT and regression checks on forms and mapped outputs; investigated defects and coordinated fixes through Basecamp. SOPs & Governance: Created configuration guidance and validation documentation; supported platform settings and helped colleagues troubleshoot workflow issues. Page: https://naveensharma.net/intake-builder-demo"
+    "text": "Bolt Healthcare: SaaS Implementation Specialist. Site dates: Aug 2022 – May 2026. SaaS Implementation: Supported healthcare SaaS configuration and digital intake workflows for agency clients, translating requirements into configurable onboarding processes. Form Logic & Data Mapping: Configured dynamic forms, conditional visibility, dropdown constraints and field validation across intake and referral workflows. Document Automation & eSignatures: Configured document generation, mapped form tokens to regulatory PDFs and set up multi-party eSignature routing. QA, UAT & Defect Triage: Performed functional validation, QA/UAT and regression checks on forms and mapped outputs; investigated defects and coordinated fixes through Basecamp. SOPs & Governance: Created configuration guidance and validation documentation; supported platform settings and helped colleagues troubleshoot workflow issues. Page: https://naveensharma.net/intake-builder-demo"
   },
   {
     "keywords": [
@@ -219,7 +219,7 @@ export const ELLA_KNOWLEDGE = [
       "zapier",
       "certificate"
     ],
-    "text": "Certifications: Zapier Academy — all courses completed (AI Builder · MCP · Account Admin Essentials; Completed); QA qualification (Smart College; Completed); JSM Fundamentals with AI (Atlassian; Completed). https://naveensharma.net/#qualifications"
+    "text": "Certifications: Zapier Academy — completed learning paths (AI Builder · MCP · Account Admin Essentials; Completed); QA Manual & Automation (Smart College and Great Learning Academy; Completed); JSM Fundamentals with AI (Atlassian; Completed); AI Tools Workshop (be10x; Completed); Customer Relationship Management (HP LIFE; Completed). https://naveensharma.net/#qualifications"
   },
   {
     "keywords": [
@@ -237,7 +237,7 @@ export const ELLA_KNOWLEDGE = [
       "courses",
       "mcp"
     ],
-    "text": "All ten Zapier Academy courses are completed across AI Builder, MCP and Account Admin Essentials: Jumpstart, Building Basic Zaps, Building Intermediate Zaps, Building AI Agents, What is Zapier MCP?, Using Zapier MCP, Governing Zapier MCP, Account Setup, Monitoring and Operations, Security and Governance. This is course completion, not an invented Zapier Expert Certification."
+    "text": "Completed Zapier Academy learning paths: AI Builder, MCP and Account Admin Essentials. The supporting certificates document learning; do not present a course count as Naveen’s professional headline or invent a Zapier Expert Certification."
   },
   {
     "keywords": [
@@ -247,7 +247,7 @@ export const ELLA_KNOWLEDGE = [
       "lab",
       "centre"
     ],
-    "text": "At Shivam, Naveen managed the centre, day-to-day operations, lab systems, staff/instructor coordination and student administration; do not describe him as a classroom teacher in this role. His office nameplate reads Centre Head; his experience title is Franchise Owner & Technical Operations Lead. The academy page shows exterior, office and lab images. Edited images illustrate the setting; they are not independent evidence of metrics."
+    "text": "At Shivam, Naveen managed the centre, day-to-day operations, lab systems, staff/instructor coordination and student administration; his primary role was centre management and technical operations; training delivery was a supporting responsibility. His office nameplate reads Centre Head; his experience title is Franchise Owner & Technical Operations Lead. The academy page shows exterior, office and lab images. Edited images illustrate the setting; they are not independent evidence of metrics."
   },
   {
     "keywords": [

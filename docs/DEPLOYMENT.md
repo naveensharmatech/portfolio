@@ -13,7 +13,7 @@
 
 ## Auto-Deploy
 
-After reviewing and merging the mobile optimization PR into `main`, a connected
+After reviewing and merging a change into `main`, a connected
 Cloudflare Pages project with automatic deployments enabled rebuilds production.
 This requires the existing Cloudflare project to be connected; merging alone
 does not configure it.
@@ -54,3 +54,9 @@ Verify GET `/api/chat` returns JSON, then send a public profile question from
 Ella's UI. Check that a reply arrives, the send button recovers, and keyboard
 focus returns to the input. Test fallback locally with the Function handler and
 no key; do not remove production secrets to simulate failure.
+
+## Repository consistency
+
+Run `npm run check:content` before release. It checks the active page/theme connections, local assets and biography/knowledge invariants. `archive/` is retained history and must not enter `dist/`. Both READMEs use repo-hosted graphics; the profile README is maintained in `naveensharmatech/naveensharmatech`. Animated GIFs work as images on GitHub; CSS, JavaScript and interactive 3D do not execute in a README.
+
+Confirm the preview first. The source ZIP is a snapshot; download a fresh copy after changes merge. Existing historical release records remain evidence for their named commits only.

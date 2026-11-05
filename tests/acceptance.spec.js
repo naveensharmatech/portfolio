@@ -80,3 +80,25 @@ for (const width of [320, 375, 390, 430, 768, 1024, 1440]) {
     expect(layout.fits).toBe(true);
   });
 }
+
+// Standalone pages share the current theme instead of retaining old homepage styles.
+for (const path of ['/intake-builder-demo','/manufacturing-demo','/institute-demo']) {
+  for (const colorScheme of ['light','dark']) {
+    test(`shared standalone theme ${colorScheme} ${path}`, async ({page}) => {
+      await page.setViewportSize({width:320,height:800});
+      await page.emulateMedia({colorScheme,reducedMotion:'reduce'});
+      await page.goto(path);
+      await expect(page.locator('link[href="/portfolio-theme.css"]')).toHaveCount(1);
+      expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      expect(await page.evaluate(()=>getComputedStyle(document.body).fontSize)).toBe('17px');
+      expect(await page.evaluate(()=>getComputedStyle(document.documentElement).scrollBehavior)).toBe('auto');
+    });
+  }
+}
+test('intake demo produces a sample result from current implementation', async ({page}) => {
+  await page.goto('/intake-builder-demo');
+  await page.getByRole('button',{name:'Auto-fill valid',exact:true}).click();
+  await expect(page.getByRole('heading',{name:'Completed sample intake document',exact:true})).toBeVisible();
+  await page.getByRole('button',{name:'Save demo result ↦',exact:true}).click();
+  await expect(page.locator('#successBox')).toBeVisible();
+});
