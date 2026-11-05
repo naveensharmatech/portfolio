@@ -1,32 +1,22 @@
-# Content Customization
+# Updating the current portfolio
 
-## Update Content
+| Change | Source |
+| --- | --- |
+| Hero, nav, projects, experience, qualifications, tools | `src/App.jsx` (lowercase `projects`, `qualifications`, `tools`, plus inline experience records) |
+| Workflow gallery, experiments, additional work, story details, Ella UI | `src/RestoredContent.jsx` |
+| Main theme, type and motion | `src/index.css`, `tailwind.config.js` |
+| Standalone page theme and motion | `public/portfolio-theme.css` |
+| Intake demo and its actual interaction code | `public/intake-builder-demo.html` (inline script) |
+| Manufacturing interaction | `public/manufacturing-demo.html`, `public/experience-demo.js`, `public/experience-demo-model.js` |
+| Academy experience | `public/institute-demo.html` |
+| Certificate navigation | `public/certifications.html`, `public/zapier-expertise.html` |
+| Ella’s facts | `data/ella-knowledge.js` |
+| Ella behavior/provider/fallback | `functions/api/chat.js` |
+| Public résumé text | `public/cv.html`, `public/cv-he.html`, plus both corresponding PDF files |
+| README visuals | `docs/assets/portfolio-banner.svg`, `docs/assets/workflow-motion.gif`; both repo and profile READMEs |
 
-All content is in `src/App.jsx` data constants:
+Before changing biography, consult `docs/career/experience-source-of-truth.md` and the user’s latest corrections. Keep implementation as Bolt’s primary function; retain genuine validation duties. Never invent metrics. Use completed Zapier paths rather than a certification count.
 
-```javascript
-const EXPERIENCES = [
-  {
-    company: "Your Company",
-    period: "2024 – Present",
-    roles: ["Role"],
-    points: [{label: "Achievement", text: "Details"}]
-  }
-];
-```
+When a career fact changes, update main content, Ella, CV HTML/PDF files and both READMEs together where applicable. Original certificate and academic evidence should remain original. PDF downloads are static; `npm run build` does not regenerate them.
 
-## Update Projects
-
-```javascript
-const PROJECTS = [
-  {
-    title: "Project Name",
-    desc: "Description",
-    skills: ["Skill1", "Skill2"]
-  }
-];
-```
-
-## Update Ella AI Prompt
-
-Edit `functions/api/chat.js` SYSTEM_PROMPT
+Run `npm run check:content`, `npm run build`, `npm run test:chat` and `npm run test:acceptance`. Follow `docs/DEPLOYMENT.md` for preview and release checks. Archived code is outside `public/`; it is not active website code.

@@ -1,10 +1,10 @@
 # Experience reference — Naveen Sharma
 
-Updated 9 October 2026 to align the website, demonstrations and Ella with the corrected employment dates and supported responsibilities. Historical LinkedIn wording is not independent proof of numerical outcomes. Keep unsubstantiated performance metrics and compliance guarantees out of public copy.
+Updated 5 November 2026 to align the website, demonstrations, CV downloads and Ella with the corrected employment dates and supported responsibilities. Bolt implementation is the primary function; workflow validation is supporting scope. Historical LinkedIn wording is not independent proof of numerical outcomes. Keep unsubstantiated performance metrics and compliance guarantees out of public copy.
 
 ## Bolt Healthcare
 
-**SaaS Implementation Specialist & Workflow QA**
+**SaaS Implementation Specialist**
 
 Aug 2022 – May 2026
 

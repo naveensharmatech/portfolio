@@ -5,7 +5,7 @@ import { RestoredContent, EllaChat, Approach, AboutDetails, WorkflowGallery, Zap
 import { useState, useEffect, useRef } from "react";
 import {
   ArrowDown, ArrowRight, ArrowUpRight, Bot, ChevronDown, Code2, FileCheck2,
-  Github, Linkedin, Menu, Workflow, X,
+  Github, Linkedin, Menu, Workflow, X, CircleUserRound, Mail,
 } from "lucide-react";
 
 const tools = [
@@ -291,18 +291,18 @@ export default function App() {
             <span className="text-sm font-semibold tracking-tight">Naveen Sharma</span>
           </a>
           <nav className="nav-capsule hidden items-center gap-1 xl:flex" aria-label="Main navigation">
-            <a href="#projects" className="nav-link text-sm font-semibold">Projects</a>
-            <a href="#experience" className="nav-link text-sm font-semibold">Experience</a>
+            <a href="#projects" className="nav-link text-sm font-semibold"><Code2 size={17} aria-hidden="true"/>Projects</a>
+            <a href="#experience" className="nav-link text-sm font-semibold"><FileCheck2 size={17} aria-hidden="true"/>Experience</a>
             <div ref={expertiseRef} className="relative">
               <button ref={expertiseButtonRef} aria-controls="expertise-links" type="button" className="nav-link flex items-center gap-1 text-sm font-semibold" aria-expanded={expertiseOpen} onClick={() => setExpertiseOpen(!expertiseOpen)}>
-                Expertise <ChevronDown size={15} className={`transition-transform ${expertiseOpen ? "rotate-180" : ""}`}/>
+                <Bot size={17} aria-hidden="true"/> Expertise <ChevronDown size={15} className={`transition-transform ${expertiseOpen ? "rotate-180" : ""}`}/>
               </button>
               {expertiseOpen && <div id="expertise-links" className="nav-dropdown absolute left-0 top-full z-20 mt-3 w-56 rounded-xl border border-[#172321]/10 bg-white p-2 shadow-lg">
                 {[["Workflows", "#workflow-references"], ["Work demos", "#demos"], ["Capabilities", "#capabilities"], ["Tools & Platforms", "#tools"], ["Qualifications", "#qualifications"]].map(([label, href]) => <a key={href} href={href} onClick={() => setExpertiseOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-[#52615c] hover:bg-[#f0f3ef] hover:text-[#172321]">{label}</a>)}
               </div>}
             </div>
-            <a href="#about" className="nav-link text-sm font-semibold">About</a>
-            <a href="#contact" className="nav-link text-sm font-semibold">Contact</a>
+            <a href="#about" className="nav-link text-sm font-semibold"><CircleUserRound size={17} aria-hidden="true"/>About</a>
+            <a href="#contact" className="nav-link text-sm font-semibold"><Mail size={17} aria-hidden="true"/>Contact</a>
           </nav>
           <div className="hidden items-center gap-3 xl:flex">
             <a href="https://www.linkedin.com/in/naveensharmatech" target="_blank" rel="noreferrer" className="justify-center rounded-full p-2 text-muted hover:bg-surface" aria-label="LinkedIn"><Linkedin size={18}/></a>
@@ -373,7 +373,7 @@ export default function App() {
             <h2 className="mt-4 text-4xl font-semibold tracking-tight">Grounded in delivery.</h2>
             <div className="mt-10 grid gap-5 lg:grid-cols-3">
               {[
-                {"demoHref":"/intake-builder-demo","demoLabel":"Try intake & mapping demo","company":"Bolt Healthcare","role":"SaaS Implementation Specialist & Workflow QA","context":"Aug 2022 – May 2026","points":["SaaS Implementation: Supported healthcare SaaS configuration and digital intake workflows for agency clients, translating requirements into configurable onboarding processes.","Form Logic & Data Mapping: Configured dynamic forms, conditional visibility, dropdown constraints and field validation across intake and referral workflows.","Document Automation & eSignatures: Configured document generation, mapped form tokens to regulatory PDFs and set up multi-party eSignature routing.","QA, UAT & Defect Triage: Performed functional validation, QA/UAT and regression checks on forms and mapped outputs; investigated defects and coordinated fixes through Basecamp.","SOPs & Governance: Created configuration guidance and validation documentation; supported platform settings and helped colleagues troubleshoot workflow issues."]},
+                {"demoHref":"/intake-builder-demo","demoLabel":"Try intake & mapping demo","company":"Bolt Healthcare","role":"SaaS Implementation Specialist","context":"Aug 2022 – May 2026","points":["SaaS Implementation: Supported healthcare SaaS configuration and digital intake workflows for agency clients, translating requirements into configurable onboarding processes.","Form Logic & Data Mapping: Configured dynamic forms, conditional visibility, dropdown constraints and field validation across intake and referral workflows.","Document Automation & eSignatures: Configured document generation, mapped form tokens to regulatory PDFs and set up multi-party eSignature routing.","QA, UAT & Defect Triage: Performed functional validation, QA/UAT and regression checks on forms and mapped outputs; investigated defects and coordinated fixes through Basecamp.","SOPs & Governance: Created configuration guidance and validation documentation; supported platform settings and helped colleagues troubleshoot workflow issues."]},
 {"demoHref":"/manufacturing-demo","demoLabel":"Explore manufacturing demo","company":"Vishay Intertechnology, Inc.","role":"Technical Operator (Process Operations & Quality Control)","context":"Nov 2021 – May 2022 · 7 mos · Be'er Sheva, South District, Israel","points":["Precision Machine Operations: Operated chip-resistor manufacturing equipment in a cleanroom environment and checked machine settings according to production procedures.","Quality Control & Component Inspection: Checked component quality at production stages and reported discrepancies for follow-up.","Traceability & Compliance Logging: Maintained operational and quality records to support production traceability.","Process Adherence & Defect Escalation: Followed standard operating procedures and escalated equipment or material issues to the relevant team.","Cleanroom Governance: Followed cleanroom and equipment-handling procedures and recorded relevant issues for shift handover."]},
 {"demoHref":"/institute-demo","demoLabel":"View academy experience","company":"Shivam Institute for Vocational Trainings","role":"Franchise Owner & Technical Operations Lead","context":"Aug 2012 – Sep 2015 · 3 yrs 2 mos · India","points":["Center Operations & Business Governance: Managed a vocational computer-training franchise branch, including enrollment, fees, schedules and day-to-day operations.","IT Infrastructure & Lab Systems: Maintained computer-lab resources, organized software and equipment setup, and resolved technical problems.","Technical Curriculum & Training Delivery: Taught computer-course modules and coordinated classes and training activities.","Quality Standards & Regulatory Compliance: Organized administrative records and course-related documentation for the branch.","Student Lifecycle & Service Delivery: Handled student inquiries, enrollment and advising, parent meetings and local marketing."]},
               ].map(({ company, role, context, points, demoHref, demoLabel }) => <article key={company} className="rounded-3xl border border-[#172321]/10 bg-[#f6f7f4] p-6"><p className="text-sm font-semibold text-[#5c6d65]">{company}</p><h3 className="mt-2 text-xl font-semibold">{role}</h3><p className="mt-3 text-xs leading-6 text-[#52615c]">{context}</p><ul className="mt-5 space-y-3">{points.map(point => <li key={point} className="border-t border-[#172321]/10 pt-3 text-sm leading-6 text-[#52615c]">{point}</li>)}</ul><a href={demoHref} className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#172321] px-5 py-3 text-sm font-semibold text-[#c5f16b]">{demoLabel} <ArrowUpRight size={16}/></a></article>)}

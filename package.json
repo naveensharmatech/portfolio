@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "test:acceptance": "playwright test",
-    "test:chat": "node --test tests/chat.test.js"
+    "test:chat": "node --test tests/chat.test.js",
+    "check:content": "node scripts/check-content.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.383.0",
@@ -26,4 +27,3 @@
     "vite": "^8.3.2"
   }
 }
-
