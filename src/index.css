@@ -99,13 +99,13 @@ summary { min-height: 44px; align-content: center; }
 
 /* Readable type and green, dimensional navigation. */
 @theme {
-  --text-xs: 0.875rem;
+  --text-xs: 0.75rem;
   --text-xs--line-height: 1.6;
-  --text-sm: 1rem;
+  --text-sm: 0.875rem;
   --text-sm--line-height: 1.65;
 }
 :root { --color-muted: 52 72 63; --color-subtle: 65 84 75; }
-body { font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 17px; line-height: 1.7; }
+body { font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 16px; line-height: 1.6; }
 .site-header { padding-inline: clamp(8px, 2vw, 28px); border-bottom: 1px solid rgb(var(--color-ink) / .08); }
 .header-frame { gap: 16px; }
 .brand-link { flex-shrink: 0; }
@@ -117,8 +117,8 @@ body { font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 17px;
 .nav-link:active { transform: translateY(1px); box-shadow: 0 1px 0 #83a74c; }
 .nav-dropdown { transform-origin: top left; animation: nav-enter .18s ease-out both; box-shadow: 0 16px 40px rgb(var(--color-ink) / .16); }
 #mobile-navigation { border-radius: 0 0 20px 20px; background: rgb(var(--color-surface)); }
-#main-content p { line-height: 1.8; }
-#hero-title + p { font-size: clamp(1.125rem, 1.5vw, 1.3rem); }
+#main-content p { line-height: 1.65; }
+#hero-title + p { font-size: clamp(1rem, 1.25vw, 1.125rem); }
 #capabilities .text-white\/65, #capabilities .text-white\/60 { color: rgb(255 255 255 / .85); }
 @keyframes nav-enter { from { opacity: 0; transform: translateY(-6px) rotateX(-8deg); } to { opacity: 1; transform: translateY(0) rotateX(0); } }
 @media (hover: hover) and (pointer: fine) {
