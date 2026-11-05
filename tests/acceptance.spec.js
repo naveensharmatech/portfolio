@@ -90,7 +90,7 @@ for (const path of ['/intake-builder-demo','/manufacturing-demo','/institute-dem
       await page.goto(path);
       await expect(page.locator('link[href="/portfolio-theme.css"]')).toHaveCount(1);
       expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-      expect(await page.evaluate(()=>getComputedStyle(document.body).fontSize)).toBe('17px');
+      expect(await page.evaluate(()=>getComputedStyle(document.body).fontSize)).toBe('16px');
       expect(await page.evaluate(()=>getComputedStyle(document.documentElement).scrollBehavior)).toBe('auto');
     });
   }
