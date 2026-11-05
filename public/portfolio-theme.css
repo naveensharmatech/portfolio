@@ -10,11 +10,11 @@
 }
 @media screen {
   html { scroll-behavior:smooth; scroll-padding-top:90px; }
-  body:not(.cv-page) { font-family:"Segoe UI",system-ui,sans-serif; font-size:17px; line-height:1.75; background:var(--portfolio-canvas); color:var(--portfolio-ink); }
+  body:not(.cv-page) { font-family:"Segoe UI",system-ui,sans-serif; font-size:16px; line-height:1.6; background:var(--portfolio-canvas); color:var(--portfolio-ink); }
   body:not(.cv-page) h1,body:not(.cv-page) h2,body:not(.cv-page) h3 { font-family:inherit; color:var(--portfolio-ink); }
   body:not(.cv-page) h1 { background:none; -webkit-text-fill-color:currentColor; letter-spacing:-.025em; }
   body:not(.cv-page) p { color:var(--portfolio-muted); }
-  body:not(.cv-page) :is(.sub,.lede,.linkedin-duties p,.steps p,.foot) { font-size:17px; line-height:1.8; color:var(--portfolio-muted); }
+  body:not(.cv-page) :is(.sub,.lede,.linkedin-duties p,.steps p,.foot) { font-size:16px; line-height:1.65; color:var(--portfolio-muted); }
   body:not(.cv-page) :is(.eyebrow,.caption,.badge,.muted,.hint,.fi-meta,.k,.h-sub,.tag,.role,.card .cm,.tab .n) { font-size:14px; color:var(--portfolio-muted); opacity:1; }
   body:not(.cv-page) :is(.topbar,header,footer,.app,.field,.card,.linkedin-experience,.panel,.desk,section[id^=certificate-]) { background:var(--portfolio-surface); border-color:var(--portfolio-line); color:var(--portfolio-ink); }
   body:not(.cv-page) :is(.surface,.workbench,.evidence) { border-color:var(--portfolio-line); }
