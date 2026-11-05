@@ -4,6 +4,7 @@ import { resolve, relative } from 'node:path';
 const root = resolve(import.meta.dirname, '..');
 const read = path => readFileSync(resolve(root,path),'utf8');
 const walk = dir => readdirSync(resolve(root,dir),{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(`${dir}/${e.name}`):[`${dir}/${e.name}`]);
+assert(!existsSync(resolve(root,'archive')), 'Superseded files must not remain in an archive folder.');
 const app=read('src/App.jsx'), knowledge=read('data/ella-knowledge.js'), handler=read('functions/api/chat.js');
 assert(app.includes('Turning curiosity into') && app.includes('practical AI solutions.'));
 assert(!knowledge.includes('All ten Zapier') && !knowledge.includes('all courses completed'), 'Use completed paths consistently.');
