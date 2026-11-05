@@ -251,3 +251,5 @@ body { font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 17px;
 @media (prefers-reduced-motion: reduce) {
   .nav-link, #main-content figure, .nav-dropdown { animation: none !important; transition: none !important; transform: none !important; }
 }
+
+.header-frame a[href$=".pdf"] { white-space: nowrap; }

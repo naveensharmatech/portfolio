@@ -306,7 +306,7 @@ export default function App() {
           </nav>
           <div className="hidden items-center gap-3 xl:flex">
             <a href="https://www.linkedin.com/in/naveensharmatech" target="_blank" rel="noreferrer" className="justify-center rounded-full p-2 text-muted hover:bg-surface" aria-label="LinkedIn"><Linkedin size={18}/></a>
-            <div className="grid w-56 grid-cols-2 gap-2">
+            <div className="grid w-64 shrink-0 grid-cols-2 gap-2">
               <a href="/Naveen_Sharma_CV.pdf" className="flex min-h-11 min-w-0 items-center justify-center gap-1 rounded-full bg-[#172321] px-2 py-2 text-sm font-semibold text-white hover:bg-[#30443e]">English CV <ArrowUpRight size={15}/></a>
               <a href="/Naveen_Sharma_CV_HE.pdf" lang="he" dir="rtl" className="flex min-h-11 min-w-0 items-center justify-center gap-1 rounded-full bg-[#172321] px-2 py-2 text-sm font-semibold text-white hover:bg-[#30443e]">קורות חיים <ArrowUpRight size={15}/></a>
             </div>
