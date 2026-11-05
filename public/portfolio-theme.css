@@ -22,12 +22,13 @@
   body:not(.cv-page) :is(button,.btn,.tab,.tabs button,input,select,textarea) { font-family:inherit; font-size:16px; }
   body:not(.cv-page) :is(input,select,textarea,.field) { color:var(--portfolio-ink); background:var(--portfolio-surface); }
   body:not(.cv-page) :is(.btn-primary,.primary,.tab.active,.tabs button[aria-selected=true]) { background:#245633; border-color:#245633; color:white; box-shadow:0 4px 0 #173922; }
-  body:not(.cv-page) :is(.btn-ghost,.tabs button:not([aria-selected=true]),.tab:not(.active)) { background:var(--portfolio-soft); color:var(--portfolio-ink); }
+  body:not(.cv-page) :is(.btn-ghost,.tabs button[aria-selected=false],.tab:not(.active)) { background:var(--portfolio-soft); color:var(--portfolio-ink); }
   body:not(.cv-page) :is(.sigwrap,.paper,#mappedDocument) { background:white!important; color:#172321; color-scheme:light; }
   body:not(.cv-page) #mappedDocument :is(p,.muted,small) { color:#34483f; }
   body:not(.cv-page) :is(.hero-photo,.experience-intro img) { border-radius:20px; }
   body:not(.cv-page) :is(a,button) { min-height:44px; }
   body:not(.cv-page) a { display:inline-flex; align-items:center; }
+  body:not(.cv-page) nav a { background:var(--portfolio-surface); color:var(--portfolio-ink); border-color:var(--portfolio-line); }
   :focus-visible { outline:3px solid #52842d!important; outline-offset:4px; }
   .cv-page .controls { border-radius:16px; border:1px solid #d8e1d5; }
   @media (hover:hover) and (pointer:fine) {
