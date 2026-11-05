@@ -216,3 +216,40 @@ html.dark .tilt-card:hover {
 summary { min-height: 44px; align-content: center; }
 :focus-visible { box-shadow: 0 0 0 2px #fff; }
 @media (max-width: 767px) { input, select, textarea { font-size: 16px !important; } }
+
+
+/* Readable type and green, dimensional navigation. */
+@theme {
+  --text-xs: 0.875rem;
+  --text-xs--line-height: 1.6;
+  --text-sm: 1rem;
+  --text-sm--line-height: 1.65;
+}
+:root { --color-muted: 52 72 63; --color-subtle: 65 84 75; }
+body { font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 17px; line-height: 1.7; }
+.site-header { padding-inline: clamp(8px, 2vw, 28px); border-bottom: 1px solid rgb(var(--color-ink) / .08); }
+.header-frame { gap: 16px; }
+.brand-link { flex-shrink: 0; }
+.brand-link img { border: 2px solid #b5e971; box-shadow: 0 3px 0 #779c58; }
+.brand-link span { font-size: 17px; }
+.nav-capsule { padding: 5px; border: 1px solid rgb(var(--color-ink) / .13); border-radius: 999px; background: rgb(var(--color-surface)); box-shadow: 0 4px 0 rgb(var(--color-ink) / .08), 0 12px 28px rgb(var(--color-ink) / .06); perspective: 800px; }
+.nav-link { min-height: 44px; padding: 8px 13px; border-radius: 999px; color: rgb(var(--color-ink)); transition: transform .2s ease, background .2s ease, box-shadow .2s ease; }
+.nav-link:hover, .nav-link:focus-visible, .nav-link[aria-expanded="true"] { background: #c5f16b; color: #172321; box-shadow: 0 4px 0 #83a74c; transform: translateY(-3px) rotateX(8deg); }
+.nav-link:active { transform: translateY(1px); box-shadow: 0 1px 0 #83a74c; }
+.nav-dropdown { transform-origin: top left; animation: nav-enter .18s ease-out both; box-shadow: 0 16px 40px rgb(var(--color-ink) / .16); }
+#mobile-navigation { border-radius: 0 0 20px 20px; background: rgb(var(--color-surface)); }
+#main-content p { line-height: 1.8; }
+#hero-title + p { font-size: clamp(1.125rem, 1.5vw, 1.3rem); }
+#capabilities .text-white\/65, #capabilities .text-white\/60 { color: rgb(255 255 255 / .85); }
+@keyframes nav-enter { from { opacity: 0; transform: translateY(-6px) rotateX(-8deg); } to { opacity: 1; transform: translateY(0) rotateX(0); } }
+@media (hover: hover) and (pointer: fine) {
+  #main-content figure { transition: transform .35s ease, box-shadow .35s ease; }
+  #main-content figure:hover { transform: perspective(1200px) rotateY(-3deg) translateY(-5px); box-shadow: 12px 18px 0 rgb(var(--color-ink) / .06); }
+}
+@media (prefers-color-scheme: dark) { :root { --color-muted: 201 217 208; --color-subtle: 190 207 198; } }
+@media (max-width: 1279px) { .header-frame { padding-inline: 6px; } }
+@media (prefers-reduced-motion: reduce) {
+  .nav-link, #main-content figure, .nav-dropdown { animation: none !important; transition: none !important; transform: none !important; }
+}
+
+.header-frame a[href$=".pdf"] { white-space: nowrap; }

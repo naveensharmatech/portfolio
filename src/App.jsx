@@ -240,7 +240,7 @@ export default function App() {
   const mobileMenuButtonRef = useRef(null);
   useEffect(() => {
     if (!menuOpen) return;
-    const desktop = window.matchMedia("(min-width: 1024px)");
+    const desktop = window.matchMedia("(min-width: 1280px)");
     const closeOnDesktop = () => {
       if (desktop.matches) {
         setMenuOpen(false);
@@ -284,36 +284,36 @@ export default function App() {
   return (
     <div id="top" className="min-h-screen bg-canvas text-ink selection:bg-[#c5f16b] selection:text-[#172321]">
       <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-surface focus:p-4">Skip to content</a>
-      <header onKeyDown={event => { if (event.key === "Escape") { if (menuOpen) { closeMobileMenu(); mobileMenuButtonRef.current?.focus(); } else if (expertiseOpen) { setExpertiseOpen(false); expertiseButtonRef.current?.focus(); } } }} className="sticky top-0 z-50 border-b border-ink/10 bg-canvas/95 pt-[env(safe-area-inset-top)] backdrop-blur">
-        <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-5 md:px-10">
-          <a href="#top" className="flex items-center gap-3" aria-label="Naveen Sharma home">
+      <header onKeyDown={event => { if (event.key === "Escape") { if (menuOpen) { closeMobileMenu(); mobileMenuButtonRef.current?.focus(); } else if (expertiseOpen) { setExpertiseOpen(false); expertiseButtonRef.current?.focus(); } } }} className="site-header sticky top-0 z-50 bg-canvas/95 pt-[env(safe-area-inset-top)] backdrop-blur">
+        <div className="header-frame mx-auto flex h-[76px] max-w-7xl items-center justify-between px-4 md:px-6">
+          <a href="#top" className="brand-link flex items-center gap-3" aria-label="Naveen Sharma home">
             <img src="/favicon.png" alt="Naveen Sharma" width="40" height="40" className="h-10 w-10 rounded-full object-cover" />
             <span className="text-sm font-semibold tracking-tight">Naveen Sharma</span>
           </a>
-          <nav className="hidden items-center gap-8 lg:flex" aria-label="Main navigation">
-            <a href="#projects" className="text-sm text-[#52615c] transition hover:text-[#172321]">Projects</a>
-            <a href="#experience" className="text-sm text-[#52615c] transition hover:text-[#172321]">Experience</a>
+          <nav className="nav-capsule hidden items-center gap-1 xl:flex" aria-label="Main navigation">
+            <a href="#projects" className="nav-link text-sm font-semibold">Projects</a>
+            <a href="#experience" className="nav-link text-sm font-semibold">Experience</a>
             <div ref={expertiseRef} className="relative">
-              <button ref={expertiseButtonRef} aria-controls="expertise-links" type="button" className="flex items-center gap-1 text-sm text-[#52615c] transition hover:text-[#172321]" aria-expanded={expertiseOpen} onClick={() => setExpertiseOpen(!expertiseOpen)}>
+              <button ref={expertiseButtonRef} aria-controls="expertise-links" type="button" className="nav-link flex items-center gap-1 text-sm font-semibold" aria-expanded={expertiseOpen} onClick={() => setExpertiseOpen(!expertiseOpen)}>
                 Expertise <ChevronDown size={15} className={`transition-transform ${expertiseOpen ? "rotate-180" : ""}`}/>
               </button>
-              {expertiseOpen && <div id="expertise-links" className="absolute left-0 top-full z-20 mt-3 w-48 rounded-xl border border-[#172321]/10 bg-white p-2 shadow-lg">
+              {expertiseOpen && <div id="expertise-links" className="nav-dropdown absolute left-0 top-full z-20 mt-3 w-56 rounded-xl border border-[#172321]/10 bg-white p-2 shadow-lg">
                 {[["Workflows", "#workflow-references"], ["Work demos", "#demos"], ["Capabilities", "#capabilities"], ["Tools & Platforms", "#tools"], ["Qualifications", "#qualifications"]].map(([label, href]) => <a key={href} href={href} onClick={() => setExpertiseOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-[#52615c] hover:bg-[#f0f3ef] hover:text-[#172321]">{label}</a>)}
               </div>}
             </div>
-            <a href="#about" className="text-sm text-[#52615c] transition hover:text-[#172321]">About</a>
-            <a href="#contact" className="text-sm text-[#52615c] transition hover:text-[#172321]">Contact</a>
+            <a href="#about" className="nav-link text-sm font-semibold">About</a>
+            <a href="#contact" className="nav-link text-sm font-semibold">Contact</a>
           </nav>
-          <div className="hidden items-center gap-3 lg:flex">
+          <div className="hidden items-center gap-3 xl:flex">
             <a href="https://www.linkedin.com/in/naveensharmatech" target="_blank" rel="noreferrer" className="justify-center rounded-full p-2 text-muted hover:bg-surface" aria-label="LinkedIn"><Linkedin size={18}/></a>
-            <div className="grid w-56 grid-cols-2 gap-2">
+            <div className="grid w-64 shrink-0 grid-cols-2 gap-2">
               <a href="/Naveen_Sharma_CV.pdf" className="flex min-h-11 min-w-0 items-center justify-center gap-1 rounded-full bg-[#172321] px-2 py-2 text-sm font-semibold text-white hover:bg-[#30443e]">English CV <ArrowUpRight size={15}/></a>
               <a href="/Naveen_Sharma_CV_HE.pdf" lang="he" dir="rtl" className="flex min-h-11 min-w-0 items-center justify-center gap-1 rounded-full bg-[#172321] px-2 py-2 text-sm font-semibold text-white hover:bg-[#30443e]">קורות חיים <ArrowUpRight size={15}/></a>
             </div>
           </div>
-          <button ref={mobileMenuButtonRef} type="button" aria-controls="mobile-navigation" className="shrink-0 rounded-lg p-3 lg:hidden" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} onClick={() => { setMenuOpen(!menuOpen); setMobileExpertiseOpen(false); }}>{menuOpen ? <X/> : <Menu/>}</button>
+          <button ref={mobileMenuButtonRef} type="button" aria-controls="mobile-navigation" className="shrink-0 rounded-lg p-3 xl:hidden" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} onClick={() => { setMenuOpen(!menuOpen); setMobileExpertiseOpen(false); }}>{menuOpen ? <X/> : <Menu/>}</button>
         </div>
-        <nav id="mobile-navigation" hidden={!menuOpen} className={`${menuOpen ? "flex" : "hidden"} max-h-[calc(100dvh-76px-env(safe-area-inset-top))] flex-col gap-1 overflow-y-auto border-t border-ink/10 px-5 py-4 lg:hidden`} aria-label="Mobile navigation">
+        <nav id="mobile-navigation" hidden={!menuOpen} className={`${menuOpen ? "flex" : "hidden"} max-h-[calc(100dvh-76px-env(safe-area-inset-top))] flex-col gap-1 overflow-y-auto border-t border-ink/10 px-5 py-4 xl:hidden`} aria-label="Mobile navigation">
           <a href="#projects" onClick={closeMobileMenu} className="rounded-lg px-3 py-3 text-sm hover:bg-white">Projects</a>
           <a href="#experience" onClick={closeMobileMenu} className="rounded-lg px-3 py-3 text-sm hover:bg-white">Experience</a>
           <button type="button" className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-left text-sm hover:bg-white" aria-expanded={mobileExpertiseOpen} onClick={() => setMobileExpertiseOpen(!mobileExpertiseOpen)}>
@@ -461,3 +461,4 @@ export default function App() {
     </div>
   );
 }
+
