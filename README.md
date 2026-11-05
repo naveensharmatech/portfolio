@@ -99,7 +99,6 @@ These tools reflect a mix of project use and ongoing learning. Code-based builds
 | [data/ella-knowledge.js](data/ella-knowledge.js) | Public knowledge used by Ella |
 | [public/](public/) | Active images, tool logos, demonstrations and public documents |
 | [public/portfolio-theme.css](public/portfolio-theme.css) | Green styling, readable type and reduced-motion support for standalone pages |
-| [archive/](archive/) | Retired implementations and media; excluded from the live build |
 | [docs/CUSTOMIZATION.md](docs/CUSTOMIZATION.md) | How to update content, Ella, CV files and visuals together |
 | [tests/](tests/) | Chat-handler tests and browser acceptance scenarios |
 
@@ -145,3 +144,5 @@ Open to AI/workflow automation, implementation and integration opportunities, re
 The banner and animated workflow are repository-hosted assets. GitHub displays image animation; website CSS/JavaScript and interactive 3D run on the actual site. All essential information remains available as text.
 
 Use the [customization guide](docs/CUSTOMIZATION.md) for the exact source files. Update public biography in the site, Ella and both résumé formats together. Original academic documents and certificates remain original evidence. Historical release notes apply only to their named commits.
+
+Superseded demo implementations and unused imagery are removed from this repository; Git commit history retains prior revisions. Only active public assets are included in new deployments.

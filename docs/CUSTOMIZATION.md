@@ -19,4 +19,4 @@ Before changing biography, consult `docs/career/experience-source-of-truth.md` a
 
 When a career fact changes, update main content, Ella, CV HTML/PDF files and both READMEs together where applicable. Original certificate and academic evidence should remain original. PDF downloads are static; `npm run build` does not regenerate them.
 
-Run `npm run check:content`, `npm run build`, `npm run test:chat` and `npm run test:acceptance`. Follow `docs/DEPLOYMENT.md` for preview and release checks. Archived code is outside `public/`; it is not active website code.
+Run `npm run check:content`, `npm run build`, `npm run test:chat` and `npm run test:acceptance`. Follow `docs/DEPLOYMENT.md` for preview and release checks. Superseded code and unused media are removed rather than archived. Git commit history retains prior revisions.
