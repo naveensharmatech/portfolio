@@ -1,0 +1,32 @@
+name: Portfolio Lighthouse audit
+on:
+  push:
+    branches: [audit/portfolio-2026-11-07]
+    paths: ['.github/workflows/portfolio-lighthouse.yml','.github/scripts/lighthouse-summary.mjs']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [production, candidate]
+    env:
+      AUDIT_URL: ${{ matrix.target == 'production' && 'https://naveensharma.net' || 'https://762f4c55.naveensharma-portfolio.pages.dev' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: mkdir -p lighthouse-results
+      - run: npx --yes lighthouse "$AUDIT_URL" --output=json --output=html --output-path=lighthouse-results/report --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --only-categories=performance,accessibility,best-practices,seo --quiet
+      - run: node .github/scripts/lighthouse-summary.mjs lighthouse-results/report.report.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-${{ matrix.target }}
+          path: lighthouse-results/
+          retention-days: 14
