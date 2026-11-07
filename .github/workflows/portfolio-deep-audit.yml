@@ -1,0 +1,61 @@
+name: Portfolio deep audit
+on:
+  push:
+    branches: [audit/portfolio-2026-11-07]
+    paths: ['audit/**','audit.config.js','.github/workflows/portfolio-deep-audit.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browsers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+        target: [production, candidate]
+    env:
+      AUDIT_BROWSER: ${{ matrix.browser }}
+      AUDIT_TARGET: ${{ matrix.target }}
+      AUDIT_URL: ${{ matrix.target == 'production' && 'https://naveensharma.net' || 'https://762f4c55.naveensharma-portfolio.pages.dev' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps ${{ matrix.browser }}
+      - run: npx playwright test --config audit.config.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: audit-${{ matrix.target }}-${{ matrix.browser }}
+          path: |
+            audit-results/
+            audit-report/
+            test-results/
+          retention-days: 14
+  api:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [production, candidate]
+    env:
+      AUDIT_URL: ${{ matrix.target == 'production' && 'https://naveensharma.net' || 'https://762f4c55.naveensharma-portfolio.pages.dev' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: mkdir -p audit-results
+      - run: npx --yes newman@6 run audit/portfolio.postman_collection.json --env-var "baseUrl=$AUDIT_URL" --timeout-request 60000 --delay-request 250 --reporters cli,json --reporter-json-export audit-results/newman.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: api-${{ matrix.target }}
+          path: audit-results/
+          retention-days: 14
