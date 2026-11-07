@@ -1,0 +1,78 @@
+name: Opility source and browser audit
+on:
+  push:
+    branches: [audit/portfolio-2026-11-07]
+    paths: ['opility-audit/**','opility-audit.config.js','.github/workflows/opility-deep-audit.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: Opility/opility-website
+          ref: 3bc27c83cc27c4882ca92a9aacbb1354db075462
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm audit
+        continue-on-error: true
+      - run: npm run build
+      - run: npm test
+      - run: npm run test:prompt-execution
+      - run: npm run test:studio-assets
+  browsers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+    env:
+      AUDIT_BROWSER: ${{ matrix.browser }}
+      AUDIT_URL: http://127.0.0.1:8788
+      OPILITY_SOURCE_DIR: ${{ github.workspace }}/site
+      CLOUDFLARE_SEND_METRICS: "false"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: harness
+      - uses: actions/checkout@v4
+        with:
+          repository: Opility/opility-website
+          ref: 3bc27c83cc27c4882ca92a9aacbb1354db075462
+          path: site
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci
+        working-directory: harness
+      - run: npx playwright install --with-deps ${{ matrix.browser }}
+        working-directory: harness
+      - run: npm ci && npm run build
+        working-directory: site
+      - run: |
+          (cd site && npx --yes wrangler@4 pages dev out --ip 127.0.0.1 --port 8788 > ../wrangler.log 2>&1) &
+          for attempt in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:8788/ > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat wrangler.log
+          exit 1
+      - run: npx playwright test --config opility-audit.config.js
+        working-directory: harness
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: opility-${{ matrix.browser }}
+          path: |
+            harness/opility-results/
+            harness/opility-report/
+            harness/test-results/
+            wrangler.log
+          retention-days: 14
