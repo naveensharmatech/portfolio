@@ -6,7 +6,7 @@ const read = path => readFileSync(resolve(root,path),'utf8');
 const walk = dir => readdirSync(resolve(root,dir),{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(`${dir}/${e.name}`):[`${dir}/${e.name}`]);
 assert(!existsSync(resolve(root,'archive')), 'Superseded files must not remain in an archive folder.');
 const app=read('src/App.jsx'), knowledge=read('data/ella-knowledge.js'), handler=read('functions/api/chat.js');
-assert(app.includes('Turning curiosity into') && app.includes('practical AI solutions.'));
+assert(app.includes('Turning Curiosity Into') && app.includes('Practical AI Solutions.'));
 assert(!knowledge.includes('All ten Zapier') && !knowledge.includes('all courses completed'), 'Use completed paths consistently.');
 assert(!knowledge.includes('do not describe him as a classroom teacher'), 'Avoid contradictory Shivam role directives.');
 for(const path of ['src/App.jsx','data/ella-knowledge.js','docs/career/experience-source-of-truth.md','public/cv.html','public/intake-builder-demo.html']) {
