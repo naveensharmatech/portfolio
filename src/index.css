@@ -165,3 +165,56 @@ body { font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 16px;
   .hero-image-title { background-image: none; color: CanvasText; border-color: CanvasText; }
   .hero-image-title span { color: CanvasText; }
 }
+
+/* Compact, movable launcher; the chat panel stays safely anchored when opened. */
+.ella-launcher {
+  position: fixed; z-index: 60;
+  right: calc(20px + env(safe-area-inset-right));
+  bottom: calc(20px + env(safe-area-inset-bottom));
+}
+.ella-launcher-button {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  width: 96px; min-width: 96px; min-height: 112px; padding: 4px; gap: 5px;
+  border: 0; background: transparent; color: #c5f16b;
+  cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none;
+}
+.ella-launcher-button:active { cursor: grabbing; }
+.ella-launcher-label {
+  display: block; background: #172321; color: #c5f16b;
+  border: 1px solid #52675b; border-radius: 16px 16px 16px 4px;
+  padding: 4px 10px; font: 600 14px/20px "Segoe UI", system-ui, sans-serif;
+  white-space: nowrap;
+}
+.ella-launcher-avatar {
+  display: block; width: 64px; height: 64px; border-radius: 50%;
+  object-fit: cover; border: 2px solid #c5f16b;
+  box-shadow: 0 4px 16px rgb(0 0 0 / .24); pointer-events: none;
+}
+.ella-launcher-hidden { visibility: hidden; }
+.ella-chat-panel {
+  position: fixed; z-index: 61;
+  right: calc(12px + env(safe-area-inset-right));
+  bottom: calc(12px + env(safe-area-inset-bottom));
+  width: min(370px, calc(100vw - 24px - env(safe-area-inset-left) - env(safe-area-inset-right)));
+  height: min(520px, calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom)));
+}
+.portfolio-footer { padding-bottom: calc(144px + env(safe-area-inset-bottom)); }
+@media print { .ella-widget, #ella-widget-host { display: none !important; } }
+
+/* Release into a side dock with a short, spring-like settle. */
+.ella-launcher {
+  --ella-safe-left: env(safe-area-inset-left, 0px);
+  --ella-safe-right: env(safe-area-inset-right, 0px);
+  --ella-safe-top: env(safe-area-inset-top, 0px);
+  --ella-safe-bottom: env(safe-area-inset-bottom, 0px);
+  touch-action: none; overscroll-behavior: contain;
+  transition: left .38s cubic-bezier(.22, 1.18, .36, 1), top .38s cubic-bezier(.22, 1.18, .36, 1);
+}
+.ella-launcher-dragging { transition: none; }
+.ella-launcher-label { pointer-events: none; }
+.ella-launcher-avatar { -webkit-user-drag: none; }
+.ella-launcher-dragging .ella-launcher-avatar { transform: scale(1.04); }
+@media (prefers-reduced-motion: reduce) {
+  .ella-launcher { transition: none; }
+  .ella-launcher-dragging .ella-launcher-avatar { transform: none; }
+}
