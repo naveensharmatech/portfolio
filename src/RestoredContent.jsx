@@ -147,35 +147,55 @@ export function EllaChat() {
   const [connectionMode,setConnectionMode]=useState('');
   const inputRef=useRef(null), endRef=useRef(null), toggleRef=useRef(null);
   const launcherRef=useRef(null), dragRef=useRef(null);
-  const [position,setPosition]=useState(null);
+  const [position,setPosition]=useState(null), [dragging,setDragging]=useState(false);
   const positionRef=useRef(null);
-  const storageKey='portfolio-ella-position-v1';
-  const clampPosition=(point)=>{
-    const button=toggleRef.current;
+  const storageKey='portfolio-ella-dock-v2';
+  const bounds=()=>{
+    const button=toggleRef.current, viewport=window.visualViewport;
     const width=button?.offsetWidth || 96, height=button?.offsetHeight || 112;
-    const viewport=window.visualViewport;
-    const left=(viewport?.offsetLeft || 0)+12, top=(viewport?.offsetTop || 0)+12;
-    const right=left+Math.max(0,(viewport?.width || innerWidth)-width-24);
-    const bottom=top+Math.max(0,(viewport?.height || innerHeight)-height-24);
-    return {x:Math.min(right,Math.max(left,point.x)),y:Math.min(bottom,Math.max(top,point.y))};
+    const style=launcherRef.current?getComputedStyle(launcherRef.current):null;
+    const safe=side=>parseFloat(style?.getPropertyValue('--ella-safe-'+side)) || 0;
+    const left=(viewport?.offsetLeft || 0)+20+safe('left');
+    const top=(viewport?.offsetTop || 0)+20+safe('top');
+    return {left,top,width,height,
+      right:Math.max(left,(viewport?.offsetLeft || 0)+(viewport?.width || innerWidth)-width-20-safe('right')),
+      bottom:Math.max(top,(viewport?.offsetTop || 0)+(viewport?.height || innerHeight)-height-20-safe('bottom'))};
   };
-  const place=(point,persist=false)=>{
-    const next=clampPosition(point);positionRef.current=next;setPosition(next);
-    if(persist)try{localStorage.setItem(storageKey,JSON.stringify({x:next.x/innerWidth,y:next.y/innerHeight}));}catch{}
+  const clampPosition=point=>{
+    const b=bounds();
+    return {x:Math.min(b.right,Math.max(b.left,point.x)),y:Math.min(b.bottom,Math.max(b.top,point.y))};
+  };
+  const place=point=>{
+    const next=clampPosition(point);positionRef.current=next;setPosition(next);return next;
+  };
+  const dock=(point,persist=true,side)=>{
+    const b=bounds(), right=side?side==='right':point.x>(b.left+b.right)/2;
+    const next=place({x:right?b.right:b.left,y:point.y});
+    if(persist)try{localStorage.setItem(storageKey,JSON.stringify({side:right?'right':'left',y:next.y/innerHeight}));}catch{}
+    return next;
   };
   useEffect(()=>{
     try{
       const saved=JSON.parse(localStorage.getItem(storageKey));
-      if(Number.isFinite(saved?.x)&&Number.isFinite(saved?.y))place({x:saved.x*innerWidth,y:saved.y*innerHeight});
+      if(['left','right'].includes(saved?.side)&&Number.isFinite(saved?.y))dock({x:0,y:saved.y*innerHeight},false,saved.side);
     }catch{}
-    const resize=()=>{if(positionRef.current)place(positionRef.current);};
+    const resize=()=>{if(positionRef.current&&!dragRef.current)dock(positionRef.current);};
+    const button=toggleRef.current;
+    const stopTouch=event=>{if(dragRef.current&&event.cancelable)event.preventDefault();};
+    // Safari needs a non-passive listener as well as touch-action: none.
+    button?.addEventListener('touchstart',stopTouch,{passive:false});
+    document.addEventListener('touchmove',stopTouch,{passive:false,capture:true});
     window.addEventListener('resize',resize);window.visualViewport?.addEventListener('resize',resize);
-    window.visualViewport?.addEventListener('scroll',resize);
-    return ()=>{window.removeEventListener('resize',resize);window.visualViewport?.removeEventListener('resize',resize);window.visualViewport?.removeEventListener('scroll',resize);};
+    return ()=>{
+      button?.removeEventListener('touchstart',stopTouch);
+      document.removeEventListener('touchmove',stopTouch,{capture:true});
+      window.removeEventListener('resize',resize);window.visualViewport?.removeEventListener('resize',resize);
+    };
   },[]);
   function startDrag(event){
     if(event.pointerType==='mouse'&&event.button!==0)return;
     const rect=event.currentTarget.getBoundingClientRect();
+    setDragging(true);place({x:rect.left,y:rect.top});
     dragRef.current={id:event.pointerId,startX:event.clientX,startY:event.clientY,x:rect.left,y:rect.top,moved:false};
     event.currentTarget.setPointerCapture(event.pointerId);
   }
@@ -183,18 +203,22 @@ export function EllaChat() {
     const drag=dragRef.current;if(!drag||event.pointerId!==drag.id)return;
     const dx=event.clientX-drag.startX,dy=event.clientY-drag.startY;
     if(!drag.moved&&Math.hypot(dx,dy)<6)return;
+    if(event.cancelable)event.preventDefault();
     drag.moved=true;
-    place({x:drag.x+dx,y:drag.y+dy});
+    // A little horizontal resistance makes a small tug return to the same dock.
+    const distance=Math.abs(dx), resisted=Math.sign(dx)*(distance<=48?distance*.55:distance-21.6);
+    place({x:drag.x+resisted,y:drag.y+dy});
   }
   function finishDrag(event){
     const drag=dragRef.current;if(!drag||event.pointerId!==drag.id)return;
-    if(drag.moved&&positionRef.current)place(positionRef.current,true);
-    dragRef.current=null;
+    dragRef.current=null;setDragging(false);
+    if(event.type==='pointercancel'||event.type==='lostpointercapture')dock({x:drag.x,y:drag.y});
+    else if(drag.moved&&positionRef.current)dock(positionRef.current);
     if(event.currentTarget.hasPointerCapture(event.pointerId))event.currentTarget.releasePointerCapture(event.pointerId);
     if(!drag.moved&&event.type==='pointerup')open?close():setOpen(true);
   }
   function moveWithKeyboard(event){
-    const delta={ArrowLeft:[-24,0],ArrowRight:[24,0],ArrowUp:[0,-24],ArrowDown:[0,24]}[event.key];
+    const delta={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-24],ArrowDown:[0,24]}[event.key];
     if(event.key==='Home'){
       event.preventDefault();positionRef.current=null;setPosition(null);
       try{localStorage.removeItem(storageKey);}catch{}return;
@@ -202,11 +226,11 @@ export function EllaChat() {
     if(!delta)return;
     event.preventDefault();
     const rect=event.currentTarget.getBoundingClientRect();
-    place({x:rect.left+delta[0],y:rect.top+delta[1]},true);
+    dock({x:rect.left,y:rect.top+delta[1]},true,delta[0]?(delta[0]<0?'left':'right'):undefined);
   }
-  useEffect(()=>{if(open) inputRef.current?.focus();},[open]);
-  useEffect(()=>{if(open) endRef.current?.scrollIntoView({block:'nearest'});},[messages,busy,open]);
-  function close(){setOpen(false);requestAnimationFrame(()=>toggleRef.current?.focus());}
+  useEffect(()=>{if(open) inputRef.current?.focus({preventScroll:true});},[open]);
+  useEffect(()=>{if(open&&endRef.current){const log=endRef.current.parentElement;log.scrollTop=log.scrollHeight;}},[messages,busy,open]);
+  function close(){setOpen(false);requestAnimationFrame(()=>toggleRef.current?.focus({preventScroll:true}));}
   async function send(event){
     event.preventDefault(); const question=input.trim(); if(!question||busy)return;
     const next=[...messages,{role:'user',content:question}];setMessages(next);setInput('');setBusy(true);
@@ -218,7 +242,7 @@ export function EllaChat() {
       setConnectionMode(data.mode === 'saved-knowledge' ? 'Saved profile knowledge · live AI temporarily unavailable' : '');
       setMessages([...next,{role:'assistant',content:data.reply}]);
     }catch{setMessages([...next,{role:'assistant',content:'I couldn’t connect just now. Please try again, or use the Contact section to reach Naveen.'}]);}
-    finally{clearTimeout(timer);setBusy(false);inputRef.current?.focus();}
+    finally{clearTimeout(timer);setBusy(false);inputRef.current?.focus({preventScroll:true});}
   }
   return <div className="ella-widget">
     {open&&<section id="ella-panel" role="dialog" aria-labelledby="ella-title" onKeyDown={e=>{if(e.key==='Escape')close();}} className="ella-chat-panel flex flex-col overflow-hidden rounded-3xl border border-[#172321]/15 bg-white text-[#172321] shadow-2xl">
@@ -227,17 +251,17 @@ export function EllaChat() {
       {connectionMode && <p role="status" className="border-t border-[#172321]/10 px-4 py-2 text-xs leading-5 text-[#52615c]">{connectionMode}</p>}
       <form onSubmit={send} className="flex gap-2 border-t border-[#172321]/10 p-3"><label htmlFor="ella-input" className="sr-only">Ask Ella a question</label><input ref={inputRef} id="ella-input" maxLength={1500} value={input} onChange={e=>setInput(e.target.value)} placeholder="Ask me about Naveen…" className="min-w-0 flex-1 rounded-xl border border-[#172321]/20 px-3 py-3 text-sm"/><button type="submit" disabled={busy||!input.trim()} aria-label="Send message" className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[#172321] text-white disabled:opacity-40"><Send size={18}/></button></form>
     </section>}
-    <div ref={launcherRef} className={`ella-launcher ${open?'ella-launcher-hidden':''}`} style={position?{left:position.x,top:position.y,right:'auto',bottom:'auto'}:undefined}>
+    <div ref={launcherRef} className={`ella-launcher ${dragging?'ella-launcher-dragging':''} ${open?'ella-launcher-hidden':''}`} style={position?{left:position.x,top:position.y,right:'auto',bottom:'auto'}:undefined}>
       <button ref={toggleRef} type="button" aria-label="Ask Ella" aria-describedby="ella-move-help" aria-expanded={open} aria-controls="ella-panel"
-        title="Tap to chat · drag to move · arrow keys move · Home resets"
-        onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={finishDrag} onPointerCancel={finishDrag}
+        title="Tap to chat · drag and release to dock · arrow keys move · Home resets"
+        onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={finishDrag} onPointerCancel={finishDrag} onLostPointerCapture={finishDrag}
         onKeyDown={moveWithKeyboard}
         onClick={event=>{if(event.detail===0)open?close():setOpen(true);}}
         className="ella-launcher-button">
         <span className="ella-launcher-label" aria-hidden="true">Ask Ella</span>
         <img src="/ella-avatar.png" alt="" aria-hidden="true" width="64" height="64" draggable="false" className="ella-launcher-avatar"/>
       </button>
-      <span id="ella-move-help" className="sr-only">Tap to open chat. Drag to move Ella. With keyboard focus, use arrow keys to move or Home to reset the position.</span>
+      <span id="ella-move-help" className="sr-only">Tap to open chat. Drag Ella and release to snap to the nearest side. With keyboard focus, use left or right arrows to switch sides, up or down to change height, or Home to reset.</span>
     </div>
   </div>;
 }
