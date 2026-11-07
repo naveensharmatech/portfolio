@@ -146,6 +146,64 @@ export function EllaChat() {
   const [busy,setBusy]=useState(false);
   const [connectionMode,setConnectionMode]=useState('');
   const inputRef=useRef(null), endRef=useRef(null), toggleRef=useRef(null);
+  const launcherRef=useRef(null), dragRef=useRef(null), suppressClickRef=useRef(false);
+  const [position,setPosition]=useState(null);
+  const positionRef=useRef(null);
+  const storageKey='portfolio-ella-position-v1';
+  const clampPosition=(point)=>{
+    const button=toggleRef.current;
+    const width=button?.offsetWidth || 96, height=button?.offsetHeight || 112;
+    const viewport=window.visualViewport;
+    const left=(viewport?.offsetLeft || 0)+12, top=(viewport?.offsetTop || 0)+12;
+    const right=left+Math.max(0,(viewport?.width || innerWidth)-width-24);
+    const bottom=top+Math.max(0,(viewport?.height || innerHeight)-height-24);
+    return {x:Math.min(right,Math.max(left,point.x)),y:Math.min(bottom,Math.max(top,point.y))};
+  };
+  const place=(point,persist=false)=>{
+    const next=clampPosition(point);positionRef.current=next;setPosition(next);
+    if(persist)try{localStorage.setItem(storageKey,JSON.stringify({x:next.x/innerWidth,y:next.y/innerHeight}));}catch{}
+  };
+  useEffect(()=>{
+    try{
+      const saved=JSON.parse(localStorage.getItem(storageKey));
+      if(Number.isFinite(saved?.x)&&Number.isFinite(saved?.y))place({x:saved.x*innerWidth,y:saved.y*innerHeight});
+    }catch{}
+    const resize=()=>{if(positionRef.current)place(positionRef.current);};
+    window.addEventListener('resize',resize);window.visualViewport?.addEventListener('resize',resize);
+    window.visualViewport?.addEventListener('scroll',resize);
+    return ()=>{window.removeEventListener('resize',resize);window.visualViewport?.removeEventListener('resize',resize);window.visualViewport?.removeEventListener('scroll',resize);};
+  },[]);
+  function startDrag(event){
+    if(event.button!==0)return;
+    suppressClickRef.current=false;
+    const rect=event.currentTarget.getBoundingClientRect();
+    dragRef.current={id:event.pointerId,startX:event.clientX,startY:event.clientY,x:rect.left,y:rect.top,moved:false};
+    event.currentTarget.setPointerCapture(event.pointerId);
+  }
+  function moveDrag(event){
+    const drag=dragRef.current;if(!drag||event.pointerId!==drag.id)return;
+    const dx=event.clientX-drag.startX,dy=event.clientY-drag.startY;
+    if(!drag.moved&&Math.hypot(dx,dy)<6)return;
+    drag.moved=true;suppressClickRef.current=true;
+    place({x:drag.x+dx,y:drag.y+dy});
+  }
+  function finishDrag(event){
+    const drag=dragRef.current;if(!drag||event.pointerId!==drag.id)return;
+    if(drag.moved&&positionRef.current)place(positionRef.current,true);
+    dragRef.current=null;
+    if(event.currentTarget.hasPointerCapture(event.pointerId))event.currentTarget.releasePointerCapture(event.pointerId);
+  }
+  function moveWithKeyboard(event){
+    const delta={ArrowLeft:[-24,0],ArrowRight:[24,0],ArrowUp:[0,-24],ArrowDown:[0,24]}[event.key];
+    if(event.key==='Home'){
+      event.preventDefault();positionRef.current=null;setPosition(null);
+      try{localStorage.removeItem(storageKey);}catch{}return;
+    }
+    if(!delta)return;
+    event.preventDefault();
+    const rect=event.currentTarget.getBoundingClientRect();
+    place({x:rect.left+delta[0],y:rect.top+delta[1]},true);
+  }
   useEffect(()=>{if(open) inputRef.current?.focus();},[open]);
   useEffect(()=>{if(open) endRef.current?.scrollIntoView({block:'nearest'});},[messages,busy,open]);
   function close(){setOpen(false);toggleRef.current?.focus();}
@@ -162,13 +220,24 @@ export function EllaChat() {
     }catch{setMessages([...next,{role:'assistant',content:'I couldn’t connect just now. Please try again, or use the Contact section to reach Naveen.'}]);}
     finally{clearTimeout(timer);setBusy(false);inputRef.current?.focus();}
   }
-  return <div className="fixed bottom-[calc(1.25rem+env(safe-area-inset-bottom))] right-[calc(1.25rem+env(safe-area-inset-right))] z-[60]">
-    {open&&<section id="ella-panel" role="dialog" aria-labelledby="ella-title" onKeyDown={e=>{if(e.key==='Escape')close();}} className="mb-3 flex h-[min(520px,70dvh)] w-[min(370px,calc(100vw-40px-env(safe-area-inset-left)-env(safe-area-inset-right)))] flex-col overflow-hidden rounded-3xl border border-[#172321]/15 bg-white text-[#172321] shadow-2xl">
+  return <div className="ella-widget">
+    {open&&<section id="ella-panel" role="dialog" aria-labelledby="ella-title" onKeyDown={e=>{if(e.key==='Escape')close();}} className="ella-chat-panel flex flex-col overflow-hidden rounded-3xl border border-[#172321]/15 bg-white text-[#172321] shadow-2xl">
       <header className="flex items-center justify-between bg-[#172321] p-4 text-white"><div className="flex items-center gap-3"><img src="/ella-avatar.png" alt="Ella" width="48" height="48" className="h-12 w-12 shrink-0 rounded-full object-cover"/><div><h2 id="ella-title" className="font-semibold">Ella</h2><p className="text-xs text-white/75">Naveen Sharma’s Personal Assistant</p></div></div><button type="button" onClick={close} aria-label="Close Ella chat" className="grid h-11 w-11 place-items-center rounded-full hover:bg-white/10"><X size={20}/></button></header>
       <div className="flex-1 overflow-y-auto p-4" aria-live="polite" aria-relevant="additions" aria-busy={busy}>{messages.map((m,i)=><p key={i} className={`mb-3 whitespace-pre-wrap break-words rounded-2xl p-3 text-sm leading-6 ${m.role==='user'?'ml-7 bg-[#eaf3dc]':'mr-7 bg-[#f0f3ef]'}`}><span className="sr-only">{m.role==='user'?'You':'Ella'}: </span><ChatText text={m.content}/></p>)}{busy&&<p className="text-sm text-[#52615c]">Ella is replying…</p>}<div ref={endRef}/></div>
       {connectionMode && <p role="status" className="border-t border-[#172321]/10 px-4 py-2 text-xs leading-5 text-[#52615c]">{connectionMode}</p>}
       <form onSubmit={send} className="flex gap-2 border-t border-[#172321]/10 p-3"><label htmlFor="ella-input" className="sr-only">Ask Ella a question</label><input ref={inputRef} id="ella-input" maxLength={1500} value={input} onChange={e=>setInput(e.target.value)} placeholder="Ask me about Naveen…" className="min-w-0 flex-1 rounded-xl border border-[#172321]/20 px-3 py-3 text-sm"/><button type="submit" disabled={busy||!input.trim()} aria-label="Send message" className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[#172321] text-white disabled:opacity-40"><Send size={18}/></button></form>
     </section>}
-    <button ref={toggleRef} type="button" aria-expanded={open} aria-controls="ella-panel" onClick={()=>open?close():setOpen(true)} className="ml-auto flex min-h-12 items-center gap-2 rounded-full bg-[#172321] px-5 py-3 font-semibold text-[#c5f16b] shadow-lg"><img src="/ella-avatar.png" alt="" aria-hidden="true" width="36" height="36" className="h-9 w-9 rounded-full object-cover"/>Ask Ella</button>
+    <div ref={launcherRef} className={`ella-launcher ${open?'ella-launcher-hidden':''}`} style={position?{left:position.x,top:position.y,right:'auto',bottom:'auto'}:undefined}>
+      <button ref={toggleRef} type="button" aria-label="Ask Ella" aria-describedby="ella-move-help" aria-expanded={open} aria-controls="ella-panel"
+        title="Tap to chat · drag to move · arrow keys move · Home resets"
+        onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={finishDrag} onPointerCancel={finishDrag}
+        onKeyDown={moveWithKeyboard}
+        onClick={()=>{if(suppressClickRef.current){suppressClickRef.current=false;return;}open?close():setOpen(true);}}
+        className="ella-launcher-button">
+        <span className="ella-launcher-label" aria-hidden="true">Ask Ella</span>
+        <img src="/ella-avatar.png" alt="" aria-hidden="true" width="64" height="64" draggable="false" className="ella-launcher-avatar"/>
+      </button>
+      <span id="ella-move-help" className="sr-only">Tap to open chat. Drag to move Ella. With keyboard focus, use arrow keys to move or Home to reset the position.</span>
+    </div>
   </div>;
 }
