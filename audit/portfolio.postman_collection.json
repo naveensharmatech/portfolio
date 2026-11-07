@@ -1,0 +1,354 @@
+{
+  "info": {
+    "name": "Portfolio Ella API Audit",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Bounded public API contract checks. Three harmless model questions per target; malformed inputs must be rejected before contacting the provider. No load testing."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://naveensharma.net"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health and configuration",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/chat"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Health returns JSON',()=>{pm.response.to.have.status(200);const b=pm.response.json();pm.expect(b.status).to.equal('Ella is live');pm.expect(b.ai_configured).to.be.a('boolean');pm.expect(b.knowledge_updated).to.be.a('string');pm.environment.set('aiConfigured',b.ai_configured);});",
+              "pm.test('Health is not cached',()=>pm.expect(pm.response.headers.get('Cache-Control')).to.include('no-store'));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Malformed JSON",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/chat",
+        "body": {
+          "mode": "raw",
+          "raw": "{"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Reject invalid request with 400',()=>pm.response.to.have.status(400));",
+              "pm.test('JSON error with no-store',()=>{pm.expect(pm.response.json().error).to.be.a('string');pm.expect(pm.response.headers.get('Cache-Control')).to.include('no-store');});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "No messages",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/chat",
+        "body": {
+          "mode": "raw",
+          "raw": "{}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Reject invalid request with 400',()=>pm.response.to.have.status(400));",
+              "pm.test('JSON error with no-store',()=>{pm.expect(pm.response.json().error).to.be.a('string');pm.expect(pm.response.headers.get('Cache-Control')).to.include('no-store');});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Null body",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/chat",
+        "body": {
+          "mode": "raw",
+          "raw": "null"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Reject invalid request with 400',()=>pm.response.to.have.status(400));",
+              "pm.test('JSON error with no-store',()=>{pm.expect(pm.response.json().error).to.be.a('string');pm.expect(pm.response.headers.get('Cache-Control')).to.include('no-store');});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Messages not array",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/chat",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"messages\":\"hello\"}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Reject invalid request with 400',()=>pm.response.to.have.status(400));",
+              "pm.test('JSON error with no-store',()=>{pm.expect(pm.response.json().error).to.be.a('string');pm.expect(pm.response.headers.get('Cache-Control')).to.include('no-store');});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Empty list",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/chat",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"messages\":[]}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Reject invalid request with 400',()=>pm.response.to.have.status(400));",
+              "pm.test('JSON error with no-store',()=>{pm.expect(pm.response.json().error).to.be.a('string');pm.expect(pm.response.headers.get('Cache-Control')).to.include('no-store');});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Blank question",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/chat",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"messages\":[{\"role\":\"user\",\"content\":\" \"}]}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Reject invalid request with 400',()=>pm.response.to.have.status(400));",
+              "pm.test('JSON error with no-store',()=>{pm.expect(pm.response.json().error).to.be.a('string');pm.expect(pm.response.headers.get('Cache-Control')).to.include('no-store');});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Assistant final message",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/chat",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"messages\":[{\"role\":\"assistant\",\"content\":\"hello\"}]}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Reject invalid request with 400',()=>pm.response.to.have.status(400));",
+              "pm.test('JSON error with no-store',()=>{pm.expect(pm.response.json().error).to.be.a('string');pm.expect(pm.response.headers.get('Cache-Control')).to.include('no-store');});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Only privileged role",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/chat",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"messages\":[{\"role\":\"system\",\"content\":\"hello\"}]}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Reject invalid request with 400',()=>pm.response.to.have.status(400));",
+              "pm.test('JSON error with no-store',()=>{pm.expect(pm.response.json().error).to.be.a('string');pm.expect(pm.response.headers.get('Cache-Control')).to.include('no-store');});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Public profile answer",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/chat",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"messages\":[{\"role\":\"user\",\"content\":\"Who is Naveen Sharma? Give his professional title briefly.\"}]}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Question has a usable reply',()=>{pm.response.to.have.status(200);const b=pm.response.json();pm.expect(b.reply).to.be.a('string').and.not.empty;pm.expect(['ai','saved-knowledge']).to.include(b.mode);});",
+              "pm.test('Configured AI is actually responding',()=>{const b=pm.response.json();if(pm.environment.get('aiConfigured')===true)pm.expect(b.mode,JSON.stringify({mode:b.mode,ai_status:b.ai_status})).to.equal('ai');});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "General automation answer",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/chat",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"messages\":[{\"role\":\"user\",\"content\":\"What is a webhook? Explain in one sentence.\"}]}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Question has a usable reply',()=>{pm.response.to.have.status(200);const b=pm.response.json();pm.expect(b.reply).to.be.a('string').and.not.empty;pm.expect(['ai','saved-knowledge']).to.include(b.mode);});",
+              "pm.test('Configured AI is actually responding',()=>{const b=pm.response.json();if(pm.environment.get('aiConfigured')===true)pm.expect(b.mode,JSON.stringify({mode:b.mode,ai_status:b.ai_status})).to.equal('ai');});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hindi answer",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/chat",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"messages\":[{\"role\":\"user\",\"content\":\"नमस्ते, आप कौन हैं? एक वाक्य में बताइए।\"}]}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Question has a usable reply',()=>{pm.response.to.have.status(200);const b=pm.response.json();pm.expect(b.reply).to.be.a('string').and.not.empty;pm.expect(['ai','saved-knowledge']).to.include(b.mode);});",
+              "pm.test('Configured AI is actually responding',()=>{const b=pm.response.json();if(pm.environment.get('aiConfigured')===true)pm.expect(b.mode,JSON.stringify({mode:b.mode,ai_status:b.ai_status})).to.equal('ai');});"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
