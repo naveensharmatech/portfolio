@@ -146,7 +146,7 @@ export function EllaChat() {
   const [busy,setBusy]=useState(false);
   const [connectionMode,setConnectionMode]=useState('');
   const inputRef=useRef(null), endRef=useRef(null), toggleRef=useRef(null);
-  const launcherRef=useRef(null), dragRef=useRef(null), suppressClickRef=useRef(false);
+  const launcherRef=useRef(null), dragRef=useRef(null);
   const [position,setPosition]=useState(null);
   const positionRef=useRef(null);
   const storageKey='portfolio-ella-position-v1';
@@ -174,8 +174,7 @@ export function EllaChat() {
     return ()=>{window.removeEventListener('resize',resize);window.visualViewport?.removeEventListener('resize',resize);window.visualViewport?.removeEventListener('scroll',resize);};
   },[]);
   function startDrag(event){
-    if(event.button!==0)return;
-    suppressClickRef.current=false;
+    if(event.pointerType==='mouse'&&event.button!==0)return;
     const rect=event.currentTarget.getBoundingClientRect();
     dragRef.current={id:event.pointerId,startX:event.clientX,startY:event.clientY,x:rect.left,y:rect.top,moved:false};
     event.currentTarget.setPointerCapture(event.pointerId);
@@ -184,7 +183,7 @@ export function EllaChat() {
     const drag=dragRef.current;if(!drag||event.pointerId!==drag.id)return;
     const dx=event.clientX-drag.startX,dy=event.clientY-drag.startY;
     if(!drag.moved&&Math.hypot(dx,dy)<6)return;
-    drag.moved=true;suppressClickRef.current=true;
+    drag.moved=true;
     place({x:drag.x+dx,y:drag.y+dy});
   }
   function finishDrag(event){
@@ -192,6 +191,7 @@ export function EllaChat() {
     if(drag.moved&&positionRef.current)place(positionRef.current,true);
     dragRef.current=null;
     if(event.currentTarget.hasPointerCapture(event.pointerId))event.currentTarget.releasePointerCapture(event.pointerId);
+    if(!drag.moved&&event.type==='pointerup')open?close():setOpen(true);
   }
   function moveWithKeyboard(event){
     const delta={ArrowLeft:[-24,0],ArrowRight:[24,0],ArrowUp:[0,-24],ArrowDown:[0,24]}[event.key];
@@ -232,7 +232,7 @@ export function EllaChat() {
         title="Tap to chat · drag to move · arrow keys move · Home resets"
         onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={finishDrag} onPointerCancel={finishDrag}
         onKeyDown={moveWithKeyboard}
-        onClick={()=>{if(suppressClickRef.current){suppressClickRef.current=false;return;}open?close():setOpen(true);}}
+        onClick={event=>{if(event.detail===0)open?close():setOpen(true);}}
         className="ella-launcher-button">
         <span className="ella-launcher-label" aria-hidden="true">Ask Ella</span>
         <img src="/ella-avatar.png" alt="" aria-hidden="true" width="64" height="64" draggable="false" className="ella-launcher-avatar"/>
