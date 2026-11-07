@@ -71,7 +71,7 @@ for (const width of [320, 375, 390, 430, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/');
     const heading = page.locator('#hero-title');
-    await expect(heading).toHaveText('Turning curiosity into practical AI solutions.');
+    await expect(heading).toHaveText('Turning Curiosity Into Practical AI Solutions.');
     const layout = await heading.evaluate(element => ({
       spacing: getComputedStyle(element).letterSpacing,
       fits: element.scrollWidth <= element.clientWidth,
