@@ -206,7 +206,7 @@ export function EllaChat() {
   }
   useEffect(()=>{if(open) inputRef.current?.focus();},[open]);
   useEffect(()=>{if(open) endRef.current?.scrollIntoView({block:'nearest'});},[messages,busy,open]);
-  function close(){setOpen(false);toggleRef.current?.focus();}
+  function close(){setOpen(false);requestAnimationFrame(()=>toggleRef.current?.focus());}
   async function send(event){
     event.preventDefault(); const question=input.trim(); if(!question||busy)return;
     const next=[...messages,{role:'user',content:question}];setMessages(next);setInput('');setBusy(true);
