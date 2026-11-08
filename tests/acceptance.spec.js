@@ -102,3 +102,111 @@ test('intake demo produces a sample result from current implementation', async (
   await page.getByRole('button',{name:'Save demo result ↦',exact:true}).click();
   await expect(page.locator('#successBox')).toBeVisible();
 });
+
+test('Ella drag, bounds, tap, keyboard reset and saved placement', async ({page}) => {
+  await page.setViewportSize({width:390,height:844}); await page.goto('/');
+  const button=page.getByRole('button',{name:'Ask Ella',exact:true});
+  let box=await button.boundingBox();
+  await page.mouse.move(box.x+box.width/2,box.y+box.height/2); await page.mouse.down();
+  await page.mouse.move(70,220,{steps:12}); await page.mouse.up();
+  await expect(page.locator('#ella-panel')).toHaveCount(0);
+  await expect.poll(async()=>Math.abs((await button.boundingBox()).x-20)).toBeLessThan(2);
+  const moved=await button.boundingBox();
+  expect(moved.x).toBeLessThan(box.x); expect(moved.y).toBeLessThan(box.y);
+  await page.reload();
+  const saved=await button.boundingBox(); expect(Math.abs(saved.x-moved.x)).toBeLessThan(2);
+  expect(Math.abs(saved.y-moved.y)).toBeLessThan(2);
+  await button.focus(); await page.keyboard.press('ArrowRight');
+  await expect.poll(async()=>(await button.boundingBox()).x).toBeGreaterThan(saved.x+100);
+  await button.click(); await expect(page.locator('#ella-panel')).toBeVisible();
+  await page.keyboard.press('Escape'); await expect(button).toBeFocused();
+  await page.keyboard.press('Home');
+  expect((await button.boundingBox()).y).toBeGreaterThan(600);
+  await page.setViewportSize({width:320,height:480});
+  box=await button.boundingBox();
+  await page.mouse.move(box.x+30,box.y+40); await page.mouse.down();
+  await page.mouse.move(0,0,{steps:8}); await page.mouse.up();
+  await expect.poll(async()=>Math.abs((await button.boundingBox()).x-20)).toBeLessThan(2);
+  box=await button.boundingBox(); expect(box.x).toBeGreaterThanOrEqual(12); expect(box.y).toBeGreaterThanOrEqual(12);
+  await button.click(); const panel=await page.locator('#ella-panel').boundingBox();
+  expect(panel.x).toBeGreaterThanOrEqual(0); expect(panel.y).toBeGreaterThanOrEqual(0);
+  expect(panel.x+panel.width).toBeLessThanOrEqual(320);
+  expect(panel.y+panel.height).toBeLessThanOrEqual(480);
+});
+
+test('touch drag moves Ella without opening chat', async ({browser}) => {
+  const context=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true});
+  const page=await context.newPage(); await page.goto('/');
+  const button=page.getByRole('button',{name:'Ask Ella',exact:true});
+  const box=await button.boundingBox(), client=await context.newCDPSession(page);
+  const point={x:Math.round(box.x+box.width/2),y:Math.round(box.y+box.height/2)};
+  await client.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[point]});
+  await client.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:80,y:240}]});
+  await client.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+  await expect(page.locator('#ella-panel')).toHaveCount(0);
+  expect((await button.boundingBox()).y).toBeLessThan(box.y-100);
+  await button.tap(); await expect(page.locator('#ella-panel')).toBeVisible();
+  await context.close();
+});
+
+test('Opility footer link stays clear of the default Ella launcher', async ({page}) => {
+  await page.setViewportSize({width:390,height:844}); await page.goto('/');
+  const link=page.locator('footer').getByRole('link',{name:'Opility — Business Services',exact:true});
+  await link.scrollIntoViewIfNeeded();
+  const a=await link.boundingBox(),b=await page.getByRole('button',{name:'Ask Ella',exact:true}).boundingBox();
+  expect(a.x+a.width<=b.x || b.x+b.width<=a.x || a.y+a.height<=b.y || b.y+b.height<=a.y).toBe(true);
+  await expect(page.getByRole('link',{name:'Explore Opility — Business Services',exact:true})).toHaveAttribute('href','https://opility.com');
+});
+
+test('Ella works across standalone routes and keeps saved placement', async ({page}) => {
+  await page.setViewportSize({width:390,height:844}); await page.goto('/');
+  const button=page.getByRole('button',{name:'Ask Ella',exact:true});
+  await button.focus(); await page.keyboard.press('ArrowUp');
+  const position=await button.boundingBox();
+  for(const path of ['/intake-builder-demo','/manufacturing-demo','/institute-demo','/certifications.html?group=qa','/zapier-expertise.html','/docs/gmail-acknowledgment-demo.html','/cv.html','/cv-he.html']) {
+    await page.goto(path);
+    await expect(button).toBeVisible();
+    expect(Math.abs((await button.boundingBox()).x-position.x)).toBeLessThan(2);
+    await button.click();
+    await expect(page.getByRole('dialog',{name:'Ella',exact:true})).toBeVisible();
+    await page.getByRole('button',{name:'Close Ella chat'}).click(); await expect(button).toBeFocused();
+  }
+});
+
+test('Ella springs back after a short tug and switches sides after a deliberate drag', async ({page})=>{
+  await page.setViewportSize({width:390,height:844}); await page.goto('/');
+  const button=page.getByRole('button',{name:'Ask Ella',exact:true});
+  let box=await button.boundingBox(), startX=box.x;
+  await page.mouse.move(box.x+48,box.y+64); await page.mouse.down();
+  await page.mouse.move(box.x+8,box.y+64,{steps:8});
+  const pulled=await button.boundingBox();
+  expect(pulled.x).toBeLessThan(startX); expect(pulled.x).toBeGreaterThan(startX-40);
+  await page.mouse.up();
+  await expect.poll(async()=>Math.abs((await button.boundingBox()).x-startX)).toBeLessThan(2);
+  await expect(page.locator('#ella-panel')).toHaveCount(0);
+  box=await button.boundingBox();
+  await page.mouse.move(box.x+48,box.y+64); await page.mouse.down();
+  await page.mouse.move(50,300,{steps:12}); await page.mouse.up();
+  await expect.poll(async()=>Math.abs((await button.boundingBox()).x-20)).toBeLessThan(2);
+  box=await button.boundingBox();
+  await page.mouse.move(box.x+48,box.y+64); await page.mouse.down();
+  await page.mouse.move(box.x+88,box.y+64,{steps:8}); await page.mouse.up();
+  await expect.poll(async()=>Math.abs((await button.boundingBox()).x-20)).toBeLessThan(2);
+});
+
+test('touch dragging Ella at the footer does not scroll the page', async ({browser})=>{
+  const context=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true});
+  const page=await context.newPage(); await page.goto('/');
+  await page.locator('footer').scrollIntoViewIfNeeded();
+  const before=await page.evaluate(()=>scrollY);
+  const button=page.getByRole('button',{name:'Ask Ella',exact:true}), box=await button.boundingBox();
+  const client=await context.newCDPSession(page), point={x:Math.round(box.x+48),y:Math.round(box.y+64)};
+  await client.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[point]});
+  for(const offset of [20,60,120])await client.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:point.x-30,y:point.y-offset}]});
+  expect(await page.evaluate(()=>scrollY)).toBe(before);
+  await client.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+  await expect.poll(async()=>Math.abs((await button.boundingBox()).x-(390-96-20))).toBeLessThan(2);
+  expect(await page.evaluate(()=>scrollY)).toBe(before);
+  await expect(page.locator('#ella-panel')).toHaveCount(0);
+  await context.close();
+});
