@@ -220,6 +220,15 @@ const projects = [
     linkLabel: "Open Apify actor",
     href: "https://apify.com/opility/shopify-store-lead-extractor-emails-catalog-size-apps",
   },
+  {
+    number: "04",
+    type: "Workflow automation · Make scenario",
+    title: "SaaS Onboarding Request Mapper",
+    description: "I built a Make scenario that receives JSON through a custom webhook and maps company name, administrator email, subscription plan, and seat count into named variables for downstream onboarding steps.",
+    stack: ["Make", "Webhooks", "JSON mapping"],
+    href: "https://opility.com/projects/saas-onboarding-request-mapper",
+    linkLabel: "See the workflow",
+  },
 ];
 
 const capabilities = [
@@ -364,6 +373,14 @@ export default function App() {
         <section id="projects" tabIndex={-1} className="mx-auto max-w-7xl px-5 py-16 md:px-10 md:py-32">
           <div className="mb-12 flex flex-wrap items-end justify-between gap-6"><div><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#5c6d65]">Selected work</p><h2 className="mt-4 text-4xl font-semibold tracking-[-.04em]">Projects you can inspect.</h2></div><p className="max-w-md text-sm leading-6 text-[#52615c]">Public builds and published products. Client work is described at a high level to respect privacy.</p><a href="#workflow-references" className="inline-flex items-center gap-2 rounded-full bg-[#172321] px-5 py-3 text-sm font-semibold text-[#c5f16b]">Explore workflow gallery <ArrowDown size={16}/></a></div>
           <div className="grid gap-4">{projects.map(project => <article key={project.number} className="grid gap-5 rounded-3xl border border-ink/10 bg-surface p-6 transition motion-safe:hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[70px_minmax(0,1fr)_auto] md:items-center md:p-8"><span className="text-sm font-semibold text-subtle">{project.number}</span><div><p className="text-xs font-semibold uppercase tracking-[.14em] text-subtle">{project.type}</p><h3 className="mt-2 text-2xl font-semibold">{project.title}</h3><p className="mt-2 max-w-2xl text-sm leading-6 text-muted">{project.description}</p><div className="mt-4 flex flex-wrap gap-2">{project.stack.map(item => <span key={item} className="rounded-full bg-soft px-3 py-1 text-xs text-muted">{item}</span>)}</div></div><div className="flex flex-wrap gap-4 md:flex-col">{project.workflowHref && <a href={project.workflowHref} aria-label={`Inspect workflow: ${project.title}`} className="inline-flex items-center gap-2 text-sm font-semibold">Inspect workflow <ArrowDown size={16}/></a>}<a href={project.href} target="_blank" rel="noreferrer" aria-label={`${project.linkLabel}: ${project.title}`} className="inline-flex items-center gap-2 text-sm font-semibold">{project.linkLabel} <ArrowUpRight size={16}/></a></div></article>)}</div>
+          <section id="make-scenario-screenshots" className="mt-8 space-y-5 rounded-3xl border border-ink/10 bg-surface p-6" aria-labelledby="make-scenario-screenshots-title">
+  <h3 id="make-scenario-screenshots-title">Make scenario screenshots</h3>
+  <figure><img src="/workflow-screenshots/onboarding-grid.webp" width={535} height={465} alt="Make Grid showing the webhook connected to the SaaS Onboarding Request Mapper" loading="lazy" style={{maxWidth:'100%',height:'auto'}}/><figcaption>Make Grid view of the webhook connected to the SaaS Onboarding Request Mapper.</figcaption></figure>
+  <h4>Related Make scenario: lead-batch routing</h4>
+  <p>This separate scenario is shown inactive in Make. Its diagram shows how incoming lead records are checked for duplicate emails and routed to Google Sheets as invalid, duplicate, or valid.</p>
+  <figure><img src="/workflow-screenshots/lead-batch-overview.webp" width={1015} height={505} alt="Make scenario overview showing three lead-record routes" loading="lazy" style={{maxWidth:'100%',height:'auto'}}/><figcaption>Scenario overview showing the three lead-record routes.</figcaption></figure>
+  <figure><img src="/workflow-screenshots/lead-batch-editor.webp" width={1510} height={760} alt="Make editor showing the lead-batch webhook, iterator, duplicate check, router, Google Sheets branches and Data Store write" loading="lazy" style={{maxWidth:'100%',height:'auto'}}/><figcaption>Editor view showing the full workflow, including the Data Store step that records processed email addresses.</figcaption></figure>
+ </section>
           <section id="demos" aria-labelledby="demos-title" className="mt-14 scroll-mt-24"><h3 id="demos-title" className="text-2xl font-semibold tracking-tight">Explore the work firsthand.</h3><p className="mt-3 text-sm leading-6 text-[#52615c]">Try sample-data demonstrations or explore the academy experience. Project source, documents and Apify products have separate links.</p><div className="mt-6 grid gap-4 lg:grid-cols-3">{[{title:"Intake & Mapping Workbench",text:"Fill sample fields, test mappings and inspect a populated document.",href:"/intake-builder-demo",label:"Launch interactive demo"},{title:"Manufacturing Shift Handoff",text:"Load a sample shift and generate a validated handoff summary.",href:"/manufacturing-demo",label:"Launch interactive demo"},{title:"Academy Operations",text:"Explore my institute responsibilities and academy photo gallery.",href:"/institute-demo",label:"Explore experience gallery"}].map(item => <article key={item.href} className="flex flex-col rounded-3xl border border-[#172321]/10 bg-white p-6"><h4 className="text-xl font-semibold">{item.title}</h4><p className="mt-3 flex-1 text-sm leading-6 text-[#52615c]">{item.text}</p><a href={item.href} aria-label={`${item.label}: ${item.title}`} className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-[#172321] px-5 py-3 text-sm font-semibold text-[#c5f16b]">{item.label} <ArrowUpRight size={16}/></a></article>)}</div></section>
           <RestoredContent />
           <ZapierExperiments />
