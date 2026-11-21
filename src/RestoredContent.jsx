@@ -24,7 +24,7 @@ export function ZapierExperiments() {
       status: 'Published demo · Successful run and draft shown',
       description: 'Built a two-step Gmail workflow that receives a new email and creates a fixed acknowledgment draft addressed to its sender. The reply stays in Drafts for human review.',
       skills: 'Gmail integration · Field mapping · Workflow testing · Human review',
-      evidence: 'Shared screenshots show the Zap published as v1, a successful run on one new email, and the matching acknowledgment draft. Scheduled execution without pressing Run has not yet been confirmed.',
+      evidence: 'The published v1 configuration and run result show one Gmail input creating an acknowledgment draft. Scheduled execution without pressing Run has not yet been confirmed.',
       next: 'Confirm an unattended run and check duplicate processing and sender mapping with additional test messages.',
       href: '/docs/gmail-acknowledgment-demo.html',
       label: 'Explore the demo and routing design',
@@ -53,7 +53,7 @@ export function ZapierExperiments() {
       title: 'Social Media AI Chatbot',
       href: 'https://social-media-ai-chatbot-c5b290.zapier.app',
       label: 'Open chatbot demo',
-      status: 'Experimental · Configuration evidence',
+      status: 'Experimental · Configuration documented',
       description: 'Configured a Zapier Chatbots assistant with a greeting and instructions for drafting, editing, summarizing, and adapting social content to a requested audience and tone.',
       skills: 'AI instruction design · Requirements gathering · Conversational experience',
       evidence: 'The editor screenshot establishes a configured greeting and directive, and a shared chatbot URL is available. Response quality, model setup, and successful conversations have not yet been verified.',
@@ -71,13 +71,13 @@ export function ZapierExperiments() {
   return <section id="zapier-experiments" aria-labelledby="zapier-experiments-title" className="mt-14 scroll-mt-24">
     <p className="text-xs font-semibold uppercase tracking-[.2em] text-[#5c6d65]">Hands-on learning · Zapier</p>
     <h3 id="zapier-experiments-title" className="mt-3 text-3xl font-semibold tracking-tight">Zapier experiments &amp; workflow design</h3>
-    <p className="mt-4 max-w-3xl text-sm leading-7 text-[#52615c]">A published Gmail acknowledgment demo alongside personal prototypes exploring routing, AI steps, connected apps, structured data, and interfaces. Each example states what was built and what its evidence establishes.</p>
+    <p className="mt-4 max-w-3xl text-sm leading-7 text-[#52615c]">A published Gmail acknowledgment demo alongside personal prototypes exploring routing, AI steps, connected apps, structured data, and interfaces. Each walkthrough documents the configuration, observed test results, and remaining validation.</p>
     <div className="mt-6 grid gap-5 lg:grid-cols-3">{experiments.map(item => <article key={item.title} className="rounded-3xl border border-[#172321]/10 bg-white p-6">
       <p className="text-xs font-semibold leading-5 text-[#5c6d65]">{item.status}</p>
       <h4 className="mt-3 text-xl font-semibold">{item.title}</h4>
       <p className="mt-3 text-sm leading-7 text-[#52615c]">{item.description}</p>
       <p className="mt-4 text-xs font-semibold leading-6 text-[#40572d]">{item.skills}</p>
-      <details className="mt-5 border-t border-[#172321]/10 pt-4"><summary className="cursor-pointer text-sm font-semibold">Evidence &amp; next validation</summary><p className="mt-3 text-sm leading-7 text-[#52615c]">{item.evidence}</p><p className="mt-3 text-sm leading-7 text-[#52615c]"><strong>Next validation:</strong> {item.next}</p></details>
+      <details className="mt-5 border-t border-[#172321]/10 pt-4"><summary className="cursor-pointer text-sm font-semibold">Configuration &amp; test status</summary><p className="mt-3 text-sm leading-7 text-[#52615c]">{item.evidence}</p><p className="mt-3 text-sm leading-7 text-[#52615c]"><strong>Next test:</strong> {item.next}</p></details>
       {item.href && <a href={item.href} target="_blank" rel="noreferrer" className="mt-5 inline-block text-sm font-semibold underline underline-offset-4">{item.label} ↗</a>}
     </article>)}</div>
     <p className="mt-5 text-sm leading-7 text-[#52615c]">The <a href="#inquiry-workflow" className="font-semibold underline underline-offset-4">Customer Inquiry Router</a> is documented separately: Gmail filtering and JavaScript processing feed three routing paths with email and HubSpot actions. It is currently inactive after the Zapier trial expired. Screenshots document its structure; current run results and classification behavior require verification.</p>
