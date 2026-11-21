@@ -336,7 +336,9 @@ export default function App() {
           <div className="min-w-0">
             <p className="mb-7 max-w-2xl text-sm font-semibold leading-6 text-[#52615c]">AI Automation &amp; Integration Engineer <span aria-hidden="true">|</span> SaaS Implementation Specialist <span aria-hidden="true">|</span> Workflow Automation</p>
             <h1 id="hero-title" className="hero-image-title">Turning Curiosity Into <span>Practical AI Solutions.</span></h1>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-[#52615c]">I’m Naveen Sharma. At Bolt Healthcare, I configured digital intake forms, mapped fields and tested multi-party eSignature routing. Through Opility, I help service teams connect each new enquiry to the person responsible for the next step.</p>
+            <h2 className="mt-8 text-2xl font-semibold">From first enquiry to signed intake</h2>
+            <p className="mt-3 max-w-2xl text-lg leading-8 text-[#52615c]">At Bolt Healthcare, I worked as an employee inside their existing intake platform—configuring form fields, mapping where submitted data goes, and testing eSignature routing from start to finish. Through Opility, I use that same hands-on configuration and QA approach to help small service teams connect the tools they already use.</p>
+            <p className="mt-3 max-w-2xl text-base leading-7 text-[#52615c]">If someone on your team still copies form submissions into a tracker or chases colleagues to find out who followed up, that’s a good starting point for a pilot.</p>
             <div className="mt-7 flex flex-wrap items-center gap-4">
               <a href="https://opility.com/contact?subject=Intake%20and%20handoff%20implementation" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#172321] px-6 py-4 text-sm font-semibold text-white hover:bg-[#30443e]">Book an Intake Implementation Pilot <ArrowRight size={16} aria-hidden="true"/></a>
               <a href="https://opility.com/case-studies/healthcare-workflow-configuration" className="text-sm font-semibold underline underline-offset-4">Read my anonymized intake and workflow QA case study</a>
