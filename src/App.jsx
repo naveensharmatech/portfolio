@@ -335,7 +335,7 @@ export default function App() {
         <section aria-labelledby="hero-title" className="mx-auto grid max-w-7xl gap-10 px-5 pb-20 pt-14 md:px-10 md:py-24 lg:grid-cols-[1.15fr_.85fr] lg:items-center lg:gap-14">
           <div className="min-w-0">
             <p className="mb-7 max-w-2xl text-sm font-semibold leading-6 text-[#52615c]">AI Automation &amp; Integration Engineer <span aria-hidden="true">|</span> SaaS Implementation Specialist <span aria-hidden="true">|</span> Workflow Automation</p>
-            <h1 id="hero-title" className="hero-image-title">Intake workflows <span>your team can follow.</span></h1>
+            <h1 id="hero-title" className="hero-image-title">Turning Curiosity Into <span>Practical AI Solutions.</span></h1>
             <p className="mt-8 max-w-2xl text-lg leading-8 text-[#52615c]">I’m Naveen Sharma. At Bolt Healthcare, I configured digital intake forms, mapped fields and tested multi-party eSignature routing. Through Opility, I help service teams connect each new enquiry to the person responsible for the next step.</p>
             <div className="mt-7 flex flex-wrap items-center gap-4">
               <a href="https://opility.com/contact?subject=Intake%20and%20handoff%20implementation" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#172321] px-6 py-4 text-sm font-semibold text-white hover:bg-[#30443e]">Book an Intake Implementation Pilot <ArrowRight size={16} aria-hidden="true"/></a>
