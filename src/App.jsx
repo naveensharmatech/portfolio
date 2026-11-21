@@ -336,7 +336,13 @@ export default function App() {
           <div className="min-w-0">
             <p className="mb-7 max-w-2xl text-sm font-semibold leading-6 text-[#52615c]">AI Automation &amp; Integration Engineer <span aria-hidden="true">|</span> SaaS Implementation Specialist <span aria-hidden="true">|</span> Workflow Automation</p>
             <h1 id="hero-title" className="hero-image-title">Turning Curiosity Into <span>Practical AI Solutions.</span></h1>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-[#52615c]">I’m Naveen—a lifelong technology enthusiast building with no-code tools and AI assistance. I combine SaaS implementation and technical problem-solving experience with hands-on projects in automation, assistants and websites, while expanding into AI agents and apps.</p>
+            <h2 className="mt-8 text-2xl font-semibold">From first enquiry to signed intake</h2>
+            <p className="mt-3 max-w-2xl text-lg leading-8 text-[#52615c]">At Bolt Healthcare, I worked as an employee inside their existing intake platform—configuring form fields, mapping where submitted data goes, and testing eSignature routing from start to finish. Through Opility, I use that same hands-on configuration and QA approach to help small service teams connect the tools they already use.</p>
+            <p className="mt-3 max-w-2xl text-base leading-7 text-[#52615c]">If someone on your team still copies form submissions into a tracker or chases colleagues to find out who followed up, that’s a good starting point for a pilot.</p>
+            <div className="mt-7 flex flex-wrap items-center gap-4">
+              <a href="https://opility.com/contact?subject=Intake%20and%20handoff%20implementation" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#172321] px-6 py-4 text-sm font-semibold text-white hover:bg-[#30443e]">Book an Intake Implementation Pilot <ArrowRight size={16} aria-hidden="true"/></a>
+              <a href="https://opility.com/case-studies/healthcare-workflow-configuration" className="text-sm font-semibold underline underline-offset-4">Read my anonymized intake and workflow QA case study</a>
+            </div>
             <section aria-labelledby="resume-title" className="mt-7 rounded-2xl border border-ink/10 bg-surface p-5">
               <h2 id="resume-title" className="text-sm font-semibold">View résumé</h2>
               <div className="mt-3 grid w-full grid-cols-2 gap-3">
@@ -344,10 +350,7 @@ export default function App() {
                 <a href="/Naveen_Sharma_CV_HE.pdf" hrefLang="he" lang="he" dir="rtl" className="flex w-full min-h-12 min-w-0 items-center justify-center gap-1 rounded-full border border-ink/20 px-2 py-3 text-sm font-semibold hover:bg-soft">קורות חיים <ArrowUpRight size={15}/></a>
               </div>
             </section>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <a href="#projects" className="w-full justify-center rounded-full bg-[#172321] px-6 py-4 text-sm font-semibold text-white hover:bg-[#30443e] sm:w-auto">Explore my work <ArrowDown className="ml-2 inline" size={16}/></a>
-              <a href="mailto:contact@naveensharma.net" className="w-full justify-center rounded-full border border-ink/20 px-6 py-4 text-sm font-semibold hover:bg-surface sm:w-auto">Let’s connect <ArrowUpRight className="ml-2 inline" size={16}/></a>
-            </div>
+
           </div>
           <figure className="mx-auto w-full max-w-xl overflow-hidden rounded-[2rem] border border-[#172321]/10 bg-white">
             <img src="/images/naveen-ai-builder.jpeg" alt="Illustration of Naveen connecting an inquiry, AI processing, routing and a CRM, surrounded by workflow and SaaS tools." width="1254" height="1254" fetchPriority="high" className="aspect-square w-full object-contain"/>
