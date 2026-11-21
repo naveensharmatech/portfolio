@@ -376,7 +376,7 @@ export default function App() {
           <section id="make-scenario-evidence" className="mt-8 space-y-5 rounded-3xl border border-ink/10 bg-surface p-6" aria-labelledby="make-scenario-evidence-title">
   <h3 id="make-scenario-evidence-title">Make Workflow Blueprint &amp; Verified Execution Results</h3>
   <p className="text-sm leading-6 text-muted">Original Make.com workflow configuration and independently verified execution data. The blueprint establishes the module design; the execution record verifies the JSON transformation.</p>
-  <figure><img src="/visual-evidences/onboarding-grid.webp" width={535} height={465} alt="Original Make.com workflow blueprint for SaaS Onboarding Request Mapper" loading="lazy" style={{maxWidth:'100%',height:'auto'}}/><figcaption>Make Workflow Blueprint — original configuration view of the onboarding mapper.</figcaption></figure>
+  <figure><img src="/visual-evidences/Make%20Workflow%20Blueprint.png" width={1494} height={992} alt="Original Make.com workflow blueprint for SaaS Onboarding Request Mapper" loading="lazy" style={{maxWidth:'100%',height:'auto'}}/><figcaption>Make Workflow Blueprint — original Make.com Tools configuration with field mappings and the Cedar Dental webhook input. Verified Execution Results are documented separately.</figcaption></figure>
   <div className="rounded-2xl border border-ink/10 bg-soft p-5 space-y-3">
    <h4 className="font-semibold">Verified Execution Results · 21 November 2026</h4>
    <p className="text-sm leading-6 text-muted">Execution b3a7c94f5b124e72a0fd274703b89bc4 · Success · 2 modules · 0 errors · 93 ms. Synthetic test values; not a real customer onboarding.</p>
