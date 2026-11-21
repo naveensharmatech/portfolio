@@ -220,6 +220,15 @@ const projects = [
     linkLabel: "Open Apify actor",
     href: "https://apify.com/opility/shopify-store-lead-extractor-emails-catalog-size-apps",
   },
+  {
+    number: "04",
+    type: "Workflow automation · Make scenario",
+    title: "SaaS Onboarding Request Mapper",
+    description: "I built a Make scenario that receives JSON through a custom webhook and maps company name, administrator email, subscription plan, and seat count into named variables for downstream onboarding steps.",
+    stack: ["Make", "Webhooks", "JSON mapping"],
+    href: "https://opility.com/projects/saas-onboarding-request-mapper",
+    linkLabel: "See the workflow",
+  },
 ];
 
 const capabilities = [
